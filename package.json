@@ -21,9 +21,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:bamf-health/bamfjs.git"
+    "url": "git://github.com/bamf-health/bamfjs.git"
   },
-  "type": "commonjs",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "main": "./cjs/index.js",
   "module": "./index.js",
   "sideEffects": false,
