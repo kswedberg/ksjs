@@ -2,7 +2,7 @@
 
 <!-- [![view on npm](http://img.shields.io/npm/v/bamfjs.svg)](https://www.npmjs.org/package/bamfjs) -->
 
-This repo contains a bunch of plain JavaScript functions that I used a lot in projects at [Fusionary](https://fusionary.com) and elsewhere. They are mostly provided as ES6 modules, but a subset of them are also offered as CommonJS modules so they can easily be used in a node.js environment.
+This repo contains a bunch of plain JavaScript functions that could come in handy while working on BAMF projects. They are mostly provided as ES6 modules, but a subset of them are also offered as CommonJS modules so they can easily be used in a node.js environment.
 
 ## Install
 
