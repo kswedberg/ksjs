@@ -4,7 +4,6 @@
   "description": "A bunch of JavaScript functions that we may end up using in various projects.",
   "version": "1.0.1",
   "author": "Karl Swedberg",
-  "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "lint": "eslint -c .eslintrc.js {rollup.config.js,test/,src/}",
