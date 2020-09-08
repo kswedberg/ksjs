@@ -1,0 +1,5 @@
+*.js
+!src/*.js
+!test/*.js
+!rollup.config.js
+!.*.js

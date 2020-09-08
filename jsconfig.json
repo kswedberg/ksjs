@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "exclude": ["cjs", "gitignore", "node_modules", "test/dist", "test/mocha/test.js", "test/mocha", "test/vendor"]
+}

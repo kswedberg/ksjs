@@ -1,0 +1,12 @@
+gitignore/
+node_modules/
+scripts/
+templates/
+test/
+vendor/
+.babelrc
+.env
+.eslintignore
+.eslintrc.js
+rollup.config.js
+webpack.js

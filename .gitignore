@@ -1,0 +1,10 @@
+/*.js
+/cjs
+
+!.eslintrc.js
+!rollup.config.js
+.env
+node_modules
+test/qunit
+test/dist
+test/mocha
