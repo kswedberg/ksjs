@@ -1,0 +1,1 @@
+window.BAMF.stubbed = true;

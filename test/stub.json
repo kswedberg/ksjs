@@ -1,0 +1,8 @@
+{
+  "status": "success",
+  "success": true,
+  "data": {
+    "foo": 2,
+    "bar": 4
+  }
+}

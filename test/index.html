@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>BAMFJS Tests</title>
+    <link rel="stylesheet" href="vendor/qunit/qunit.css" />
+  </head>
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture" class="qunit-fixture">
+      <div id="container" class="el-selector"></div>
+      <div id="selection-container" class="el-selector">test markup</div>
+      <form id="dom-form" class="dom-form" action="" method="post">
+        <input id="select-input" type="text" value="test value" />
+        <select id="select-single" name="select-single">
+          <option value="foo">foo</option>
+          <option value="bar" selected>bar</option>
+        </select>
+        <input type="radio" name="radio-input" value="radio unchecked" />
+        <input type="radio" name="radio-input" value="radio checked" checked />
+        <input id="checkme" type="checkbox" name="checkbox-input" value="programmatic checked" />
+        <div class="hey el-selector">
+          <ul>
+            <li>one</li>
+            <li class="li-two">two</li>
+            <li class="find-me replace-me touch-me">three</li>
+          </ul>
+        </div>
+      </form>
+    </div>
+    <script src="vendor/qunit/qunit.js"></script>
+    <script src="qunit/test.js"></script>
+  </body>
+</html>
