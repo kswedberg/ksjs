@@ -344,3 +344,21 @@ export const base64Decode = function base64Decode(str) {
 
   return decodeURIComponent(atob(str));
 };
+
+/**
+ * Return a pseudo-random string consisting of two base-36 strings, separated by the optional provided `sep` argument.
+ * The first number is derived from the current date, including milliseconds
+ * The second number is derived from a random 11-digit number
+ * @function
+ * @param {string} [sep = .] Optional separator for the two base-36 strings
+ * @returns {string}
+ */
+
+export const randomString = function(sep) {
+  const pow = 10 ** 10;
+  const separator = sep == null ? '.' : sep;
+  const randoNum = Math.round(Math.random() * pow);
+  const date36 = (+new Date()).toString(36);
+
+  return [randoNum.toString(36), date36].join(separator);
+};

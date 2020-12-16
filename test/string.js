@@ -112,4 +112,19 @@ describe('String', () => {
     });
   });
 
+  describe('randomString', () => {
+    // Generate random strings and make sure each one is unique
+    const unique = new Set();
+    const total = 10000;
+
+    for (let i = 0; i < total; i++) {
+      const rando = strings.randomString();
+
+      unique.add(rando);
+    }
+
+    it(`Set has ${total} unique items`, () => {
+      assert.strictEqual(unique.size, total);
+    });
+  });
 });
