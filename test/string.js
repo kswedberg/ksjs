@@ -10,31 +10,31 @@ describe('String', () => {
     let heAte = 'he ate his sandwich';
 
     it('Converts a string to title case', () => {
-      assert.equal(strings.changeCase(forWhom, 'title'), 'For Whom the Bell Tolls');
-      assert.equal(strings.changeCase(oldMan, 'title'), 'The Old Man and the Sea');
-      assert.equal(strings.changeCase(heAte, 'title'), 'He Ate his Sandwich');
+      assert.strictEqual(strings.changeCase(forWhom, 'title'), 'For Whom the Bell Tolls');
+      assert.strictEqual(strings.changeCase(oldMan, 'title'), 'The Old Man and the Sea');
+      assert.strictEqual(strings.changeCase(heAte, 'title'), 'He Ate his Sandwich');
     });
 
     it('Converts a string to sentence case', () => {
-      assert.equal(strings.changeCase(forWhom, 'sentence'), 'For whom the bell tolls');
-      assert.equal(strings.changeCase(oldMan, 'sentence'), 'The old man and the sea');
-      assert.equal(strings.changeCase(heAte, 'sentence'), 'He ate his sandwich');
+      assert.strictEqual(strings.changeCase(forWhom, 'sentence'), 'For whom the bell tolls');
+      assert.strictEqual(strings.changeCase(oldMan, 'sentence'), 'The old man and the sea');
+      assert.strictEqual(strings.changeCase(heAte, 'sentence'), 'He ate his sandwich');
     });
 
     it('Converts a string to camel case', () => {
-      assert.equal(strings.changeCase(forWhom, 'camel'), 'forWhomTheBellTolls');
-      assert.equal(strings.changeCase(oldMan, 'camel'), 'theOldManAndTheSea');
-      assert.equal(strings.changeCase(heAte, 'camel'), 'heAteHisSandwich');
+      assert.strictEqual(strings.changeCase(forWhom, 'camel'), 'forWhomTheBellTolls');
+      assert.strictEqual(strings.changeCase(oldMan, 'camel'), 'theOldManAndTheSea');
+      assert.strictEqual(strings.changeCase(heAte, 'camel'), 'heAteHisSandwich');
     });
   });
 
   describe('hashCode', () => {
     it('Converts string to numeric hashCode', () => {
-      assert.equal(strings.hashCode('a'), 97);
+      assert.strictEqual(strings.hashCode('a'), 97);
     });
 
     it('Converts string to numeric hashCode', () => {
-      assert.equal(strings.hashCode('a*a'), 94616);
+      assert.strictEqual(strings.hashCode('a*a'), 94616);
     });
 
   });
@@ -49,10 +49,10 @@ describe('String', () => {
     rot13.decoded = strings.rot13(rot13.encoded);
 
     it(`${rot13.original} is rot13 encoded to ${rot13.encoded}`, () => {
-      assert.equal(rot13.encoded, rot13.expect);
+      assert.strictEqual(rot13.encoded, rot13.expect);
     });
     it('String is base64 encoded, then decoded to original value', () => {
-      assert.equal(rot13.original, rot13.decoded);
+      assert.strictEqual(rot13.original, rot13.decoded);
     });
   });
 
@@ -69,7 +69,7 @@ describe('String', () => {
     });
 
     it('String is base64 encoded, then decoded to original value', () => {
-      assert.equal(base64.original, base64.decoded);
+      assert.strictEqual(base64.original, base64.decoded);
     });
   });
 
@@ -107,7 +107,7 @@ describe('String', () => {
       let slugged = strings.slugify(item.pre);
 
       it(`${item.pre} is slugified to ${slugged}`, () => {
-        assert.equal(slugged, item.expected);
+        assert.strictEqual(slugged, item.expected);
       });
     });
   });
