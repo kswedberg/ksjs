@@ -1874,6 +1874,7 @@ const {slugify} = require('fmjs/cjs/string.js');
   * [hashCode(str, [prefix])](#module_string.hashCode) ⇒ <code>number</code> \| <code>string</code>
   * [base64Encode(str)](#module_string.base64Encode) ⇒ <code>string</code>
   * [base64Decode(str)](#module_string.base64Decode) ⇒ <code>string</code>
+  * [randomString([sep])](#module_string.randomString) ⇒ <code>string</code>
 
 <a name="module_string.stringTo"></a>
 
@@ -2007,6 +2008,20 @@ If the browser does not support this type of encoding, returns the string unchan
 | Param | Type | Description |
 | --- | --- | --- |
 | str | <code>string</code> | base4-encoded string |
+
+<a name="module_string.randomString"></a>
+
+### randomString([sep]) ⇒ <code>string</code>
+
+Return a pseudo-random string consisting of two base-36 strings, separated by the optional provided `sep` argument.
+The first number is derived from the current date, including milliseconds
+The second number is derived from a random 11-digit number
+
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [sep] | <code>string</code> | <code>&quot;.&quot;</code> | Optional separator for the two base-36 strings |
 
 <a name="module_timer"></a>
 
