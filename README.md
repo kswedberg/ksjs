@@ -1917,7 +1917,7 @@ Changes the case of the provided words according to the `type`.
 | Param | Type | Description |
 | --- | --- | --- |
 | str | <code>string</code> | String that will be cased as determined by `type` |
-| type | <code>string</code> | One of 'title|sentence|caps|camel|slug' |
+| type | <code>string</code> | One of 'title|sentence|caps|camel|pascal|slug|snake' |
 
 **Example**  
 ```js

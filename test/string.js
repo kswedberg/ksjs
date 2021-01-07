@@ -26,6 +26,44 @@ describe('String', () => {
       assert.strictEqual(strings.changeCase(oldMan, 'camel'), 'theOldManAndTheSea');
       assert.strictEqual(strings.changeCase(heAte, 'camel'), 'heAteHisSandwich');
     });
+
+    it('Converts a string to pascal case', () => {
+      assert.strictEqual(strings.changeCase(forWhom, 'pascal'), 'ForWhomTheBellTolls');
+      assert.strictEqual(strings.changeCase(oldMan, 'pascal'), 'TheOldManAndTheSea');
+      assert.strictEqual(strings.changeCase(heAte, 'pascal'), 'HeAteHisSandwich');
+    });
+
+    let snakes = [
+      {
+        pre: 'Hello there, how are you?',
+        expected: 'hello_there_how_are_you',
+      },
+      {
+        pre: '  You? & Me<3* ',
+        expected: 'you_and_me_3',
+      },
+      {
+        pre: '_Hey___this should work*I think--',
+        expected: 'hey_this_should_work_i_think',
+      },
+      {
+        pre: 'Preemptive ♥: ♥ anyway™.',
+        expected: 'preemptive_love_love_anywaytm',
+      },
+      {
+        pre: `I've got
+        "some" “apostrophes” here, y’all!`,
+        expected: 'ive_got_some_apostrophes_here_yall',
+      },
+    ];
+
+    snakes.forEach((item) => {
+      const snaked = strings.changeCase(item.pre, 'snake');
+
+      it(`${item.pre} is snake-cased to ${snaked}`, () => {
+        assert.strictEqual(snaked, item.expected);
+      });
+    });
   });
 
   describe('hashCode', () => {
@@ -75,7 +113,7 @@ describe('String', () => {
 
   describe('slugify', () => {
 
-    let slugs = [
+    const slugs = [
       {
         pre: 'Hello there, how are you?',
         expected: 'hello-there-how-are-you',

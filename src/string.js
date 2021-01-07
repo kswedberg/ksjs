@@ -208,6 +208,12 @@ const caseChanges = {
     .join('');
   },
 
+  pascal: (str) => {
+    const camel = caseChanges.camel(str);
+
+    return `${camel.charAt(0).toUpperCase()}${camel.slice(1)}`;
+  },
+
   slug: (str) => {
     if (!str) {
       return '';
@@ -223,13 +229,28 @@ const caseChanges = {
     // remove leading and trailing dashes
     .replace(/^-|-$/g, '') || str;
   },
+  snake: (str) => {
+    if (!str) {
+      return '';
+    }
+
+    return normalize(str)
+    .toLowerCase()
+    .replace(/['"`)(\]]/g, '')
+    // replace non-alphanumeric with underscore
+    .replace(/[^a-z0-9]+/g, '_')
+    // replace repeating dashes with a single underscore
+    .replace(/--+/g, '_')
+    // remove leading and trailing underscores
+    .replace(/^_|_$/g, '') || str;
+  },
 };
 
 /**
  * Changes the case of the provided words according to the `type`.
  * @function
  * @param {string} str String that will be cased as determined by `type`
- * @param {string} type One of 'title|sentence|caps|camel|slug'
+ * @param {string} type One of 'title|sentence|caps|camel|pascal|slug|snake'
  * @returns {string} Converted string
  * @example
  * const oldMan = 'the old man and the sea';
