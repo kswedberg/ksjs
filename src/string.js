@@ -15,7 +15,7 @@
  *
  */
 
-import {extend} from './object.js';
+const rTrim = /^\s+|\s$/g;
 
 // charMap courtesy of https://github.com/simov/slugify/blob/master/slugify.js
 const charMaps = {
@@ -167,19 +167,24 @@ const capWord = (word) => {
 };
 
 const caseChanges = {
-  sentence: (str) => {
+  sentence: (str, options) => {
     if (!str) {
       return '';
     }
+    let sentence = options.unslugify ? str.replace(/[_-]+/g, ' ') : str;
 
-    return str.slice(0, 1).toUpperCase() + str.slice(1);
+    // Trim string and normalize spaces
+    sentence = sentence.replace(rTrim, '').replace(/\s\s+/g, ' ');
+
+    return sentence.slice(0, 1).toUpperCase() + sentence.slice(1);
   },
 
-  title: (str) => {
+  title: (str, options) => {
+    // Start with sentence case
+    const words = caseChanges.sentence(str, options).split(/\s+/);
 
-    const words = (str || '').split(/\s+/);
-    const firstWord = caseChanges.sentence(words.shift());
-
+    // Preserve first word: it's always capitalized, even if it's a preposition or article, etc.
+    const firstWord = words.shift();
     const moreWords = words.map(capWord);
 
     return [firstWord, ...moreWords].join(' ');
@@ -251,6 +256,7 @@ const caseChanges = {
  * @function
  * @param {string} str String that will be cased as determined by `type`
  * @param {string} type One of 'title|sentence|caps|camel|pascal|slug|snake'
+ * @param {object} [options] Optional options object. Its use depends on the type of case change
  * @returns {string} Converted string
  * @example
  * const oldMan = 'the old man and the sea';
@@ -261,15 +267,18 @@ const caseChanges = {
  * console.log(changeCase(oldMan, 'sentence'));
  * // Logs: 'The old man and the sea'
  *
+ * console.log(changeCase('the-old-man-and-the-sea', 'sentence', {unslugify: true}));
+ * // Logs: 'The old man and the sea'
+ *
  * console.log(changeCase(oldMan, 'camel'));
  * // Logs: 'theOldManAndTheSea'
  */
-export const changeCase = (str, type) => {
+export const changeCase = (str, type, options) => {
   if (!caseChanges[type]) {
     return str;
   }
 
-  return caseChanges[type](str);
+  return caseChanges[type](str, options || {});
 };
 
 /**

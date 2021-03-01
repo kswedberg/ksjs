@@ -7,17 +7,20 @@ describe('String', () => {
   describe('changeCase', () => {
     let forWhom = 'for whom the bell tolls';
     let oldMan = 'the old man and the sea';
+    let oldManSluggedAndSnaked = '_the__old-man--- and-the sea';
     let heAte = 'he ate his sandwich';
 
     it('Converts a string to title case', () => {
       assert.strictEqual(strings.changeCase(forWhom, 'title'), 'For Whom the Bell Tolls');
       assert.strictEqual(strings.changeCase(oldMan, 'title'), 'The Old Man and the Sea');
+      assert.strictEqual(strings.changeCase(oldManSluggedAndSnaked, 'title', {unslugify: true}), 'The Old Man and the Sea');
       assert.strictEqual(strings.changeCase(heAte, 'title'), 'He Ate his Sandwich');
     });
 
     it('Converts a string to sentence case', () => {
       assert.strictEqual(strings.changeCase(forWhom, 'sentence'), 'For whom the bell tolls');
       assert.strictEqual(strings.changeCase(oldMan, 'sentence'), 'The old man and the sea');
+      assert.strictEqual(strings.changeCase(oldManSluggedAndSnaked, 'sentence', {unslugify: true}), 'The old man and the sea');
       assert.strictEqual(strings.changeCase(heAte, 'sentence'), 'He ate his sandwich');
     });
 
