@@ -16,7 +16,7 @@
     "test": "npm run build:scripts && npm run test:mocha",
     "watch": "node ./scripts/watch.js",
     "serve": "nodemon --watch test/index.html --watch test/qunit ./scripts/server.js",
-    "prepublishOnly": "npm run build:es && npm run build:cjs"
+    "prepublishOnly": "npm run build:es && npm run build:cjs && node ./scripts/cp.js"
   },
   "repository": {
     "type": "git",
