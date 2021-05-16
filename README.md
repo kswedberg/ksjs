@@ -44,7 +44,9 @@ examples.example1('foo');
 examples.example2('bar');
 ```
 
+### New in version 1.5.0: `*.mjs`!
 
+As of version 1.5.0, all files are also offered as Michael Jackson scripts — i.e. with the `.mjs` extension.
 
 ## CommonJS Modules
 
@@ -1361,6 +1363,7 @@ const {deepCopy} = require('fmjs/cjs/object.js');
 * [object](#module_object)
   * [isObject(obj)](#module_object..isObject)
   * [isPlainObject(obj)](#module_object..isPlainObject)
+  * [clone(obj)](#module_object..clone) ⇒ <code>Object</code>
   * [deepCopy(obj, [cache])](#module_object..deepCopy) ⇒ <code>Object</code>
   * [extend(target, ...objects)](#module_object..extend) ⇒ <code>Object</code>
   * [getProperty(root, properties, fallbackVaue)](#module_object..getProperty) ⇒ <code>\*</code>
@@ -1394,6 +1397,19 @@ Derived from lodash _.isPlainObject
 | Param | Type | Description |
 | --- | --- | --- |
 | obj | <code>Object</code> | The argument that will be checked to see if it is a plain object |
+
+<a name="module_object..clone"></a>
+
+### clone(obj) ⇒ <code>Object</code>
+
+Deep copy an object (alternative to deepCopy), using graph theory and new Map(). Avoids circular refs and infinite loops.
+
+**Returns**: <code>Object</code> - A copy of the object<br />
+
+
+| Param | Type |
+| --- | --- |
+| obj | <code>Object</code> | 
 
 <a name="module_object..deepCopy"></a>
 

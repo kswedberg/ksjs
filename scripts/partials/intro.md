@@ -44,7 +44,9 @@ examples.example1('foo');
 examples.example2('bar');
 ```
 
+### New in version 1.5.0: `*.mjs`!
 
+As of version 1.5.0, all files are also offered as Michael Jackson scripts — i.e. with the `.mjs` extension.
 
 ## CommonJS Modules
 
