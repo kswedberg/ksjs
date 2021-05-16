@@ -59,6 +59,52 @@ export const isPlainObject = function(obj) {
     fnProtoToString.call(Ctor) === fnProtoToString.call(Object);
 };
 
+const getAdjacentNodes = function(obj) {
+  return Object.entries(obj)
+  .filter(([, v]) => isObject(v));
+};
+
+const cloneNonObjectProperties = function(obj) {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, v]) => !isObject(v))
+  );
+};
+
+const cloneNode = function(obj, helperMap) {
+  // If we've already seen this node, just return its clone
+  if (helperMap.has(obj)) {
+    return helperMap.get(obj);
+  }
+
+  // Otherwise, start by cloning non-object properties
+  const clonedNode = cloneNonObjectProperties(obj);
+
+  // And set clonedNode as the obj's clone
+  helperMap.set(obj, clonedNode);
+
+  // Then recursively clone each object reachable by the current node
+  for (const [k, n] of getAdjacentNodes(obj)) {
+    const clonedAdjacentNode = cloneNode(n, helperMap);
+
+    // Set the reference
+    clonedNode[k] = clonedAdjacentNode;
+  }
+
+  return clonedNode;
+};
+
+
+/**
+ * Deep copy an object (alternative to deepCopy), using graph theory and new Map(). Avoids circular refs and infinite loops.
+ * @function clone
+ * @param {Object} obj
+ * @returns {Object} A copy of the object
+ */
+
+export const clone = function(obj) {
+  return cloneNode(obj, new Map());
+};
+
 /**
 * Deep copy an object, avoiding circular references and the infinite loops they might cause.
 * @function deepCopy
@@ -97,6 +143,7 @@ export const deepCopy = function deepCopy(obj, cache = []) {
 
   return copy;
 };
+
 
 /**
  * Deep merge two or more objects in turn, with right overriding left
