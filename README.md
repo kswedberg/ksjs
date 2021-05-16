@@ -1361,6 +1361,7 @@ const {deepCopy} = require('fmjs/cjs/object.js');
 * [object](#module_object)
   * [isObject(obj)](#module_object..isObject)
   * [isPlainObject(obj)](#module_object..isPlainObject)
+  * [clone(obj)](#module_object..clone) ⇒ <code>Object</code>
   * [deepCopy(obj, [cache])](#module_object..deepCopy) ⇒ <code>Object</code>
   * [extend(target, ...objects)](#module_object..extend) ⇒ <code>Object</code>
   * [getProperty(root, properties, fallbackVaue)](#module_object..getProperty) ⇒ <code>\*</code>
@@ -1394,6 +1395,20 @@ Derived from lodash _.isPlainObject
 | Param | Type | Description |
 | --- | --- | --- |
 | obj | <code>Object</code> | The argument that will be checked to see if it is a plain object |
+
+<a name="module_object..clone"></a>
+
+### clone(obj) ⇒ <code>Object</code>
+
+Deep copy an object (alternative to deepCopy), using graph theory and new Map(). Avoids circular refs and infinite loops.
+
+**Returns**: <code>Object</code> - A copy of the object<br />
+
+**See**: [Cloning JavaScript objects with Graph Theory](https://andreasimonecosta.dev/posts/cloning-javascript-objects-with-graph-theory/)
+
+| Param | Type |
+| --- | --- |
+| obj | <code>Object</code> | 
 
 <a name="module_object..deepCopy"></a>
 
@@ -1868,7 +1883,7 @@ const {slugify} = require('fmjs/cjs/string.js');
 * [string](#module_string)
   * [stringTo(value, [type], [options])](#module_string.stringTo) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
   * [pluralize(str, num, [ending])](#module_string.pluralize) ⇒ <code>string</code>
-  * [changeCase(str, type)](#module_string.changeCase) ⇒ <code>string</code>
+  * [changeCase(str, type, [options])](#module_string.changeCase) ⇒ <code>string</code>
   * [slugify(str)](#module_string.slugify) ⇒ <code>string</code>
   * [rot13(string)](#module_string.rot13) ⇒ <code>string</code>
   * [hashCode(str, [prefix])](#module_string.hashCode) ⇒ <code>number</code> \| <code>string</code>
@@ -1907,7 +1922,7 @@ Converts a singular word to a plural
 
 <a name="module_string.changeCase"></a>
 
-### changeCase(str, type) ⇒ <code>string</code>
+### changeCase(str, type, [options]) ⇒ <code>string</code>
 
 Changes the case of the provided words according to the `type`.
 
@@ -1918,6 +1933,7 @@ Changes the case of the provided words according to the `type`.
 | --- | --- | --- |
 | str | <code>string</code> | String that will be cased as determined by `type` |
 | type | <code>string</code> | One of 'title|sentence|caps|camel|pascal|slug|snake' |
+| [options] | <code>object</code> | Optional options object. Its use depends on the type of case change |
 
 **Example**  
 ```js
@@ -1927,6 +1943,9 @@ console.log(changeCase(oldMan, 'title'));
 // Logs: 'The Old Man and the Sea'
 
 console.log(changeCase(oldMan, 'sentence'));
+// Logs: 'The old man and the sea'
+
+console.log(changeCase('the-old-man-and-the-sea', 'sentence', {unslugify: true}));
 // Logs: 'The old man and the sea'
 
 console.log(changeCase(oldMan, 'camel'));
