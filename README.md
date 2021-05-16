@@ -1406,6 +1406,7 @@ Deep copy an object (alternative to deepCopy), using graph theory and new Map().
 
 **Returns**: <code>Object</code> - A copy of the object<br />
 
+**See**: [Cloning JavaScript objects with Graph Theory](https://andreasimonecosta.dev/posts/cloning-javascript-objects-with-graph-theory/)
 
 | Param | Type |
 | --- | --- |

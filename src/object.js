@@ -97,6 +97,7 @@ const cloneNode = function(obj, helperMap) {
 /**
  * Deep copy an object (alternative to deepCopy), using graph theory and new Map(). Avoids circular refs and infinite loops.
  * @function clone
+ * @see [Cloning JavaScript objects with Graph Theory]{@link https://andreasimonecosta.dev/posts/cloning-javascript-objects-with-graph-theory/}
  * @param {Object} obj
  * @returns {Object} A copy of the object
  */
