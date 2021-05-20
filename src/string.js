@@ -249,6 +249,9 @@ const caseChanges = {
     // remove leading and trailing underscores
     .replace(/^_|_$/g, '') || str;
   },
+  camelToSnake: (str) => {
+    return str.trim().split(/(?=[A-Z])/).join('_').toLowerCase();
+  }
 };
 
 /**
