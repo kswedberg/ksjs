@@ -6,10 +6,10 @@ import {extend} from './object.js';
  * @summary
  * ES6 Import Example:
  * ```js
- * import {Storage} from 'fmjs';
+ * import {Storage} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {Storage} from 'fmjs/storage.js';
+ * import {Storage} from '@bamf-health/bamfjs/storage.js';
  * ```
  *
  */

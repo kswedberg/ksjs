@@ -2,15 +2,15 @@
  * @module string
  * @summary ES6 Import Example:
  * ```js
- * import {slugify} from 'fmjs';
+ * import {slugify} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {slugify} from 'fmjs/string.js';
+ * import {slugify} from '@bamf-health/bamfjs/string.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {slugify} = require('fmjs/cjs/string.js');
+ * const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
  * ```
  *
  */
@@ -250,8 +250,12 @@ const caseChanges = {
     .replace(/^_|_$/g, '') || str;
   },
   camelToSnake: (str) => {
-    return str.trim().split(/(?=[A-Z])/).join('_').toLowerCase();
-  }
+    return str
+    .trim()
+    .split(/(?=[A-Z])/)
+    .join('_')
+    .toLowerCase();
+  },
 };
 
 /**

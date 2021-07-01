@@ -2,15 +2,15 @@
  * @module object
  * @summary ES6 Import Example:
  * ```js
- * import {deepCopy} from 'fmjs';
+ * import {deepCopy} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {deepCopy} from 'fmjs/object.js';
+ * import {deepCopy} from '@bamf-health/bamfjs/object.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {deepCopy} = require('fmjs/cjs/object.js');
+ * const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
  * ```
  *
  */

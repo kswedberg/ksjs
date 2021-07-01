@@ -102,10 +102,10 @@ examples.example1('foo');
 ## ajax
 ES6 Import Example:
 ```js
-import {getJSON} from 'fmjs';
+import {getJSON} from '@bamf-health/bamfjs';
 
 // or:
-import {getJSON} from 'fmjs/ajax.js';
+import {getJSON} from '@bamf-health/bamfjs/ajax.js';
 ```
 
 
@@ -186,15 +186,15 @@ Send a POST request with `FormData` derived from form element provided by `optio
 ## array
 ES6 Import Example:
 ```js
-import {isArray} from 'fmjs';
+import {isArray} from '@bamf-health/bamfjs';
 
 // or:
-import {isArray} from 'fmjs/array.js';
+import {isArray} from '@bamf-health/bamfjs/array.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {isArray} = require('fmjs/cjs/array.js');
+const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
 ```
 
 
@@ -227,7 +227,7 @@ Determine whether "arr" is a true array
 
 **Example**  
 ```js
-import {isArray} from 'fmjs/array.js';
+import {isArray} from '@bamf-health/bamfjs/array.js';
 
 if (isArray(window.foo)) {
   window.foo.push('bar');
@@ -276,7 +276,7 @@ Take an array of objects and a property and return an array of values of that pr
 
 **Example**  
 ```js
-import {pluck} from 'fmjs/array.js';
+import {pluck} from '@bamf-health/bamfjs/array.js';
 
 let family = [
   {
@@ -469,15 +469,15 @@ Pad an array with `value` until its length equals `size`
 ## color
 ES6 Import Example
 ```js
-import {rgb2Hex} from 'fmjs'
+import {rgb2Hex} from '@bamf-health/bamfjs'
 
 // or:
-import {rgb2Hex} from 'fmjs/color.js'
+import {rgb2Hex} from '@bamf-health/bamfjs/color.js'
 ```
 
 CJS Require Example
 ```js
-const {rgb2Hex} = require('fmjs/cjs/color.js');
+const {rgb2Hex} = require('@bamf-health/bamfjs/cjs/color.js');
 ```
 
 
@@ -591,10 +591,10 @@ Return darkColor if bgColor is light and lightColor if bgColor is dark. "Light" 
 ## cookie
 ES6 Import Example:
 ```js
-import {getCookie} from 'fmjs';
+import {getCookie} from '@bamf-health/bamfjs';
 
 // or:
-import {getCookie} from 'fmjs/cookie.js';
+import {getCookie} from '@bamf-health/bamfjs/cookie.js';
 ```
 
 
@@ -655,10 +655,10 @@ Remove a cookie
 ## dom
 ES6 Import Example:
 ```js
-import {addClass} from 'fmjs';
+import {addClass} from '@bamf-health/bamfjs';
 
 // or:
-import {addClass} from 'fmjs/dom.js';
+import {addClass} from '@bamf-health/bamfjs/dom.js';
 ```
 
 
@@ -1007,10 +1007,10 @@ Insert a script into the DOM with reasonable default properties, returning a pro
 ## event
 ES6 Import Example:
 ```js
-import {addEvent} from 'fmjs';
+import {addEvent} from '@bamf-health/bamfjs';
 
 // or:
-import {addEvent} from 'fmjs/event.js';
+import {addEvent} from '@bamf-health/bamfjs/event.js';
 ```
 
 
@@ -1086,10 +1086,10 @@ triggerEvent(document.body, 'myCustomEvent', {weather: 'sunshine'});
 ## form
 ES6 Import Example:
 ```js
-import {getFormData} from 'fmjs';
+import {getFormData} from '@bamf-health/bamfjs';
 
 // or:
-import {getFormData} from 'fmjs/form.js';
+import {getFormData} from '@bamf-health/bamfjs/form.js';
 ```
 
 <a name="module_form..getFormData"></a>
@@ -1165,10 +1165,10 @@ console.log(getFormData.array(myform));
 ## jsonp
 ES6 Import Example:
 ```js
-import {getJSONP} from 'fmjs';
+import {getJSONP} from '@bamf-health/bamfjs';
 
 // or:
-import {getJSONP} from 'fmjs/jsonp.js';
+import {getJSONP} from '@bamf-health/bamfjs/jsonp.js';
 ```
 
 <a name="module_jsonp..getJSONP"></a>
@@ -1200,15 +1200,15 @@ getJSONP({url: 'https://example.com/api/'})
 ## math
 ES6 Import Example:
 ```js
-import {median} from 'fmjs';
+import {median} from '@bamf-health/bamfjs';
 
 // or:
-import {median} from 'fmjs/math.js';
+import {median} from '@bamf-health/bamfjs/math.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {median} = require('fmjs/cjs/math.js');
+const {median} = require('@bamf-health/bamfjs/cjs/math.js');
 ```
 
 
@@ -1346,15 +1346,15 @@ Return the number with the highest value from an array of numbers
 ## object
 ES6 Import Example:
 ```js
-import {deepCopy} from 'fmjs';
+import {deepCopy} from '@bamf-health/bamfjs';
 
 // or:
-import {deepCopy} from 'fmjs/object.js';
+import {deepCopy} from '@bamf-health/bamfjs/object.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {deepCopy} = require('fmjs/cjs/object.js');
+const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
 ```
 
 
@@ -1564,15 +1564,15 @@ Return a new object, excluding the properties in the props array.
 ## promise
 ES6 Import Example:
 ```js
-import {peach} from 'fmjs';
+import {peach} from '@bamf-health/bamfjs';
 
 // or:
-import {peach} from 'fmjs/promise.js';
+import {peach} from '@bamf-health/bamfjs/promise.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {peach} = require('fmjs/cjs/promise.js');
+const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
 ```
 
 
@@ -1613,7 +1613,7 @@ const {peach} = require('fmjs/cjs/promise.js');
 
 **Example**  
 ```js
-import {pmap} from 'fmjs/promise.js';
+import {pmap} from '@bamf-health/bamfjs/promise.js';
 
 const fruits = ['apple', 'banana', 'pear'];
 
@@ -1638,7 +1638,7 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 
 **Example**  
 ```js
-import {pmap} from 'fmjs/promise.js';
+import {pmap} from '@bamf-health/bamfjs/promise.js';
 
 const fruits = ['apple', 'banana', 'pear'];
 
@@ -1662,10 +1662,10 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 ## selection
 ES6 Import Example:
 ```js
-import {getSelection} from 'fmjs';
+import {getSelection} from '@bamf-health/bamfjs';
 
 // or:
-import {getSelection} from 'fmjs/selection.js';
+import {getSelection} from '@bamf-health/bamfjs/selection.js';
 ```
 
 
@@ -1740,10 +1740,10 @@ Return an object with the following properties related to the selected text with
 ## storage
 ES6 Import Example:
 ```js
-import {Storage} from 'fmjs';
+import {Storage} from '@bamf-health/bamfjs';
 
 // or:
-import {Storage} from 'fmjs/storage.js';
+import {Storage} from '@bamf-health/bamfjs/storage.js';
 ```
 
 
@@ -1853,15 +1853,15 @@ Constructor for storage functions.
 ## string
 ES6 Import Example:
 ```js
-import {slugify} from 'fmjs';
+import {slugify} from '@bamf-health/bamfjs';
 
 // or:
-import {slugify} from 'fmjs/string.js';
+import {slugify} from '@bamf-health/bamfjs/string.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {slugify} = require('fmjs/cjs/string.js');
+const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
 ```
 
 
@@ -2028,15 +2028,15 @@ The second number is derived from a random 11-digit number
 ## timer
 ES6 Import Example:
 ```js
-import {debounce} from 'fmjs';
+import {debounce} from '@bamf-health/bamfjs';
 
 // or:
-import {debounce} from 'fmjs/timer.js';
+import {debounce} from '@bamf-health/bamfjs/timer.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {debounce} = require('fmjs/cjs/timer.js');
+const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
 ```
 
 
@@ -2146,15 +2146,15 @@ Set up a function to be called immediately before the next repaint using `reques
 ## url
 ES6 Import Example:
 ```js
-import {serialize} from 'fmjs';
+import {serialize} from '@bamf-health/bamfjs';
 
 // or:
-import {serialize} from 'fmjs/url.js';
+import {serialize} from '@bamf-health/bamfjs/url.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {serialize} = require('fmjs/cjs/url.js');
+const {serialize} = require('@bamf-health/bamfjs/cjs/url.js');
 ```
 
 

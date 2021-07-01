@@ -2,15 +2,15 @@
  * @module url
  * @summary ES6 Import Example:
  * ```js
- * import {serialize} from 'fmjs';
+ * import {serialize} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {serialize} from 'fmjs/url.js';
+ * import {serialize} from '@bamf-health/bamfjs/url.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {serialize} = require('fmjs/cjs/url.js');
+ * const {serialize} = require('@bamf-health/bamfjs/cjs/url.js');
  * ```
  *
  */

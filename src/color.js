@@ -3,15 +3,15 @@
 * @summary
 * ES6 Import Example
 * ```js
-* import {rgb2Hex} from 'fmjs'
+* import {rgb2Hex} from '@bamf-health/bamfjs'
 *
 * // or:
-* import {rgb2Hex} from 'fmjs/color.js'
+* import {rgb2Hex} from '@bamf-health/bamfjs/color.js'
 * ```
 *
 * CJS Require Example
 * ```js
-* const {rgb2Hex} = require('fmjs/cjs/color.js');
+* const {rgb2Hex} = require('@bamf-health/bamfjs/cjs/color.js');
 * ```
 */
 

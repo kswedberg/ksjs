@@ -2,15 +2,15 @@
  * @module timer
  * @summary ES6 Import Example:
  * ```js
- * import {debounce} from 'fmjs';
+ * import {debounce} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {debounce} from 'fmjs/timer.js';
+ * import {debounce} from '@bamf-health/bamfjs/timer.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {debounce} = require('fmjs/cjs/timer.js');
+ * const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
  * ```
  *
  */
@@ -175,7 +175,7 @@ export const raf = function(fn, context) {
     const ctx = context || this;
 
     if (typeof window === 'undefined') {
-      throw new TypeError('window is not defined: fmjs/timer.js ln 178');
+      throw new TypeError('window is not defined: @bamf-health/bamfjs/timer.js ln 178');
     }
 
     if (!window.requestAnimationFrame) {

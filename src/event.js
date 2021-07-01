@@ -3,10 +3,10 @@
  * @summary
  * ES6 Import Example:
  * ```js
- * import {addEvent} from 'fmjs';
+ * import {addEvent} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {addEvent} from 'fmjs/event.js';
+ * import {addEvent} from '@bamf-health/bamfjs/event.js';
  * ```
  *
  */
