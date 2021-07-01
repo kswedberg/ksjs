@@ -2,15 +2,15 @@
  * @module math
  * @summary ES6 Import Example:
  * ```js
- * import {median} from 'fmjs';
+ * import {median} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {median} from 'fmjs/math.js';
+ * import {median} from '@bamf-health/bamfjs/math.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {median} = require('fmjs/cjs/math.js');
+ * const {median} = require('@bamf-health/bamfjs/cjs/math.js');
  * ```
  *
  */

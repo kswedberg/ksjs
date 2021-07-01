@@ -4,10 +4,10 @@
  * @summary
  * ES6 Import Example:
  * ```js
- * import {getJSONP} from 'fmjs';
+ * import {getJSONP} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {getJSONP} from 'fmjs/jsonp.js';
+ * import {getJSONP} from '@bamf-health/bamfjs/jsonp.js';
  * ```
  *
  */

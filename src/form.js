@@ -3,10 +3,10 @@
  * @summary
  * ES6 Import Example:
  * ```js
- * import {getFormData} from 'fmjs';
+ * import {getFormData} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {getFormData} from 'fmjs/form.js';
+ * import {getFormData} from '@bamf-health/bamfjs/form.js';
  * ```
  *
  */

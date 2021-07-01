@@ -3,10 +3,10 @@
  * @summary
  * ES6 Import Example:
  * ```js
- * import {getSelection} from 'fmjs';
+ * import {getSelection} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {getSelection} from 'fmjs/selection.js';
+ * import {getSelection} from '@bamf-health/bamfjs/selection.js';
  * ```
  *
  */

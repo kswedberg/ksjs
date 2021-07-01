@@ -2,15 +2,15 @@
  * @module array
  * @summary ES6 Import Example:
  * ```js
- * import {isArray} from 'fmjs';
+ * import {isArray} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {isArray} from 'fmjs/array.js';
+ * import {isArray} from '@bamf-health/bamfjs/array.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {isArray} = require('fmjs/cjs/array.js');
+ * const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
  * ```
  *
  */
@@ -21,7 +21,7 @@
  * @param  {array} arr item to determine whether it's an array
  * @returns {boolean}     `true` if arr is array, `false` if not
  * @example
- * import {isArray} from 'fmjs/array.js';
+ * import {isArray} from '@bamf-health/bamfjs/array.js';
  *
  * if (isArray(window.foo)) {
  *   window.foo.push('bar');
@@ -78,7 +78,7 @@ export const randomItem = function randomItem(arr) {
  * @param  {array} arr  Array from which to pluck
  * @param  {string} prop Property to pluck
  * @returns {array} Array of values of the property (if the value is `undefined`, returns `null` instead)
-* @example import {pluck} from 'fmjs/array.js';
+* @example import {pluck} from '@bamf-health/bamfjs/array.js';
 *
 * let family = [
 *   {

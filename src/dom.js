@@ -4,10 +4,10 @@
  * @summary
  * ES6 Import Example:
  * ```js
- * import {addClass} from 'fmjs';
+ * import {addClass} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {addClass} from 'fmjs/dom.js';
+ * import {addClass} from '@bamf-health/bamfjs/dom.js';
  * ```
  *
  */
