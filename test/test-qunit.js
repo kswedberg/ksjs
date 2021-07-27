@@ -550,6 +550,32 @@ QUnit.module('form', {
   },
 });
 
+QUnit.test('valuesToFormData', (assert) => {
+  const values = {
+    name: 'Karl',
+    email: 'karl@example.com',
+    list: ['1', '2'],
+  };
+  const expectedKeys = Object.keys(values);
+  const formDataKeys = [];
+  const formData = forms.valuesToFormData(values);
+
+  for (let keyVal of formData.entries()) {
+    let key = keyVal[0];
+    const val = keyVal[1];
+    let expectedVal = values[key];
+
+    formDataKeys.push(key);
+
+    assert.ok(expectedKeys.includes(key), `formData key ${key} is in expected keys`);
+    assert.equal(val, expectedVal, `value ${val} for key ${key} is correct`);
+  }
+
+  expectedKeys.forEach((key) => {
+    assert.ok(formDataKeys.includes(key), `expected key ${key} is in formData keys`);
+  });
+});
+
 QUnit.test('getFormData - formData', function(assert) {
   const formData = forms.getFormData(this.form, 'formData');
   const expected = {
