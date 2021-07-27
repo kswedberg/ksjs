@@ -1092,6 +1092,11 @@ import {getFormData} from '@bamf-health/bamfjs';
 import {getFormData} from '@bamf-health/bamfjs/form.js';
 ```
 
+
+* [form](#module_form)
+  * [getFormData](#module_form..getFormData) ⇒ <code>any</code>
+  * [valuesToFormData(values)](#module_form..valuesToFormData) ⇒ <code>FormData</code>
+
 <a name="module_form..getFormData"></a>
 
 ### getFormData ⇒ <code>any</code>
@@ -1160,6 +1165,19 @@ console.log(getFormData.array(myform));
 //    }
 // ]
 ```
+<a name="module_form..valuesToFormData"></a>
+
+### valuesToFormData(values) ⇒ <code>FormData</code>
+
+Note: if the value of a key is an object with a `files` property, each file in the files array will be appended to the formData object.
+
+**Returns**: <code>FormData</code> - The form data object<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| values | <code>Object</code> \| <code>Array</code> | The object or array of objects to convert |
+
 <a name="module_jsonp"></a>
 
 ## jsonp

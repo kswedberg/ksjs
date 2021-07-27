@@ -11,6 +11,7 @@
  *
  */
 import {unserialize} from './url.js';
+import {isArray} from './array.js';
 
 const selectVal = function(select) {
   let val = '';
@@ -42,12 +43,8 @@ const filterSuccessfulControl = (elem) => {
 };
 
 
-const formElements = (form) => {
-  if (!isForm(form)) {
-    return [];
-  }
-
-  return [...form.elements]
+const formElements = (elements) => {
+  return [...elements]
   .filter(filterSuccessfulControl)
   .map((elem) => {
     return {
@@ -57,9 +54,64 @@ const formElements = (form) => {
   });
 };
 
+const arrayToFormData = (arr = []) => {
+  const elems = formElements(arr);
+  let formData = new FormData();
+
+  elems.forEach((elem) => {
+    const value = elem.value;
+
+    if (isArray(value.files)) {
+      value.files.forEach((file) => {
+        formData.append(elem.name, file.file, file.filename);
+      });
+
+      return;
+    }
+
+    formData.append(decodeURIComponent(elem.name), decodeURIComponent(value));
+    if (elem.type === 'file') {
+      elem.files.forEach((item) => {
+        formData.append(elem.name, item);
+      });
+    }
+  });
+
+  return formData;
+};
+
+const objectToArray = (object) => {
+  const array = [];
+
+  for (let key in object) {
+    const value = object[key];
+
+    array.push({
+      name: key,
+      value: value,
+    });
+  }
+
+  return array;
+};
+
+/**
+ * Change an object of key-value pairs, or an array of objects with `name` and `value` properties, into a formData object.
+ * @description Note: if the value of a key is an object with a `files` property, each file in the files array will be appended to the formData object.
+ * @function valuesToFormData
+ * @param {Object|Array} values The object or array of objects to convert
+ * @returns {FormData} The form data object
+ */
+
+export const valuesToFormData = (values) => {
+  const elems = isArray(values) ? values : objectToArray(values);
+
+  return arrayToFormData(elems);
+};
+
 const formDataMethods = {
   string: (form) => {
-    const elems = formElements(form)
+    const elems = formElements(form.elements)
     .map((elem) => {
       return `${encodeURIComponent(elem.name)}=${encodeURIComponent(elem.value)}`;
     });
@@ -68,7 +120,7 @@ const formDataMethods = {
   },
 
   array: (form) => {
-    return formElements(form);
+    return formElements(form.elements);
   },
 
   object: (form) => {
@@ -80,29 +132,9 @@ const formDataMethods = {
       return null;
     }
 
-    let formData = new FormData();
-    const elems = [...form.elements];
-
-    elems
-    .filter(filterSuccessfulControl)
-    .forEach((elem) => {
-      let val = elem.value;
-
-      if (elem.nodeName === 'SELECT') {
-        val = selectVal(elem);
-      }
-
-      formData.append(decodeURIComponent(elem.name), decodeURIComponent(elem.value));
-
-      if (elem.type === 'file') {
-        formData.append(elem.name, elem.files[0]);
-      }
-    });
-
-    return formData;
+    return arrayToFormData(form.elements);
   },
 };
-
 
 /**
  * Return the set of successful form controls of the provided `form` element in one of four types: object, string, formData, or array.
