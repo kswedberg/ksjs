@@ -61,7 +61,7 @@ const arrayToFormData = (arr = []) => {
   elems.forEach((elem) => {
     const value = elem.value;
 
-    if (isArray(value.files)) {
+    if (value && isArray(value.files)) {
       value.files.forEach((file) => {
         formData.append(elem.name, file.file, file.filename);
       });
@@ -97,7 +97,7 @@ const objectToArray = (object) => {
 
 /**
  * Change an object of key-value pairs, or an array of objects with `name` and `value` properties, into a formData object.
- * @description Note: if the value of a key is an object with a `files` property, each file in the files array will be appended to the formData object.
+ * @description Note: if the value of a key is an object with a `files` property, each file in the files array will be appended to the FormData object.
  * @function valuesToFormData
  * @param {Object|Array} values The object or array of objects to convert
  * @returns {FormData} The form data object
