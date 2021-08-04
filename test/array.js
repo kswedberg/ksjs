@@ -21,7 +21,7 @@ describe('Array', () => {
     });
   });
 
-  describe('inArray', () => {
+  describe('randomItem', () => {
     let arr = [3, 2, 1];
 
     it('Random item is in array [3, 2, 1]', () => {
@@ -67,13 +67,13 @@ describe('Array', () => {
     let ids = arrays.pluck(family, 'id');
 
     it('Plucked names out of family', () => {
-      assert.deepEqual(names, ['Karl', 'Sara', 'Ben', 'Lucy']);
+      assert.deepStrictEqual(names, ['Karl', 'Sara', 'Ben', 'Lucy']);
     });
     it('Plucked colors out of family', () => {
-      assert.deepEqual(colors, ['orange', 'yellow', 'blue', 'green']);
+      assert.deepStrictEqual(colors, ['orange', 'yellow', 'blue', 'green']);
     });
     it('Plucked ids out of 2 family members', () => {
-      assert.deepEqual(ids, [null, 'mom', 'son', null]);
+      assert.deepStrictEqual(ids, [null, 'mom', 'son', null]);
     });
 
   });
@@ -128,13 +128,13 @@ describe('Array', () => {
     it('unique merged elements in array', () => {
       let uniq = arrays.unique(array1);
 
-      assert.deepEqual(uniq, [1, 2, 3, 4, 6]);
+      assert.deepStrictEqual(uniq, [1, 2, 3, 4, 6]);
     });
 
     it('uniquely merged two arrays', () => {
       let uniqueMerge = arrays.unique(arrays.merge(array1, array2));
 
-      assert.deepEqual(uniqueMerge, [1, 2, 3, 4, 6, 5, -1]);
+      assert.deepStrictEqual(uniqueMerge, [1, 2, 3, 4, 6, 5, -1]);
     });
   });
 
@@ -145,7 +145,7 @@ describe('Array', () => {
     it('returns array1 intersected with array2', () => {
       let arrayIntersect = arrays.intersect(array1, array2);
 
-      assert.deepEqual(arrayIntersect, [2, 3]);
+      assert.deepStrictEqual(arrayIntersect, [2, 3]);
     });
 
     it('returns intersected array of objects', () => {
@@ -158,7 +158,7 @@ describe('Array', () => {
         },
       ];
 
-      assert.deepEqual(arrayIntersect, expectIntersect);
+      assert.deepStrictEqual(arrayIntersect, expectIntersect);
     });
 
     it('returns intersected array of objects, checking for "name" property', () => {
@@ -175,7 +175,7 @@ describe('Array', () => {
         },
       ];
 
-      assert.deepEqual(arrayIntersect, expectIntersect);
+      assert.deepStrictEqual(arrayIntersect, expectIntersect);
     });
   });
 
@@ -186,7 +186,7 @@ describe('Array', () => {
     it('returns a diffed array1', () => {
       let arrayDiff = arrays.diff(array1, array2);
 
-      assert.deepEqual(arrayDiff, [1, 4]);
+      assert.deepStrictEqual(arrayDiff, [1, 4]);
     });
 
     it('returns a differed array of objects', () => {
@@ -209,7 +209,7 @@ describe('Array', () => {
         },
       ];
 
-      assert.deepEqual(arrayDiff, expectDiff);
+      assert.deepStrictEqual(arrayDiff, expectDiff);
     });
 
     it('returns a differed array of objects, checking for "name" property', () => {
@@ -226,7 +226,7 @@ describe('Array', () => {
         },
       ];
 
-      assert.deepEqual(arrayDiff, expectDiff);
+      assert.deepStrictEqual(arrayDiff, expectDiff);
     });
   });
 
@@ -239,9 +239,9 @@ describe('Array', () => {
     arrays.pad(array2, 7, 'foo');
     arrays.pad(array3, 2, 0);
     it('pads arrays appropriately', () => {
-      assert.deepEqual(array1, [1, 2, 3, 4, 0, 0, 0, 0]);
-      assert.deepEqual(array2, [2, 3, 5, 6, -1, 'foo', 'foo']);
-      assert.deepEqual(array3, [1, 2, 3, 4]);
+      assert.deepStrictEqual(array1, [1, 2, 3, 4, 0, 0, 0, 0]);
+      assert.deepStrictEqual(array2, [2, 3, 5, 6, -1, 'foo', 'foo']);
+      assert.deepStrictEqual(array3, [1, 2, 3, 4]);
     });
   });
 });
