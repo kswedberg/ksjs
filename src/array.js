@@ -61,6 +61,91 @@ export const inArray = function(el, arr) {
 };
 
 /**
+ * Convert an object to an array of objects with name and value properties
+ * @function objectToArray
+ * @param  {object} obj The object to convert
+ * @returns {array}     An array of objects with name and value properties
+ * @example
+ * import {objectToArray} from '@bamf-health/bamfjs/array.js';
+ *
+ * const obj = {
+ *   foo: 'bar',
+ *   baz: 'qux'
+ * };
+ *
+ * const arr = objectToArray(obj);
+ *  // arr = [
+ * //   {name: 'foo', value: 'bar'},
+ * //   {name: 'baz', value: 'qux'}
+ * // ];
+ *
+ *
+ */
+
+export const objectToArray = function(obj) {
+  const arr = [];
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      arr.push({
+        name: key,
+        value: obj[key],
+      });
+    }
+  }
+
+  return arr;
+};
+
+/**
+ * Return an array based on the given value:
+ * a) Strings are split by a delimiter (defaults to /\s+/).
+ * b) Plain objects are converted to an array of objects with name and value properties.
+ * c) Undefined and null are returned as an empty array.
+ * d) Arrays are returned as is.
+ * e) Anything else is wrapped in an array.
+ * @function makeArray
+ * @param  {any} value The value to convert to an array
+ * @param  {string|RegExp} [delimiter] The value to convert to an array (defaults to /\s+/)
+ * @returns {array}      The value converted to an array
+ * @example
+ *  import {makeArray} from '@bamf-health/bamfjs/array.js';
+ * const foo = makeArray('one two three');
+ * // foo is now ['one', 'two', 'three']
+ *
+ * const bar = makeArray('one,two,three', ',');
+ * // bar is now ['one', 'two', 'three']
+ *
+ * const baz = makeArray(['one', 'two', 'three']);
+ * // baz is still ['one', 'two', 'three']
+ *
+ * const quz = makeArray({foo: 'bar'});
+ * // quz is now [{name: 'foo': value: 'bar'}]
+ *
+ * const quuz = makeArray(null);
+ * // quuz is now []
+ */
+export const makeArray = function(value, delimiter) {
+  if (value == null) {
+    return [];
+  }
+
+  if (typeof value === 'string') {
+    return value.split(delimiter || /\s+/);
+  }
+
+  if (isArray(value)) {
+    return value;
+  }
+
+  if (typeof value === 'object') {
+    return objectToArray(value);
+  }
+
+  return [value];
+};
+
+/**
  * Return a random item from the provided array
  * @function randomItem
  * @param  {array} arr An array of elements
