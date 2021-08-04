@@ -201,6 +201,8 @@ const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
 * [array](#module_array)
   * [isArray(arr)](#module_array..isArray) ⇒ <code>boolean</code>
   * [inArray(el, arr)](#module_array..inArray) ⇒ <code>boolean</code>
+  * [objectToArray(obj)](#module_array..objectToArray) ⇒ <code>array</code>
+  * [makeArray(value, [delimiter])](#module_array..makeArray) ⇒ <code>array</code>
   * [randomItem(arr)](#module_array..randomItem) ⇒ <code>any</code>
   * [pluck(arr, prop)](#module_array..pluck) ⇒ <code>array</code>
   * [shuffle(els)](#module_array..shuffle) ⇒ <code>array</code>
@@ -247,6 +249,71 @@ Determine whether item "el" is in array "arr"
 | el | <code>any</code> | An item to test against the array |
 | arr | <code>array</code> | The array to test against |
 
+<a name="module_array..objectToArray"></a>
+
+### objectToArray(obj) ⇒ <code>array</code>
+
+Convert an object to an array of objects with name and value properties
+
+**Returns**: <code>array</code> - An array of objects with name and value properties<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>object</code> | The object to convert |
+
+**Example**  
+```js
+import {objectToArray} from '@bamf-health/bamfjs/array.js';
+
+const obj = {
+  foo: 'bar',
+  baz: 'qux'
+};
+
+const arr = objectToArray(obj);
+ // arr = [
+//   {name: 'foo', value: 'bar'},
+//   {name: 'baz', value: 'qux'}
+// ];
+```
+<a name="module_array..makeArray"></a>
+
+### makeArray(value, [delimiter]) ⇒ <code>array</code>
+
+Return an array based on the given value:
+a) Strings are split by a delimiter (defaults to /\s+/).
+b) Plain objects are converted to an array of objects with name and value properties.
+c) Undefined and null are returned as an empty array.
+d) Arrays are returned as is.
+e) Anything else is wrapped in an array.
+
+**Returns**: <code>array</code> - The value converted to an array<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>any</code> | The value to convert to an array |
+| [delimiter] | <code>string</code> \| <code>RegExp</code> | The value to convert to an array (defaults to /\s+/) |
+
+**Example**  
+```js
+import {makeArray} from '@bamf-health/bamfjs/array.js';
+const foo = makeArray('one two three');
+// foo is now ['one', 'two', 'three']
+
+const bar = makeArray('one,two,three', ',');
+// bar is now ['one', 'two', 'three']
+
+const baz = makeArray(['one', 'two', 'three']);
+// baz is still ['one', 'two', 'three']
+
+const quz = makeArray({foo: 'bar'});
+// quz is now [{name: 'foo': value: 'bar'}]
+
+const quuz = makeArray(null);
+// quuz is now []
+```
 <a name="module_array..randomItem"></a>
 
 ### randomItem(arr) ⇒ <code>any</code>
@@ -1169,7 +1236,7 @@ console.log(getFormData.array(myform));
 
 ### valuesToFormData(values) ⇒ <code>FormData</code>
 
-Note: if the value of a key is an object with a `files` property, each file in the files array will be appended to the formData object.
+Note: if the value of a key is an object with a `files` property, each file in the files array will be appended to the FormData object.
 
 **Returns**: <code>FormData</code> - The form data object<br />
 
