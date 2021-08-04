@@ -11,7 +11,7 @@
  *
  */
 import {unserialize} from './url.js';
-import {isArray} from './array.js';
+import {isArray, objectToArray} from './array.js';
 
 const selectVal = function(select) {
   let val = '';
@@ -78,21 +78,6 @@ const arrayToFormData = (arr = []) => {
   });
 
   return formData;
-};
-
-const objectToArray = (object) => {
-  const array = [];
-
-  for (let key in object) {
-    const value = object[key];
-
-    array.push({
-      name: key,
-      value: value,
-    });
-  }
-
-  return array;
 };
 
 /**
