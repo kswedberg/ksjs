@@ -21,6 +21,34 @@ describe('Array', () => {
     });
   });
 
+  describe('makeArray', () => {
+    const str1 = 'one two three';
+    const str2 = 'one,two, three';
+    const arr = [1, 2, 3];
+    const obj = {uno: 'one', dos: 'two', tres: 'three'};
+    let nothing;
+    const num = 0;
+
+    it('converts space-delimited string to array', () => {
+      assert.deepStrictEqual(arrays.makeArray(str1), ['one', 'two', 'three']);
+    });
+    it('converts custom-delimited string to array', () => {
+      assert.deepStrictEqual(arrays.makeArray(str2, /,\s*/), ['one', 'two', 'three']);
+    });
+    it('returns an array unchanged', () => {
+      assert.deepStrictEqual(arrays.makeArray(arr), [1, 2, 3]);
+    });
+    it('converts an object to an array of objects with name and value properties', () => {
+      assert.deepStrictEqual(arrays.makeArray(obj), [{name: 'uno', value: 'one'}, {name: 'dos', value: 'two'}, {name: 'tres', value: 'three'}]);
+    });
+    it('returns an empty array from an undefined variable', () => {
+      assert.deepStrictEqual(arrays.makeArray(nothing), []);
+    });
+    it('wraps the number in an array', () => {
+      assert.deepStrictEqual(arrays.makeArray(num), [num]);
+    });
+  });
+
   describe('randomItem', () => {
     let arr = [3, 2, 1];
 
