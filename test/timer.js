@@ -1,4 +1,4 @@
-import {throttle, debounce, unbounce} from '../src/timer.js';
+import {throttle, debounce, unbounce, idle} from '../src/timer.js';
 
 const assert = require('assert');
 
@@ -34,13 +34,13 @@ describe('Timer', () => {
     throttled('nope');
 
     it('throttled function calls', (done) => {
-      assert.equal(logs.length, 1);
+      assert.strictEqual(logs.length, 1);
       // This shouldn't get called either
       setTimeout(() => {
         throttled('never');
       }, 25);
       setTimeout(() => {
-        assert.equal(logs.length, 1);
+        assert.strictEqual(logs.length, 1);
         done();
       }, 125);
     });
@@ -51,16 +51,16 @@ describe('Timer', () => {
         throttled('eventually!');
 
         setTimeout(() => {
-          assert.equal(logs.join(''), 'yeseventually!');
-          assert.equal(logs.length, 2);
+          assert.strictEqual(logs.join(''), 'yeseventually!');
+          assert.strictEqual(logs.length, 2);
 
           // ** This WILL get called, too, because another 200ms has started
           throttled('yahoo');
           setTimeout(() => {
             ['yes', 'eventually!', 'yahoo'].forEach((item, i) => {
-              assert.equal(logs[i], item);
+              assert.strictEqual(logs[i], item);
             });
-            assert.equal(logs.length, 3);
+            assert.strictEqual(logs.length, 3);
             console.log(logs);
             console.log(times);
             done();
@@ -91,8 +91,8 @@ describe('Timer', () => {
           }
 
           setTimeout(() => {
-            assert.equal(repeated.length, 20, 'Attempted 20 times');
-            assert.equal(debounced.length, 1, 'Called only once');
+            assert.strictEqual(repeated.length, 20, 'Attempted 20 times');
+            assert.strictEqual(debounced.length, 1, 'Called only once');
             assert.ok(+new Date() - debounced[debounced.length - 1] < 50, 'Called at the end');
             // console.log('time diff', );
             done();
@@ -104,6 +104,7 @@ describe('Timer', () => {
       repeater();
     });
   });
+
   describe('unbounce', () => {
     let unbounced = [];
     let repeated = [];
@@ -127,8 +128,8 @@ describe('Timer', () => {
           }
 
           setTimeout(() => {
-            assert.equal(repeated.length, 20, 'Attempted 20 times');
-            assert.equal(unbounced.length, 1, 'Called only once');
+            assert.strictEqual(repeated.length, 20, 'Attempted 20 times');
+            assert.strictEqual(unbounced.length, 1, 'Called only once');
             assert.ok(firstTime - unbounced[unbounced.length - 1] < 50, 'Called at the start');
             // console.log('time diff', );
             done();
@@ -139,5 +140,28 @@ describe('Timer', () => {
 
       repeater();
     });
+  });
+});
+
+// This test is a little dumb, but just want to make sure the function gets called
+describe('idle', () => {
+  const logs = [];
+  let times = 20;
+
+  const logit = (num) => {
+    logs.push(num);
+  };
+
+  it('logs on idle', (done) => {
+    const logOnIdle = idle(logit);
+
+    for (let i = 0; i < times; i++) {
+      logOnIdle(i);
+    }
+    idle(() => {
+      assert.strictEqual(logs.length, times, 'Called 20 times');
+      assert.strictEqual(logs[logs.length - 1], 19, 'Last call\'s argument was 19');
+      done();
+    })();
   });
 });

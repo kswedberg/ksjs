@@ -191,3 +191,31 @@ export const raf = function(fn, context) {
     });
   };
 };
+
+/**
+* Set up a function to be called when the UI thread is idle by using `requestIdleCallback()`.
+* Falls back to using `requestAnimationFrame (or an rAF polyfill) if `requestIdleCallback()` is not supported.
+* @function idle
+* @param {function} fn The function to call
+* @param {Element} [context = this] The context in which to call `fn`
+*/
+export const idle = function(fn, context) {
+  let queued = false;
+
+  if (typeof window !== 'undefined' && !window.requestIdleCallback) {
+    return raf(fn, context);
+  }
+
+  return function(...args) {
+    const ctx = context || this;
+
+    if (!queued) {
+      queued = true;
+      // eslint-disable-next-line prefer-arrow-callback
+      requestIdleCallback(() => {
+        fn.apply(ctx, args);
+        queued = false;
+      });
+    }
+  };
+};
