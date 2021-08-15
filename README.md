@@ -2133,6 +2133,7 @@ const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
   * [unbounce(fn, [timerDelay], [ctx])](#module_timer..unbounce)
   * [throttle(fn, [timerDelay], [context])](#module_timer..throttle)
   * [raf(fn, [context])](#module_timer..raf)
+  * [idle(fn, [context])](#module_timer..idle)
 
 <a name="module_timer..HOUR"></a>
 
@@ -2218,6 +2219,20 @@ Set up a function to be called no more than once every `timerDelay` milliseconds
 ### raf(fn, [context])
 
 Set up a function to be called immediately before the next repaint using `requestAnimationFrame()`
+
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| fn | <code>function</code> |  | The function to call |
+| [context] | <code>Element</code> | <code>this</code> | The context in which to call `fn` |
+
+<a name="module_timer..idle"></a>
+
+### idle(fn, [context])
+
+Set up a function to be called when the UI thread is idle by using `requestIdleCallback()`.
+Falls back to using `requestAnimationFrame (or an rAF polyfill) if `requestIdleCallback()` is not supported.
 
 
 
