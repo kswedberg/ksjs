@@ -399,3 +399,20 @@ export const randomString = function(sep) {
 
   return [randoNum.toString(36), date36].join(separator);
 };
+
+/**
+ * Strip tags from a string
+ * @function stripTags
+ * @param {string} str String to be stripped of tags
+ * @returns {string} Stripped string
+ * @example
+ * console.log(stripTags('<p>Hello</p>'));
+ * // Logs: 'Hello'
+ *
+ * console.log(stripTags('<p>Hello</p><p>World</p>'));
+ * // Logs: 'HelloWorld'
+ *
+ */
+export const stripTags = function stripTags(str) {
+  return str.replace(/<\/?[a-z0-9]+\b[^>]*>/g, '');
+};
