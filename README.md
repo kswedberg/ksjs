@@ -206,8 +206,8 @@ const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
   * [randomItem(arr)](#module_array..randomItem) ⇒ <code>any</code>
   * [pluck(arr, prop)](#module_array..pluck) ⇒ <code>array</code>
   * [shuffle(els)](#module_array..shuffle) ⇒ <code>array</code>
-  * [collapse(...arrays)](#module_array..collapse) ⇒ <code>array</code>
-  * [merge(array1, array2)](#module_array..merge) ⇒ <code>array</code>
+  * [merge(...arrays)](#module_array..merge) ⇒ <code>array</code>
+  * ~~[collapse()](#module_array..collapse)~~
   * [intersect(array1, array2, [prop])](#module_array..intersect) ⇒ <code>array</code>
   * [unique(arr, [prop])](#module_array..unique) ⇒ <code>array</code>
   * [diff(array1, array2, [prop])](#module_array..diff) ⇒ <code>array</code>
@@ -393,39 +393,26 @@ Fisher-Yates (aka Knuth) shuffle. Takes an array of elements and returns the sam
 | --- | --- | --- |
 | els | <code>array</code> | Array to be shuffled |
 
-<a name="module_array..collapse"></a>
+<a name="module_array..merge"></a>
 
-### collapse(...arrays) ⇒ <code>array</code>
+### merge(...arrays) ⇒ <code>array</code>
 
-Collapse two or more arrays into a single, new array. Same as `merge()`, but not limited to two arrays.
+Merge two or more arrays into a single, new array.
 
-**Returns**: <code>array</code> - A new collapsed array<br />
+**Returns**: <code>array</code> - A new merged array<br />
 
-* **Warning**: untested
-
-**See**: [merge](#module_array..merge)
 
 | Param | Type | Description |
 | --- | --- | --- |
 | ...arrays | <code>array</code> | 2 or more arrays to collapse |
 
-<a name="module_array..merge"></a>
+<a name="module_array..collapse"></a>
 
-### merge(array1, array2) ⇒ <code>array</code>
+### ~~collapse()~~
+***Deprecated***
 
-Merge two arrays into a single, new array. Same as `collapse()` but only works with two array arguments.
 
-**Returns**: <code>array</code> - A new merged array<br />
-
-* **Warning**: untested
-
-**See**: [collapse](#module_array..collapse)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| array1 | <code>array</code> | First array |
-| array2 | <code>array</code> | Second array |
-
+**See**: [merge](#module_array..merge) instead
 <a name="module_array..intersect"></a>
 
 ### intersect(array1, array2, [prop]) ⇒ <code>array</code>
@@ -1966,15 +1953,18 @@ const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
 
 
 * [string](#module_string)
-  * [stringTo(value, [type], [options])](#module_string.stringTo) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
-  * [pluralize(str, num, [ending])](#module_string.pluralize) ⇒ <code>string</code>
-  * [changeCase(str, type, [options])](#module_string.changeCase) ⇒ <code>string</code>
-  * [slugify(str)](#module_string.slugify) ⇒ <code>string</code>
-  * [rot13(string)](#module_string.rot13) ⇒ <code>string</code>
-  * [hashCode(str, [prefix])](#module_string.hashCode) ⇒ <code>number</code> \| <code>string</code>
-  * [base64Encode(str)](#module_string.base64Encode) ⇒ <code>string</code>
-  * [base64Decode(str)](#module_string.base64Decode) ⇒ <code>string</code>
-  * [randomString([sep])](#module_string.randomString) ⇒ <code>string</code>
+  * _static_
+    * [stringTo(value, [type], [options])](#module_string.stringTo) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
+    * [pluralize(str, num, [ending])](#module_string.pluralize) ⇒ <code>string</code>
+    * [changeCase(str, type, [options])](#module_string.changeCase) ⇒ <code>string</code>
+    * [slugify(str)](#module_string.slugify) ⇒ <code>string</code>
+    * [rot13(string)](#module_string.rot13) ⇒ <code>string</code>
+    * [hashCode(str, [prefix])](#module_string.hashCode) ⇒ <code>number</code> \| <code>string</code>
+    * [base64Encode(str)](#module_string.base64Encode) ⇒ <code>string</code>
+    * [base64Decode(str)](#module_string.base64Decode) ⇒ <code>string</code>
+    * [randomString([sep])](#module_string.randomString) ⇒ <code>string</code>
+  * _inner_
+    * [stripTags(str)](#module_string..stripTags) ⇒ <code>string</code>
 
 <a name="module_string.stringTo"></a>
 
@@ -2127,6 +2117,27 @@ The second number is derived from a random 11-digit number
 | --- | --- | --- | --- |
 | [sep] | <code>string</code> | <code>&quot;.&quot;</code> | Optional separator for the two base-36 strings |
 
+<a name="module_string..stripTags"></a>
+
+### stripTags(str) ⇒ <code>string</code>
+
+Strip tags from a string
+
+**Returns**: <code>string</code> - Stripped string<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | String to be stripped of tags |
+
+**Example**  
+```js
+console.log(stripTags('<p>Hello</p>'));
+// Logs: 'Hello'
+
+console.log(stripTags('<p>Hello</p><p>World</p>'));
+// Logs: 'HelloWorld'
+```
 <a name="module_timer"></a>
 
 ## timer
