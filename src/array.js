@@ -233,14 +233,12 @@ export const shuffle = function(els) {
 };
 
 /**
- * Collapse two or more arrays into a single, new array. Same as `merge()`, but not limited to two arrays.
- * @function collapse
+ * Merge two or more arrays into a single, new array.
+ * @function merge
  * @param  {...array} arrays 2 or more arrays to collapse
- * @see [merge]{@link #module_array..merge}
- * @returns {array} A new collapsed array
- * @warning untested
+ * @returns {array} A new merged array
  */
-export const collapse = function(...arrays) {
+export const merge = function(...arrays) {
   let tmp = [];
 
   for (let i = 0, len = arrays.length; i < len; i++) {
@@ -251,17 +249,11 @@ export const collapse = function(...arrays) {
 };
 
 /**
- * Merge two arrays into a single, new array. Same as `collapse()` but only works with two array arguments.
- * @function merge
- * @param {array} array1 First array
- * @param {array} array2 Second array
- * @see [collapse]{@link #module_array..collapse}
- * @returns {array} A new merged array
- * @warning untested
+ * @function collapse
+ * @deprecated Use {@link #module_array..merge} instead
+ * @see [merge]{@link #module_array..merge} instead
  */
-export const merge = function(array1, array2) {
-  return collapse(array1, array2);
-};
+export const collapse = merge;
 
 /**
  * Return a subset of `array1`, only including elements from `array2` that are also in `array1`.
