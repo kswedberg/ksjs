@@ -7,7 +7,10 @@ const cp = async() => {
 
   files.forEach(async(f) => {
     const base = path.basename(f, '.js');
-    await fs.copy(f, `${base}.mjs`);
+    const content = await fs.readFile(f, 'utf8');
+    const updated = content.replace(/( from .*?)\.js/g, '$1.mjs');
+
+    await fs.writeFile(`${base}.mjs`, updated);
   })
 }
 

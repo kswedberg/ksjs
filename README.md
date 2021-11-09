@@ -100,7 +100,9 @@ examples.example1('foo');
 <a name="module_ajax"></a>
 
 ## ajax
+
 ES6 Import Example:
+
 ```js
 import {getJSON} from '@bamf-health/bamfjs';
 
@@ -184,7 +186,9 @@ Send a POST request with `FormData` derived from form element provided by `optio
 <a name="module_array"></a>
 
 ## array
+
 ES6 Import Example:
+
 ```js
 import {isArray} from '@bamf-health/bamfjs';
 
@@ -193,6 +197,7 @@ import {isArray} from '@bamf-health/bamfjs/array.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
 ```
@@ -206,8 +211,8 @@ const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
   * [randomItem(arr)](#module_array..randomItem) ⇒ <code>any</code>
   * [pluck(arr, prop)](#module_array..pluck) ⇒ <code>array</code>
   * [shuffle(els)](#module_array..shuffle) ⇒ <code>array</code>
-  * [collapse(...arrays)](#module_array..collapse) ⇒ <code>array</code>
-  * [merge(array1, array2)](#module_array..merge) ⇒ <code>array</code>
+  * [merge(...arrays)](#module_array..merge) ⇒ <code>array</code>
+  * ~~[collapse()](#module_array..collapse)~~
   * [intersect(array1, array2, [prop])](#module_array..intersect) ⇒ <code>array</code>
   * [unique(arr, [prop])](#module_array..unique) ⇒ <code>array</code>
   * [diff(array1, array2, [prop])](#module_array..diff) ⇒ <code>array</code>
@@ -227,7 +232,8 @@ Determine whether "arr" is a true array
 | --- | --- | --- |
 | arr | <code>array</code> | item to determine whether it's an array |
 
-**Example**  
+**Example**
+
 ```js
 import {isArray} from '@bamf-health/bamfjs/array.js';
 
@@ -235,6 +241,7 @@ if (isArray(window.foo)) {
   window.foo.push('bar');
 }
 ```
+
 <a name="module_array..inArray"></a>
 
 ### inArray(el, arr) ⇒ <code>boolean</code>
@@ -262,7 +269,8 @@ Convert an object to an array of objects with name and value properties
 | --- | --- | --- |
 | obj | <code>object</code> | The object to convert |
 
-**Example**  
+**Example**
+
 ```js
 import {objectToArray} from '@bamf-health/bamfjs/array.js';
 
@@ -277,6 +285,7 @@ const arr = objectToArray(obj);
 //   {name: 'baz', value: 'qux'}
 // ];
 ```
+
 <a name="module_array..makeArray"></a>
 
 ### makeArray(value, [delimiter]) ⇒ <code>array</code>
@@ -296,7 +305,8 @@ e) Anything else is wrapped in an array.
 | value | <code>any</code> | The value to convert to an array |
 | [delimiter] | <code>string</code> \| <code>RegExp</code> | The value to convert to an array (defaults to /\s+/) |
 
-**Example**  
+**Example**
+
 ```js
 import {makeArray} from '@bamf-health/bamfjs/array.js';
 const foo = makeArray('one two three');
@@ -314,6 +324,7 @@ const quz = makeArray({foo: 'bar'});
 const quuz = makeArray(null);
 // quuz is now []
 ```
+
 <a name="module_array..randomItem"></a>
 
 ### randomItem(arr) ⇒ <code>any</code>
@@ -341,7 +352,8 @@ Take an array of objects and a property and return an array of values of that pr
 | arr | <code>array</code> | Array from which to pluck |
 | prop | <code>string</code> | Property to pluck |
 
-**Example**  
+**Example**
+
 ```js
 import {pluck} from '@bamf-health/bamfjs/array.js';
 
@@ -379,6 +391,7 @@ console.log(ids);
 console.log(colors);
 // Logs: [null, 'blue', 'green', null]
 ```
+
 <a name="module_array..shuffle"></a>
 
 ### shuffle(els) ⇒ <code>array</code>
@@ -393,44 +406,33 @@ Fisher-Yates (aka Knuth) shuffle. Takes an array of elements and returns the sam
 | --- | --- | --- |
 | els | <code>array</code> | Array to be shuffled |
 
-<a name="module_array..collapse"></a>
+<a name="module_array..merge"></a>
 
-### collapse(...arrays) ⇒ <code>array</code>
+### merge(...arrays) ⇒ <code>array</code>
 
-Collapse two or more arrays into a single, new array. Same as `merge()`, but not limited to two arrays.
+Merge two or more arrays into a single, new array.
 
-**Returns**: <code>array</code> - A new collapsed array<br />
+**Returns**: <code>array</code> - A new merged array<br />
 
-* **Warning**: untested
-
-**See**: [merge](#module_array..merge)
 
 | Param | Type | Description |
 | --- | --- | --- |
 | ...arrays | <code>array</code> | 2 or more arrays to collapse |
 
-<a name="module_array..merge"></a>
+<a name="module_array..collapse"></a>
 
-### merge(array1, array2) ⇒ <code>array</code>
+### ~~collapse()~~
 
-Merge two arrays into a single, new array. Same as `collapse()` but only works with two array arguments.
+***Deprecated***
 
-**Returns**: <code>array</code> - A new merged array<br />
 
-* **Warning**: untested
-
-**See**: [collapse](#module_array..collapse)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| array1 | <code>array</code> | First array |
-| array2 | <code>array</code> | Second array |
-
+**See**: [merge](#module_array..merge) instead
 <a name="module_array..intersect"></a>
 
 ### intersect(array1, array2, [prop]) ⇒ <code>array</code>
 
 Return a subset of `array1`, only including elements from `array2` that are also in `array1`.
+
 * If `prop` is provided, only that property of an element needs to match for the two arrays to be considered intersecting at that element
 
 **Returns**: <code>array</code> - A new filtered array<br />
@@ -442,7 +444,8 @@ Return a subset of `array1`, only including elements from `array2` that are also
 | array2 | <code>array</code> | Second array |
 | [prop] | <code>any</code> | Optional property to compare in each element of the array |
 
-**Example**  
+**Example**
+
 ```js
 const array1 = [{name: 'Foo', id: 'a'}, {name: 'Bar', id: 'b'}];
 const array2 = [{name: 'Foo', id: 'z'}, {name: 'Zippy', id: 'b'}];
@@ -453,12 +456,14 @@ console.log(intersect(array1, array2, 'name'));
 console.log(intersect(array1, array2, 'id'));
 // Logs [{name: 'Bar', id: 'b'}]
 ```
+
 <a name="module_array..unique"></a>
 
 ### unique(arr, [prop]) ⇒ <code>array</code>
 
 Take an array of elements and return an array containing unique elements.
 If an element is an object or array:
+
 * when `prop` is *undefined*, uses `JSON.stringify()` when checking the elements
 * when `prop` is *provided*, only that property needs to match for the element to be considered a duplicate and thus excluded from the returned array
 
@@ -470,19 +475,22 @@ If an element is an object or array:
 | arr | <code>array</code> | Array to be filtered by uniqueness of elements (or property of elements) |
 | [prop] | <code>any</code> | Optional property to be tested if an element in `arr` is an object or array |
 
-**Example**  
+**Example**
+
 ```js
 const array1 = [1, 2, 3, 2, 5, 1];
 const uniq = unique(array1);
 console.log(uniq);
 // Logs: [1, 2, 3, 5]
 ```
+
 <a name="module_array..diff"></a>
 
 ### diff(array1, array2, [prop]) ⇒ <code>array</code>
 
 Return a subset of `array1`, only including elements that are NOT also in `array2`. The returned array won't include any elements from `array2`.
 If an element is an object or array:
+
 * when `prop` is *undefined*, uses `JSON.stringify()` when performing the comparison on an object or array
 * when `prop` is *provided*, only that property needs to match for the item to be excluded fom the returned array
 
@@ -495,13 +503,15 @@ If an element is an object or array:
 | array2 | <code>array</code> | Array to use as a comparison |
 | [prop] | <code>string</code> | Optional property to be tested if an element in `array1` is an object or array |
 
-**Example**  
+**Example**
+
 ```js
 const array1 = [1, 2, 3, 4];
 const array2 = [2, 3, 5, 6, -1];
 console.log(diff(array1, array2));
 // Logs: [1, 4]
 ```
+
 <a name="module_array..chunk"></a>
 
 ### chunk(arr, n) ⇒ <code>array</code>
@@ -534,7 +544,9 @@ Pad an array with `value` until its length equals `size`
 <a name="module_color"></a>
 
 ## color
+
 ES6 Import Example
+
 ```js
 import {rgb2Hex} from '@bamf-health/bamfjs'
 
@@ -543,15 +555,16 @@ import {rgb2Hex} from '@bamf-health/bamfjs/color.js'
 ```
 
 CJS Require Example
+
 ```js
 const {rgb2Hex} = require('@bamf-health/bamfjs/cjs/color.js');
 ```
 
 
 * [color](#module_color)
-  * _static_
+  * *static*
     * [hex2Rgb](#module_color.hex2Rgb)
-  * _inner_
+  * *inner*
     * [rgb2Hex(rgb)](#module_color..rgb2Hex) ⇒ <code>string</code>
     * [rgba2Hex(rgba)](#module_color..rgba2Hex) ⇒ <code>string</code>
     * [rgb2Luminance(rgb)](#module_color..rgb2Luminance) ⇒ <code>number</code>
@@ -583,7 +596,8 @@ Convert an rgb value to a 6-digit hex value. If an *rgba* value is passed, the o
 | --- | --- | --- |
 | rgb | <code>string</code> \| <code>array</code> | either an rgb string such as `'rgb(255, 120, 10)'` or an rgb array such as `[255, 120, 10]` |
 
-**Example**  
+**Example**
+
 ```js
 rgb2Hex('rgb(255, 136, 0)')
 // => '#ff8800'
@@ -594,6 +608,7 @@ rgb2Hex([255, 136, 0])
 rgb2Hex('rgba(255, 136, 0, .8)')
 // => '#ff8800'
 ```
+
 <a name="module_color..rgba2Hex"></a>
 
 ### rgba2Hex(rgba) ⇒ <code>string</code>
@@ -607,7 +622,8 @@ Convert an rgba value to an 8-digit hex value, or an rgb value to a 6-digit hex 
 | --- | --- | --- |
 | rgba | <code>string</code> \| <code>array</code> | either an rgba string such as `'rgba(255, 120, 10, .5)'` or an rgba array such as `[255, 120, 10, .5]` |
 
-**Example**  
+**Example**
+
 ```js
 rgba2Hex('rgba(255, 136, 0, .8)')
 // => '#ff8800cc'
@@ -618,6 +634,7 @@ rgba2Hex([255, 136, 0, .8])
 rgba2Hex('rgb(255, 136, 0)')
 // => '#ff8800'
 ```
+
 <a name="module_color..rgb2Luminance"></a>
 
 ### rgb2Luminance(rgb) ⇒ <code>number</code>
@@ -628,8 +645,8 @@ Convert an RGB color to a luminance value. You probably don't want to use this o
 
 **See**
 
-- [getContrastColor()](#module_color..getContrastColor)
-- [StackOverflow](https://stackoverflow.com/questions/9733288/how-to-programmatically-calculate-the-contrast-ratio-between-two-colors) for more information
+* [getContrastColor()](#module_color..getContrastColor)
+* [StackOverflow](https://stackoverflow.com/questions/9733288/how-to-programmatically-calculate-the-contrast-ratio-between-two-colors) for more information
 
 
 | Param | Type | Description |
@@ -656,7 +673,9 @@ Return darkColor if bgColor is light and lightColor if bgColor is dark. "Light" 
 <a name="module_cookie"></a>
 
 ## cookie
+
 ES6 Import Example:
+
 ```js
 import {getCookie} from '@bamf-health/bamfjs';
 
@@ -720,7 +739,9 @@ Remove a cookie
 <a name="module_dom"></a>
 
 ## dom
+
 ES6 Import Example:
+
 ```js
 import {addClass} from '@bamf-health/bamfjs';
 
@@ -1072,7 +1093,9 @@ Insert a script into the DOM with reasonable default properties, returning a pro
 <a name="module_event"></a>
 
 ## event
+
 ES6 Import Example:
+
 ```js
 import {addEvent} from '@bamf-health/bamfjs';
 
@@ -1137,7 +1160,8 @@ Derived from emitEvent(): (c) 2019 Chris Ferdinandi, MIT License, https://gomake
 | type | <code>string</code> | Name representing the custom event type |
 | detail | <code>Object</code> | Object to make available as the `detail` property of the event handler's `event` argument |
 
-**Example**  
+**Example**
+
 ```js
 // Using this module's addEvent() function
 // Add a custom event handler
@@ -1148,10 +1172,13 @@ addEvent(document.body, 'myCustomEvent', (event) => console.log(event.detail.wea
 triggerEvent(document.body, 'myCustomEvent', {weather: 'sunshine'});
 // Logs: 'sunshine'
 ```
+
 <a name="module_form"></a>
 
 ## form
+
 ES6 Import Example:
+
 ```js
 import {getFormData} from '@bamf-health/bamfjs';
 
@@ -1187,7 +1214,8 @@ Return the set of successful form controls of the provided `form` element in one
 | .formData(form) | <code>function</code> | Return a `FormData` instance |
 | .array(form) | <code>function</code> | Return form data as an array of objects with `name` and `value` properties |
 
-**Example**  
+**Example**
+
 ```js
 const myform = document.getElementById('myform');
 
@@ -1199,7 +1227,9 @@ console.log(getFormData.object(myform));
 //    meals: ['breakfast', 'dinner']
 // }
 ```
-**Example**  
+
+**Example**
+
 ```js
 const myform = document.getElementById('myform');
 
@@ -1207,7 +1237,9 @@ console.log(getFormData.string(myform));
 // Logs:
 // email=name%40example.com&gender=female&meals[]=breakfast&meals[]=dinner
 ```
-**Example**  
+
+**Example**
+
 ```js
 const myform = document.getElementById('myform');
 
@@ -1232,6 +1264,7 @@ console.log(getFormData.array(myform));
 //    }
 // ]
 ```
+
 <a name="module_form..valuesToFormData"></a>
 
 ### valuesToFormData(values) ⇒ <code>FormData</code>
@@ -1248,7 +1281,9 @@ Note: if the value of a key is an object with a `files` property, each file in t
 <a name="module_jsonp"></a>
 
 ## jsonp
+
 ES6 Import Example:
+
 ```js
 import {getJSONP} from '@bamf-health/bamfjs';
 
@@ -1276,14 +1311,18 @@ Function for those times when you just need to make a "jsonp" request (and you c
 | [options.data.callback] | <code>string</code> | <code>&quot;jsonp.[timestamp]&quot;</code> | Optional value of the callback query-string parameter to append to the script's `src` |
 | callback(json) | <code>function</code> |  | Function to be called when request is complete. A json object is passed to it. |
 
-**Example**  
+**Example**
+
 ```js
 getJSONP({url: 'https://example.com/api/'})
 ```
+
 <a name="module_math"></a>
 
 ## math
+
 ES6 Import Example:
+
 ```js
 import {median} from '@bamf-health/bamfjs';
 
@@ -1292,6 +1331,7 @@ import {median} from '@bamf-health/bamfjs/math.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 const {median} = require('@bamf-health/bamfjs/cjs/math.js');
 ```
@@ -1429,7 +1469,9 @@ Return the number with the highest value from an array of numbers
 <a name="module_object"></a>
 
 ## object
+
 ES6 Import Example:
+
 ```js
 import {deepCopy} from '@bamf-health/bamfjs';
 
@@ -1438,6 +1480,7 @@ import {deepCopy} from '@bamf-health/bamfjs/object.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
 ```
@@ -1510,7 +1553,8 @@ Heavily influenced by/mostly ripped off from jQuery.extend
 | target | <code>Object</code> | The target object that will be mutated. Use `{}` to create new object |
 | ...objects | <code>Object</code> | One or more objects to merge into the first |
 
-**Example**  
+**Example**
+
 ```js
 const foo = {
   one: 'singular',
@@ -1542,6 +1586,7 @@ const merged = extend(foo, bar);
 //  saloon: 'wild west',
 // }
 ```
+
 <a name="module_object..getProperty"></a>
 
 ### getProperty(root, properties, fallbackVaue) ⇒ <code>\*</code>
@@ -1557,7 +1602,8 @@ Get a nested property of an object in a safe way
 | properties | <code>Array.&lt;String&gt;</code> \| <code>String</code> | Either an array of properties or a dot-delimited string of properties |
 | fallbackVaue | <code>any</code> | A value to assign if it's otherwise undefined |
 
-**Example**  
+**Example**
+
 ```js
 const foo = {
   could: {
@@ -1576,6 +1622,7 @@ console.log(getProperty(foo, ['broken', 'not', 'happening']))
 // Logs: undefined
 };
 ```
+
 <a name="module_object..isEmptyObject"></a>
 
 ### isEmptyObject(obj) ⇒ <code>boolean</code>
@@ -1647,7 +1694,9 @@ Return a new object, excluding the properties in the props array.
 <a name="module_promise"></a>
 
 ## promise
+
 ES6 Import Example:
+
 ```js
 import {peach} from '@bamf-health/bamfjs';
 
@@ -1656,6 +1705,7 @@ import {peach} from '@bamf-health/bamfjs/promise.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
 ```
@@ -1696,7 +1746,8 @@ const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
 | fn | <code>ArrayCallback</code> |  | Function that is called for each element in the array, each returning a modified result |
 | [order] | <code>string</code> | <code>&quot;sequence&quot;</code> | Whether to call the callback for each item sequentially (`'sequence'`, default) or at the same time (`'parallel'`). |
 
-**Example**  
+**Example**
+
 ```js
 import {pmap} from '@bamf-health/bamfjs/promise.js';
 
@@ -1706,6 +1757,7 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 
 });
 ```
+
 <a name="module_promise..pfilter"></a>
 
 ### pfilter(arr, fn(item,index,array), [order]) ⇒ <code>Promise</code>
@@ -1721,7 +1773,8 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 | fn(item,index,array) | <code>ArrayCallback</code> |  | Function that is called for each element in the array, each returning a modified result |
 | [order] | <code>string</code> | <code>&quot;sequence&quot;</code> | Whether to call the callback for each item sequentially (`'sequence'`, default) or at the same time (`'parallel'`). |
 
-**Example**  
+**Example**
+
 ```js
 import {pmap} from '@bamf-health/bamfjs/promise.js';
 
@@ -1731,6 +1784,7 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 
 });
 ```
+
 <a name="module_promise..ArrayCallback"></a>
 
 ### ArrayCallback ⇒ <code>Promise</code>
@@ -1738,14 +1792,16 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 
 | Param | Type |
 | --- | --- |
-| item | <code>any</code> | 
-| [index] | <code>number</code> | 
-| [array] | <code>array</code> | 
+| item | <code>any</code> |
+| [index] | <code>number</code> |
+| [array] | <code>array</code> |
 
 <a name="module_selection"></a>
 
 ## selection
+
 ES6 Import Example:
+
 ```js
 import {getSelection} from '@bamf-health/bamfjs';
 
@@ -1809,6 +1865,7 @@ Sets the selection of **all** of the element's contents (including all of its ch
 ### getSelection(el)
 
 Return an object with the following properties related to the selected text within the element:
+
 * `start`: 0-based index of the start of the selection
 * `end`: 0-based index of the end of the selection
 * `length`: the length of the selection
@@ -1823,7 +1880,9 @@ Return an object with the following properties related to the selected text with
 <a name="module_storage"></a>
 
 ## storage
+
 ES6 Import Example:
+
 ```js
 import {Storage} from '@bamf-health/bamfjs';
 
@@ -1833,7 +1892,7 @@ import {Storage} from '@bamf-health/bamfjs/storage.js';
 
 
 * [storage](#module_storage)
-  * _instance_
+  * *instance*
     * [getLength()](#module_storage+getLength) ⇒ <code>number</code>
     * [get(key)](#module_storage+get) ⇒ <code>any</code>
     * [set(key, value)](#module_storage+set) ⇒ <code>string</code>
@@ -1841,7 +1900,7 @@ import {Storage} from '@bamf-health/bamfjs/storage.js';
     * [clear()](#module_storage+clear)
     * [getAll()](#module_storage+getAll) ⇒ <code>Object</code>
     * [keys()](#module_storage+keys) ⇒ <code>array</code>
-  * _inner_
+  * *inner*
     * [Storage](#module_storage..Storage)
       * [new Storage([type], [ns])](#new_module_storage..Storage_new)
 
@@ -1936,7 +1995,9 @@ Constructor for storage functions.
 <a name="module_string"></a>
 
 ## string
+
 ES6 Import Example:
+
 ```js
 import {slugify} from '@bamf-health/bamfjs';
 
@@ -1945,6 +2006,7 @@ import {slugify} from '@bamf-health/bamfjs/string.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
 ```
@@ -2004,7 +2066,8 @@ Changes the case of the provided words according to the `type`.
 | str | <code>string</code> | String that will be cased as determined by `type` |
 | type | <code>string</code> | One of 'title|sentence|caps|camel|pascal|slug|snake' |
 
-**Example**  
+**Example**
+
 ```js
 const oldMan = 'the old man and the sea';
 
@@ -2017,6 +2080,7 @@ console.log(changeCase(oldMan, 'sentence'));
 console.log(changeCase(oldMan, 'camel'));
 // Logs: 'theOldManAndTheSea'
 ```
+
 <a name="module_string.slugify"></a>
 
 ### slugify(str) ⇒ <code>string</code>
@@ -2030,7 +2094,8 @@ Slugify a string by lowercasing it and replacing white spaces and non-alphanumer
 | --- | --- | --- |
 | str | <code>string</code> | String to be converted to a slug |
 
-**Example**  
+**Example**
+
 ```js
 console.log(slugify('Hello there, how are you?'));
 // Logs: 'hello-there-how-are-you'
@@ -2038,6 +2103,7 @@ console.log(slugify('Hello there, how are you?'));
 console.log(slugify('  You? & Me<3* '));
 // Logs: 'you-me-3'
 ```
+
 <a name="module_string.rot13"></a>
 
 ### rot13(string) ⇒ <code>string</code>
@@ -2108,10 +2174,35 @@ The second number is derived from a random 11-digit number
 | --- | --- | --- | --- |
 | [sep] | <code>string</code> | <code>&quot;.&quot;</code> | Optional separator for the two base-36 strings |
 
+<a name="module_string..stripTags"></a>
+
+### stripTags(str) ⇒ <code>string</code>
+
+Strip tags from a string
+
+**Returns**: <code>string</code> - Stripped string<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | String to be stripped of tags |
+
+**Example**
+
+```js
+console.log(stripTags('<p>Hello</p>'));
+// Logs: 'Hello'
+
+console.log(stripTags('<p>Hello</p><p>World</p>'));
+// Logs: 'HelloWorld'
+```
+
 <a name="module_timer"></a>
 
 ## timer
+
 ES6 Import Example:
+
 ```js
 import {debounce} from '@bamf-health/bamfjs';
 
@@ -2120,6 +2211,7 @@ import {debounce} from '@bamf-health/bamfjs/timer.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
 ```
@@ -2170,7 +2262,8 @@ Set up a function to be called once at the end of repeated potential calls withi
 | [timerDelay] | <code>number</code> | <code>200</code> | Number of milliseconds to delay before firing once at the end |
 | [ctx] | <code>Element</code> | <code>this</code> | The context in which to call `fn` |
 
-**Example**  
+**Example**
+
 ```js
 const scrollLog = function(event) {
 console.log('Started resizing the window!');
@@ -2178,6 +2271,7 @@ console.log('Started resizing the window!');
 
 window.addEventListener('resize', debounce(scrollLog));
 ```
+
 <a name="module_timer..unbounce"></a>
 
 ### unbounce(fn, [timerDelay], [ctx])
@@ -2192,7 +2286,8 @@ Set up a function to be called once at the end of repeated potential calls withi
 | [timerDelay] | <code>number</code> | <code>200</code> | Number of milliseconds within which to avoid calling the same function |
 | [ctx] | <code>Element</code> | <code>this</code> | The context in which to call `fn` |
 
-**Example**  
+**Example**
+
 ```js
 const scrollLog = function(event) {
 console.log('Started resizing the window!');
@@ -2200,6 +2295,7 @@ console.log('Started resizing the window!');
 
 window.addEventListener('resize', debounce(scrollLog));
 ```
+
 <a name="module_timer..throttle"></a>
 
 ### throttle(fn, [timerDelay], [context])
@@ -2232,7 +2328,7 @@ Set up a function to be called immediately before the next repaint using `reques
 ### idle(fn, [context])
 
 Set up a function to be called when the UI thread is idle by using `requestIdleCallback()`.
-Falls back to using `requestAnimationFrame (or an rAF polyfill) if `requestIdleCallback()` is not supported.
+Falls back to using `requestAnimationFrame (or an rAF polyfill) if`requestIdleCallback()` is not supported.
 
 
 
@@ -2244,7 +2340,9 @@ Falls back to using `requestAnimationFrame (or an rAF polyfill) if `requestIdleC
 <a name="module_url"></a>
 
 ## url
+
 ES6 Import Example:
+
 ```js
 import {serialize} from '@bamf-health/bamfjs';
 
@@ -2253,6 +2351,7 @@ import {serialize} from '@bamf-health/bamfjs/url.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 const {serialize} = require('@bamf-health/bamfjs/cjs/url.js');
 ```
@@ -2338,12 +2437,15 @@ Convert an object to a serialized string
 | [options.arrayToString] | <code>boolean</code> | If `true`, calls .toString() on arrays. So `{foo: ['won', 'too']}` becomes `foo=won%2Ctoo`. Used in conjunction with `{raw: true}`, the same object becomes `foo=won,too` |
 | [options.indexed] | <code>boolean</code> | If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[0]=won&foo[1]=too`; otherwise, `foo[]=won&foo[]=too` |
 
-**Example**  
+**Example**
+
 ```js
 console.log(serialize({foo: 'yes', bar: 'again}));
 // Logs: 'foo=yes&bar=again'
 ```
-**Example**  
+
+**Example**
+
 ```js
 console.log(serialize({foo: ['yes', 'again']}, {arrayToString: true}));
 // Logs: 'foo=yes,again'
@@ -2359,6 +2461,7 @@ console.log(serialize(['yes', 'again'], {prefix: 'foo'}));
 console.log(serialize(['yes', 'again'], {prefix: 'foo', indexed: false}));
 // Logs: 'foo[]=yes&foo[]=again'
 ```
+
 <a name="module_url..unserialize"></a>
 
 ### unserialize([string], [options]) ⇒ <code>Object</code>
@@ -2376,4 +2479,3 @@ Convert a serialized string to an object
 | [options.empty] | <code>any</code> | <code>true</code> | The returned value of a param with no value (e.g. `?foo&bar&baz`). Typically, this would be either `true` or `''` |
 | [options.splitValues] | <code>Boolean</code> \| <code>RegExp</code> \| <code>String</code> | <code>false</code> | If NOT `false`, splits converts to an array all values with one or more matches of the `splitValues` option. If `true`, splits on commas (`/,/`). So, `?foo=bar,baz` becomes `{foo: ['bar', 'baz']}` |
 | [options.shallow] | <code>boolean</code> | <code>false</code> | If `true`, does NOT attempt to build nested object |
-
