@@ -44,6 +44,7 @@
     "jsdoc-to-markdown": "^7.0.1",
     "jsdom": "^16.6.0",
     "jsdom-global": "^3.0.2",
+    "markdown-it": "^12.2.0",
     "minimist": "^1.2.0",
     "mocha": "^8.4.0",
     "mock-local-storage": "^1.1.17",
