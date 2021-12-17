@@ -63,13 +63,20 @@ export const isPlainObject = function(obj) {
 * Deep copy an object, avoiding circular references and the infinite loops they might cause.
 * @function deepCopy
 * @param {Object} obj The object to copy
+* @param {Boolean} [forceFallback] If set to `true`, doesn't try to use native `structuredClone` function first.
 * @param {Array<Object>} [cache] Used internally to avoid circular references
 * @returns {Object} A copy of the object
 */
-export const deepCopy = function deepCopy(obj, cache = []) {
-  // just return if obj is immutable value
+export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
+
+  // just return if obj is immutable or primitive value
   if (obj === null || typeof obj !== 'object') {
     return obj;
+  }
+
+  if (typeof structuredClone !== 'undefined' && forceFallback !== true) {
+    // eslint-disable-next-line no-undef
+    return structuredClone(obj);
   }
 
   // if obj is hit, it is in circular structure
@@ -92,7 +99,7 @@ export const deepCopy = function deepCopy(obj, cache = []) {
     if ((key === 'constructor' && typeof obj[key] === 'function') || key === '__proto__') {
       return;
     }
-    copy[key] = deepCopy(obj[key], cache);
+    copy[key] = deepCopy(obj[key], false, cache);
   });
 
   return copy;
