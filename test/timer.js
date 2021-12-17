@@ -1,4 +1,4 @@
-import {throttle, debounce, unbounce, idle} from '../src/timer.js';
+import {throttle, debounce, unbounce, idle, deadline, delay} from '../src/timer.js';
 
 const assert = require('assert');
 
@@ -141,27 +141,85 @@ describe('Timer', () => {
       repeater();
     });
   });
-});
 
-// This test is a little dumb, but just want to make sure the function gets called
-describe('idle', () => {
-  const logs = [];
-  let times = 20;
+  // This test is a little dumb, but just want to make sure the function gets called
+  describe('idle', () => {
+    const logs = [];
+    let times = 20;
 
-  const logit = (num) => {
-    logs.push(num);
-  };
+    const logit = (num) => {
+      logs.push(num);
+    };
 
-  it('logs on idle', (done) => {
-    const logOnIdle = idle(logit);
+    it('logs on idle', (done) => {
+      const logOnIdle = idle(logit);
 
-    for (let i = 0; i < times; i++) {
-      logOnIdle(i);
-    }
-    idle(() => {
-      assert.strictEqual(logs.length, times, 'Called 20 times');
-      assert.strictEqual(logs[logs.length - 1], 19, 'Last call\'s argument was 19');
-      done();
-    })();
+      for (let i = 0; i < times; i++) {
+        logOnIdle(i);
+      }
+      idle(() => {
+        assert.strictEqual(logs.length, times, 'Called 20 times');
+        assert.strictEqual(logs[logs.length - 1], 19, 'Last call\'s argument was 19');
+        done();
+      })();
+    });
+  });
+
+  describe('deadline', () => {
+    it('should resolve with return value before deadline', async() => {
+      const succeed = new Promise((resolve) => {
+        return setTimeout(() => resolve('success'), 20);
+      });
+
+      try {
+        const res = await deadline(succeed, 50);
+
+        assert.equal(res, 'success', 'resolves with success');
+      } catch (err) {
+        assert.equal('success', 'failed', 'resolves with success');
+      }
+    });
+
+    it('should reject in try/catch with error after deadline', async() => {
+
+      const fail = new Promise((resolve) => {
+        return setTimeout(() => resolve('fail'), 80);
+      });
+
+      const timeoutError = Symbol();
+
+      try {
+        await deadline(fail, 20, timeoutError);
+      } catch (err) {
+        assert.equal(timeoutError, err, 'rejects with timeoutError');
+      }
+
+    });
+    it('should reject in promise.catch() with error after deadline', () => {
+
+      const fail = new Promise((resolve) => {
+        return setTimeout(() => resolve('fail'), 80);
+      });
+
+      return deadline(fail, 40)
+      .then(() => {
+        assert.fail('should not resolve');
+      })
+      .catch((err) => {
+        assert.equal('timeout', err.message, 'rejects with default "timeout" error message');
+      });
+    });
+  });
+
+  describe('delay', () => {
+    it('should wait before executing', (done) => {
+      const now = +new Date();
+
+      delay(100)
+      .then(() => {
+        assert.ok(+new Date() - now >= 100, 'Delayed 100ms');
+        done();
+      });
+    });
   });
 });
