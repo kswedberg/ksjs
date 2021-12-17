@@ -219,3 +219,34 @@ export const idle = function(fn, context) {
     }
   };
 };
+
+/**
+ * @function deadline
+ * @param {Promise} promise A promise to be resolved
+ * @param {number} ms The number of milliseconds to wait for the promise to be resolved before rejecting
+ * @param {any} exception An optional exception to be thrown if the promise is rejected
+ * @returns {any} The result of the promise if it is resolved or the exception if it is rejected
+ */
+export const deadline = (promise, ms, exception) => {
+  let timer;
+
+  return Promise
+  .race([
+    promise,
+    new Promise((_r, reject) => {
+      timer = setTimeout(reject, ms, exception || new Error('timeout'));
+    }),
+  ])
+  .finally(() => clearTimeout(timer));
+};
+
+/**
+* Like setTimeout, but with a promise that resolves when the timeout has expired.
+* @function delay
+* @param {number} timeout The number of ms to wait before resolving the promise
+*/
+export const delay = (timeout) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+};
