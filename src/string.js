@@ -94,7 +94,7 @@ const stringToImplicit = function(value, options) {
 
 /**
  * Casts a value to the specified `type` or to best guess at a type if none given
- * @function
+ * @function stringTo
  * @param {string} value Value to cast
  * @param {function} [type] (Boolean|Number|Array)
  * @param {object} [options]
@@ -384,20 +384,27 @@ export const base64Decode = function base64Decode(str) {
 
 /**
  * Return a pseudo-random string consisting of two base-36 strings, separated by the optional provided `sep` argument.
- * The first number is derived from the current date, including milliseconds
- * The second number is derived from a random 11-digit number
+* The first number is derived from a random 11-digit number
+* The second number is derived from the current date, including milliseconds
+* The string can begin with an optional `prefix`
  * @function
- * @param {string} [sep = .] Optional separator for the two base-36 strings
+ * @param {string} [sep = .] Optional separator for the two base-36 strings, Default is "."
+ * @param {string} [prefix = ''] Optional prefix for the string
  * @returns {string}
  */
-
-export const randomString = function(sep) {
+export const randomString = function(sep, prefix) {
   const pow = 10 ** 10;
   const separator = sep == null ? '.' : sep;
   const randoNum = Math.round(Math.random() * pow);
   const date36 = (+new Date()).toString(36);
 
-  return [randoNum.toString(36), date36].join(separator);
+  const parts = [randoNum.toString(36), date36];
+
+  if (prefix) {
+    parts.unshift(prefix);
+  }
+
+  return parts.join(separator);
 };
 
 /**
