@@ -3033,7 +3033,6 @@ import {slugify} from '@bamf-health/bamfjs/string.js';
 <ul>
 <li><em>static</em>
 <ul>
-<li><a href="#module_string.stringTo">stringTo(value, [type], [options])</a> ⇒ <code>Boolean</code> | <code>Number</code> | <code>Array</code></li>
 <li><a href="#module_string.pluralize">pluralize(str, num, [ending])</a> ⇒ <code>string</code></li>
 <li><a href="#module_string.changeCase">changeCase(str, type, [options])</a> ⇒ <code>string</code></li>
 <li><a href="#module_string.slugify">slugify(str)</a> ⇒ <code>string</code></li>
@@ -3041,46 +3040,18 @@ import {slugify} from '@bamf-health/bamfjs/string.js';
 <li><a href="#module_string.hashCode">hashCode(str, [prefix])</a> ⇒ <code>number</code> | <code>string</code></li>
 <li><a href="#module_string.base64Encode">base64Encode(str)</a> ⇒ <code>string</code></li>
 <li><a href="#module_string.base64Decode">base64Decode(str)</a> ⇒ <code>string</code></li>
-<li><a href="#module_string.randomString">randomString([sep])</a> ⇒ <code>string</code></li>
+<li><a href="#module_string.randomString">randomString([sep], [prefix])</a> ⇒ <code>string</code></li>
 </ul>
 </li>
 <li><em>inner</em>
 <ul>
+<li><a href="#module_string..stringTo">stringTo(value, [type], [options])</a> ⇒ <code>Boolean</code> | <code>Number</code> | <code>Array</code></li>
 <li><a href="#module_string..stripTags">stripTags(str)</a> ⇒ <code>string</code></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p><a name="module_string.stringTo"></a></p>
-<h3>stringTo(value, [type], [options]) ⇒ <code>Boolean</code> | <code>Number</code> | <code>Array</code></h3>
-<p>Casts a value to the specified <code>type</code> or to best guess at a type if none given</p>
-<table>
-<thead>
-<tr>
-<th>Param</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>value</td>
-<td><code>string</code></td>
-<td>Value to cast</td>
-</tr>
-<tr>
-<td>[type]</td>
-<td><code>function</code></td>
-<td>(Boolean</td>
-</tr>
-<tr>
-<td>[options]</td>
-<td><code>object</code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <p><a name="module_string.pluralize"></a></p>
 <h3>pluralize(str, num, [ending]) ⇒ <code>string</code></h3>
 <p>Converts a singular word to a plural</p>
@@ -3276,10 +3247,11 @@ If the browser does not support this type of encoding, returns the string unchan
 </tbody>
 </table>
 <p><a name="module_string.randomString"></a></p>
-<h3>randomString([sep]) ⇒ <code>string</code></h3>
+<h3>randomString([sep], [prefix]) ⇒ <code>string</code></h3>
 <p>Return a pseudo-random string consisting of two base-36 strings, separated by the optional provided <code>sep</code> argument.
-The first number is derived from the current date, including milliseconds
-The second number is derived from a random 11-digit number</p>
+The first number is derived from a random 11-digit number
+The second number is derived from the current date, including milliseconds
+The string can begin with an optional <code>prefix</code></p>
 <table>
 <thead>
 <tr>
@@ -3294,7 +3266,42 @@ The second number is derived from a random 11-digit number</p>
 <td>[sep]</td>
 <td><code>string</code></td>
 <td><code>&quot;.&quot;</code></td>
-<td>Optional separator for the two base-36 strings</td>
+<td>Optional separator for the two base-36 strings, Default is “.”</td>
+</tr>
+<tr>
+<td>[prefix]</td>
+<td><code>string</code></td>
+<td><code>&quot;''&quot;</code></td>
+<td>Optional prefix for the string</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_string..stringTo"></a></p>
+<h3>stringTo(value, [type], [options]) ⇒ <code>Boolean</code> | <code>Number</code> | <code>Array</code></h3>
+<p>Casts a value to the specified <code>type</code> or to best guess at a type if none given</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value</td>
+<td><code>string</code></td>
+<td>Value to cast</td>
+</tr>
+<tr>
+<td>[type]</td>
+<td><code>function</code></td>
+<td>(Boolean</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>object</code></td>
+<td></td>
 </tr>
 </tbody>
 </table>

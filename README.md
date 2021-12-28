@@ -1954,7 +1954,6 @@ const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
 
 * [string](#module_string)
   * _static_
-    * [stringTo(value, [type], [options])](#module_string.stringTo) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
     * [pluralize(str, num, [ending])](#module_string.pluralize) ⇒ <code>string</code>
     * [changeCase(str, type, [options])](#module_string.changeCase) ⇒ <code>string</code>
     * [slugify(str)](#module_string.slugify) ⇒ <code>string</code>
@@ -1962,23 +1961,10 @@ const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
     * [hashCode(str, [prefix])](#module_string.hashCode) ⇒ <code>number</code> \| <code>string</code>
     * [base64Encode(str)](#module_string.base64Encode) ⇒ <code>string</code>
     * [base64Decode(str)](#module_string.base64Decode) ⇒ <code>string</code>
-    * [randomString([sep])](#module_string.randomString) ⇒ <code>string</code>
+    * [randomString([sep], [prefix])](#module_string.randomString) ⇒ <code>string</code>
   * _inner_
+    * [stringTo(value, [type], [options])](#module_string..stringTo) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
     * [stripTags(str)](#module_string..stripTags) ⇒ <code>string</code>
-
-<a name="module_string.stringTo"></a>
-
-### stringTo(value, [type], [options]) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
-
-Casts a value to the specified `type` or to best guess at a type if none given
-
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| value | <code>string</code> | Value to cast |
-| [type] | <code>function</code> | (Boolean|Number|Array) |
-| [options] | <code>object</code> |  |
 
 <a name="module_string.pluralize"></a>
 
@@ -2105,17 +2091,33 @@ If the browser does not support this type of encoding, returns the string unchan
 
 <a name="module_string.randomString"></a>
 
-### randomString([sep]) ⇒ <code>string</code>
+### randomString([sep], [prefix]) ⇒ <code>string</code>
 
 Return a pseudo-random string consisting of two base-36 strings, separated by the optional provided `sep` argument.
-The first number is derived from the current date, including milliseconds
-The second number is derived from a random 11-digit number
+The first number is derived from a random 11-digit number
+The second number is derived from the current date, including milliseconds
+The string can begin with an optional `prefix`
 
 
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [sep] | <code>string</code> | <code>&quot;.&quot;</code> | Optional separator for the two base-36 strings |
+| [sep] | <code>string</code> | <code>&quot;.&quot;</code> | Optional separator for the two base-36 strings, Default is "." |
+| [prefix] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | Optional prefix for the string |
+
+<a name="module_string..stringTo"></a>
+
+### stringTo(value, [type], [options]) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
+
+Casts a value to the specified `type` or to best guess at a type if none given
+
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>string</code> | Value to cast |
+| [type] | <code>function</code> | (Boolean|Number|Array) |
+| [options] | <code>object</code> |  |
 
 <a name="module_string..stripTags"></a>
 
