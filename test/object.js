@@ -33,6 +33,35 @@ describe('Object', () => {
       assert.notStrictEqual(original.bar, copy.bar);
       assert.notStrictEqual(original.firstName, copy.firstName);
     });
+
+    const schema = [
+      {
+        id: 'foo',
+        title: 'Foo',
+        type: 'object',
+      },
+      {
+        id: 'bar',
+        title: 'Bar',
+        type: 'string',
+      },
+    ];
+
+    const schemaCopy = deepCopy(schema);
+
+    schemaCopy[0].title = 'Foo Bar';
+    schema.push({id: 'baz', title: 'Baz', type: 'string'});
+
+    it('copies an array of objects', () => {
+      assert.strictEqual(schemaCopy[0].id, schema[0].id);
+    });
+
+    it('preserves original when copy is mutated & vice versa', () => {
+      assert.strictEqual(schema[0].title, 'Foo');
+      assert.strictEqual(schemaCopy[0].title, 'Foo Bar');
+      assert.strictEqual(schema.length, 3);
+      assert.strictEqual(schemaCopy.length, 2);
+    });
   });
 
   describe('clone', () => {
