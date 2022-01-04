@@ -258,6 +258,20 @@ describe('Array', () => {
     });
   });
 
+  describe('range', () => {
+    const array1 = arrays.range(4);
+    const array2 = arrays.range(1, 4);
+    const array3 = arrays.range(10, 0);
+    const array4 = arrays.range(3, -2);
+
+    it('returns the expected range', () => {
+      assert.deepStrictEqual(array1, [0, 1, 2, 3]);
+      assert.deepStrictEqual(array2, [1, 2, 3, 4]);
+      assert.deepStrictEqual(array3, [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]);
+      assert.deepStrictEqual(array4, [3, 2, 1, 0, -1, -2]);
+    });
+  });
+
   describe('pad', () => {
     const array1 = [1, 2, 3, 4];
     const array2 = [2, 3, 5, 6, -1];
