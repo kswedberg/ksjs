@@ -383,6 +383,24 @@ export const chunk = function(arr, n) {
 };
 
 /**
+ * Create an array of numbers from 0 to `a` - 1 (if `b` not provided) or from `a` to `b` (if `b` is provided).
+ * @function range
+ * @param {number} a The length of the 0-based array to be returned if `b` is NOT provided; the first number in the array if `b` IS provided.
+ * @param {number} [b] The (optional) last number of the array.
+ * @returns {array} A new array of numbers
+ */
+export const range = function(a, b) {
+  const start = b == null ? 0 : a;
+  const end = b == null ? a : b;
+  const diff = end - start;
+  const length = Math.abs(diff) + (b == null ? 0 : 1);
+
+  const result = Array.from({length}, (v, k) => k + (diff > 0 ? start : end));
+
+  return diff < 0 ? result.reverse() : result;
+};
+
+/**
  * Pad an array with `value` until its length equals `size`
  * @function pad
  * @param {array} arr Array to pad

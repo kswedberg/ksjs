@@ -217,6 +217,7 @@ const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
   * [unique(arr, [prop])](#module_array..unique) ⇒ <code>array</code>
   * [diff(array1, array2, [prop])](#module_array..diff) ⇒ <code>array</code>
   * [chunk(arr, n)](#module_array..chunk) ⇒ <code>array</code>
+  * [range(a, [b])](#module_array..range) ⇒ <code>array</code>
   * [pad(arr, size, value)](#module_array..pad) ⇒ <code>array</code>
 
 <a name="module_array..isArray"></a>
@@ -525,6 +526,20 @@ From an array passed into the first argument, create an array of arrays, each on
 | --- | --- | --- |
 | arr | <code>array</code> | Array to be chunked. This array itself will not be modified. |
 | n | <code>number</code> | Number of elements per chunk |
+
+<a name="module_array..range"></a>
+
+### range(a, [b]) ⇒ <code>array</code>
+
+Create an array of numbers from 0 to `a` - 1 (if `b` not provided) or from `a` to `b` (if `b` is provided).
+
+**Returns**: <code>array</code> - A new array of numbers<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| a | <code>number</code> | The length of the 0-based array to be returned if `b` is NOT provided; the first number in the array if `b` IS provided. |
+| [b] | <code>number</code> | The (optional) last number of the array. |
 
 <a name="module_array..pad"></a>
 
@@ -1525,7 +1540,7 @@ Derived from lodash _.isPlainObject
 
 <a name="module_object..deepCopy"></a>
 
-### deepCopy(obj, [cache]) ⇒ <code>Object</code>
+### deepCopy(obj, [forceFallback], [cache]) ⇒ <code>Object</code>
 
 Deep copy an object, avoiding circular references and the infinite loops they might cause.
 
@@ -1535,6 +1550,7 @@ Deep copy an object, avoiding circular references and the infinite loops they mi
 | Param | Type | Description |
 | --- | --- | --- |
 | obj | <code>Object</code> | The object to copy |
+| [forceFallback] | <code>Boolean</code> | If set to `true`, doesn't try to use native `structuredClone` function first. |
 | [cache] | <code>Array.&lt;Object&gt;</code> | Used internally to avoid circular references |
 
 <a name="module_object..extend"></a>
@@ -2228,6 +2244,8 @@ const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
   * [throttle(fn, [timerDelay], [context])](#module_timer..throttle)
   * [raf(fn, [context])](#module_timer..raf)
   * [idle(fn, [context])](#module_timer..idle)
+  * [deadline(promise, ms, exception)](#module_timer..deadline) ⇒ <code>any</code>
+  * [delay(timeout)](#module_timer..delay)
 
 <a name="module_timer..HOUR"></a>
 
@@ -2338,6 +2356,31 @@ Falls back to using `requestAnimationFrame (or an rAF polyfill) if`requestIdleCa
 | --- | --- | --- | --- |
 | fn | <code>function</code> |  | The function to call |
 | [context] | <code>Element</code> | <code>this</code> | The context in which to call `fn` |
+
+<a name="module_timer..deadline"></a>
+
+### deadline(promise, ms, exception) ⇒ <code>any</code>
+
+**Returns**: <code>any</code> - The result of the promise if it is resolved or the exception if it is rejected<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| promise | <code>Promise</code> | A promise to be resolved |
+| ms | <code>number</code> | The number of milliseconds to wait for the promise to be resolved before rejecting |
+| exception | <code>any</code> | An optional exception to be thrown if the promise is rejected |
+
+<a name="module_timer..delay"></a>
+
+### delay(timeout)
+
+Like setTimeout, but with a promise that resolves when the timeout has expired.
+
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| timeout | <code>number</code> | The number of ms to wait before resolving the promise |
 
 <a name="module_url"></a>
 
