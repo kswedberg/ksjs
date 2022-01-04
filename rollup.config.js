@@ -3,10 +3,10 @@ import minimist from 'minimist';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import strip from '@rollup/plugin-strip';
-import buble from '@rollup/plugin-buble';
-import {terser} from 'rollup-plugin-terser';
-import {eslint} from 'rollup-plugin-eslint';
-import banner from 'rollup-plugin-banner';
+// import buble from '@rollup/plugin-buble';
+// import {terser} from 'rollup-plugin-terser';
+import eslint from '@rollup/plugin-eslint';
+// import banner from 'rollup-plugin-banner';
 
 const argv = minimist(process.argv.slice(2));
 const addSrc = (f) => `src/${f}`;
