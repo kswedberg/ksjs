@@ -286,6 +286,7 @@ import {isArray} from '@bamf-health/bamfjs/array.js';
 <li><a href="#module_array..unique">unique(arr, [prop])</a> ⇒ <code>array</code></li>
 <li><a href="#module_array..diff">diff(array1, array2, [prop])</a> ⇒ <code>array</code></li>
 <li><a href="#module_array..chunk">chunk(arr, n)</a> ⇒ <code>array</code></li>
+<li><a href="#module_array..range">range(a, [b])</a> ⇒ <code>array</code></li>
 <li><a href="#module_array..pad">pad(arr, size, value)</a> ⇒ <code>array</code></li>
 </ul>
 </li>
@@ -692,6 +693,31 @@ console.log(diff(array1, array2));
 <td>n</td>
 <td><code>number</code></td>
 <td>Number of elements per chunk</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_array..range"></a></p>
+<h3>range(a, [b]) ⇒ <code>array</code></h3>
+<p>Create an array of numbers from 0 to <code>a</code> - 1 (if <code>b</code> not provided) or from <code>a</code> to <code>b</code> (if <code>b</code> is provided).</p>
+<p><strong>Returns</strong>: <code>array</code> - A new array of numbers<br /></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td><code>number</code></td>
+<td>The length of the 0-based array to be returned if <code>b</code> is NOT provided; the first number in the array if <code>b</code> IS provided.</td>
+</tr>
+<tr>
+<td>[b]</td>
+<td><code>number</code></td>
+<td>The (optional) last number of the array.</td>
 </tr>
 </tbody>
 </table>
@@ -2275,7 +2301,7 @@ import {deepCopy} from '@bamf-health/bamfjs/object.js';
 <li><a href="#module_object..isObject">isObject(obj)</a></li>
 <li><a href="#module_object..isPlainObject">isPlainObject(obj)</a></li>
 <li><a href="#module_object..clone">clone(obj)</a> ⇒ <code>Object</code></li>
-<li><a href="#module_object..deepCopy">deepCopy(obj, [cache])</a> ⇒ <code>Object</code></li>
+<li><a href="#module_object..deepCopy">deepCopy(obj, [forceFallback], [cache])</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..extend">extend(target, …objects)</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..getProperty">getProperty(root, properties, fallbackVaue)</a> ⇒ <code>*</code></li>
 <li><a href="#module_object..isEmptyObject">isEmptyObject(obj)</a> ⇒ <code>boolean</code></li>
@@ -2345,7 +2371,7 @@ Derived from lodash _.isPlainObject</p>
 </tbody>
 </table>
 <p><a name="module_object..deepCopy"></a></p>
-<h3>deepCopy(obj, [cache]) ⇒ <code>Object</code></h3>
+<h3>deepCopy(obj, [forceFallback], [cache]) ⇒ <code>Object</code></h3>
 <p>Deep copy an object, avoiding circular references and the infinite loops they might cause.</p>
 <p><strong>Returns</strong>: <code>Object</code> - A copy of the object<br /></p>
 <table>
@@ -2361,6 +2387,11 @@ Derived from lodash _.isPlainObject</p>
 <td>obj</td>
 <td><code>Object</code></td>
 <td>The object to copy</td>
+</tr>
+<tr>
+<td>[forceFallback]</td>
+<td><code>Boolean</code></td>
+<td>If set to <code>true</code>, doesn’t try to use native <code>structuredClone</code> function first.</td>
 </tr>
 <tr>
 <td>[cache]</td>
@@ -3354,6 +3385,8 @@ import {debounce} from '@bamf-health/bamfjs/timer.js';
 <li><a href="#module_timer..throttle">throttle(fn, [timerDelay], [context])</a></li>
 <li><a href="#module_timer..raf">raf(fn, [context])</a></li>
 <li><a href="#module_timer..idle">idle(fn, [context])</a></li>
+<li><a href="#module_timer..deadline">deadline(promise, ms, exception)</a> ⇒ <code>any</code></li>
+<li><a href="#module_timer..delay">delay(timeout)</a></li>
 </ul>
 </li>
 </ul>
@@ -3531,6 +3564,54 @@ Falls back to using <code>requestAnimationFrame (or an rAF polyfill) if </code>r
 <td><code>Element</code></td>
 <td><code>this</code></td>
 <td>The context in which to call <code>fn</code></td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_timer..deadline"></a></p>
+<h3>deadline(promise, ms, exception) ⇒ <code>any</code></h3>
+<p><strong>Returns</strong>: <code>any</code> - The result of the promise if it is resolved or the exception if it is rejected<br /></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>promise</td>
+<td><code>Promise</code></td>
+<td>A promise to be resolved</td>
+</tr>
+<tr>
+<td>ms</td>
+<td><code>number</code></td>
+<td>The number of milliseconds to wait for the promise to be resolved before rejecting</td>
+</tr>
+<tr>
+<td>exception</td>
+<td><code>any</code></td>
+<td>An optional exception to be thrown if the promise is rejected</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_timer..delay"></a></p>
+<h3>delay(timeout)</h3>
+<p>Like setTimeout, but with a promise that resolves when the timeout has expired.</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>timeout</td>
+<td><code>number</code></td>
+<td>The number of ms to wait before resolving the promise</td>
 </tr>
 </tbody>
 </table>
