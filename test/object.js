@@ -30,8 +30,91 @@ describe('Object', () => {
     });
 
     it('preserves original when copy is mutated & vice versa', () => {
-      assert.notEqual(original.bar, copy.bar);
-      assert.notEqual(original.firstName, copy.firstName);
+      assert.notStrictEqual(original.bar, copy.bar);
+      assert.notStrictEqual(original.firstName, copy.firstName);
+    });
+
+    const schema = [
+      {
+        id: 'foo',
+        title: 'Foo',
+        type: 'object',
+      },
+      {
+        id: 'bar',
+        title: 'Bar',
+        type: 'string',
+      },
+    ];
+
+    const schemaCopy = deepCopy(schema);
+
+    schemaCopy[0].title = 'Foo Bar';
+    schema.push({id: 'baz', title: 'Baz', type: 'string'});
+
+    it('copies an array of objects', () => {
+      assert.strictEqual(schemaCopy[0].id, schema[0].id);
+    });
+
+    it('preserves original when copy is mutated & vice versa', () => {
+      assert.strictEqual(schema[0].title, 'Foo');
+      assert.strictEqual(schemaCopy[0].title, 'Foo Bar');
+      assert.strictEqual(schema.length, 3);
+      assert.strictEqual(schemaCopy.length, 2);
+    });
+  });
+
+  describe('clone', () => {
+    let original = {
+      foo: {
+        bar: {
+          baz: 'Hello',
+        },
+        flotsam: ['Meet George Jetsam', 'Jude, his wife'],
+      },
+      bar: 'hello',
+      firstName: 'Jane',
+      lastName: 'Doe',
+      cb: function() {
+        return 'hello';
+      },
+    };
+
+    const copy = clone(original);
+
+    const origArray = [
+      {
+        foo: 'bar',
+        b: 'c',
+      },
+      {
+        bar: 'quiggle',
+      },
+    ];
+    const copyArray = clone(origArray);
+
+    copy.bar = 'goodbye';
+    original.firstName = 'G.I.';
+    original.foo.flotsam.push('nocopy');
+
+    origArray[1].bar = 'glixon';
+
+    it('copies deeply nested object', () => {
+      assert.strictEqual(original.foo.bar.baz, copy.foo.bar.baz);
+    });
+    it('copies arrays properly', () => {
+      assert.strictEqual(original.foo.flotsam[0], copy.foo.flotsam[0]);
+      assert.strictEqual(copy.foo.flotsam[1], 'Jude, his wife');
+      assert.strictEqual(original.foo.flotsam[2], 'nocopy');
+      assert.strictEqual(copy.foo.flotsam[2], undefined);
+      assert.strictEqual(origArray[0].foo, copyArray[0].foo);
+
+    });
+    it('preserves original when copy is mutated & vice versa', () => {
+      assert.notStrictEqual(original.bar, copy.bar);
+      assert.notStrictEqual(original.firstName, copy.firstName);
+      assert.notStrictEqual(origArray[1].bar, copyArray[1].bar);
+      assert.strictEqual(origArray[1].bar, 'glixon');
     });
   });
 
