@@ -312,6 +312,23 @@ export const slugify = function slugify(str) {
  * @param {int} [options.end] The number of characters to keep at the end of the string. If falsy, no truncation will occur at the end.
  * @param {string} [options.separator = '...'] The separator to use when truncating the string. Defaults to '...'
  * @returns {string} The truncated string, or the full string if it's shorter than the total amount to truncate
+ * @example
+ * const str = 'Collaboratively administrate empowered markets';
+ *
+ * console.log(truncate(str, {start: 10}));
+ * // Logs: 'Collaborat...'
+ *
+* console.log(truncate(str, {start: 10, separator: ''}));
+ * // Logs: 'Collaborat'
+ *
+ * console.log(truncate(str, {end: 10}));
+ * // Logs: '...ed markets'
+ *
+ * console.log(truncate(str, {start: 10, end: 10}));
+ * // Logs: 'Collaborat...ed markets'
+ *
+ * console.log(truncate(str, {start: 50, end: 50}));
+ * // Logs: 'Collaboratively administrate empowered markets'
  */
 export const truncate = function truncate(str, options = {}) {
   const {start, end, separator = '...'} = options;
