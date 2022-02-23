@@ -2117,6 +2117,25 @@ console.log(slugify('  You? & Me<3* '));
 ```
 
 
+**Example**  
+```js
+const str = 'Collaboratively administrate empowered markets';
+
+console.log(truncate(str, {start: 10}));
+// Logs: 'Collaborat...'
+
+console.log(truncate(str, {start: 10, separator: ''}));
+// Logs: 'Collaborat'
+
+console.log(truncate(str, {end: 10}));
+// Logs: '...ed markets'
+
+console.log(truncate(str, {start: 10, end: 10}));
+// Logs: 'Collaborat...ed markets'
+
+console.log(truncate(str, {start: 50, end: 50}));
+// Logs: 'Collaboratively administrate empowered markets'
+```
 <a name="module_string.rot13"></a>
 
 ### rot13(string) ⇒ <code>string</code>
