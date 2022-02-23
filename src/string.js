@@ -305,6 +305,34 @@ export const slugify = function slugify(str) {
 };
 
 /**
+ * @function
+ * @param {str} string The string to be truncated
+ * @param {object} options Options object.
+ * @param {int} [options.start] The number of characters to keep at the start of the string. If falsy, no truncation will occur at the start.
+ * @param {int} [options.end] The number of characters to keep at the end of the string. If falsy, no truncation will occur at the end.
+ * @param {string} [options.separator = '...'] The separator to use when truncating the string. Defaults to '...'
+ * @returns {string} The truncated string, or the full string if it's shorter than the total amount to truncate
+ */
+export const truncate = function truncate(str, options = {}) {
+  const {start, end, separator = '...'} = options;
+
+  if (typeof str !== 'string' || (!start && !end)) {
+    return str;
+  }
+  const len = str.length;
+
+  if (!end) {
+    return len <= start ? str : str.slice(0, start) + separator;
+  }
+  if (!start) {
+    return len <= end ? str : separator + str.slice(-end);
+  }
+
+  // both start and end
+  return len <= start + end ? str : str.slice(0, start) + separator + str.slice(-end);
+};
+
+/**
  * ROT13 encode/decode a string
  * @function
  * @param {string} string String to be converted to or from ROT13
