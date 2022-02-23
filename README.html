@@ -82,9 +82,16 @@ examples.example1('foo');
 <li><a href="#module_storage">storage</a></li>
 <li><a href="#module_string">string</a></li>
 <li><a href="#module_timer">timer</a></li>
-<li><a href="#module_url">url</a>
-<a name="module_ajax"></a></li>
+<li><a href="#module_url">url</a></li>
 </ul>
+<h2>Functions</h2>
+<dl>
+<dt><a href="#pipe">pipe(initialValue, ...fns)</a></dt>
+<dd><p>Provided an initial value and a set of functions, execute the functions in order,
+using initialValue for the first function&#39;s argument and the return value of each function for its subsequent function</p>
+</dd>
+</dl>
+<p><a name="module_ajax"></a></p>
 <h2>ajax</h2>
 <p>ES6 Import Example:</p>
 <pre><code class="language-js">import {getJSON} from '@bamf-health/bamfjs';
@@ -3067,6 +3074,7 @@ import {slugify} from '@bamf-health/bamfjs/string.js';
 <li><a href="#module_string.pluralize">pluralize(str, num, [ending])</a> ⇒ <code>string</code></li>
 <li><a href="#module_string.changeCase">changeCase(str, type, [options])</a> ⇒ <code>string</code></li>
 <li><a href="#module_string.slugify">slugify(str)</a> ⇒ <code>string</code></li>
+<li><a href="#module_string.truncate">truncate(string, options)</a> ⇒ <code>string</code></li>
 <li><a href="#module_string.rot13">rot13(string)</a> ⇒ <code>string</code></li>
 <li><a href="#module_string.hashCode">hashCode(str, [prefix])</a> ⇒ <code>number</code> | <code>string</code></li>
 <li><a href="#module_string.base64Encode">base64Encode(str)</a> ⇒ <code>string</code></li>
@@ -3189,6 +3197,51 @@ console.log(changeCase(oldMan, 'camel'));
 console.log(slugify('  You? &amp; Me&lt;3* '));
 // Logs: 'you-me-3'
 </code></pre>
+<p><a name="module_string.truncate"></a></p>
+<h3>truncate(string, options) ⇒ <code>string</code></h3>
+<p><strong>Returns</strong>: <code>string</code> - The truncated string, or the full string if it’s shorter than the total amount to truncate<br /></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>string</td>
+<td><code>str</code></td>
+<td></td>
+<td>The string to be truncated</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>object</code></td>
+<td></td>
+<td>Options object.</td>
+</tr>
+<tr>
+<td>[options.start]</td>
+<td><code>int</code></td>
+<td></td>
+<td>The number of characters to keep at the start of the string. If falsy, no truncation will occur at the start.</td>
+</tr>
+<tr>
+<td>[options.end]</td>
+<td><code>int</code></td>
+<td></td>
+<td>The number of characters to keep at the end of the string. If falsy, no truncation will occur at the end.</td>
+</tr>
+<tr>
+<td>[options.separator]</td>
+<td><code>string</code></td>
+<td><code>&quot;'…'&quot;</code></td>
+<td>The separator to use when truncating the string. Defaults to ‘…’</td>
+</tr>
+</tbody>
+</table>
 <p><a name="module_string.rot13"></a></p>
 <h3>rot13(string) ⇒ <code>string</code></h3>
 <p>ROT13 encode/decode a string</p>
@@ -3851,6 +3904,31 @@ console.log(serialize(['yes', 'again'], {prefix: 'foo', indexed: false}));
 <td><code>boolean</code></td>
 <td><code>false</code></td>
 <td>If <code>true</code>, does NOT attempt to build nested object</td>
+</tr>
+</tbody>
+</table>
+<p><a name="pipe"></a></p>
+<h2>pipe(initialValue, …fns)</h2>
+<p>Provided an initial value and a set of functions, execute the functions in order,
+using initialValue for the first function’s argument and the return value of each function for its subsequent function</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initialValue</td>
+<td><code>*</code></td>
+<td>The initial value that will be passed into the subsequent functions</td>
+</tr>
+<tr>
+<td>…fns</td>
+<td><code>function</code></td>
+<td></td>
 </tr>
 </tbody>
 </table>

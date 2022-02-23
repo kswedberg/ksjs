@@ -97,6 +97,15 @@ examples.example1('foo');
 * <a href="#module_string">string</a>
 * <a href="#module_timer">timer</a>
 * <a href="#module_url">url</a>
+## Functions
+
+<dl>
+<dt><a href="#pipe">pipe(initialValue, ...fns)</a></dt>
+<dd><p>Provided an initial value and a set of functions, execute the functions in order,
+using initialValue for the first function&#39;s argument and the return value of each function for its subsequent function</p>
+</dd>
+</dl>
+
 <a name="module_ajax"></a>
 
 ## ajax
@@ -1973,6 +1982,7 @@ const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
     * [pluralize(str, num, [ending])](#module_string.pluralize) ⇒ <code>string</code>
     * [changeCase(str, type, [options])](#module_string.changeCase) ⇒ <code>string</code>
     * [slugify(str)](#module_string.slugify) ⇒ <code>string</code>
+    * [truncate(string, options)](#module_string.truncate) ⇒ <code>string</code>
     * [rot13(string)](#module_string.rot13) ⇒ <code>string</code>
     * [hashCode(str, [prefix])](#module_string.hashCode) ⇒ <code>number</code> \| <code>string</code>
     * [base64Encode(str)](#module_string.base64Encode) ⇒ <code>string</code>
@@ -2049,6 +2059,20 @@ console.log(slugify('Hello there, how are you?'));
 console.log(slugify('  You? & Me<3* '));
 // Logs: 'you-me-3'
 ```
+<a name="module_string.truncate"></a>
+
+### truncate(string, options) ⇒ <code>string</code>
+**Returns**: <code>string</code> - The truncated string, or the full string if it's shorter than the total amount to truncate<br />
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| string | <code>str</code> |  | The string to be truncated |
+| options | <code>object</code> |  | Options object. |
+| [options.start] | <code>int</code> |  | The number of characters to keep at the start of the string. If falsy, no truncation will occur at the start. |
+| [options.end] | <code>int</code> |  | The number of characters to keep at the end of the string. If falsy, no truncation will occur at the end. |
+| [options.separator] | <code>string</code> | <code>&quot;&#x27;...&#x27;&quot;</code> | The separator to use when truncating the string. Defaults to '...' |
+
 <a name="module_string.rot13"></a>
 
 ### rot13(string) ⇒ <code>string</code>
@@ -2450,4 +2474,18 @@ Convert a serialized string to an object
 | [options.empty] | <code>any</code> | <code>true</code> | The returned value of a param with no value (e.g. `?foo&bar&baz`). Typically, this would be either `true` or `''` |
 | [options.splitValues] | <code>Boolean</code> \| <code>RegExp</code> \| <code>String</code> | <code>false</code> | If NOT `false`, splits converts to an array all values with one or more matches of the `splitValues` option. If `true`, splits on commas (`/,/`). So, `?foo=bar,baz` becomes `{foo: ['bar', 'baz']}` |
 | [options.shallow] | <code>boolean</code> | <code>false</code> | If `true`, does NOT attempt to build nested object |
+
+<a name="pipe"></a>
+
+## pipe(initialValue, ...fns)
+
+Provided an initial value and a set of functions, execute the functions in order,
+using initialValue for the first function's argument and the return value of each function for its subsequent function
+
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| initialValue | <code>\*</code> | The initial value that will be passed into the subsequent functions |
+| ...fns | <code>function</code> |  |
 
