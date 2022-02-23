@@ -80,6 +80,39 @@ describe('String', () => {
 
   });
 
+  describe('truncate', () => {
+    const shortString = 'Override the digital';
+    const longString = 'Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.';
+
+    const notrunc1 = strings.truncate(shortString, {start: 20});
+    const notrunc2 = strings.truncate(shortString, {end: 20});
+    const notrunc3 = strings.truncate(shortString, {start: 20, end: 20});
+
+    const trunc1 = strings.truncate(longString, {start: 10});
+    const trunc2 = strings.truncate(longString, {end: 10});
+    const trunc3 = strings.truncate(longString, {start: 10, end: 10});
+
+    it('Does not truncate a string that is shorter than the "start" option', () => {
+      assert.strictEqual(notrunc1, shortString);
+    });
+    it('Does not truncate a string that is shorter than the "end" option', () => {
+      assert.strictEqual(notrunc2, shortString);
+    });
+
+    it('Does not truncate a string that is shorter than the sum of the "start" and "end" options', () => {
+      assert.strictEqual(notrunc3, shortString);
+    });
+
+    it('Truncates string to the first 10 characters', () => {
+      assert.strictEqual(trunc1, 'Collaborat...');
+    });
+    it('Truncates string to the last 10 characters', () => {
+      assert.strictEqual(trunc2, '...onary ROI.');
+    });
+    it('Truncates string to the last 10 characters', () => {
+      assert.strictEqual(trunc3, 'Collaborat...onary ROI.');
+    });
+  });
   describe('rot13', () => {
     let rot13 = {
       original: 'Karl Swedberg',
