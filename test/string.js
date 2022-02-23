@@ -89,6 +89,7 @@ describe('String', () => {
     const notrunc3 = strings.truncate(shortString, {start: 20, end: 20});
 
     const trunc1 = strings.truncate(longString, {start: 10});
+    const trunc1b = strings.truncate(longString, {start: 10, separator: ''});
     const trunc2 = strings.truncate(longString, {end: 10});
     const trunc3 = strings.truncate(longString, {start: 10, end: 10});
 
@@ -105,6 +106,7 @@ describe('String', () => {
 
     it('Truncates string to the first 10 characters', () => {
       assert.strictEqual(trunc1, 'Collaborat...');
+      assert.strictEqual(trunc1b, 'Collaborat');
     });
     it('Truncates string to the last 10 characters', () => {
       assert.strictEqual(trunc2, '...onary ROI.');
