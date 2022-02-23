@@ -3242,6 +3242,24 @@ console.log(slugify('  You? &amp; Me&lt;3* '));
 </tr>
 </tbody>
 </table>
+<p><strong>Example</strong></p>
+<pre><code class="language-js">const str = 'Collaboratively administrate empowered markets';
+
+console.log(truncate(str, {start: 10}));
+// Logs: 'Collaborat...'
+
+console.log(truncate(str, {start: 10, separator: ''}));
+// Logs: 'Collaborat'
+
+console.log(truncate(str, {end: 10}));
+// Logs: '...ed markets'
+
+console.log(truncate(str, {start: 10, end: 10}));
+// Logs: 'Collaborat...ed markets'
+
+console.log(truncate(str, {start: 50, end: 50}));
+// Logs: 'Collaboratively administrate empowered markets'
+</code></pre>
 <p><a name="module_string.rot13"></a></p>
 <h3>rot13(string) ⇒ <code>string</code></h3>
 <p>ROT13 encode/decode a string</p>
