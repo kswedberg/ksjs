@@ -97,16 +97,6 @@ examples.example1('foo');
 * <a href="#module_string">string</a>
 * <a href="#module_timer">timer</a>
 * <a href="#module_url">url</a>
-
-## Functions
-
-<dl>
-<dt><a href="#pipe">pipe(initialValue, ...fns)</a></dt>
-<dd><p>Provided an initial value and a set of functions, execute the functions in order,
-using initialValue for the first function&#39;s argument and the return value of each function for its subsequent function</p>
-</dd>
-</dl>
-
 <a name="module_ajax"></a>
 
 ## ajax
@@ -2117,7 +2107,8 @@ console.log(slugify('  You? & Me<3* '));
 ```
 
 
-**Example**  
+**Example**
+
 ```js
 const str = 'Collaboratively administrate empowered markets';
 
@@ -2136,6 +2127,7 @@ console.log(truncate(str, {start: 10, end: 10}));
 console.log(truncate(str, {start: 50, end: 50}));
 // Logs: 'Collaboratively administrate empowered markets'
 ```
+
 <a name="module_string.rot13"></a>
 
 ### rot13(string) ⇒ <code>string</code>
