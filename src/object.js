@@ -146,7 +146,7 @@ export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
     if ((key === 'constructor' && typeof obj[key] === 'function') || key === '__proto__') {
       return;
     }
-    copy[key] = deepCopy(obj[key], false, cache);
+    copy[key] = deepCopy(obj[key], forceFallback, cache);
   });
 
   return copy;
