@@ -4,6 +4,32 @@ const assert = require('assert');
 
 describe('String', () => {
 
+  describe('parseStringTemplate', () => {
+    const path1 = '/patients/${patient_id}';
+    const path2 = '/patients/${patient_id}/encounters/${encounter_id}/observations/${observation_id}';
+    const obj = {
+      patient_id: '12345',
+      encounter_id: '67890',
+      observation_id: 'abcde',
+    };
+    const greeting = 'Hello, my name is ${first} ${last}';
+    const greeting2 = 'Hola, mi tio ${first} ${last} está ${age} años.';
+    const name = {
+      first: 'Jörn',
+      last: 'Zångström',
+      age: '42',
+    };
+
+    it('Parses a simple string with one or more tokens', () => {
+      assert.strictEqual(strings.parseStringTemplate(path1, obj), '/patients/12345');
+      assert.strictEqual(strings.parseStringTemplate(path2, obj), '/patients/12345/encounters/67890/observations/abcde');
+    });
+    it('Returns a greeting that includes diacritics', () => {
+      assert.strictEqual(strings.parseStringTemplate(greeting, name), 'Hello, my name is Jörn Zångström');
+      assert.strictEqual(strings.parseStringTemplate(greeting2, name), 'Hola, mi tio Jörn Zångström está 42 años.');
+    });
+  });
+
   describe('changeCase', () => {
     let forWhom = 'for whom the bell tolls';
     let oldMan = 'the old man and the sea';
