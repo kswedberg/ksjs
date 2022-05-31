@@ -236,6 +236,41 @@ export const getProperty = (function(ctx) {
 })(getCtx());
 
 /**
+ * Get a nested property of an object in a safe way
+ * @function getLastDefined
+ * @param  {Object} root The root object
+ * @param {Array.<String>|String} properties Either an array of properties or a dot-delimited string of properties
+ * @returns {*} The value of the last nested property referenced in `properties` arg that has a defined value
+ * @example
+ * const foo = {
+ *   could: {
+ *    keep: {
+ *     going: 'but will stop'
+ *   },
+ *   shortStop: 'ride ends here'
+ * };
+ *
+ * console.log(getLastDefined(foo, 'could.keep.going'))
+ * // Logs: 'but will stop'
+ *
+ * console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
+ * // Logs: 'ride ends here'
+};
+ */
+export const getLastDefined = function(root, properties) {
+  const props = ensureArray(properties);
+
+  if (typeof root === 'undefined') {
+    return root;
+  }
+
+  return props.reduce((prev, curr) => {
+    return prev && typeof prev[curr] !== 'undefined' ? prev[curr] : prev;
+  }, root);
+};
+
+
+/**
  * Determine whether an object (or array) is "empty"
  * @function isEmptyObject
  * @param  {object|array} obj The object to test
