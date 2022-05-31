@@ -92,6 +92,25 @@ const stringToImplicit = function(value, options) {
   return value;
 };
 
+
+/**
+ * @function parseStringTemplate
+ * @param {string} str String with tokens ( `${example}` ) to parse
+ * @param {object} obj Object of properties with values to be used when replacing tokens
+ * @returns {string} String with tokens replaced with values
+ * @see https://stackoverflow.com/a/59084440
+ */
+export const parseStringTemplate = (str, obj) => {
+  const rText = /\$\{(?!\d)[\w\p{L}]*\}/u;
+  const rVars = /[^}{]+(?=})/g;
+
+  const textParts = str.split(rText);
+  const args = str.match(rVars) || [];
+  const params = args.map((item) => obj[item] || (obj[item] === undefined ? '' : obj[item]));
+
+  return String.raw({raw: textParts}, ...params);
+};
+
 /**
  * Casts a value to the specified `type` or to best guess at a type if none given
  * @function stringTo
