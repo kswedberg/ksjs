@@ -29,8 +29,11 @@ const testEnv = process.env.TEST_ENV;
 const plugins = {
   main: [
     replace({
-      'process.env.NODE_ENV': JSON.stringify(nodeEnv),
-      'process.env.TEST_ENV': JSON.stringify(testEnv),
+      values: {
+        'process.env.NODE_ENV': JSON.stringify(nodeEnv),
+        'process.env.TEST_ENV': JSON.stringify(testEnv),
+      },
+      preventAssignment: true,
     }),
     // Strip debugger, console.*, assert.* statements
     strip(),
@@ -39,8 +42,11 @@ const plugins = {
   ],
   qunit: [
     replace({
-      'process.env.NODE_ENV': JSON.stringify(nodeEnv),
-      'process.env.TEST_ENV': JSON.stringify(testEnv),
+      values: {
+        'process.env.NODE_ENV': JSON.stringify(nodeEnv),
+        'process.env.TEST_ENV': JSON.stringify(testEnv),
+      },
+      preventAssignment: true,
     }),
   ],
   mocha: [],
