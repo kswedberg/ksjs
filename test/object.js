@@ -1,4 +1,4 @@
-import {deepCopy, clone, extend, setProperty, getProperty, pick, omit, isPlainObject} from '../src/object.js';
+import {deepCopy, clone, extend, setProperty, getProperty, getLastDefined, pick, omit, isPlainObject} from '../src/object.js';
 
 const assert = require('assert');
 
@@ -303,6 +303,62 @@ describe('Object', () => {
     it('gets correct falsey value', () => {
       assert.equal(zeroVal, 0);
       assert.ok(zeroVal === 0);
+    });
+  });
+
+  describe('getLastDefined', () => {
+    let target = {
+      foo: {
+        bar: {
+          baz: 'Hello, I am a baz',
+        },
+        flotsam: ['Meet George Jetsam', 'Jude, his wife'],
+      },
+      str: 'I am a string',
+      arr: [{foo: 'bar'}, 0],
+      cb: function() {
+        return 'hello';
+      },
+    };
+
+    let targetArray = [
+      {
+        foo: 'bar',
+        name: {
+          first: 'karl',
+          last: 'swedberg',
+        },
+        cb: function() {
+          return 'hello';
+        },
+      },
+    ];
+
+    const stringStyle = getLastDefined(target, 'foo.bar.baz');
+    const arrayStyle = getLastDefined(target, ['foo', 'bar', 'baz']);
+    const lastDef = getLastDefined(target, ['foo', 'bar', 'baz', 'nothere']);
+    const lastDefEarly = getLastDefined(target, ['str', 'nothere', 'bar', 'baz']);
+    const lastDefObj = getLastDefined(target, 'foo.bar.zizzy');
+    const undefRoot = getLastDefined(window && window.foo, ['foo', 'bar', 'nothere'], 'defaultzee');
+
+    it('target.foo.bar.baz == "Hello, i am a baz"', () => {
+      assert.equal(stringStyle, 'Hello, I am a baz');
+    });
+    it('target.foo.bar.baz == "Hello, i am a baz"', () => {
+      assert.equal(arrayStyle, 'Hello, I am a baz');
+    });
+    it('target.foo.bar.baz.nothere == "Hello, i am a baz"', () => {
+      assert.equal(lastDef, 'Hello, I am a baz');
+    });
+    it('target.str.nothere.bar.baz == "I am a string"', () => {
+      assert.equal(lastDefEarly, 'I am a string');
+    });
+    it('last defined is object {baz: "Hello, I am a baz"}', () => {
+      assert.equal(lastDefObj.baz, 'Hello, I am a baz');
+    });
+
+    it('root value is undefined', () => {
+      assert.equal(undefRoot, undefined);
     });
   });
 
