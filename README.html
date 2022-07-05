@@ -2304,6 +2304,7 @@ import {deepCopy} from '@bamf-health/bamfjs/object.js';
 <li><a href="#module_object..deepCopy">deepCopy(obj, [forceFallback], [cache])</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..extend">extend(target, …objects)</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..getProperty">getProperty(root, properties, fallbackVaue)</a> ⇒ <code>*</code></li>
+<li><a href="#module_object..getLastDefined">getLastDefined(root, properties)</a> ⇒ <code>*</code></li>
 <li><a href="#module_object..isEmptyObject">isEmptyObject(obj)</a> ⇒ <code>boolean</code></li>
 <li><a href="#module_object..setProperty">setProperty(root, properties)</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..forEachValue">forEachValue(obj, fn)</a> ⇒ <code>void</code></li>
@@ -2503,6 +2504,47 @@ console.log(getProperty(foo, ['could', 'keep', 'going']))
 
 console.log(getProperty(foo, ['broken', 'not', 'happening']))
 // Logs: undefined
+};
+</code></pre>
+<p><a name="module_object..getLastDefined"></a></p>
+<h3>getLastDefined(root, properties) ⇒ <code>*</code></h3>
+<p>Get a nested property of an object in a safe way</p>
+<p><strong>Returns</strong>: <code>*</code> - The value of the last nested property referenced in <code>properties</code> arg that has a defined value<br /></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>root</td>
+<td><code>Object</code></td>
+<td>The root object</td>
+</tr>
+<tr>
+<td>properties</td>
+<td><code>Array.&lt;String&gt;</code> | <code>String</code></td>
+<td>Either an array of properties or a dot-delimited string of properties</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre><code class="language-js">const foo = {
+  could: {
+   keep: {
+    going: 'but will stop'
+  },
+  shortStop: 'ride ends here'
+};
+
+console.log(getLastDefined(foo, 'could.keep.going'))
+// Logs: 'but will stop'
+
+console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
+// Logs: 'ride ends here'
 };
 </code></pre>
 <p><a name="module_object..isEmptyObject"></a></p>
@@ -3077,6 +3119,7 @@ import {slugify} from '@bamf-health/bamfjs/string.js';
 </li>
 <li><em>inner</em>
 <ul>
+<li><a href="#module_string..parseStringTemplate">parseStringTemplate(str, obj)</a> ⇒ <code>string</code></li>
 <li><a href="#module_string..stringTo">stringTo(value, [type], [options])</a> ⇒ <code>Boolean</code> | <code>Number</code> | <code>Array</code></li>
 <li><a href="#module_string..stripTags">stripTags(str)</a> ⇒ <code>string</code></li>
 </ul>
@@ -3368,6 +3411,31 @@ The string can begin with an optional <code>prefix</code></p>
 <td><code>string</code></td>
 <td><code>&quot;''&quot;</code></td>
 <td>Optional prefix for the string</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_string..parseStringTemplate"></a></p>
+<h3>parseStringTemplate(str, obj) ⇒ <code>string</code></h3>
+<p><strong>Returns</strong>: <code>string</code> - String with tokens replaced with values<br /></p>
+<p><strong>See</strong>: https://stackoverflow.com/a/59084440</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td><code>string</code></td>
+<td>String with tokens ( <code>${example}</code> ) to parse</td>
+</tr>
+<tr>
+<td>obj</td>
+<td><code>object</code></td>
+<td>Object of properties with values to be used when replacing tokens</td>
 </tr>
 </tbody>
 </table>

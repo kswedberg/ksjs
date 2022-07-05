@@ -1452,6 +1452,7 @@ const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
   * [deepCopy(obj, [forceFallback], [cache])](#module_object..deepCopy) ⇒ <code>Object</code>
   * [extend(target, ...objects)](#module_object..extend) ⇒ <code>Object</code>
   * [getProperty(root, properties, fallbackVaue)](#module_object..getProperty) ⇒ <code>\*</code>
+  * [getLastDefined(root, properties)](#module_object..getLastDefined) ⇒ <code>\*</code>
   * [isEmptyObject(obj)](#module_object..isEmptyObject) ⇒ <code>boolean</code>
   * [setProperty(root, properties)](#module_object..setProperty) ⇒ <code>Object</code>
   * [forEachValue(obj, fn)](#module_object..forEachValue) ⇒ <code>void</code>
@@ -1592,6 +1593,37 @@ console.log(getProperty(foo, ['could', 'keep', 'going']))
 
 console.log(getProperty(foo, ['broken', 'not', 'happening']))
 // Logs: undefined
+};
+```
+<a name="module_object..getLastDefined"></a>
+
+### getLastDefined(root, properties) ⇒ <code>\*</code>
+
+Get a nested property of an object in a safe way
+
+**Returns**: <code>\*</code> - The value of the last nested property referenced in `properties` arg that has a defined value<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| root | <code>Object</code> | The root object |
+| properties | <code>Array.&lt;String&gt;</code> \| <code>String</code> | Either an array of properties or a dot-delimited string of properties |
+
+**Example**  
+```js
+const foo = {
+  could: {
+   keep: {
+    going: 'but will stop'
+  },
+  shortStop: 'ride ends here'
+};
+
+console.log(getLastDefined(foo, 'could.keep.going'))
+// Logs: 'but will stop'
+
+console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
+// Logs: 'ride ends here'
 };
 ```
 <a name="module_object..isEmptyObject"></a>
@@ -1980,6 +2012,7 @@ const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
     * [base64Decode(str)](#module_string.base64Decode) ⇒ <code>string</code>
     * [randomString([sep], [prefix])](#module_string.randomString) ⇒ <code>string</code>
   * _inner_
+    * [parseStringTemplate(str, obj)](#module_string..parseStringTemplate) ⇒ <code>string</code>
     * [stringTo(value, [type], [options])](#module_string..stringTo) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
     * [stripTags(str)](#module_string..stripTags) ⇒ <code>string</code>
 
@@ -2154,6 +2187,18 @@ The string can begin with an optional `prefix`
 | --- | --- | --- | --- |
 | [sep] | <code>string</code> | <code>&quot;.&quot;</code> | Optional separator for the two base-36 strings, Default is "." |
 | [prefix] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | Optional prefix for the string |
+
+<a name="module_string..parseStringTemplate"></a>
+
+### parseStringTemplate(str, obj) ⇒ <code>string</code>
+**Returns**: <code>string</code> - String with tokens replaced with values<br />
+
+**See**: https://stackoverflow.com/a/59084440
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | String with tokens ( `${example}` ) to parse |
+| obj | <code>object</code> | Object of properties with values to be used when replacing tokens |
 
 <a name="module_string..stringTo"></a>
 
