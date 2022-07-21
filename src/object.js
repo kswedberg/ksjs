@@ -289,6 +289,7 @@ export const isEmptyObject = (obj) => {
  * @function setProperty
  * @param  {Object} root The root object
  * @param {Array.<String>|String} properties Either an array of properties or a dot-delimited string of properties
+ * @param {any} value The value to set for the nested property
  * @returns {Object} The modified root object
  */
 export const setProperty = (function(ctx) {
