@@ -4,3 +4,5 @@
 !test/*.js
 !rollup.config.js
 !.*.js
+!scripts/*.js
+!scripts/*.mjs

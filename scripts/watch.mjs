@@ -1,6 +1,6 @@
-const chokidar = require('chokidar');
-const chalk = require('chalk');
-const {spawn} = require('child_process');
+import {chokidar} from './esm.mjs';
+import chalk from 'chalk';
+import {spawn} from 'child_process';
 
 const dateTimeFormat = {weekday: 'short', year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric'};
 
