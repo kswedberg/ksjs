@@ -1,15 +1,16 @@
-const path = require('path');
-const fs = require('fs-extra');
-const jsdoc2md = require('jsdoc-to-markdown');
-const Markdown = require('markdown-it');
+import path from 'path';
 
-const {cleanMarkdown} = require('./clean-markdown.js');
-const projRoot = path.join(__dirname, '..');
+import {isCliCall, readFile, outputFile, Markdown, jsdoc2md} from './esm.mjs';
+
+
+import {cleanMarkdown} from './clean-markdown.mjs';
+
+const projRoot = process.cwd();
 
 const renderAPI = async(files) => {
   const output = await jsdoc2md.render({
     files,
-    partial: path.join(__dirname, 'partials/*.hbs'),
+    partial: path.join(projRoot, 'scripts/partials/*.hbs'),
     // @ts-ignore
     'module-index-format': 'list',
   });
@@ -18,9 +19,10 @@ const renderAPI = async(files) => {
 };
 const buildMarkdown = async(files) => {
   let content = '';
+
   try {
     const output = await renderAPI(files);
-    const intro = await fs.readFile(path.join(__dirname, 'partials', 'intro.md'));
+    const intro = await readFile(path.join(projRoot, 'scripts/partials', 'intro.md'));
 
     content = [intro, output].join('\n');
   } catch (err) {
@@ -31,6 +33,7 @@ const buildMarkdown = async(files) => {
 };
 
 const md2html = (content) => {
+  // eslint-disable-next-line new-cap
   const md = Markdown({
     html: true,
     typographer: true,
@@ -39,12 +42,13 @@ const md2html = (content) => {
   return md.render(content);
 };
 
-const outputAPI = async(files) => {
+export const outputAPI = async(files) => {
   const content = await buildMarkdown(files);
-  try {
-    const apiMdFile = path.join(__dirname, 'api.md');
 
-    await fs.outputFile(apiMdFile, content);
+  try {
+    const apiMdFile = path.join(projRoot, 'scripts/api.md');
+
+    await outputFile(apiMdFile, content);
 
     const md = await cleanMarkdown(apiMdFile);
 
@@ -69,17 +73,15 @@ const outputAPI = async(files) => {
   <body>
     ${html}
   </body>
-</html>`
-    await fs.outputFile(path.join(projRoot, 'README.html'), readmeHtml);
+</html>`;
+
+    await outputFile(path.join(projRoot, 'README.html'), readmeHtml);
   } catch (err) {
     console.log(err);
   }
 };
 
-module.exports = {outputAPI};
-
-// @ts-ignore
-if (!module.parent) {
+if (isCliCall(import.meta)) {
   // outputReadme(path.join(projRoot, 'src/*.js'));
   outputAPI(path.join(projRoot, 'src/*.js'));
 }
