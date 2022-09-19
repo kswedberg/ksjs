@@ -47,6 +47,9 @@ describe('Array', () => {
     it('wraps the number in an array', () => {
       assert.deepStrictEqual(arrays.makeArray(num), [num]);
     });
+    it('wraps the number in an array', () => {
+      assert.deepStrictEqual(arrays.makeArray(obj, null, true), [{uno: 'one', dos: 'two', tres: 'three'}]);
+    });
   });
 
   describe('randomItem', () => {

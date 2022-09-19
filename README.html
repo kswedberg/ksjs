@@ -276,7 +276,7 @@ import {isArray} from '@bamf-health/bamfjs/array.js';
 <li><a href="#module_array..isArray">isArray(arr)</a> ⇒ <code>boolean</code></li>
 <li><a href="#module_array..inArray">inArray(el, arr)</a> ⇒ <code>boolean</code></li>
 <li><a href="#module_array..objectToArray">objectToArray(obj)</a> ⇒ <code>array</code></li>
-<li><a href="#module_array..makeArray">makeArray(value, [delimiter])</a> ⇒ <code>array</code></li>
+<li><a href="#module_array..makeArray">makeArray(value, [delimiter], [wrapObject])</a> ⇒ <code>array</code></li>
 <li><a href="#module_array..randomItem">randomItem(arr)</a> ⇒ <code>any</code></li>
 <li><a href="#module_array..pluck">pluck(arr, prop)</a> ⇒ <code>array</code></li>
 <li><a href="#module_array..shuffle">shuffle(els)</a> ⇒ <code>array</code></li>
@@ -378,10 +378,11 @@ const arr = objectToArray(obj);
 // ];
 </code></pre>
 <p><a name="module_array..makeArray"></a></p>
-<h3>makeArray(value, [delimiter]) ⇒ <code>array</code></h3>
+<h3>makeArray(value, [delimiter], [wrapObject]) ⇒ <code>array</code></h3>
 <p>Return an array based on the given value:
 a) Strings are split by a delimiter (defaults to /\s+/).
 b) Plain objects are converted to an array of objects with name and value properties.
+b2) …unless wrapObject is true in which case they are just wrapped in an array
 c) Undefined and null are returned as an empty array.
 d) Arrays are returned as is.
 e) Anything else is wrapped in an array.</p>
@@ -391,6 +392,7 @@ e) Anything else is wrapped in an array.</p>
 <tr>
 <th>Param</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -398,12 +400,20 @@ e) Anything else is wrapped in an array.</p>
 <tr>
 <td>value</td>
 <td><code>any</code></td>
+<td></td>
 <td>The value to convert to an array</td>
 </tr>
 <tr>
 <td>[delimiter]</td>
 <td><code>string</code> | <code>RegExp</code></td>
-<td>The value to convert to an array (defaults to /\s+/)</td>
+<td><code>&quot;= /\s+/&quot;</code></td>
+<td>A string or regular expression to use for splitting a string into an array (defaults to /\s+/)</td>
+</tr>
+<tr>
+<td>[wrapObject]</td>
+<td><code>Boolean</code></td>
+<td></td>
+<td>Whether to simply wrap an object in an array (true) or  convert to array of objects with name/value properties</td>
 </tr>
 </tbody>
 </table>
@@ -2306,7 +2316,7 @@ import {deepCopy} from '@bamf-health/bamfjs/object.js';
 <li><a href="#module_object..getProperty">getProperty(root, properties, fallbackVaue)</a> ⇒ <code>*</code></li>
 <li><a href="#module_object..getLastDefined">getLastDefined(root, properties)</a> ⇒ <code>*</code></li>
 <li><a href="#module_object..isEmptyObject">isEmptyObject(obj)</a> ⇒ <code>boolean</code></li>
-<li><a href="#module_object..setProperty">setProperty(root, properties)</a> ⇒ <code>Object</code></li>
+<li><a href="#module_object..setProperty">setProperty(root, properties, value)</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..forEachValue">forEachValue(obj, fn)</a> ⇒ <code>void</code></li>
 <li><a href="#module_object..pick">pick(obj, props)</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..omit">omit(obj, props)</a> ⇒ <code>Object</code></li>
@@ -2568,7 +2578,7 @@ console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
 </tbody>
 </table>
 <p><a name="module_object..setProperty"></a></p>
-<h3>setProperty(root, properties) ⇒ <code>Object</code></h3>
+<h3>setProperty(root, properties, value) ⇒ <code>Object</code></h3>
 <p>Set a nested property of an object in a safe way</p>
 <p><strong>Returns</strong>: <code>Object</code> - The modified root object<br /></p>
 <table>
@@ -2589,6 +2599,11 @@ console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
 <td>properties</td>
 <td><code>Array.&lt;String&gt;</code> | <code>String</code></td>
 <td>Either an array of properties or a dot-delimited string of properties</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>any</code></td>
+<td>The value to set for the nested property</td>
 </tr>
 </tbody>
 </table>

@@ -207,7 +207,7 @@ const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
   * [isArray(arr)](#module_array..isArray) ⇒ <code>boolean</code>
   * [inArray(el, arr)](#module_array..inArray) ⇒ <code>boolean</code>
   * [objectToArray(obj)](#module_array..objectToArray) ⇒ <code>array</code>
-  * [makeArray(value, [delimiter])](#module_array..makeArray) ⇒ <code>array</code>
+  * [makeArray(value, [delimiter], [wrapObject])](#module_array..makeArray) ⇒ <code>array</code>
   * [randomItem(arr)](#module_array..randomItem) ⇒ <code>any</code>
   * [pluck(arr, prop)](#module_array..pluck) ⇒ <code>array</code>
   * [shuffle(els)](#module_array..shuffle) ⇒ <code>array</code>
@@ -289,11 +289,12 @@ const arr = objectToArray(obj);
 
 <a name="module_array..makeArray"></a>
 
-### makeArray(value, [delimiter]) ⇒ <code>array</code>
+### makeArray(value, [delimiter], [wrapObject]) ⇒ <code>array</code>
 
 Return an array based on the given value:
 a) Strings are split by a delimiter (defaults to /\s+/).
 b) Plain objects are converted to an array of objects with name and value properties.
+b2) …unless wrapObject is true in which case they are just wrapped in an array
 c) Undefined and null are returned as an empty array.
 d) Arrays are returned as is.
 e) Anything else is wrapped in an array.
@@ -301,10 +302,11 @@ e) Anything else is wrapped in an array.
 **Returns**: <code>array</code> - The value converted to an array<br />
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| value | <code>any</code> | The value to convert to an array |
-| [delimiter] | <code>string</code> \| <code>RegExp</code> | The value to convert to an array (defaults to /\s+/) |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | <code>any</code> |  | The value to convert to an array |
+| [delimiter] | <code>string</code> \| <code>RegExp</code> | <code>&quot;&#x3D; /\\s+/&quot;</code> | A string or regular expression to use for splitting a string into an array (defaults to /\s+/) |
+| [wrapObject] | <code>Boolean</code> |  | Whether to simply wrap an object in an array (true) or  convert to array of objects with name/value properties |
 
 **Example**
 
@@ -1509,7 +1511,7 @@ const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
   * [getProperty(root, properties, fallbackVaue)](#module_object..getProperty) ⇒ <code>\*</code>
   * [getLastDefined(root, properties)](#module_object..getLastDefined) ⇒ <code>\*</code>
   * [isEmptyObject(obj)](#module_object..isEmptyObject) ⇒ <code>boolean</code>
-  * [setProperty(root, properties)](#module_object..setProperty) ⇒ <code>Object</code>
+  * [setProperty(root, properties, value)](#module_object..setProperty) ⇒ <code>Object</code>
   * [forEachValue(obj, fn)](#module_object..forEachValue) ⇒ <code>void</code>
   * [pick(obj, props)](#module_object..pick) ⇒ <code>Object</code>
   * [omit(obj, props)](#module_object..omit) ⇒ <code>Object</code>
@@ -1688,7 +1690,7 @@ Determine whether an object (or array) is "empty"
 
 <a name="module_object..setProperty"></a>
 
-### setProperty(root, properties) ⇒ <code>Object</code>
+### setProperty(root, properties, value) ⇒ <code>Object</code>
 
 Set a nested property of an object in a safe way
 
@@ -1699,6 +1701,7 @@ Set a nested property of an object in a safe way
 | --- | --- | --- |
 | root | <code>Object</code> | The root object |
 | properties | <code>Array.&lt;String&gt;</code> \| <code>String</code> | Either an array of properties or a dot-delimited string of properties |
+| value | <code>any</code> | The value to set for the nested property |
 
 <a name="module_object..forEachValue"></a>
 
