@@ -101,12 +101,14 @@ export const objectToArray = function(obj) {
  * Return an array based on the given value:
  * a) Strings are split by a delimiter (defaults to /\s+/).
  * b) Plain objects are converted to an array of objects with name and value properties.
+ * b2) …unless wrapObject is true in which case they are just wrapped in an array
  * c) Undefined and null are returned as an empty array.
  * d) Arrays are returned as is.
  * e) Anything else is wrapped in an array.
  * @function makeArray
  * @param  {any} value The value to convert to an array
- * @param  {string|RegExp} [delimiter] The value to convert to an array (defaults to /\s+/)
+ * @param  {string|RegExp} [delimiter = = /\s+/] A string or regular expression to use for splitting a string into an array (defaults to /\s+/)
+ * @param {Boolean} [wrapObject] Whether to simply wrap an object in an array (true) or  convert to array of objects with name/value properties
  * @returns {array}      The value converted to an array
  * @example
  *  import {makeArray} from '@bamf-health/bamfjs/array.js';
@@ -125,13 +127,15 @@ export const objectToArray = function(obj) {
  * const quuz = makeArray(null);
  * // quuz is now []
  */
-export const makeArray = function(value, delimiter) {
+export const makeArray = function(value, delimiter, wrapObject) {
   if (value == null) {
     return [];
   }
 
   if (typeof value === 'string') {
-    return value.split(delimiter || /\s+/);
+    const splitOn = delimiter != null ? delimiter : /\s+/;
+
+    return value.split(splitOn);
   }
 
   if (isArray(value)) {
@@ -139,7 +143,7 @@ export const makeArray = function(value, delimiter) {
   }
 
   if (typeof value === 'object') {
-    return objectToArray(value);
+    return wrapObject ? [value] : objectToArray(value);
   }
 
   return [value];
