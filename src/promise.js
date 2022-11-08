@@ -43,7 +43,7 @@ export const peach = (arr, fn) => {
       const called = func();
       // If the function doesn't return a "then-able", create one with Promise.resolve():
 
-      return (typeof called.then === 'function' ? called : Promise.resolve(called))
+      return (called && typeof called.then === 'function' ? called : Promise.resolve(called))
       .then([].concat.bind(result));
     });
 
