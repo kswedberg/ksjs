@@ -75,8 +75,15 @@ export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
   }
 
   if (typeof structuredClone !== 'undefined' && forceFallback !== true) {
-    // eslint-disable-next-line no-undef
-    return structuredClone(obj);
+    try {
+      // eslint-disable-next-line no-undef
+      const clone = structuredClone(obj);
+
+      return clone;
+    } catch (err) {
+      // silently fall back on error
+    }
+
   }
 
   // if obj is hit, it is in circular structure
@@ -99,7 +106,9 @@ export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
     if ((key === 'constructor' && typeof obj[key] === 'function') || key === '__proto__') {
       return;
     }
-    copy[key] = deepCopy(obj[key], forceFallback, cache);
+
+    // If we've made it here, we're already using the fallback, so we should continue doing so
+    copy[key] = deepCopy(obj[key], true, cache);
   });
 
   return copy;

@@ -9,6 +9,9 @@ describe('Object', () => {
       foo: {
         bar: {
           baz: 'Hello',
+          fn() {
+            return 'who are you?';
+          },
         },
         flotsam: ['Meet George Jetsam', 'Jude, his wife'],
       },
