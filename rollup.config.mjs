@@ -1,9 +1,8 @@
-import {readdirSync} from 'fs-extra';
+import {readdirSync} from 'fs';
 import minimist from 'minimist';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import strip from '@rollup/plugin-strip';
-// import buble from '@rollup/plugin-buble';
 // import {terser} from 'rollup-plugin-terser';
 import eslint from '@rollup/plugin-eslint';
 // import banner from 'rollup-plugin-banner';
@@ -59,12 +58,12 @@ const buildFormats = [];
 
 if (!argv.format || argv.format === 'es') {
   const esConfig = {
-    preserveModules: true,
     input: esFiles,
     output: {
       dir: './',
       format: 'esm',
       exports: 'named',
+      preserveModules: true,
     },
     plugins: [
       eslint({
@@ -79,13 +78,13 @@ if (!argv.format || argv.format === 'es') {
 
 if (!argv.format || argv.format === 'cjs') {
   const cjsConfig = {
-    preserveModules: true,
     input: cjsFiles,
     output: {
       esModule: false,
       dir: 'cjs',
       format: 'cjs',
       exports: 'named',
+      preserveModules: true,
     },
     plugins: [
       ...plugins.main,

@@ -4,6 +4,7 @@
 
 !.eslintrc.js
 !rollup.config.js
+!rollup.config.mjs
 .env
 node_modules
 test/qunit
