@@ -214,6 +214,7 @@ const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
   * [chunk(arr, n)](#module_array..chunk) ⇒ <code>array</code>
   * [range(a, [b])](#module_array..range) ⇒ <code>array</code>
   * [pad(arr, size, value)](#module_array..pad) ⇒ <code>array</code>
+  * [sort(arr, [prop], [options])](#module_array..sort) ⇒ <code>array</code>
 
 <a name="module_array..isArray"></a>
 
@@ -534,6 +535,24 @@ Pad an array with `value` until its length equals `size`
 | arr | <code>array</code> | Array to pad |
 | size | <code>number</code> | Total length of the array after padding it |
 | value | <code>any</code> | Value to use for each "padded" element of the array |
+
+<a name="module_array..sort"></a>
+
+### sort(arr, [prop], [options]) ⇒ <code>array</code>
+
+Sort an array with sensible defaults: numbers (or numeric strings) before letters and case and diacritics ignored
+
+**Returns**: <code>array</code> - The sorted array<br />
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| arr | <code>array</code> |  | Array to sort |
+| [prop] | <code>string</code> |  | If dealing with an array of objects, the property by which to sort |
+| [options] | <code>object</code> |  | Object indicating options to override defaults (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator#options) |
+| [options.sensitivity] | <code>string</code> | <code>&quot;base&quot;</code> | One of 'base', 'accent', 'case', 'variant'. Default is 'base' |
+| [options.numeric] | <code>boolean</code> | <code>true</code> | Whether to treat numeric strings as numbers. Default is true |
+| [options[...rest]] | <code>any</code> |  | Other options (besides sensitivity:'base' and numeric: true) per the spec for `Intl.Collator.prototype.compare` |
 
 <a name="module_color"></a>
 
