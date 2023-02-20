@@ -288,6 +288,7 @@ import {isArray} from '@bamf-health/bamfjs/array.js';
 <li><a href="#module_array..chunk">chunk(arr, n)</a> ⇒ <code>array</code></li>
 <li><a href="#module_array..range">range(a, [b])</a> ⇒ <code>array</code></li>
 <li><a href="#module_array..pad">pad(arr, size, value)</a> ⇒ <code>array</code></li>
+<li><a href="#module_array..sort">sort(arr, [prop], [options])</a> ⇒ <code>array</code></li>
 </ul>
 </li>
 </ul>
@@ -758,6 +759,58 @@ console.log(diff(array1, array2));
 <td>value</td>
 <td><code>any</code></td>
 <td>Value to use for each “padded” element of the array</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_array..sort"></a></p>
+<h3>sort(arr, [prop], [options]) ⇒ <code>array</code></h3>
+<p>Sort an array with sensible defaults: numbers (or numeric strings) before letters and case and diacritics ignored</p>
+<p><strong>Returns</strong>: <code>array</code> - The sorted array<br /></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arr</td>
+<td><code>array</code></td>
+<td></td>
+<td>Array to sort</td>
+</tr>
+<tr>
+<td>[prop]</td>
+<td><code>string</code></td>
+<td></td>
+<td>If dealing with an array of objects, the property by which to sort</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>object</code></td>
+<td></td>
+<td>Object indicating options to override defaults (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator#options)</td>
+</tr>
+<tr>
+<td>[options.sensitivity]</td>
+<td><code>string</code></td>
+<td><code>&quot;base&quot;</code></td>
+<td>One of ‘base’, ‘accent’, ‘case’, ‘variant’. Default is ‘base’</td>
+</tr>
+<tr>
+<td>[options.numeric]</td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Whether to treat numeric strings as numbers. Default is true</td>
+</tr>
+<tr>
+<td>[options[…rest]]</td>
+<td><code>any</code></td>
+<td></td>
+<td>Other options (besides sensitivity:‘base’ and numeric: true) per the spec for <code>Intl.Collator.prototype.compare</code></td>
 </tr>
 </tbody>
 </table>
