@@ -420,3 +420,38 @@ export const pad = function(arr, size, value) {
 
   return arr;
 };
+
+
+const emptyCompare = (a, b) => {
+  const aEmpty = !a && typeof a !== 'number';
+  const bEmpty = !b && typeof b !== 'number';
+
+  if (aEmpty === bEmpty) {
+    return 0;
+  }
+
+  return aEmpty ? 1 : -1;
+};
+
+/**
+ * Sort an array with sensible defaults: numbers (or numeric strings) before letters and case and diacritics ignored
+ * @function sort
+ * @param {array} arr Array to sort
+ * @param {string} [prop] If dealing with an array of objects, the property by which to sort
+ * @param {object} [options] Object indicating options to override defaults (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator#options)
+ * @param {string} [options.sensitivity = base] One of 'base', 'accent', 'case', 'variant'. Default is 'base'
+ * @param {boolean} [options.numeric = true] Whether to treat numeric strings as numbers. Default is true
+ * @param {any} [options[...rest]] Other options (besides sensitivity:'base' and numeric: true) per the spec for `Intl.Collator.prototype.compare`
+ * @returns {array} The sorted array
+ */
+export const sort = (arr, prop, options = {}) => {
+  const opts = Object.assign({sensitivity: 'base', numeric: true}, options);
+  const collator = new Intl.Collator('en-US', opts);
+  const localeCompare = collator.compare;
+
+  return arr.sort((a, b) => {
+    const vals = prop ? [a[prop], b[prop]] : [a, b];
+
+    return emptyCompare(vals[0], vals[1]) || localeCompare(vals[0], vals[1]);
+  });
+};
