@@ -289,4 +289,30 @@ describe('Array', () => {
       assert.deepStrictEqual(array3, [1, 2, 3, 4]);
     });
   });
+
+  describe('sort', () => {
+    const arr = ['', 'Z', null, 'a', 'z', 1, '3', '2', 13, '11', 'ä'];
+    const sorted = arrays.sort(arr);
+
+    const arrObjs = [
+      {foo: ''},
+      {foo: 'Z'},
+      {foo: null},
+      {foo: 'a'},
+      {foo: 'z'},
+      {foo: 1},
+      {foo: '3'},
+      {foo: '2'},
+      {foo: 13},
+      {foo: '11'},
+      {foo: 'ä'},
+    ];
+    const objsSorted = arrays.sort(arrObjs, 'foo');
+    const expectObjsSorted = [{foo: 1}, {foo: '2'}, {foo: '3'}, {foo: '11'}, {foo: 13}, {foo: 'a'}, {foo: 'ä'}, {foo: 'Z'}, {foo: 'z'}, {foo: ''}, {foo: null}];
+
+    it('sorts as expected', () => {
+      assert.deepStrictEqual(sorted, [1, '2', '3', '11', 13, 'a', 'ä', 'Z', 'z', '', null]);
+      assert.deepStrictEqual(objsSorted, expectObjsSorted);
+    });
+  });
 });
