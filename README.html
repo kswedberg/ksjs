@@ -1150,6 +1150,7 @@ import {addClass} from '@bamf-health/bamfjs/dom.js';
 <li><a href="#module_dom..before">before(el, toInsert)</a> ⇒ <code>Element</code></li>
 <li><a href="#module_dom..after">after(el, toInsert)</a> ⇒ <code>Element</code></li>
 <li><a href="#module_dom..createTree">createTree(options)</a> ⇒ <code>Element(s)</code></li>
+<li><a href="#module_dom..createHTML">createHTML(options)</a> ⇒ <code>Element(s)</code></li>
 <li><a href="#module_dom..remove">remove(el)</a> ⇒ <code>Element</code></li>
 <li><a href="#module_dom..empty">empty(el)</a> ⇒ <code>Element</code></li>
 <li><a href="#module_dom..replace">replace(oldEl, replacement)</a></li>
@@ -1612,6 +1613,46 @@ import {addClass} from '@bamf-health/bamfjs/dom.js';
 <p><a name="module_dom..createTree"></a></p>
 <h3>createTree(options) ⇒ <code>Element(s)</code></h3>
 <p>Provide an object, along with possible child objects, to create a node tree ready to be inserted into the DOM.</p>
+<p><strong>Returns</strong>: <code>Element(s)</code> - The created Element node tree<br /></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td><code>object</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.tag]</td>
+<td><code>string</code></td>
+<td>Optional tag name for the element. If none provided, a document fragment is created instead</td>
+</tr>
+<tr>
+<td>[options.text]</td>
+<td><code>string</code></td>
+<td>Optional inner text of the element.</td>
+</tr>
+<tr>
+<td>[options.children]</td>
+<td><code>Array.&lt;Object&gt;</code></td>
+<td>Optional array of objects, with each object representing a child node</td>
+</tr>
+<tr>
+<td>[…options[attr]]</td>
+<td><code>string</code></td>
+<td>One or more optional attributes to set on the element</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_dom..createHTML"></a></p>
+<h3>createHTML(options) ⇒ <code>Element(s)</code></h3>
+<p>Provide an object, along with possible child objects, to create an HTML string that can be inserted into the DOM.</p>
 <p><strong>Returns</strong>: <code>Element(s)</code> - The created Element node tree<br /></p>
 <table>
 <thead>
@@ -2705,7 +2746,7 @@ console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
 <tr>
 <td>props</td>
 <td><code>array</code></td>
-<td>Propertes to get from the object</td>
+<td>Properties to get from the object</td>
 </tr>
 </tbody>
 </table>

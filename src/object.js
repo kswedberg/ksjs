@@ -389,7 +389,7 @@ export const forEachValue = function(obj, fn) {
  * Return a new object containing only the properties included in the props array.
  * @function pick
  * @param {Object} obj The object from which to get properties
- * @param {array} props Propertes to get from the object
+ * @param {array} props Properties to get from the object
  * @returns {Object} A copy of the object, containing only the `props` properties
  */
 

@@ -771,6 +771,7 @@ import {addClass} from '@bamf-health/bamfjs/dom.js';
   * [before(el, toInsert)](#module_dom..before) ⇒ <code>Element</code>
   * [after(el, toInsert)](#module_dom..after) ⇒ <code>Element</code>
   * [createTree(options)](#module_dom..createTree) ⇒ <code>Element(s)</code>
+  * [createHTML(options)](#module_dom..createHTML) ⇒ <code>Element(s)</code>
   * [remove(el)](#module_dom..remove) ⇒ <code>Element</code>
   * [empty(el)](#module_dom..empty) ⇒ <code>Element</code>
   * [replace(oldEl, replacement)](#module_dom..replace)
@@ -1021,6 +1022,23 @@ Insert an element as the next sibling of `el`
 ### createTree(options) ⇒ <code>Element(s)</code>
 
 Provide an object, along with possible child objects, to create a node tree ready to be inserted into the DOM.
+
+**Returns**: <code>Element(s)</code> - The created Element node tree<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>object</code> |  |
+| [options.tag] | <code>string</code> | Optional tag name for the element. If none provided, a document fragment is created instead |
+| [options.text] | <code>string</code> | Optional inner text of the element. |
+| [options.children] | <code>Array.&lt;Object&gt;</code> | Optional array of objects, with each object representing a child node |
+| [...options[attr]] | <code>string</code> | One or more optional attributes to set on the element |
+
+<a name="module_dom..createHTML"></a>
+
+### createHTML(options) ⇒ <code>Element(s)</code>
+
+Provide an object, along with possible child objects, to create an HTML string that can be inserted into the DOM.
 
 **Returns**: <code>Element(s)</code> - The created Element node tree<br />
 
@@ -1700,7 +1718,7 @@ Return a new object containing only the properties included in the props array.
 | Param | Type | Description |
 | --- | --- | --- |
 | obj | <code>Object</code> | The object from which to get properties |
-| props | <code>array</code> | Propertes to get from the object |
+| props | <code>array</code> | Properties to get from the object |
 
 <a name="module_object..omit"></a>
 
