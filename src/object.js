@@ -397,7 +397,9 @@ export const pick = function(obj, props = []) {
   const copy = deepCopy(obj);
 
   return props.reduce((prev, prop) => {
-    prev[prop] = copy[prop];
+    if (prop in copy) {
+      prev[prop] = copy[prop];
+    }
 
     return prev;
   }, {});
