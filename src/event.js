@@ -54,9 +54,11 @@ if (typeof addEventListener === 'function') {
 }
 
 const normalizeOptions = (options) => {
-  return typeof options === 'object' ? options : {
-    capture: !!options.capture,
-  };
+  return typeof options === 'object' ?
+    options :
+    {
+      capture: !!options.capture,
+    };
 };
 let removeEvent;
 
@@ -80,10 +82,12 @@ export let addEvent = function(el, type, handler, options = false) {
   const opts = normalizeOptions(options);
 
   if (!supportsObject) {
-    const fun = !opts.once ? handler : function(event) {
-      handler(event);
-      removeEvent(type, fun, opts.capture);
-    };
+    const fun = !opts.once ?
+      handler :
+      function(event) {
+        handler(event);
+        removeEvent(type, fun, opts.capture);
+      };
 
     return el[ listener.type ](listener.prefix + type, fun, opts.capture);
   }

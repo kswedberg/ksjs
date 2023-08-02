@@ -67,9 +67,11 @@ describe('Promise', () => {
       const indexedFruits = await pmap(fruits, (fruit, i) => {
         const output = `${fruit}-${i}`;
 
-        return i % 2 === 1 ? output : new Promise((resolve) => {
-          setTimeout(() => resolve(output), 10);
-        });
+        return i % 2 === 1 ?
+          output :
+          new Promise((resolve) => {
+            setTimeout(() => resolve(output), 10);
+          });
       });
 
       assert.equal(indexedFruits.length, 3, 'array length matches');

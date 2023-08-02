@@ -260,7 +260,7 @@ const ensureArray = (properties) => {
  * @function getProperty
  * @param  {Object} root The root object
  * @param {Array.<String>|String} properties Either an array of properties or a dot-delimited string of properties
- * @param {any} fallbackVaue A value to assign if it's otherwise undefined
+ * @param {any} fallbackValue A value to assign if it's otherwise undefined
  * @returns {*} The value of the nested property, or `undefined`, or the designated fallback value
  * @example
  * const foo = {
@@ -409,7 +409,7 @@ export const pick = function(obj, props = []) {
  * Return a new object, excluding the properties in the props array.
  * @function omit
  * @param {Object} obj The object from which to get properties
- * @param {array} props Propertes to exclude from the object
+ * @param {array} props Properties to exclude from the object
  * @returns {Object} A modified copy of the object
  */
 

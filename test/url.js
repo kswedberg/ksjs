@@ -1,17 +1,19 @@
 import * as urls from '../src/url.js';
 
 const assert = require('assert');
-const safeLocation = location.href !== 'about:blank' ? location : {
-  hash: '',
-  host: 'localhost:8001',
-  hostname: 'localhost',
-  href: 'http://localhost:8001/test/index.html',
-  origin: 'http://localhost:8001',
-  pathname: '/test/index.html',
-  port: '8001',
-  protocol: 'http:',
-  search: '',
-};
+const safeLocation = location.href !== 'about:blank' ?
+  location :
+  {
+    hash: '',
+    host: 'localhost:8001',
+    hostname: 'localhost',
+    href: 'http://localhost:8001/test/index.html',
+    origin: 'http://localhost:8001',
+    pathname: '/test/index.html',
+    port: '8001',
+    protocol: 'http:',
+    search: '',
+  };
 
 describe('URL', () => {
   describe('location', () => {
