@@ -1,15 +1,19 @@
 /**
  * @module object
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
  * import {deepCopy} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {deepCopy} from '@bamf-health/bamfjs/object.mjs';
  * // or:
  * import {deepCopy} from '@bamf-health/bamfjs/object.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
+ * import {deepCopy} from '@bamf-health/bamfjs/object.cjs';
+ * // or:
  * const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
  * ```
  *
@@ -384,17 +388,31 @@ export const forEachValue = function(obj, fn) {
   return Object.keys(obj).forEach((key) => fn(obj[key], key));
 };
 
+/**
+ * INTERNAL: Return either the same object passed in first parameter or a deep copy of the object, depending on the deep option.
+ * @function getObject
+ * @param {Object} obj The object to return
+ * @param {Object} options Options object
+ * @param {boolean} options.deep Whether to deep-clone the object or not before returning it
+ */
+const getObject = (obj, options = {}) => {
+  const settings = Object.assign({deep: true}, options);
+
+  return settings.deep ? deepCopy(obj) : obj;
+};
 
 /**
  * Return a new object containing only the properties included in the props array.
  * @function pick
  * @param {Object} obj The object from which to get properties
- * @param {array} props Properties to get from the object
+ * @param {array<string>} props Properties to get from the object
+ * @param {Object} [options] Options object
+ * @param {boolean} [options.deep = true]  Whether to deep-clone the object before assigning its properties to the new object
  * @returns {Object} A copy of the object, containing only the `props` properties
  */
 
-export const pick = function(obj, props = []) {
-  const copy = deepCopy(obj);
+export const pick = function(obj, props = [], options) {
+  const copy = getObject(obj, options);
 
   return props.reduce((prev, prop) => {
     if (prop in copy) {
@@ -410,11 +428,13 @@ export const pick = function(obj, props = []) {
  * @function omit
  * @param {Object} obj The object from which to get properties
  * @param {array} props Properties to exclude from the object
+ * @param {Object} [options] Options object
+ * @param {boolean} [options.deep = true] Whether to deep-clone the object before assigning its properties to the new object
  * @returns {Object} A modified copy of the object
  */
 
-export const omit = function(obj, props = []) {
-  const copy = deepCopy(obj);
+export const omit = function(obj, props = [], options) {
+  const copy = getObject(obj, options);
 
   return Object.keys(copy).reduce((prev, prop) => {
     if (!props.includes(prop)) {
