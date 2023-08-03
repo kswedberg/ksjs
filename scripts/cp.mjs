@@ -1,6 +1,7 @@
-import {readdir, readFile, outputFile} from './esm.mjs';
+import {isCliCall, readdir, readFile, outputFile} from './esm.mjs';
 
 import path from 'path';
+import chalk from 'chalk';
 
 const cp = async() => {
   const esFiles = await readdir('./');
@@ -14,3 +15,14 @@ const cp = async() => {
     await outputFile(`${base}.mjs`, updated);
   });
 };
+
+if (isCliCall(import.meta)) {
+  console.log('');
+  console.log(chalk.cyan('Copying scripts to *.mjs...'));
+  cp()
+  .then(() => {
+    console.log(chalk.green('Copied scripts to *.mjs!'));
+  });
+} else {
+  console.log(chalk.yellow('This is not a CLI call.'));
+}
