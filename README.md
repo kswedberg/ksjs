@@ -2,49 +2,49 @@
 
 <!-- [![view on npm](http://img.shields.io/npm/v/bamfjs.svg)](https://www.npmjs.org/package/bamfjs) -->
 
-This repo contains a bunch of plain JavaScript functions that could come in handy while working on BAMF projects. They are mostly provided as ES6 modules, but a subset of them are also offered as CommonJS modules so they can easily be used in a node.js environment.
+This repo contains a bunch of plain JavaScript functions that could come in handy while working on BAMF projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.
 
 ## Install
 
-If you want to install bamfjs via npm or yarn, go ahead:
+If you want to install bamfjs via npm or yarn, you'll need to add the following lines to your .npmrc file after creating a personal access token in GitHub (search Confluence or ask Karl for instructions):
 
 ```bash
-npm install bamfjs
+# Replace xxxxxxxxxxxxxxx with the actual auth token
+//npm.pkg.github.com/:_authToken=xxxxxxxxxxxxxxx
+@bamf-health:registry=https://npm.pkg.github.com
 ```
+
+Then run the usual command:
 
 ```bash
-yarn add bamfjs
+npm install @bamf-health/bamfjs
 ```
 
-## ES6 Modules
+or
 
-If your bundler supports ES6 module tree shaking, you can import any function like this:
-
-```js
-import {$, debounce, deepCopy} from 'bamfjs';
+```bash
+yarn add @bamf-health/bamfjs
 ```
 
-**Note**: For Webpack, you probably need to configure it to treat bamfjs as ES6.
+## ES Modules
 
-Otherwise, for any of the [modules](#modules), you can do this:
+**Preferred**: For any of the [modules](#modules), you can import functions like so:
 
 ```js
-import {example1, example2} from '@bamf-health/bamfjs/example.js'
+import {example1, example2} from '@bamf-health/bamfjs/example.mjs'
+// Depending on your project, ES modules are available in
+// files with the .js extension, too. For example:
+// import {example1, example2} from '@bamf-health/bamfjs/example.js'
 
 example1('foo');
 example2('bar');
 ```
 
-or this (not recommended):
+**Not recommended**: If your bundler supports ES module tree shaking, you might be able to import functions from various files like so (for Webpack, you might need to configure it to treat bamfjs as ES6+):
 
 ```js
-import * as examples from '@bamf-health/bamfjs/example'
-
-examples.example1('foo');
-examples.example2('bar');
+import {$, debounce, deepCopy} from 'bamfjs';
 ```
-
-
 
 ## CommonJS Modules
 
@@ -59,10 +59,10 @@ The following [modules](#modules) &amp; their corresponding functions can be use
 * timer
 * url
 
-You can require them from their respective files in the `cjs` directory, like so:
+**Preferred**: You can require them from their respective files with the `.cjs` extension, like so:
 
 ```js
-const {example1} = require('@bamf-health/bamfjs/cjs/example');
+const {example1} = require('@bamf-health/bamfjs/example.cjs');
 
 example1('foo');
 ```
@@ -70,7 +70,23 @@ example1('foo');
 or like so:
 
 ```js
-const examples = require('@bamf-health/bamfjs/cjs/example');
+const examples = require('@bamf-health/bamfjs/example.cjs');
+
+examples.example1('foo');
+```
+
+**Otherwise**: You could require them from the `cjs` directory, like so (Note the ".js" extension here):
+
+```js
+const {example1} = require('@bamf-health/bamfjs/cjs/example.js');
+
+example1('foo');
+```
+
+or like so:
+
+```js
+const examples = require('@bamf-health/bamfjs/cjs/example.js');
 
 examples.example1('foo');
 ```
@@ -100,12 +116,14 @@ examples.example1('foo');
 <a name="module_ajax"></a>
 
 ## ajax
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {getJSON} from '@bamf-health/bamfjs';
 
 // or:
 import {getJSON} from '@bamf-health/bamfjs/ajax.js';
+// or:
+import {getJSON} from '@bamf-health/bamfjs/ajax.mjs';
 ```
 
 
@@ -184,16 +202,20 @@ Send a POST request with `FormData` derived from form element provided by `optio
 <a name="module_array"></a>
 
 ## array
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {isArray} from '@bamf-health/bamfjs';
 
+// or:
+import {isArray} from '@bamf-health/bamfjs/array.mjs';
 // or:
 import {isArray} from '@bamf-health/bamfjs/array.js';
 ```
 
 CommonJS Require Example:
 ```js
+const {isArray} = require('@bamf-health/bamfjs/array.cjs');
+// or:
 const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
 ```
 
@@ -557,16 +579,20 @@ Sort an array with sensible defaults: numbers (or numeric strings) before letter
 <a name="module_color"></a>
 
 ## color
-ES6 Import Example
+ESM Import Example
 ```js
 import {rgb2Hex} from '@bamf-health/bamfjs'
 
+// or:
+import {rgb2Hex} from '@bamf-health/bamfjs/color.mjs'
 // or:
 import {rgb2Hex} from '@bamf-health/bamfjs/color.js'
 ```
 
 CJS Require Example
 ```js
+const {rgb2Hex} = require('@bamf-health/bamfjs/color.cjs');
+// or:
 const {rgb2Hex} = require('@bamf-health/bamfjs/cjs/color.js');
 ```
 
@@ -679,10 +705,12 @@ Return darkColor if bgColor is light and lightColor if bgColor is dark. "Light" 
 <a name="module_cookie"></a>
 
 ## cookie
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {getCookie} from '@bamf-health/bamfjs';
 
+// or:
+import {getCookie} from '@bamf-health/bamfjs/cookie.mjs';
 // or:
 import {getCookie} from '@bamf-health/bamfjs/cookie.js';
 ```
@@ -743,10 +771,12 @@ Remove a cookie
 <a name="module_dom"></a>
 
 ## dom
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {addClass} from '@bamf-health/bamfjs';
 
+// or:
+import {addClass} from '@bamf-health/bamfjs/dom.mjs';
 // or:
 import {addClass} from '@bamf-health/bamfjs/dom.js';
 ```
@@ -1113,10 +1143,12 @@ Insert a script into the DOM with reasonable default properties, returning a pro
 <a name="module_event"></a>
 
 ## event
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {addEvent} from '@bamf-health/bamfjs';
 
+// or:
+import {addEvent} from '@bamf-health/bamfjs/event.mjs';
 // or:
 import {addEvent} from '@bamf-health/bamfjs/event.js';
 ```
@@ -1192,10 +1224,12 @@ triggerEvent(document.body, 'myCustomEvent', {weather: 'sunshine'});
 <a name="module_form"></a>
 
 ## form
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {getFormData} from '@bamf-health/bamfjs';
 
+// or:
+import {getFormData} from '@bamf-health/bamfjs/form.mjs';
 // or:
 import {getFormData} from '@bamf-health/bamfjs/form.js';
 ```
@@ -1289,10 +1323,12 @@ Note: if the value of a key is an object with a `files` property, each file in t
 <a name="module_jsonp"></a>
 
 ## jsonp
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {getJSONP} from '@bamf-health/bamfjs';
 
+// or:
+import {getJSONP} from '@bamf-health/bamfjs/jsonp.mjs';
 // or:
 import {getJSONP} from '@bamf-health/bamfjs/jsonp.js';
 ```
@@ -1324,16 +1360,20 @@ getJSONP({url: 'https://example.com/api/'})
 <a name="module_math"></a>
 
 ## math
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {median} from '@bamf-health/bamfjs';
 
+// or:
+import {median} from '@bamf-health/bamfjs/math.mjs';
 // or:
 import {median} from '@bamf-health/bamfjs/math.js';
 ```
 
 CommonJS Require Example:
 ```js
+const {median} = require('@bamf-health/bamfjs/math.cjs');
+// or:
 const {median} = require('@bamf-health/bamfjs/cjs/math.js');
 ```
 
@@ -1470,16 +1510,20 @@ Return the number with the highest value from an array of numbers
 <a name="module_object"></a>
 
 ## object
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {deepCopy} from '@bamf-health/bamfjs';
 
+// or:
+import {deepCopy} from '@bamf-health/bamfjs/object.mjs';
 // or:
 import {deepCopy} from '@bamf-health/bamfjs/object.js';
 ```
 
 CommonJS Require Example:
 ```js
+import {deepCopy} from '@bamf-health/bamfjs/object.cjs';
+// or:
 const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
 ```
 
@@ -1490,13 +1534,14 @@ const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
   * [clone(obj)](#module_object..clone) ⇒ <code>Object</code>
   * [deepCopy(obj, [forceFallback], [cache])](#module_object..deepCopy) ⇒ <code>Object</code>
   * [extend(target, ...objects)](#module_object..extend) ⇒ <code>Object</code>
-  * [getProperty(root, properties, fallbackVaue)](#module_object..getProperty) ⇒ <code>\*</code>
+  * [getProperty(root, properties, fallbackValue)](#module_object..getProperty) ⇒ <code>\*</code>
   * [getLastDefined(root, properties)](#module_object..getLastDefined) ⇒ <code>\*</code>
   * [isEmptyObject(obj)](#module_object..isEmptyObject) ⇒ <code>boolean</code>
   * [setProperty(root, properties, value)](#module_object..setProperty) ⇒ <code>Object</code>
   * [forEachValue(obj, fn)](#module_object..forEachValue) ⇒ <code>void</code>
-  * [pick(obj, props)](#module_object..pick) ⇒ <code>Object</code>
-  * [omit(obj, props)](#module_object..omit) ⇒ <code>Object</code>
+  * [getObject(obj, options)](#module_object..getObject)
+  * [pick(obj, props, [options])](#module_object..pick) ⇒ <code>Object</code>
+  * [omit(obj, props, [options])](#module_object..omit) ⇒ <code>Object</code>
 
 <a name="module_object..isObject"></a>
 
@@ -1602,7 +1647,7 @@ const merged = extend(foo, bar);
 ```
 <a name="module_object..getProperty"></a>
 
-### getProperty(root, properties, fallbackVaue) ⇒ <code>\*</code>
+### getProperty(root, properties, fallbackValue) ⇒ <code>\*</code>
 
 Get a nested property of an object in a safe way
 
@@ -1613,7 +1658,7 @@ Get a nested property of an object in a safe way
 | --- | --- | --- |
 | root | <code>Object</code> | The root object |
 | properties | <code>Array.&lt;String&gt;</code> \| <code>String</code> | Either an array of properties or a dot-delimited string of properties |
-| fallbackVaue | <code>any</code> | A value to assign if it's otherwise undefined |
+| fallbackValue | <code>any</code> | A value to assign if it's otherwise undefined |
 
 **Example**  
 ```js
@@ -1706,47 +1751,69 @@ Loop through an object, calling a function for each element (like forEach, but f
 | obj | <code>Object</code> | The object to iterate over |
 | fn | <code>function</code> | A function to be called for each member of the object. The function takes two parameters: the member's value and the member's key, respectively |
 
+<a name="module_object..getObject"></a>
+
+### getObject(obj, options)
+
+INTERNAL: Return either the same object passed in first parameter or a deep copy of the object, depending on the deep option.
+
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>Object</code> | The object to return |
+| options | <code>Object</code> | Options object |
+| options.deep | <code>boolean</code> | Whether to deep-clone the object or not before returning it |
+
 <a name="module_object..pick"></a>
 
-### pick(obj, props) ⇒ <code>Object</code>
+### pick(obj, props, [options]) ⇒ <code>Object</code>
 
 Return a new object containing only the properties included in the props array.
 
 **Returns**: <code>Object</code> - A copy of the object, containing only the `props` properties<br />
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| obj | <code>Object</code> | The object from which to get properties |
-| props | <code>array</code> | Properties to get from the object |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| obj | <code>Object</code> |  | The object from which to get properties |
+| props | <code>array.&lt;string&gt;</code> |  | Properties to get from the object |
+| [options] | <code>Object</code> |  | Options object |
+| [options.deep] | <code>boolean</code> | <code>true</code> | Whether to deep-clone the object before assigning its properties to the new object |
 
 <a name="module_object..omit"></a>
 
-### omit(obj, props) ⇒ <code>Object</code>
+### omit(obj, props, [options]) ⇒ <code>Object</code>
 
 Return a new object, excluding the properties in the props array.
 
 **Returns**: <code>Object</code> - A modified copy of the object<br />
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| obj | <code>Object</code> | The object from which to get properties |
-| props | <code>array</code> | Propertes to exclude from the object |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| obj | <code>Object</code> |  | The object from which to get properties |
+| props | <code>array</code> |  | Properties to exclude from the object |
+| [options] | <code>Object</code> |  | Options object |
+| [options.deep] | <code>boolean</code> | <code>true</code> | Whether to deep-clone the object before assigning its properties to the new object |
 
 <a name="module_promise"></a>
 
 ## promise
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {peach} from '@bamf-health/bamfjs';
 
+// or:
+import {peach} from '@bamf-health/bamfjs/promise.mjs';
 // or:
 import {peach} from '@bamf-health/bamfjs/promise.js';
 ```
 
 CommonJS Require Example:
 ```js
+import {peach} from '@bamf-health/bamfjs/promise.cjs';
+// or:
 const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
 ```
 
@@ -1835,10 +1902,12 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 <a name="module_selection"></a>
 
 ## selection
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {getSelection} from '@bamf-health/bamfjs';
 
+// or:
+import {getSelection} from '@bamf-health/bamfjs/selection.mjs';
 // or:
 import {getSelection} from '@bamf-health/bamfjs/selection.js';
 ```
@@ -1913,10 +1982,12 @@ Return an object with the following properties related to the selected text with
 <a name="module_storage"></a>
 
 ## storage
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {Storage} from '@bamf-health/bamfjs';
 
+// or:
+import {Storage} from '@bamf-health/bamfjs/storage.mjs';
 // or:
 import {Storage} from '@bamf-health/bamfjs/storage.js';
 ```
@@ -2026,16 +2097,20 @@ Constructor for storage functions.
 <a name="module_string"></a>
 
 ## string
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {slugify} from '@bamf-health/bamfjs';
 
+// or:
+import {slugify} from '@bamf-health/bamfjs/string.mjs';
 // or:
 import {slugify} from '@bamf-health/bamfjs/string.js';
 ```
 
 CommonJS Require Example:
 ```js
+import {slugify} from '@bamf-health/bamfjs/string.cjs';
+// or:
 const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
 ```
 
@@ -2278,16 +2353,20 @@ console.log(stripTags('<p>Hello</p><p>World</p>'));
 <a name="module_timer"></a>
 
 ## timer
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {debounce} from '@bamf-health/bamfjs';
 
+// or:
+import {debounce} from '@bamf-health/bamfjs/timer.mjs';
 // or:
 import {debounce} from '@bamf-health/bamfjs/timer.js';
 ```
 
 CommonJS Require Example:
 ```js
+import {debounce} from '@bamf-health/bamfjs/timer.cjs';
+// or:
 const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
 ```
 
@@ -2437,16 +2516,20 @@ Like setTimeout, but with a promise that resolves when the timeout has expired.
 <a name="module_url"></a>
 
 ## url
-ES6 Import Example:
+ESM Import Example:
 ```js
 import {serialize} from '@bamf-health/bamfjs';
 
+// or:
+import {serialize} from '@bamf-health/bamfjs/url.mjs';
 // or:
 import {serialize} from '@bamf-health/bamfjs/url.js';
 ```
 
 CommonJS Require Example:
 ```js
+import {serialize} from '@bamf-health/bamfjs/url.cjs';
+// or:
 const {serialize} = require('@bamf-health/bamfjs/cjs/url.js');
 ```
 

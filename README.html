@@ -17,29 +17,31 @@
   <body>
     <h1>bamfjs</h1>
 <!-- [![view on npm](http://img.shields.io/npm/v/bamfjs.svg)](https://www.npmjs.org/package/bamfjs) -->
-<p>This repo contains a bunch of plain JavaScript functions that could come in handy while working on BAMF projects. They are mostly provided as ES6 modules, but a subset of them are also offered as CommonJS modules so they can easily be used in a node.js environment.</p>
+<p>This repo contains a bunch of plain JavaScript functions that could come in handy while working on BAMF projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.</p>
 <h2>Install</h2>
-<p>If you want to install bamfjs via npm or yarn, go ahead:</p>
-<pre><code class="language-bash">npm install bamfjs
+<p>If you want to install bamfjs via npm or yarn, you’ll need to add the following lines to your .npmrc file after creating a personal access token in GitHub (search Confluence or ask Karl for instructions):</p>
+<pre><code class="language-bash"># Replace xxxxxxxxxxxxxxx with the actual auth token
+//npm.pkg.github.com/:_authToken=xxxxxxxxxxxxxxx
+@bamf-health:registry=https://npm.pkg.github.com
 </code></pre>
-<pre><code class="language-bash">yarn add bamfjs
+<p>Then run the usual command:</p>
+<pre><code class="language-bash">npm install @bamf-health/bamfjs
 </code></pre>
-<h2>ES6 Modules</h2>
-<p>If your bundler supports ES6 module tree shaking, you can import any function like this:</p>
-<pre><code class="language-js">import {$, debounce, deepCopy} from 'bamfjs';
+<p>or</p>
+<pre><code class="language-bash">yarn add @bamf-health/bamfjs
 </code></pre>
-<p><strong>Note</strong>: For Webpack, you probably need to configure it to treat bamfjs as ES6.</p>
-<p>Otherwise, for any of the <a href="#modules">modules</a>, you can do this:</p>
-<pre><code class="language-js">import {example1, example2} from '@bamf-health/bamfjs/example.js'
+<h2>ES Modules</h2>
+<p><strong>Preferred</strong>: For any of the <a href="#modules">modules</a>, you can import functions like so:</p>
+<pre><code class="language-js">import {example1, example2} from '@bamf-health/bamfjs/example.mjs'
+// Depending on your project, ES modules are available in
+// files with the .js extension, too. For example:
+// import {example1, example2} from '@bamf-health/bamfjs/example.js'
 
 example1('foo');
 example2('bar');
 </code></pre>
-<p>or this (not recommended):</p>
-<pre><code class="language-js">import * as examples from '@bamf-health/bamfjs/example'
-
-examples.example1('foo');
-examples.example2('bar');
+<p><strong>Not recommended</strong>: If your bundler supports ES module tree shaking, you might be able to import functions from various files like so (for Webpack, you might need to configure it to treat bamfjs as ES6+):</p>
+<pre><code class="language-js">import {$, debounce, deepCopy} from 'bamfjs';
 </code></pre>
 <h2>CommonJS Modules</h2>
 <p>The following <a href="#modules">modules</a> &amp; their corresponding functions can be used in a node.js environment:</p>
@@ -53,13 +55,23 @@ examples.example2('bar');
 <li>timer</li>
 <li>url</li>
 </ul>
-<p>You can require them from their respective files in the <code>cjs</code> directory, like so:</p>
-<pre><code class="language-js">const {example1} = require('@bamf-health/bamfjs/cjs/example');
+<p><strong>Preferred</strong>: You can require them from their respective files with the <code>.cjs</code> extension, like so:</p>
+<pre><code class="language-js">const {example1} = require('@bamf-health/bamfjs/example.cjs');
 
 example1('foo');
 </code></pre>
 <p>or like so:</p>
-<pre><code class="language-js">const examples = require('@bamf-health/bamfjs/cjs/example');
+<pre><code class="language-js">const examples = require('@bamf-health/bamfjs/example.cjs');
+
+examples.example1('foo');
+</code></pre>
+<p><strong>Otherwise</strong>: You could require them from the <code>cjs</code> directory, like so (Note the “.js” extension here):</p>
+<pre><code class="language-js">const {example1} = require('@bamf-health/bamfjs/cjs/example.js');
+
+example1('foo');
+</code></pre>
+<p>or like so:</p>
+<pre><code class="language-js">const examples = require('@bamf-health/bamfjs/cjs/example.js');
 
 examples.example1('foo');
 </code></pre>
@@ -86,11 +98,13 @@ examples.example1('foo');
 <a name="module_ajax"></a></li>
 </ul>
 <h2>ajax</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {getJSON} from '@bamf-health/bamfjs';
 
 // or:
 import {getJSON} from '@bamf-health/bamfjs/ajax.js';
+// or:
+import {getJSON} from '@bamf-health/bamfjs/ajax.mjs';
 </code></pre>
 <ul>
 <li><a href="#module_ajax">ajax</a>
@@ -261,14 +275,18 @@ import {getJSON} from '@bamf-health/bamfjs/ajax.js';
 </table>
 <p><a name="module_array"></a></p>
 <h2>array</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {isArray} from '@bamf-health/bamfjs';
 
+// or:
+import {isArray} from '@bamf-health/bamfjs/array.mjs';
 // or:
 import {isArray} from '@bamf-health/bamfjs/array.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
+<pre><code class="language-js">const {isArray} = require('@bamf-health/bamfjs/array.cjs');
+// or:
+const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
 </code></pre>
 <ul>
 <li><a href="#module_array">array</a>
@@ -816,14 +834,18 @@ console.log(diff(array1, array2));
 </table>
 <p><a name="module_color"></a></p>
 <h2>color</h2>
-<p>ES6 Import Example</p>
+<p>ESM Import Example</p>
 <pre><code class="language-js">import {rgb2Hex} from '@bamf-health/bamfjs'
 
+// or:
+import {rgb2Hex} from '@bamf-health/bamfjs/color.mjs'
 // or:
 import {rgb2Hex} from '@bamf-health/bamfjs/color.js'
 </code></pre>
 <p>CJS Require Example</p>
-<pre><code class="language-js">const {rgb2Hex} = require('@bamf-health/bamfjs/cjs/color.js');
+<pre><code class="language-js">const {rgb2Hex} = require('@bamf-health/bamfjs/color.cjs');
+// or:
+const {rgb2Hex} = require('@bamf-health/bamfjs/cjs/color.js');
 </code></pre>
 <ul>
 <li><a href="#module_color">color</a>
@@ -992,9 +1014,11 @@ rgba2Hex('rgb(255, 136, 0)')
 </table>
 <p><a name="module_cookie"></a></p>
 <h2>cookie</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {getCookie} from '@bamf-health/bamfjs';
 
+// or:
+import {getCookie} from '@bamf-health/bamfjs/cookie.mjs';
 // or:
 import {getCookie} from '@bamf-health/bamfjs/cookie.js';
 </code></pre>
@@ -1123,9 +1147,11 @@ import {getCookie} from '@bamf-health/bamfjs/cookie.js';
 </table>
 <p><a name="module_dom"></a></p>
 <h2>dom</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {addClass} from '@bamf-health/bamfjs';
 
+// or:
+import {addClass} from '@bamf-health/bamfjs/dom.mjs';
 // or:
 import {addClass} from '@bamf-health/bamfjs/dom.js';
 </code></pre>
@@ -1820,9 +1846,11 @@ import {addClass} from '@bamf-health/bamfjs/dom.js';
 </table>
 <p><a name="module_event"></a></p>
 <h2>event</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {addEvent} from '@bamf-health/bamfjs';
 
+// or:
+import {addEvent} from '@bamf-health/bamfjs/event.mjs';
 // or:
 import {addEvent} from '@bamf-health/bamfjs/event.js';
 </code></pre>
@@ -1980,9 +2008,11 @@ triggerEvent(document.body, 'myCustomEvent', {weather: 'sunshine'});
 </code></pre>
 <p><a name="module_form"></a></p>
 <h2>form</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {getFormData} from '@bamf-health/bamfjs';
 
+// or:
+import {getFormData} from '@bamf-health/bamfjs/form.mjs';
 // or:
 import {getFormData} from '@bamf-health/bamfjs/form.js';
 </code></pre>
@@ -2118,9 +2148,11 @@ console.log(getFormData.array(myform));
 </table>
 <p><a name="module_jsonp"></a></p>
 <h2>jsonp</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {getJSONP} from '@bamf-health/bamfjs';
 
+// or:
+import {getJSONP} from '@bamf-health/bamfjs/jsonp.mjs';
 // or:
 import {getJSONP} from '@bamf-health/bamfjs/jsonp.js';
 </code></pre>
@@ -2179,14 +2211,18 @@ import {getJSONP} from '@bamf-health/bamfjs/jsonp.js';
 </code></pre>
 <p><a name="module_math"></a></p>
 <h2>math</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {median} from '@bamf-health/bamfjs';
 
+// or:
+import {median} from '@bamf-health/bamfjs/math.mjs';
 // or:
 import {median} from '@bamf-health/bamfjs/math.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">const {median} = require('@bamf-health/bamfjs/cjs/math.js');
+<pre><code class="language-js">const {median} = require('@bamf-health/bamfjs/math.cjs');
+// or:
+const {median} = require('@bamf-health/bamfjs/cjs/math.js');
 </code></pre>
 <ul>
 <li><a href="#module_math">math</a>
@@ -2390,14 +2426,18 @@ import {median} from '@bamf-health/bamfjs/math.js';
 </table>
 <p><a name="module_object"></a></p>
 <h2>object</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {deepCopy} from '@bamf-health/bamfjs';
 
+// or:
+import {deepCopy} from '@bamf-health/bamfjs/object.mjs';
 // or:
 import {deepCopy} from '@bamf-health/bamfjs/object.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
+<pre><code class="language-js">import {deepCopy} from '@bamf-health/bamfjs/object.cjs';
+// or:
+const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
 </code></pre>
 <ul>
 <li><a href="#module_object">object</a>
@@ -2407,13 +2447,14 @@ import {deepCopy} from '@bamf-health/bamfjs/object.js';
 <li><a href="#module_object..clone">clone(obj)</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..deepCopy">deepCopy(obj, [forceFallback], [cache])</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..extend">extend(target, …objects)</a> ⇒ <code>Object</code></li>
-<li><a href="#module_object..getProperty">getProperty(root, properties, fallbackVaue)</a> ⇒ <code>*</code></li>
+<li><a href="#module_object..getProperty">getProperty(root, properties, fallbackValue)</a> ⇒ <code>*</code></li>
 <li><a href="#module_object..getLastDefined">getLastDefined(root, properties)</a> ⇒ <code>*</code></li>
 <li><a href="#module_object..isEmptyObject">isEmptyObject(obj)</a> ⇒ <code>boolean</code></li>
 <li><a href="#module_object..setProperty">setProperty(root, properties, value)</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..forEachValue">forEachValue(obj, fn)</a> ⇒ <code>void</code></li>
-<li><a href="#module_object..pick">pick(obj, props)</a> ⇒ <code>Object</code></li>
-<li><a href="#module_object..omit">omit(obj, props)</a> ⇒ <code>Object</code></li>
+<li><a href="#module_object..getObject">getObject(obj, options)</a></li>
+<li><a href="#module_object..pick">pick(obj, props, [options])</a> ⇒ <code>Object</code></li>
+<li><a href="#module_object..omit">omit(obj, props, [options])</a> ⇒ <code>Object</code></li>
 </ul>
 </li>
 </ul>
@@ -2563,7 +2604,7 @@ const merged = extend(foo, bar);
 // }
 </code></pre>
 <p><a name="module_object..getProperty"></a></p>
-<h3>getProperty(root, properties, fallbackVaue) ⇒ <code>*</code></h3>
+<h3>getProperty(root, properties, fallbackValue) ⇒ <code>*</code></h3>
 <p>Get a nested property of an object in a safe way</p>
 <p><strong>Returns</strong>: <code>*</code> - The value of the nested property, or <code>undefined</code>, or the designated fallback value<br /></p>
 <table>
@@ -2586,7 +2627,7 @@ const merged = extend(foo, bar);
 <td>Either an array of properties or a dot-delimited string of properties</td>
 </tr>
 <tr>
-<td>fallbackVaue</td>
+<td>fallbackValue</td>
 <td><code>any</code></td>
 <td>A value to assign if it’s otherwise undefined</td>
 </tr>
@@ -2725,8 +2766,37 @@ console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
 </tr>
 </tbody>
 </table>
+<p><a name="module_object..getObject"></a></p>
+<h3>getObject(obj, options)</h3>
+<p>INTERNAL: Return either the same object passed in first parameter or a deep copy of the object, depending on the deep option.</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>obj</td>
+<td><code>Object</code></td>
+<td>The object to return</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td>Options object</td>
+</tr>
+<tr>
+<td>options.deep</td>
+<td><code>boolean</code></td>
+<td>Whether to deep-clone the object or not before returning it</td>
+</tr>
+</tbody>
+</table>
 <p><a name="module_object..pick"></a></p>
-<h3>pick(obj, props) ⇒ <code>Object</code></h3>
+<h3>pick(obj, props, [options]) ⇒ <code>Object</code></h3>
 <p>Return a new object containing only the properties included in the props array.</p>
 <p><strong>Returns</strong>: <code>Object</code> - A copy of the object, containing only the <code>props</code> properties<br /></p>
 <table>
@@ -2734,6 +2804,7 @@ console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
 <tr>
 <th>Param</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -2741,17 +2812,31 @@ console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
 <tr>
 <td>obj</td>
 <td><code>Object</code></td>
+<td></td>
 <td>The object from which to get properties</td>
 </tr>
 <tr>
 <td>props</td>
-<td><code>array</code></td>
+<td><code>array.&lt;string&gt;</code></td>
+<td></td>
 <td>Properties to get from the object</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td></td>
+<td>Options object</td>
+</tr>
+<tr>
+<td>[options.deep]</td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Whether to deep-clone the object before assigning its properties to the new object</td>
 </tr>
 </tbody>
 </table>
 <p><a name="module_object..omit"></a></p>
-<h3>omit(obj, props) ⇒ <code>Object</code></h3>
+<h3>omit(obj, props, [options]) ⇒ <code>Object</code></h3>
 <p>Return a new object, excluding the properties in the props array.</p>
 <p><strong>Returns</strong>: <code>Object</code> - A modified copy of the object<br /></p>
 <table>
@@ -2759,6 +2844,7 @@ console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
 <tr>
 <th>Param</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -2766,25 +2852,43 @@ console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
 <tr>
 <td>obj</td>
 <td><code>Object</code></td>
+<td></td>
 <td>The object from which to get properties</td>
 </tr>
 <tr>
 <td>props</td>
 <td><code>array</code></td>
-<td>Propertes to exclude from the object</td>
+<td></td>
+<td>Properties to exclude from the object</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td></td>
+<td>Options object</td>
+</tr>
+<tr>
+<td>[options.deep]</td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Whether to deep-clone the object before assigning its properties to the new object</td>
 </tr>
 </tbody>
 </table>
 <p><a name="module_promise"></a></p>
 <h2>promise</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {peach} from '@bamf-health/bamfjs';
 
+// or:
+import {peach} from '@bamf-health/bamfjs/promise.mjs';
 // or:
 import {peach} from '@bamf-health/bamfjs/promise.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
+<pre><code class="language-js">import {peach} from '@bamf-health/bamfjs/promise.cjs';
+// or:
+const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
 </code></pre>
 <ul>
 <li><a href="#module_promise">promise</a>
@@ -2933,9 +3037,11 @@ const indexedFruits = pmap(fruits, (fruit, i) =&gt; {
 </table>
 <p><a name="module_selection"></a></p>
 <h2>selection</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {getSelection} from '@bamf-health/bamfjs';
 
+// or:
+import {getSelection} from '@bamf-health/bamfjs/selection.mjs';
 // or:
 import {getSelection} from '@bamf-health/bamfjs/selection.js';
 </code></pre>
@@ -3058,9 +3164,11 @@ only the first text node within the element will be used for selection</p>
 </table>
 <p><a name="module_storage"></a></p>
 <h2>storage</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {Storage} from '@bamf-health/bamfjs';
 
+// or:
+import {Storage} from '@bamf-health/bamfjs/storage.mjs';
 // or:
 import {Storage} from '@bamf-health/bamfjs/storage.js';
 </code></pre>
@@ -3201,14 +3309,18 @@ import {Storage} from '@bamf-health/bamfjs/storage.js';
 </table>
 <p><a name="module_string"></a></p>
 <h2>string</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {slugify} from '@bamf-health/bamfjs';
 
+// or:
+import {slugify} from '@bamf-health/bamfjs/string.mjs';
 // or:
 import {slugify} from '@bamf-health/bamfjs/string.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
+<pre><code class="language-js">import {slugify} from '@bamf-health/bamfjs/string.cjs';
+// or:
+const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
 </code></pre>
 <ul>
 <li><a href="#module_string">string</a>
@@ -3606,14 +3718,18 @@ console.log(stripTags('&lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;World&lt;/p&gt;'));
 </code></pre>
 <p><a name="module_timer"></a></p>
 <h2>timer</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {debounce} from '@bamf-health/bamfjs';
 
+// or:
+import {debounce} from '@bamf-health/bamfjs/timer.mjs';
 // or:
 import {debounce} from '@bamf-health/bamfjs/timer.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
+<pre><code class="language-js">import {debounce} from '@bamf-health/bamfjs/timer.cjs';
+// or:
+const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
 </code></pre>
 <ul>
 <li><a href="#module_timer">timer</a>
@@ -3858,14 +3974,18 @@ Falls back to using <code>requestAnimationFrame (or an rAF polyfill) if </code>r
 </table>
 <p><a name="module_url"></a></p>
 <h2>url</h2>
-<p>ES6 Import Example:</p>
+<p>ESM Import Example:</p>
 <pre><code class="language-js">import {serialize} from '@bamf-health/bamfjs';
 
+// or:
+import {serialize} from '@bamf-health/bamfjs/url.mjs';
 // or:
 import {serialize} from '@bamf-health/bamfjs/url.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">const {serialize} = require('@bamf-health/bamfjs/cjs/url.js');
+<pre><code class="language-js">import {serialize} from '@bamf-health/bamfjs/url.cjs';
+// or:
+const {serialize} = require('@bamf-health/bamfjs/cjs/url.js');
 </code></pre>
 <ul>
 <li><a href="#module_url">url</a>
