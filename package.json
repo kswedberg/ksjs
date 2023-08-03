@@ -2,7 +2,7 @@
   "name": "@bamf-health/bamfjs",
   "title": "bamfjs",
   "description": "A bunch of JavaScript functions that we may end up using in various projects.",
-  "version": "1.16.2",
+  "version": "1.16.3",
   "author": "Karl Swedberg",
   "license": "MIT",
   "scripts": {
