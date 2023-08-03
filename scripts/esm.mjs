@@ -6,7 +6,7 @@ import {fileURLToPath} from 'url';
 const require = createRequire(import.meta.url);
 const commonJsFs = require('fs-extra');
 
-export const {readFile, outputFile, readJson, readdir}  = commonJsFs;
+export const {readFile, outputFile, readJson, readdir, remove}  = commonJsFs;
 export const Markdown = require('markdown-it');
 export const jsdoc2md = require('jsdoc-to-markdown');
 export const through2 = require('through2');

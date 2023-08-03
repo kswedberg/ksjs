@@ -11,7 +11,7 @@ const argv = minimist(process.argv.slice(2));
 const addSrc = (f) => `src/${f}`;
 const esFiles = readdirSync('./src/').map(addSrc);
 
-const cjsFiles = [
+const cjsFileNames = [
   'array.js',
   'color.js',
   'index.js',
@@ -21,7 +21,8 @@ const cjsFiles = [
   'string.js',
   'timer.js',
   'url.js',
-].map(addSrc);
+];
+const cjsFiles = cjsFileNames.map(addSrc);
 
 const nodeEnv = process.env.NODE_ENV;
 const testEnv = process.env.TEST_ENV;
@@ -73,6 +74,7 @@ if (!argv.format || argv.format === 'es') {
     ],
   };
 
+  console.log('esm');
   buildFormats.push(esConfig);
 }
 
@@ -107,9 +109,11 @@ if (!argv.format || argv.format === 'cjs') {
       plugins: plugins[test],
     };
 
+    console.log('building', test);
     buildFormats.push(testConfig);
   }
 });
 
+export {cjsFileNames};
 // Export config
 export default buildFormats;
