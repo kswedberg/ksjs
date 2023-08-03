@@ -1,10 +1,12 @@
 /**
  * @module cookie
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
  * import {getCookie} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {getCookie} from '@bamf-health/bamfjs/cookie.mjs';
  * // or:
  * import {getCookie} from '@bamf-health/bamfjs/cookie.js';
  * ```

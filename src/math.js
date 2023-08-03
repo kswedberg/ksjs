@@ -1,15 +1,19 @@
 /**
  * @module math
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
  * import {median} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {median} from '@bamf-health/bamfjs/math.mjs';
  * // or:
  * import {median} from '@bamf-health/bamfjs/math.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
+ * const {median} = require('@bamf-health/bamfjs/math.cjs');
+ * // or:
  * const {median} = require('@bamf-health/bamfjs/cjs/math.js');
  * ```
  *

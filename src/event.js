@@ -1,10 +1,12 @@
 /**
  * @module event
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
  * import {addEvent} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {addEvent} from '@bamf-health/bamfjs/event.mjs';
  * // or:
  * import {addEvent} from '@bamf-health/bamfjs/event.js';
  * ```

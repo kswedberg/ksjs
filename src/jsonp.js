@@ -2,10 +2,12 @@
 /**
  * @module jsonp
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
  * import {getJSONP} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {getJSONP} from '@bamf-health/bamfjs/jsonp.mjs';
  * // or:
  * import {getJSONP} from '@bamf-health/bamfjs/jsonp.js';
  * ```

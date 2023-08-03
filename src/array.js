@@ -1,15 +1,19 @@
 /**
  * @module array
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
  * import {isArray} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {isArray} from '@bamf-health/bamfjs/array.mjs';
  * // or:
  * import {isArray} from '@bamf-health/bamfjs/array.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
+ * const {isArray} = require('@bamf-health/bamfjs/array.cjs');
+ * // or:
  * const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
  * ```
  *

@@ -1,15 +1,19 @@
 /**
  * @module promise
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
  * import {peach} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {peach} from '@bamf-health/bamfjs/promise.mjs';
  * // or:
  * import {peach} from '@bamf-health/bamfjs/promise.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
+ * import {peach} from '@bamf-health/bamfjs/promise.cjs';
+ * // or:
  * const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
  * ```
  *

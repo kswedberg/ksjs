@@ -1,10 +1,12 @@
 /**
  * @module selection
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
  * import {getSelection} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {getSelection} from '@bamf-health/bamfjs/selection.mjs';
  * // or:
  * import {getSelection} from '@bamf-health/bamfjs/selection.js';
  * ```

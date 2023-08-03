@@ -1,15 +1,19 @@
 /**
  * @module string
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
  * import {slugify} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {slugify} from '@bamf-health/bamfjs/string.mjs';
  * // or:
  * import {slugify} from '@bamf-health/bamfjs/string.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
+ * import {slugify} from '@bamf-health/bamfjs/string.cjs';
+ * // or:
  * const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
  * ```
  *
