@@ -13,8 +13,9 @@ const copyFiles = (files, {dir = '.', ext}) => {
     const base = path.basename(f, '.js');
     const inputFile = path.resolve(dir, f);
     const content = await readFile(inputFile, 'utf8');
+    const transformed = content.replace(/(import.+)(\.js)/g, `$1.${ext}`);
 
-    await outputFile(`${base}.${ext}`, content);
+    await outputFile(`${base}.${ext}`, transformed);
   });
 };
 
