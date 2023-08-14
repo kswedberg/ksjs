@@ -1,4 +1,4 @@
-# bamfjs
+# ksjs
 
 This repo contains a bunch of plain JavaScript functions that come in handy while working on various projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.
 
@@ -103,15 +103,6 @@ examples.example1('foo');
 * <a href="#module_string">string</a>
 * <a href="#module_timer">timer</a>
 * <a href="#module_url">url</a>
-## Functions
-
-<dl>
-<dt><a href="#pipe">pipe(initialValue, ...fns)</a></dt>
-<dd><p>Provided an initial value and a set of functions, execute the functions in order,
-using initialValue for the first function&#39;s argument and the return value of each function for its subsequent function</p>
-</dd>
-</dl>
-
 <a name="module_ajax"></a>
 
 ## ajax
@@ -2651,18 +2642,4 @@ Convert a serialized string to an object
 | [options.empty] | <code>any</code> | <code>true</code> | The returned value of a param with no value (e.g. `?foo&bar&baz`). Typically, this would be either `true` or `''` |
 | [options.splitValues] | <code>Boolean</code> \| <code>RegExp</code> \| <code>String</code> | <code>false</code> | If NOT `false`, splits converts to an array all values with one or more matches of the `splitValues` option. If `true`, splits on commas (`/,/`). So, `?foo=bar,baz` becomes `{foo: ['bar', 'baz']}` |
 | [options.shallow] | <code>boolean</code> | <code>false</code> | If `true`, does NOT attempt to build nested object |
-
-<a name="pipe"></a>
-
-## pipe(initialValue, ...fns)
-
-Provided an initial value and a set of functions, execute the functions in order,
-using initialValue for the first function's argument and the return value of each function for its subsequent function
-
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| initialValue | <code>\*</code> | The initial value that will be passed into the subsequent functions |
-| ...fns | <code>function</code> |  |
 

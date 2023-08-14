@@ -1,4 +1,4 @@
-# bamfjs
+# ksjs
 
 This repo contains a bunch of plain JavaScript functions that come in handy while working on various projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.
 
