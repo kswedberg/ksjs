@@ -2,7 +2,7 @@
   "name": "ksjs",
   "title": "ksjs",
   "description": "A bunch of random JavaScript functions",
-  "version": "1.6.0",
+  "version": "1.5.0",
   "author": "Karl Swedberg",
   "license": "MIT",
   "scripts": {
@@ -20,13 +20,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/bamf-health/bamfjs.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "url": "git://github.com/kswedberg/ksjs.git"
   },
   "main": "./cjs/index.js",
-  "module": "./index.js",
+  "module": "./index.mjs",
   "sideEffects": false,
   "dependencies": {},
   "devDependencies": {
