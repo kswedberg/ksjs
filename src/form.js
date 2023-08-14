@@ -3,12 +3,12 @@
  * @summary
  * ESM Import Example:
  * ```js
- * import {getFormData} from '@bamf-health/bamfjs';
+ * import {getFormData} from 'ksjs';
  *
  * // or:
- * import {getFormData} from '@bamf-health/bamfjs/form.mjs';
+ * import {getFormData} from 'ksjs/form.mjs';
  * // or:
- * import {getFormData} from '@bamf-health/bamfjs/form.js';
+ * import {getFormData} from 'ksjs/form.js';
  * ```
  *
  */

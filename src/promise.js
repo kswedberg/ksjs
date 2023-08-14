@@ -2,19 +2,19 @@
  * @module promise
  * @summary ESM Import Example:
  * ```js
- * import {peach} from '@bamf-health/bamfjs';
+ * import {peach} from 'ksjs';
  *
  * // or:
- * import {peach} from '@bamf-health/bamfjs/promise.mjs';
+ * import {peach} from 'ksjs/promise.mjs';
  * // or:
- * import {peach} from '@bamf-health/bamfjs/promise.js';
+ * import {peach} from 'ksjs/promise.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * import {peach} from '@bamf-health/bamfjs/promise.cjs';
+ * import {peach} from 'ksjs/promise.cjs';
  * // or:
- * const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
+ * const {peach} = require('ksjs/cjs/promise.js');
  * ```
  *
  */
@@ -62,7 +62,7 @@ export const peach = (arr, fn) => {
  * @param {string} [order=sequence] Whether to call the callback for each item sequentially (`'sequence'`, default) or at the same time (`'parallel'`).
  * @returns {Promise} A resolved Promise, fulfilled with an array containing the mapped items of `arr`
  * @example
- * import {pmap} from '@bamf-health/bamfjs/promise.js';
+ * import {pmap} from 'ksjs/promise.js';
  *
  * const fruits = ['apple', 'banana', 'pear'];
  *
@@ -110,7 +110,7 @@ export const pmap = async function(arr, fn, order) {
 * @param {string} [order=sequence] Whether to call the callback for each item sequentially (`'sequence'`, default) or at the same time (`'parallel'`).
 * @returns {Promise} A resolved Promise, fulfilled with an array containing the mapped items of `arr`
 * @example
-* import {pmap} from '@bamf-health/bamfjs/promise.js';
+* import {pmap} from 'ksjs/promise.js';
 *
 * const fruits = ['apple', 'banana', 'pear'];
 *

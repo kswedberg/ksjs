@@ -4,12 +4,12 @@
  * @summary
  * ESM Import Example:
  * ```js
- * import {addClass} from '@bamf-health/bamfjs';
+ * import {addClass} from 'ksjs';
  *
  * // or:
- * import {addClass} from '@bamf-health/bamfjs/dom.mjs';
+ * import {addClass} from 'ksjs/dom.mjs';
  * // or:
- * import {addClass} from '@bamf-health/bamfjs/dom.js';
+ * import {addClass} from 'ksjs/dom.js';
  * ```
  *
  */

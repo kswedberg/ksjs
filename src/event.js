@@ -3,12 +3,12 @@
  * @summary
  * ESM Import Example:
  * ```js
- * import {addEvent} from '@bamf-health/bamfjs';
+ * import {addEvent} from 'ksjs';
  *
  * // or:
- * import {addEvent} from '@bamf-health/bamfjs/event.mjs';
+ * import {addEvent} from 'ksjs/event.mjs';
  * // or:
- * import {addEvent} from '@bamf-health/bamfjs/event.js';
+ * import {addEvent} from 'ksjs/event.js';
  * ```
  *
  */

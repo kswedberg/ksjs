@@ -6,12 +6,12 @@ import {extend} from './object.js';
  * @summary
  * ESM Import Example:
  * ```js
- * import {Storage} from '@bamf-health/bamfjs';
+ * import {Storage} from 'ksjs';
  *
  * // or:
- * import {Storage} from '@bamf-health/bamfjs/storage.mjs';
+ * import {Storage} from 'ksjs/storage.mjs';
  * // or:
- * import {Storage} from '@bamf-health/bamfjs/storage.js';
+ * import {Storage} from 'ksjs/storage.js';
  * ```
  *
  */

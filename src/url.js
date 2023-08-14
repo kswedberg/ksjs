@@ -2,19 +2,19 @@
  * @module url
  * @summary ESM Import Example:
  * ```js
- * import {serialize} from '@bamf-health/bamfjs';
+ * import {serialize} from 'ksjs';
  *
  * // or:
- * import {serialize} from '@bamf-health/bamfjs/url.mjs';
+ * import {serialize} from 'ksjs/url.mjs';
  * // or:
- * import {serialize} from '@bamf-health/bamfjs/url.js';
+ * import {serialize} from 'ksjs/url.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * import {serialize} from '@bamf-health/bamfjs/url.cjs';
+ * import {serialize} from 'ksjs/url.cjs';
  * // or:
- * const {serialize} = require('@bamf-health/bamfjs/cjs/url.js');
+ * const {serialize} = require('ksjs/cjs/url.js');
  * ```
  *
  */

@@ -3,12 +3,12 @@
  * @summary
  * ESM Import Example:
  * ```js
- * import {getCookie} from '@bamf-health/bamfjs';
+ * import {getCookie} from 'ksjs';
  *
  * // or:
- * import {getCookie} from '@bamf-health/bamfjs/cookie.mjs';
+ * import {getCookie} from 'ksjs/cookie.mjs';
  * // or:
- * import {getCookie} from '@bamf-health/bamfjs/cookie.js';
+ * import {getCookie} from 'ksjs/cookie.js';
  * ```
  *
  */

@@ -3,19 +3,19 @@
 * @summary
 * ESM Import Example
 * ```js
-* import {rgb2Hex} from '@bamf-health/bamfjs'
+* import {rgb2Hex} from 'ksjs'
 *
 * // or:
-* import {rgb2Hex} from '@bamf-health/bamfjs/color.mjs'
+* import {rgb2Hex} from 'ksjs/color.mjs'
 * // or:
-* import {rgb2Hex} from '@bamf-health/bamfjs/color.js'
+* import {rgb2Hex} from 'ksjs/color.js'
 * ```
 *
 * CJS Require Example
 * ```js
-* const {rgb2Hex} = require('@bamf-health/bamfjs/color.cjs');
+* const {rgb2Hex} = require('ksjs/color.cjs');
 * // or:
-* const {rgb2Hex} = require('@bamf-health/bamfjs/cjs/color.js');
+* const {rgb2Hex} = require('ksjs/cjs/color.js');
 * ```
 */
 

@@ -1,29 +1,19 @@
 # bamfjs
 
-<!-- [![view on npm](http://img.shields.io/npm/v/bamfjs.svg)](https://www.npmjs.org/package/bamfjs) -->
-
-This repo contains a bunch of plain JavaScript functions that could come in handy while working on BAMF projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.
+This repo contains a bunch of plain JavaScript functions that come in handy while working on various projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.
 
 ## Install
 
-If you want to install bamfjs via npm or yarn, you'll need to add the following lines to your .npmrc file after creating a personal access token in GitHub (search Confluence or ask Karl for instructions):
+From the command line, run:
 
 ```bash
-# Replace xxxxxxxxxxxxxxx with the actual auth token
-//npm.pkg.github.com/:_authToken=xxxxxxxxxxxxxxx
-@bamf-health:registry=https://npm.pkg.github.com
-```
-
-Then run the usual command:
-
-```bash
-npm install @bamf-health/bamfjs
+npm install ksjs
 ```
 
 or
 
 ```bash
-yarn add @bamf-health/bamfjs
+yarn add ksjs
 ```
 
 ## ES Modules
@@ -31,10 +21,10 @@ yarn add @bamf-health/bamfjs
 **Preferred**: For any of the [modules](#modules), you can import functions like so:
 
 ```js
-import {example1, example2} from '@bamf-health/bamfjs/example.mjs'
+import {example1, example2} from 'ksjs/example.mjs'
 // Depending on your project, ES modules are available in
 // files with the .js extension, too. For example:
-// import {example1, example2} from '@bamf-health/bamfjs/example.js'
+// import {example1, example2} from 'ksjs/example.js'
 
 example1('foo');
 example2('bar');
@@ -62,7 +52,7 @@ The following [modules](#modules) &amp; their corresponding functions can be use
 **Preferred**: You can require them from their respective files with the `.cjs` extension, like so:
 
 ```js
-const {example1} = require('@bamf-health/bamfjs/example.cjs');
+const {example1} = require('ksjs/example.cjs');
 
 example1('foo');
 ```
@@ -70,7 +60,7 @@ example1('foo');
 or like so:
 
 ```js
-const examples = require('@bamf-health/bamfjs/example.cjs');
+const examples = require('ksjs/example.cjs');
 
 examples.example1('foo');
 ```
@@ -78,7 +68,7 @@ examples.example1('foo');
 **Otherwise**: You could require them from the `cjs` directory, like so (Note the ".js" extension here):
 
 ```js
-const {example1} = require('@bamf-health/bamfjs/cjs/example.js');
+const {example1} = require('ksjs/cjs/example.js');
 
 example1('foo');
 ```
@@ -86,7 +76,7 @@ example1('foo');
 or like so:
 
 ```js
-const examples = require('@bamf-health/bamfjs/cjs/example.js');
+const examples = require('ksjs/cjs/example.js');
 
 examples.example1('foo');
 ```
@@ -127,12 +117,12 @@ using initialValue for the first function&#39;s argument and the return value of
 ## ajax
 ESM Import Example:
 ```js
-import {getJSON} from '@bamf-health/bamfjs';
+import {getJSON} from 'ksjs';
 
 // or:
-import {getJSON} from '@bamf-health/bamfjs/ajax.js';
+import {getJSON} from 'ksjs/ajax.js';
 // or:
-import {getJSON} from '@bamf-health/bamfjs/ajax.mjs';
+import {getJSON} from 'ksjs/ajax.mjs';
 ```
 
 
@@ -213,19 +203,19 @@ Send a POST request with `FormData` derived from form element provided by `optio
 ## array
 ESM Import Example:
 ```js
-import {isArray} from '@bamf-health/bamfjs';
+import {isArray} from 'ksjs';
 
 // or:
-import {isArray} from '@bamf-health/bamfjs/array.mjs';
+import {isArray} from 'ksjs/array.mjs';
 // or:
-import {isArray} from '@bamf-health/bamfjs/array.js';
+import {isArray} from 'ksjs/array.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {isArray} = require('@bamf-health/bamfjs/array.cjs');
+const {isArray} = require('ksjs/array.cjs');
 // or:
-const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
+const {isArray} = require('ksjs/cjs/array.js');
 ```
 
 
@@ -262,7 +252,7 @@ Determine whether "arr" is a true array
 
 **Example**  
 ```js
-import {isArray} from '@bamf-health/bamfjs/array.js';
+import {isArray} from 'ksjs/array.js';
 
 if (isArray(window.foo)) {
   window.foo.push('bar');
@@ -297,7 +287,7 @@ Convert an object to an array of objects with name and value properties
 
 **Example**  
 ```js
-import {objectToArray} from '@bamf-health/bamfjs/array.js';
+import {objectToArray} from 'ksjs/array.js';
 
 const obj = {
   foo: 'bar',
@@ -333,7 +323,7 @@ e) Anything else is wrapped in an array.
 
 **Example**  
 ```js
-import {makeArray} from '@bamf-health/bamfjs/array.js';
+import {makeArray} from 'ksjs/array.js';
 const foo = makeArray('one two three');
 // foo is now ['one', 'two', 'three']
 
@@ -378,7 +368,7 @@ Take an array of objects and a property and return an array of values of that pr
 
 **Example**  
 ```js
-import {pluck} from '@bamf-health/bamfjs/array.js';
+import {pluck} from 'ksjs/array.js';
 
 let family = [
   {
@@ -590,19 +580,19 @@ Sort an array with sensible defaults: numbers (or numeric strings) before letter
 ## color
 ESM Import Example
 ```js
-import {rgb2Hex} from '@bamf-health/bamfjs'
+import {rgb2Hex} from 'ksjs'
 
 // or:
-import {rgb2Hex} from '@bamf-health/bamfjs/color.mjs'
+import {rgb2Hex} from 'ksjs/color.mjs'
 // or:
-import {rgb2Hex} from '@bamf-health/bamfjs/color.js'
+import {rgb2Hex} from 'ksjs/color.js'
 ```
 
 CJS Require Example
 ```js
-const {rgb2Hex} = require('@bamf-health/bamfjs/color.cjs');
+const {rgb2Hex} = require('ksjs/color.cjs');
 // or:
-const {rgb2Hex} = require('@bamf-health/bamfjs/cjs/color.js');
+const {rgb2Hex} = require('ksjs/cjs/color.js');
 ```
 
 
@@ -716,12 +706,12 @@ Return darkColor if bgColor is light and lightColor if bgColor is dark. "Light" 
 ## cookie
 ESM Import Example:
 ```js
-import {getCookie} from '@bamf-health/bamfjs';
+import {getCookie} from 'ksjs';
 
 // or:
-import {getCookie} from '@bamf-health/bamfjs/cookie.mjs';
+import {getCookie} from 'ksjs/cookie.mjs';
 // or:
-import {getCookie} from '@bamf-health/bamfjs/cookie.js';
+import {getCookie} from 'ksjs/cookie.js';
 ```
 
 
@@ -782,12 +772,12 @@ Remove a cookie
 ## dom
 ESM Import Example:
 ```js
-import {addClass} from '@bamf-health/bamfjs';
+import {addClass} from 'ksjs';
 
 // or:
-import {addClass} from '@bamf-health/bamfjs/dom.mjs';
+import {addClass} from 'ksjs/dom.mjs';
 // or:
-import {addClass} from '@bamf-health/bamfjs/dom.js';
+import {addClass} from 'ksjs/dom.js';
 ```
 
 
@@ -1154,12 +1144,12 @@ Insert a script into the DOM with reasonable default properties, returning a pro
 ## event
 ESM Import Example:
 ```js
-import {addEvent} from '@bamf-health/bamfjs';
+import {addEvent} from 'ksjs';
 
 // or:
-import {addEvent} from '@bamf-health/bamfjs/event.mjs';
+import {addEvent} from 'ksjs/event.mjs';
 // or:
-import {addEvent} from '@bamf-health/bamfjs/event.js';
+import {addEvent} from 'ksjs/event.js';
 ```
 
 
@@ -1235,12 +1225,12 @@ triggerEvent(document.body, 'myCustomEvent', {weather: 'sunshine'});
 ## form
 ESM Import Example:
 ```js
-import {getFormData} from '@bamf-health/bamfjs';
+import {getFormData} from 'ksjs';
 
 // or:
-import {getFormData} from '@bamf-health/bamfjs/form.mjs';
+import {getFormData} from 'ksjs/form.mjs';
 // or:
-import {getFormData} from '@bamf-health/bamfjs/form.js';
+import {getFormData} from 'ksjs/form.js';
 ```
 
 
@@ -1334,12 +1324,12 @@ Note: if the value of a key is an object with a `files` property, each file in t
 ## jsonp
 ESM Import Example:
 ```js
-import {getJSONP} from '@bamf-health/bamfjs';
+import {getJSONP} from 'ksjs';
 
 // or:
-import {getJSONP} from '@bamf-health/bamfjs/jsonp.mjs';
+import {getJSONP} from 'ksjs/jsonp.mjs';
 // or:
-import {getJSONP} from '@bamf-health/bamfjs/jsonp.js';
+import {getJSONP} from 'ksjs/jsonp.js';
 ```
 
 <a name="module_jsonp..getJSONP"></a>
@@ -1371,19 +1361,19 @@ getJSONP({url: 'https://example.com/api/'})
 ## math
 ESM Import Example:
 ```js
-import {median} from '@bamf-health/bamfjs';
+import {median} from 'ksjs';
 
 // or:
-import {median} from '@bamf-health/bamfjs/math.mjs';
+import {median} from 'ksjs/math.mjs';
 // or:
-import {median} from '@bamf-health/bamfjs/math.js';
+import {median} from 'ksjs/math.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {median} = require('@bamf-health/bamfjs/math.cjs');
+const {median} = require('ksjs/math.cjs');
 // or:
-const {median} = require('@bamf-health/bamfjs/cjs/math.js');
+const {median} = require('ksjs/cjs/math.js');
 ```
 
 
@@ -1521,19 +1511,19 @@ Return the number with the highest value from an array of numbers
 ## object
 ESM Import Example:
 ```js
-import {deepCopy} from '@bamf-health/bamfjs';
+import {deepCopy} from 'ksjs';
 
 // or:
-import {deepCopy} from '@bamf-health/bamfjs/object.mjs';
+import {deepCopy} from 'ksjs/object.mjs';
 // or:
-import {deepCopy} from '@bamf-health/bamfjs/object.js';
+import {deepCopy} from 'ksjs/object.js';
 ```
 
 CommonJS Require Example:
 ```js
-import {deepCopy} from '@bamf-health/bamfjs/object.cjs';
+import {deepCopy} from 'ksjs/object.cjs';
 // or:
-const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
+const {deepCopy} = require('ksjs/cjs/object.js');
 ```
 
 
@@ -1811,19 +1801,19 @@ Return a new object, excluding the properties in the props array.
 ## promise
 ESM Import Example:
 ```js
-import {peach} from '@bamf-health/bamfjs';
+import {peach} from 'ksjs';
 
 // or:
-import {peach} from '@bamf-health/bamfjs/promise.mjs';
+import {peach} from 'ksjs/promise.mjs';
 // or:
-import {peach} from '@bamf-health/bamfjs/promise.js';
+import {peach} from 'ksjs/promise.js';
 ```
 
 CommonJS Require Example:
 ```js
-import {peach} from '@bamf-health/bamfjs/promise.cjs';
+import {peach} from 'ksjs/promise.cjs';
 // or:
-const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
+const {peach} = require('ksjs/cjs/promise.js');
 ```
 
 
@@ -1864,7 +1854,7 @@ const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
 
 **Example**  
 ```js
-import {pmap} from '@bamf-health/bamfjs/promise.js';
+import {pmap} from 'ksjs/promise.js';
 
 const fruits = ['apple', 'banana', 'pear'];
 
@@ -1889,7 +1879,7 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 
 **Example**  
 ```js
-import {pmap} from '@bamf-health/bamfjs/promise.js';
+import {pmap} from 'ksjs/promise.js';
 
 const fruits = ['apple', 'banana', 'pear'];
 
@@ -1913,12 +1903,12 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 ## selection
 ESM Import Example:
 ```js
-import {getSelection} from '@bamf-health/bamfjs';
+import {getSelection} from 'ksjs';
 
 // or:
-import {getSelection} from '@bamf-health/bamfjs/selection.mjs';
+import {getSelection} from 'ksjs/selection.mjs';
 // or:
-import {getSelection} from '@bamf-health/bamfjs/selection.js';
+import {getSelection} from 'ksjs/selection.js';
 ```
 
 
@@ -1993,12 +1983,12 @@ Return an object with the following properties related to the selected text with
 ## storage
 ESM Import Example:
 ```js
-import {Storage} from '@bamf-health/bamfjs';
+import {Storage} from 'ksjs';
 
 // or:
-import {Storage} from '@bamf-health/bamfjs/storage.mjs';
+import {Storage} from 'ksjs/storage.mjs';
 // or:
-import {Storage} from '@bamf-health/bamfjs/storage.js';
+import {Storage} from 'ksjs/storage.js';
 ```
 
 
@@ -2108,19 +2098,19 @@ Constructor for storage functions.
 ## string
 ESM Import Example:
 ```js
-import {slugify} from '@bamf-health/bamfjs';
+import {slugify} from 'ksjs';
 
 // or:
-import {slugify} from '@bamf-health/bamfjs/string.mjs';
+import {slugify} from 'ksjs/string.mjs';
 // or:
-import {slugify} from '@bamf-health/bamfjs/string.js';
+import {slugify} from 'ksjs/string.js';
 ```
 
 CommonJS Require Example:
 ```js
-import {slugify} from '@bamf-health/bamfjs/string.cjs';
+const {slugify} require('ksjs/string.cjs');
 // or:
-const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
+const {slugify} = require('ksjs/cjs/string.js');
 ```
 
 
@@ -2364,19 +2354,19 @@ console.log(stripTags('<p>Hello</p><p>World</p>'));
 ## timer
 ESM Import Example:
 ```js
-import {debounce} from '@bamf-health/bamfjs';
+import {debounce} from 'ksjs';
 
 // or:
-import {debounce} from '@bamf-health/bamfjs/timer.mjs';
+import {debounce} from 'ksjs/timer.mjs';
 // or:
-import {debounce} from '@bamf-health/bamfjs/timer.js';
+import {debounce} from 'ksjs/timer.js';
 ```
 
 CommonJS Require Example:
 ```js
-import {debounce} from '@bamf-health/bamfjs/timer.cjs';
+import {debounce} from 'ksjs/timer.cjs';
 // or:
-const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
+const {debounce} = require('ksjs/cjs/timer.js');
 ```
 
 
@@ -2527,19 +2517,19 @@ Like setTimeout, but with a promise that resolves when the timeout has expired.
 ## url
 ESM Import Example:
 ```js
-import {serialize} from '@bamf-health/bamfjs';
+import {serialize} from 'ksjs';
 
 // or:
-import {serialize} from '@bamf-health/bamfjs/url.mjs';
+import {serialize} from 'ksjs/url.mjs';
 // or:
-import {serialize} from '@bamf-health/bamfjs/url.js';
+import {serialize} from 'ksjs/url.js';
 ```
 
 CommonJS Require Example:
 ```js
-import {serialize} from '@bamf-health/bamfjs/url.cjs';
+import {serialize} from 'ksjs/url.cjs';
 // or:
-const {serialize} = require('@bamf-health/bamfjs/cjs/url.js');
+const {serialize} = require('ksjs/cjs/url.js');
 ```
 
 

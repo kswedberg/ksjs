@@ -4,12 +4,12 @@
  * @summary
  * ESM Import Example:
  * ```js
- * import {getJSONP} from '@bamf-health/bamfjs';
+ * import {getJSONP} from 'ksjs';
  *
  * // or:
- * import {getJSONP} from '@bamf-health/bamfjs/jsonp.mjs';
+ * import {getJSONP} from 'ksjs/jsonp.mjs';
  * // or:
- * import {getJSONP} from '@bamf-health/bamfjs/jsonp.js';
+ * import {getJSONP} from 'ksjs/jsonp.js';
  * ```
  *
  */
