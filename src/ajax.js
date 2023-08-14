@@ -1,12 +1,14 @@
 /**
  * @module ajax
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
  * import {getJSON} from '@bamf-health/bamfjs';
  *
- * // or:
+* // or:
  * import {getJSON} from '@bamf-health/bamfjs/ajax.js';
+ * // or:
+ * import {getJSON} from '@bamf-health/bamfjs/ajax.mjs';
  * ```
  *
  */

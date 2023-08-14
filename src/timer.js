@@ -1,15 +1,19 @@
 /**
  * @module timer
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
  * import {debounce} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {debounce} from '@bamf-health/bamfjs/timer.mjs';
  * // or:
  * import {debounce} from '@bamf-health/bamfjs/timer.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
+ * import {debounce} from '@bamf-health/bamfjs/timer.cjs';
+ * // or:
  * const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
  * ```
  *

@@ -29,7 +29,7 @@ describe('Object', () => {
     original.firstName = 'G.I.';
 
     it('copies deeply nested object', () => {
-      assert.equal(original.foo.bar.baz, copy.foo.bar.baz);
+      assert.strictEqual(original.foo.bar.baz, copy.foo.bar.baz);
     });
 
     it('preserves original when copy is mutated & vice versa', () => {

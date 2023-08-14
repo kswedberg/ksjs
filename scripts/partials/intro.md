@@ -2,49 +2,49 @@
 
 <!-- [![view on npm](http://img.shields.io/npm/v/bamfjs.svg)](https://www.npmjs.org/package/bamfjs) -->
 
-This repo contains a bunch of plain JavaScript functions that could come in handy while working on BAMF projects. They are mostly provided as ES6 modules, but a subset of them are also offered as CommonJS modules so they can easily be used in a node.js environment.
+This repo contains a bunch of plain JavaScript functions that could come in handy while working on BAMF projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.
 
 ## Install
 
-If you want to install bamfjs via npm or yarn, go ahead:
+If you want to install bamfjs via npm or yarn, you'll need to add the following lines to your .npmrc file after creating a personal access token in GitHub (search Confluence or ask Karl for instructions):
 
 ```bash
-npm install bamfjs
+# Replace xxxxxxxxxxxxxxx with the actual auth token
+//npm.pkg.github.com/:_authToken=xxxxxxxxxxxxxxx
+@bamf-health:registry=https://npm.pkg.github.com
 ```
+
+Then run the usual command:
 
 ```bash
-yarn add bamfjs
+npm install @bamf-health/bamfjs
 ```
 
-## ES6 Modules
+or
 
-If your bundler supports ES6 module tree shaking, you can import any function like this:
-
-```js
-import {$, debounce, deepCopy} from 'bamfjs';
+```bash
+yarn add @bamf-health/bamfjs
 ```
 
-**Note**: For Webpack, you probably need to configure it to treat bamfjs as ES6.
+## ES Modules
 
-Otherwise, for any of the [modules](#modules), you can do this:
+**Preferred**: For any of the [modules](#modules), you can import functions like so:
 
 ```js
-import {example1, example2} from '@bamf-health/bamfjs/example.js'
+import {example1, example2} from '@bamf-health/bamfjs/example.mjs'
+// Depending on your project, ES modules are available in
+// files with the .js extension, too. For example:
+// import {example1, example2} from '@bamf-health/bamfjs/example.js'
 
 example1('foo');
 example2('bar');
 ```
 
-or this (not recommended):
+**Not recommended**: If your bundler supports ES module tree shaking, you might be able to import functions from various files like so (for Webpack, you might need to configure it to treat bamfjs as ES6+):
 
 ```js
-import * as examples from '@bamf-health/bamfjs/example'
-
-examples.example1('foo');
-examples.example2('bar');
+import {$, debounce, deepCopy} from 'bamfjs';
 ```
-
-
 
 ## CommonJS Modules
 
@@ -59,10 +59,10 @@ The following [modules](#modules) &amp; their corresponding functions can be use
 * timer
 * url
 
-You can require them from their respective files in the `cjs` directory, like so:
+**Preferred**: You can require them from their respective files with the `.cjs` extension, like so:
 
 ```js
-const {example1} = require('@bamf-health/bamfjs/cjs/example');
+const {example1} = require('@bamf-health/bamfjs/example.cjs');
 
 example1('foo');
 ```
@@ -70,7 +70,23 @@ example1('foo');
 or like so:
 
 ```js
-const examples = require('@bamf-health/bamfjs/cjs/example');
+const examples = require('@bamf-health/bamfjs/example.cjs');
+
+examples.example1('foo');
+```
+
+**Otherwise**: You could require them from the `cjs` directory, like so (Note the ".js" extension here):
+
+```js
+const {example1} = require('@bamf-health/bamfjs/cjs/example.js');
+
+example1('foo');
+```
+
+or like so:
+
+```js
+const examples = require('@bamf-health/bamfjs/cjs/example.js');
 
 examples.example1('foo');
 ```

@@ -65,7 +65,7 @@ describe('Timer', () => {
             console.log(times);
             done();
           }, 300);
-        }, 125);
+        }, 155);
 
       }, 25);
     });

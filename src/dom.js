@@ -2,10 +2,12 @@
 /**
  * @module dom
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
  * import {addClass} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {addClass} from '@bamf-health/bamfjs/dom.mjs';
  * // or:
  * import {addClass} from '@bamf-health/bamfjs/dom.js';
  * ```

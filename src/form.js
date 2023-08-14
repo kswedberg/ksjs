@@ -1,10 +1,12 @@
 /**
  * @module form
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
  * import {getFormData} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {getFormData} from '@bamf-health/bamfjs/form.mjs';
  * // or:
  * import {getFormData} from '@bamf-health/bamfjs/form.js';
  * ```

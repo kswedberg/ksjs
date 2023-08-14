@@ -4,10 +4,12 @@ import {extend} from './object.js';
 /**
  * @module storage
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
  * import {Storage} from '@bamf-health/bamfjs';
  *
+ * // or:
+ * import {Storage} from '@bamf-health/bamfjs/storage.mjs';
  * // or:
  * import {Storage} from '@bamf-health/bamfjs/storage.js';
  * ```
