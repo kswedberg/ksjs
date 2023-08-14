@@ -2,12 +2,14 @@
 /**
  * @module dom
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
- * import {addClass} from 'fmjs';
+ * import {addClass} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {addClass} from 'fmjs/dom.js';
+ * import {addClass} from '@bamf-health/bamfjs/dom.mjs';
+ * // or:
+ * import {addClass} from '@bamf-health/bamfjs/dom.js';
  * ```
  *
  */
@@ -531,6 +533,69 @@ export const createTree = function({tag, text, children = [], ...attrs}) {
   });
 
   return el;
+};
+
+
+/**
+ * Provide an object, along with possible child objects, to create an HTML string that can be inserted into the DOM.
+ * @function createHTML
+ * @param {object} options
+ * @param {string} [options.tag] Optional tag name for the element. If none provided, a document fragment is created instead
+ * @param {string} [options.text] Optional inner text of the element.
+ * @param {Array<Object>} [options.children] Optional array of objects, with each object representing a child node
+ * @param {string} [...options[attr]] One or more optional attributes to set on the element
+ * @returns {Element(s)} The created Element node tree
+ */
+export const createHTML = ({tag, text, attrs, children = []}) => {
+  const buildAttrs = (attrs) => {
+    if (!attrs) {
+      return '';
+    }
+
+    return Object.entries(attrs)
+    .map(([key, val]) => {
+      return `${key}="${val}"`;
+    })
+    .join(' ');
+  };
+  const selfClosing = [
+    'area',
+    'base',
+    'br',
+    'col',
+    'embed',
+    'hr',
+    'img',
+    'input',
+    'keygen',
+    'link',
+    'meta',
+    'param',
+    'source',
+    'track',
+    'wbr',
+  ];
+
+  const el = [];
+
+  if (tag) {
+    const open = attrs ? `<${tag} ${buildAttrs(attrs)}>` : `<${tag}>`;
+
+    el.push(open);
+  }
+
+  if (text) {
+    el.push(text);
+  }
+
+  if (children.length) {
+    el.push(...children.map(createHTML));
+  }
+  if (tag && !selfClosing.includes(tag)) {
+    el.push(`</${tag}>`);
+  }
+
+  return el.join('');
 };
 
 // Remove as many event handlers as possible from element, as well as its children

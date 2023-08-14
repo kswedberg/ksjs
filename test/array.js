@@ -21,7 +21,38 @@ describe('Array', () => {
     });
   });
 
-  describe('inArray', () => {
+  describe('makeArray', () => {
+    const str1 = 'one two three';
+    const str2 = 'one,two, three';
+    const arr = [1, 2, 3];
+    const obj = {uno: 'one', dos: 'two', tres: 'three'};
+    let nothing;
+    const num = 0;
+
+    it('converts space-delimited string to array', () => {
+      assert.deepStrictEqual(arrays.makeArray(str1), ['one', 'two', 'three']);
+    });
+    it('converts custom-delimited string to array', () => {
+      assert.deepStrictEqual(arrays.makeArray(str2, /,\s*/), ['one', 'two', 'three']);
+    });
+    it('returns an array unchanged', () => {
+      assert.deepStrictEqual(arrays.makeArray(arr), [1, 2, 3]);
+    });
+    it('converts an object to an array of objects with name and value properties', () => {
+      assert.deepStrictEqual(arrays.makeArray(obj), [{name: 'uno', value: 'one'}, {name: 'dos', value: 'two'}, {name: 'tres', value: 'three'}]);
+    });
+    it('returns an empty array from an undefined variable', () => {
+      assert.deepStrictEqual(arrays.makeArray(nothing), []);
+    });
+    it('wraps the number in an array', () => {
+      assert.deepStrictEqual(arrays.makeArray(num), [num]);
+    });
+    it('wraps the number in an array', () => {
+      assert.deepStrictEqual(arrays.makeArray(obj, null, true), [{uno: 'one', dos: 'two', tres: 'three'}]);
+    });
+  });
+
+  describe('randomItem', () => {
     let arr = [3, 2, 1];
 
     it('Random item is in array [3, 2, 1]', () => {
@@ -67,13 +98,13 @@ describe('Array', () => {
     let ids = arrays.pluck(family, 'id');
 
     it('Plucked names out of family', () => {
-      assert.deepEqual(names, ['Karl', 'Sara', 'Ben', 'Lucy']);
+      assert.deepStrictEqual(names, ['Karl', 'Sara', 'Ben', 'Lucy']);
     });
     it('Plucked colors out of family', () => {
-      assert.deepEqual(colors, ['orange', 'yellow', 'blue', 'green']);
+      assert.deepStrictEqual(colors, ['orange', 'yellow', 'blue', 'green']);
     });
     it('Plucked ids out of 2 family members', () => {
-      assert.deepEqual(ids, [null, 'mom', 'son', null]);
+      assert.deepStrictEqual(ids, [null, 'mom', 'son', null]);
     });
 
   });
@@ -128,13 +159,13 @@ describe('Array', () => {
     it('unique merged elements in array', () => {
       let uniq = arrays.unique(array1);
 
-      assert.deepEqual(uniq, [1, 2, 3, 4, 6]);
+      assert.deepStrictEqual(uniq, [1, 2, 3, 4, 6]);
     });
 
     it('uniquely merged two arrays', () => {
       let uniqueMerge = arrays.unique(arrays.merge(array1, array2));
 
-      assert.deepEqual(uniqueMerge, [1, 2, 3, 4, 6, 5, -1]);
+      assert.deepStrictEqual(uniqueMerge, [1, 2, 3, 4, 6, 5, -1]);
     });
   });
 
@@ -145,7 +176,7 @@ describe('Array', () => {
     it('returns array1 intersected with array2', () => {
       let arrayIntersect = arrays.intersect(array1, array2);
 
-      assert.deepEqual(arrayIntersect, [2, 3]);
+      assert.deepStrictEqual(arrayIntersect, [2, 3]);
     });
 
     it('returns intersected array of objects', () => {
@@ -158,7 +189,7 @@ describe('Array', () => {
         },
       ];
 
-      assert.deepEqual(arrayIntersect, expectIntersect);
+      assert.deepStrictEqual(arrayIntersect, expectIntersect);
     });
 
     it('returns intersected array of objects, checking for "name" property', () => {
@@ -175,7 +206,7 @@ describe('Array', () => {
         },
       ];
 
-      assert.deepEqual(arrayIntersect, expectIntersect);
+      assert.deepStrictEqual(arrayIntersect, expectIntersect);
     });
   });
 
@@ -186,7 +217,7 @@ describe('Array', () => {
     it('returns a diffed array1', () => {
       let arrayDiff = arrays.diff(array1, array2);
 
-      assert.deepEqual(arrayDiff, [1, 4]);
+      assert.deepStrictEqual(arrayDiff, [1, 4]);
     });
 
     it('returns a differed array of objects', () => {
@@ -209,7 +240,7 @@ describe('Array', () => {
         },
       ];
 
-      assert.deepEqual(arrayDiff, expectDiff);
+      assert.deepStrictEqual(arrayDiff, expectDiff);
     });
 
     it('returns a differed array of objects, checking for "name" property', () => {
@@ -226,7 +257,21 @@ describe('Array', () => {
         },
       ];
 
-      assert.deepEqual(arrayDiff, expectDiff);
+      assert.deepStrictEqual(arrayDiff, expectDiff);
+    });
+  });
+
+  describe('range', () => {
+    const array1 = arrays.range(4);
+    const array2 = arrays.range(1, 4);
+    const array3 = arrays.range(10, 0);
+    const array4 = arrays.range(3, -2);
+
+    it('returns the expected range', () => {
+      assert.deepStrictEqual(array1, [0, 1, 2, 3]);
+      assert.deepStrictEqual(array2, [1, 2, 3, 4]);
+      assert.deepStrictEqual(array3, [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]);
+      assert.deepStrictEqual(array4, [3, 2, 1, 0, -1, -2]);
     });
   });
 
@@ -239,9 +284,35 @@ describe('Array', () => {
     arrays.pad(array2, 7, 'foo');
     arrays.pad(array3, 2, 0);
     it('pads arrays appropriately', () => {
-      assert.deepEqual(array1, [1, 2, 3, 4, 0, 0, 0, 0]);
-      assert.deepEqual(array2, [2, 3, 5, 6, -1, 'foo', 'foo']);
-      assert.deepEqual(array3, [1, 2, 3, 4]);
+      assert.deepStrictEqual(array1, [1, 2, 3, 4, 0, 0, 0, 0]);
+      assert.deepStrictEqual(array2, [2, 3, 5, 6, -1, 'foo', 'foo']);
+      assert.deepStrictEqual(array3, [1, 2, 3, 4]);
+    });
+  });
+
+  describe('sort', () => {
+    const arr = ['', 'Z', null, 'a', 'z', 1, '3', '2', 13, '11', 'ä'];
+    const sorted = arrays.sort(arr);
+
+    const arrObjs = [
+      {foo: ''},
+      {foo: 'Z'},
+      {foo: null},
+      {foo: 'a'},
+      {foo: 'z'},
+      {foo: 1},
+      {foo: '3'},
+      {foo: '2'},
+      {foo: 13},
+      {foo: '11'},
+      {foo: 'ä'},
+    ];
+    const objsSorted = arrays.sort(arrObjs, 'foo');
+    const expectObjsSorted = [{foo: 1}, {foo: '2'}, {foo: '3'}, {foo: '11'}, {foo: 13}, {foo: 'a'}, {foo: 'ä'}, {foo: 'Z'}, {foo: 'z'}, {foo: ''}, {foo: null}];
+
+    it('sorts as expected', () => {
+      assert.deepStrictEqual(sorted, [1, '2', '3', '11', 13, 'a', 'ä', 'Z', 'z', '', null]);
+      assert.deepStrictEqual(objsSorted, expectObjsSorted);
     });
   });
 });

@@ -1,16 +1,20 @@
-require('dotenv').config();
-const http = require('http');
-const path = require('path');
-const fs = require('fs-extra');
-const chalk = require('chalk');
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
+import http from 'http';
+import path from 'path';
+import {readFile} from './esm.mjs';
+import chalk from 'chalk';
+
+const rootDir = process.cwd();
 const port = process.env.PORT || 3303;
-const testDir = path.join(__dirname, '..', 'test');
-const rootDir = path.join(__dirname, '..');
+const testDir = path.join(rootDir, 'test');
 
 const sendFileContent = async function(res, fileName, contentType) {
   try {
     const file = path.join(rootDir, fileName);
-    const data = await fs.readFile(file);
+    const data = await readFile(file);
 
     res.writeHead(200, {'Content-Type': contentType});
     res.write(data);
@@ -22,9 +26,9 @@ const sendFileContent = async function(res, fileName, contentType) {
   res.end();
 };
 
-const server = http.createServer(async(req, res) => {
+export const server = http.createServer(async(req, res) => {
   if (/^\/test\/?(index.html)?($|\?.*)/.test(req.url)) {
-    const test = await fs.readFile(path.join(testDir, 'index.html'));
+    const test = await readFile(path.join(testDir, 'index.html'));
 
     res.write(test);
 

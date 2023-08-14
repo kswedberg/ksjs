@@ -4,6 +4,32 @@ const assert = require('assert');
 
 describe('String', () => {
 
+  describe('parseStringTemplate', () => {
+    const path1 = '/patients/${patient_id}';
+    const path2 = '/patients/${patient_id}/encounters/${encounter_id}/observations/${observation_id}';
+    const obj = {
+      patient_id: '12345',
+      encounter_id: '67890',
+      observation_id: 'abcde',
+    };
+    const greeting = 'Hello, my name is ${first} ${last}';
+    const greeting2 = 'Hola, mi tio ${first} ${last} está ${age} años.';
+    const name = {
+      first: 'Jörn',
+      last: 'Zångström',
+      age: '42',
+    };
+
+    it('Parses a simple string with one or more tokens', () => {
+      assert.strictEqual(strings.parseStringTemplate(path1, obj), '/patients/12345');
+      assert.strictEqual(strings.parseStringTemplate(path2, obj), '/patients/12345/encounters/67890/observations/abcde');
+    });
+    it('Returns a greeting that includes diacritics', () => {
+      assert.strictEqual(strings.parseStringTemplate(greeting, name), 'Hello, my name is Jörn Zångström');
+      assert.strictEqual(strings.parseStringTemplate(greeting2, name), 'Hola, mi tio Jörn Zångström está 42 años.');
+    });
+  });
+
   describe('changeCase', () => {
     let forWhom = 'for whom the bell tolls';
     let oldMan = 'the old man and the sea';
@@ -80,6 +106,41 @@ describe('String', () => {
 
   });
 
+  describe('truncate', () => {
+    const shortString = 'Override the digital';
+    const longString = 'Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.';
+
+    const notrunc1 = strings.truncate(shortString, {start: 20});
+    const notrunc2 = strings.truncate(shortString, {end: 20});
+    const notrunc3 = strings.truncate(shortString, {start: 20, end: 20});
+
+    const trunc1 = strings.truncate(longString, {start: 10});
+    const trunc1b = strings.truncate(longString, {start: 10, separator: ''});
+    const trunc2 = strings.truncate(longString, {end: 10});
+    const trunc3 = strings.truncate(longString, {start: 10, end: 10});
+
+    it('Does not truncate a string that is shorter than the "start" option', () => {
+      assert.strictEqual(notrunc1, shortString);
+    });
+    it('Does not truncate a string that is shorter than the "end" option', () => {
+      assert.strictEqual(notrunc2, shortString);
+    });
+
+    it('Does not truncate a string that is shorter than the sum of the "start" and "end" options', () => {
+      assert.strictEqual(notrunc3, shortString);
+    });
+
+    it('Truncates string to the first 10 characters', () => {
+      assert.strictEqual(trunc1, 'Collaborat...');
+      assert.strictEqual(trunc1b, 'Collaborat');
+    });
+    it('Truncates string to the last 10 characters', () => {
+      assert.strictEqual(trunc2, '...onary ROI.');
+    });
+    it('Truncates string to the last 10 characters', () => {
+      assert.strictEqual(trunc3, 'Collaborat...onary ROI.');
+    });
+  });
   describe('rot13', () => {
     let rot13 = {
       original: 'Karl Swedberg',

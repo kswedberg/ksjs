@@ -1,12 +1,14 @@
 /**
  * @module event
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
- * import {addEvent} from 'fmjs';
+ * import {addEvent} from '@bamf-health/bamfjs';
  *
  * // or:
- * import {addEvent} from 'fmjs/event.js';
+ * import {addEvent} from '@bamf-health/bamfjs/event.mjs';
+ * // or:
+ * import {addEvent} from '@bamf-health/bamfjs/event.js';
  * ```
  *
  */
@@ -54,9 +56,11 @@ if (typeof addEventListener === 'function') {
 }
 
 const normalizeOptions = (options) => {
-  return typeof options === 'object' ? options : {
-    capture: !!options.capture,
-  };
+  return typeof options === 'object' ?
+    options :
+    {
+      capture: !!options.capture,
+    };
 };
 let removeEvent;
 
@@ -80,10 +84,12 @@ export let addEvent = function(el, type, handler, options = false) {
   const opts = normalizeOptions(options);
 
   if (!supportsObject) {
-    const fun = !opts.once ? handler : function(event) {
-      handler(event);
-      removeEvent(type, fun, opts.capture);
-    };
+    const fun = !opts.once ?
+      handler :
+      function(event) {
+        handler(event);
+        removeEvent(type, fun, opts.capture);
+      };
 
     return el[ listener.type ](listener.prefix + type, fun, opts.capture);
   }
