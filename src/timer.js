@@ -2,19 +2,19 @@
  * @module timer
  * @summary ESM Import Example:
  * ```js
- * import {debounce} from '@bamf-health/bamfjs';
+ * import {debounce} from 'ksjs';
  *
  * // or:
- * import {debounce} from '@bamf-health/bamfjs/timer.mjs';
+ * import {debounce} from 'ksjs/timer.mjs';
  * // or:
- * import {debounce} from '@bamf-health/bamfjs/timer.js';
+ * import {debounce} from 'ksjs/timer.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * import {debounce} from '@bamf-health/bamfjs/timer.cjs';
+ * import {debounce} from 'ksjs/timer.cjs';
  * // or:
- * const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
+ * const {debounce} = require('ksjs/cjs/timer.js');
  * ```
  *
  */
@@ -179,7 +179,7 @@ export const raf = function(fn, context) {
     const ctx = context || this;
 
     if (typeof window === 'undefined') {
-      throw new TypeError('window is not defined: @bamf-health/bamfjs/timer.js ln 178');
+      throw new TypeError('window is not defined: ksjs/timer.js ln 178');
     }
 
     if (!window.requestAnimationFrame) {

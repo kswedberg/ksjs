@@ -16,26 +16,20 @@
   </head>
   <body>
     <h1>bamfjs</h1>
-<!-- [![view on npm](http://img.shields.io/npm/v/bamfjs.svg)](https://www.npmjs.org/package/bamfjs) -->
-<p>This repo contains a bunch of plain JavaScript functions that could come in handy while working on BAMF projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.</p>
+<p>This repo contains a bunch of plain JavaScript functions that come in handy while working on various projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.</p>
 <h2>Install</h2>
-<p>If you want to install bamfjs via npm or yarn, you’ll need to add the following lines to your .npmrc file after creating a personal access token in GitHub (search Confluence or ask Karl for instructions):</p>
-<pre><code class="language-bash"># Replace xxxxxxxxxxxxxxx with the actual auth token
-//npm.pkg.github.com/:_authToken=xxxxxxxxxxxxxxx
-@bamf-health:registry=https://npm.pkg.github.com
-</code></pre>
-<p>Then run the usual command:</p>
-<pre><code class="language-bash">npm install @bamf-health/bamfjs
+<p>From the command line, run:</p>
+<pre><code class="language-bash">npm install ksjs
 </code></pre>
 <p>or</p>
-<pre><code class="language-bash">yarn add @bamf-health/bamfjs
+<pre><code class="language-bash">yarn add ksjs
 </code></pre>
 <h2>ES Modules</h2>
 <p><strong>Preferred</strong>: For any of the <a href="#modules">modules</a>, you can import functions like so:</p>
-<pre><code class="language-js">import {example1, example2} from '@bamf-health/bamfjs/example.mjs'
+<pre><code class="language-js">import {example1, example2} from 'ksjs/example.mjs'
 // Depending on your project, ES modules are available in
 // files with the .js extension, too. For example:
-// import {example1, example2} from '@bamf-health/bamfjs/example.js'
+// import {example1, example2} from 'ksjs/example.js'
 
 example1('foo');
 example2('bar');
@@ -56,22 +50,22 @@ example2('bar');
 <li>url</li>
 </ul>
 <p><strong>Preferred</strong>: You can require them from their respective files with the <code>.cjs</code> extension, like so:</p>
-<pre><code class="language-js">const {example1} = require('@bamf-health/bamfjs/example.cjs');
+<pre><code class="language-js">const {example1} = require('ksjs/example.cjs');
 
 example1('foo');
 </code></pre>
 <p>or like so:</p>
-<pre><code class="language-js">const examples = require('@bamf-health/bamfjs/example.cjs');
+<pre><code class="language-js">const examples = require('ksjs/example.cjs');
 
 examples.example1('foo');
 </code></pre>
 <p><strong>Otherwise</strong>: You could require them from the <code>cjs</code> directory, like so (Note the “.js” extension here):</p>
-<pre><code class="language-js">const {example1} = require('@bamf-health/bamfjs/cjs/example.js');
+<pre><code class="language-js">const {example1} = require('ksjs/cjs/example.js');
 
 example1('foo');
 </code></pre>
 <p>or like so:</p>
-<pre><code class="language-js">const examples = require('@bamf-health/bamfjs/cjs/example.js');
+<pre><code class="language-js">const examples = require('ksjs/cjs/example.js');
 
 examples.example1('foo');
 </code></pre>
@@ -106,12 +100,12 @@ using initialValue for the first function&#39;s argument and the return value of
 <p><a name="module_ajax"></a></p>
 <h2>ajax</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {getJSON} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {getJSON} from 'ksjs';
 
 // or:
-import {getJSON} from '@bamf-health/bamfjs/ajax.js';
+import {getJSON} from 'ksjs/ajax.js';
 // or:
-import {getJSON} from '@bamf-health/bamfjs/ajax.mjs';
+import {getJSON} from 'ksjs/ajax.mjs';
 </code></pre>
 <ul>
 <li><a href="#module_ajax">ajax</a>
@@ -283,17 +277,17 @@ import {getJSON} from '@bamf-health/bamfjs/ajax.mjs';
 <p><a name="module_array"></a></p>
 <h2>array</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {isArray} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {isArray} from 'ksjs';
 
 // or:
-import {isArray} from '@bamf-health/bamfjs/array.mjs';
+import {isArray} from 'ksjs/array.mjs';
 // or:
-import {isArray} from '@bamf-health/bamfjs/array.js';
+import {isArray} from 'ksjs/array.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">const {isArray} = require('@bamf-health/bamfjs/array.cjs');
+<pre><code class="language-js">const {isArray} = require('ksjs/array.cjs');
 // or:
-const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
+const {isArray} = require('ksjs/cjs/array.js');
 </code></pre>
 <ul>
 <li><a href="#module_array">array</a>
@@ -338,7 +332,7 @@ const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<pre><code class="language-js">import {isArray} from '@bamf-health/bamfjs/array.js';
+<pre><code class="language-js">import {isArray} from 'ksjs/array.js';
 
 if (isArray(window.foo)) {
   window.foo.push('bar');
@@ -390,7 +384,7 @@ if (isArray(window.foo)) {
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<pre><code class="language-js">import {objectToArray} from '@bamf-health/bamfjs/array.js';
+<pre><code class="language-js">import {objectToArray} from 'ksjs/array.js';
 
 const obj = {
   foo: 'bar',
@@ -444,7 +438,7 @@ e) Anything else is wrapped in an array.</p>
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<pre><code class="language-js">import {makeArray} from '@bamf-health/bamfjs/array.js';
+<pre><code class="language-js">import {makeArray} from 'ksjs/array.js';
 const foo = makeArray('one two three');
 // foo is now ['one', 'two', 'three']
 
@@ -506,7 +500,7 @@ const quuz = makeArray(null);
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<pre><code class="language-js">import {pluck} from '@bamf-health/bamfjs/array.js';
+<pre><code class="language-js">import {pluck} from 'ksjs/array.js';
 
 let family = [
   {
@@ -842,17 +836,17 @@ console.log(diff(array1, array2));
 <p><a name="module_color"></a></p>
 <h2>color</h2>
 <p>ESM Import Example</p>
-<pre><code class="language-js">import {rgb2Hex} from '@bamf-health/bamfjs'
+<pre><code class="language-js">import {rgb2Hex} from 'ksjs'
 
 // or:
-import {rgb2Hex} from '@bamf-health/bamfjs/color.mjs'
+import {rgb2Hex} from 'ksjs/color.mjs'
 // or:
-import {rgb2Hex} from '@bamf-health/bamfjs/color.js'
+import {rgb2Hex} from 'ksjs/color.js'
 </code></pre>
 <p>CJS Require Example</p>
-<pre><code class="language-js">const {rgb2Hex} = require('@bamf-health/bamfjs/color.cjs');
+<pre><code class="language-js">const {rgb2Hex} = require('ksjs/color.cjs');
 // or:
-const {rgb2Hex} = require('@bamf-health/bamfjs/cjs/color.js');
+const {rgb2Hex} = require('ksjs/cjs/color.js');
 </code></pre>
 <ul>
 <li><a href="#module_color">color</a>
@@ -1022,12 +1016,12 @@ rgba2Hex('rgb(255, 136, 0)')
 <p><a name="module_cookie"></a></p>
 <h2>cookie</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {getCookie} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {getCookie} from 'ksjs';
 
 // or:
-import {getCookie} from '@bamf-health/bamfjs/cookie.mjs';
+import {getCookie} from 'ksjs/cookie.mjs';
 // or:
-import {getCookie} from '@bamf-health/bamfjs/cookie.js';
+import {getCookie} from 'ksjs/cookie.js';
 </code></pre>
 <ul>
 <li><a href="#module_cookie">cookie</a>
@@ -1155,12 +1149,12 @@ import {getCookie} from '@bamf-health/bamfjs/cookie.js';
 <p><a name="module_dom"></a></p>
 <h2>dom</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {addClass} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {addClass} from 'ksjs';
 
 // or:
-import {addClass} from '@bamf-health/bamfjs/dom.mjs';
+import {addClass} from 'ksjs/dom.mjs';
 // or:
-import {addClass} from '@bamf-health/bamfjs/dom.js';
+import {addClass} from 'ksjs/dom.js';
 </code></pre>
 <ul>
 <li><a href="#module_dom">dom</a>
@@ -1854,12 +1848,12 @@ import {addClass} from '@bamf-health/bamfjs/dom.js';
 <p><a name="module_event"></a></p>
 <h2>event</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {addEvent} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {addEvent} from 'ksjs';
 
 // or:
-import {addEvent} from '@bamf-health/bamfjs/event.mjs';
+import {addEvent} from 'ksjs/event.mjs';
 // or:
-import {addEvent} from '@bamf-health/bamfjs/event.js';
+import {addEvent} from 'ksjs/event.js';
 </code></pre>
 <ul>
 <li><a href="#module_event">event</a>
@@ -2016,12 +2010,12 @@ triggerEvent(document.body, 'myCustomEvent', {weather: 'sunshine'});
 <p><a name="module_form"></a></p>
 <h2>form</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {getFormData} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {getFormData} from 'ksjs';
 
 // or:
-import {getFormData} from '@bamf-health/bamfjs/form.mjs';
+import {getFormData} from 'ksjs/form.mjs';
 // or:
-import {getFormData} from '@bamf-health/bamfjs/form.js';
+import {getFormData} from 'ksjs/form.js';
 </code></pre>
 <ul>
 <li><a href="#module_form">form</a>
@@ -2156,12 +2150,12 @@ console.log(getFormData.array(myform));
 <p><a name="module_jsonp"></a></p>
 <h2>jsonp</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {getJSONP} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {getJSONP} from 'ksjs';
 
 // or:
-import {getJSONP} from '@bamf-health/bamfjs/jsonp.mjs';
+import {getJSONP} from 'ksjs/jsonp.mjs';
 // or:
-import {getJSONP} from '@bamf-health/bamfjs/jsonp.js';
+import {getJSONP} from 'ksjs/jsonp.js';
 </code></pre>
 <p><a name="module_jsonp..getJSONP"></a></p>
 <h3>getJSONP(options, callback(json))</h3>
@@ -2219,17 +2213,17 @@ import {getJSONP} from '@bamf-health/bamfjs/jsonp.js';
 <p><a name="module_math"></a></p>
 <h2>math</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {median} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {median} from 'ksjs';
 
 // or:
-import {median} from '@bamf-health/bamfjs/math.mjs';
+import {median} from 'ksjs/math.mjs';
 // or:
-import {median} from '@bamf-health/bamfjs/math.js';
+import {median} from 'ksjs/math.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">const {median} = require('@bamf-health/bamfjs/math.cjs');
+<pre><code class="language-js">const {median} = require('ksjs/math.cjs');
 // or:
-const {median} = require('@bamf-health/bamfjs/cjs/math.js');
+const {median} = require('ksjs/cjs/math.js');
 </code></pre>
 <ul>
 <li><a href="#module_math">math</a>
@@ -2434,17 +2428,17 @@ const {median} = require('@bamf-health/bamfjs/cjs/math.js');
 <p><a name="module_object"></a></p>
 <h2>object</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {deepCopy} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {deepCopy} from 'ksjs';
 
 // or:
-import {deepCopy} from '@bamf-health/bamfjs/object.mjs';
+import {deepCopy} from 'ksjs/object.mjs';
 // or:
-import {deepCopy} from '@bamf-health/bamfjs/object.js';
+import {deepCopy} from 'ksjs/object.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">import {deepCopy} from '@bamf-health/bamfjs/object.cjs';
+<pre><code class="language-js">import {deepCopy} from 'ksjs/object.cjs';
 // or:
-const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
+const {deepCopy} = require('ksjs/cjs/object.js');
 </code></pre>
 <ul>
 <li><a href="#module_object">object</a>
@@ -2885,17 +2879,17 @@ console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
 <p><a name="module_promise"></a></p>
 <h2>promise</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {peach} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {peach} from 'ksjs';
 
 // or:
-import {peach} from '@bamf-health/bamfjs/promise.mjs';
+import {peach} from 'ksjs/promise.mjs';
 // or:
-import {peach} from '@bamf-health/bamfjs/promise.js';
+import {peach} from 'ksjs/promise.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">import {peach} from '@bamf-health/bamfjs/promise.cjs';
+<pre><code class="language-js">import {peach} from 'ksjs/promise.cjs';
 // or:
-const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
+const {peach} = require('ksjs/cjs/promise.js');
 </code></pre>
 <ul>
 <li><a href="#module_promise">promise</a>
@@ -2967,7 +2961,7 @@ const {peach} = require('@bamf-health/bamfjs/cjs/promise.js');
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<pre><code class="language-js">import {pmap} from '@bamf-health/bamfjs/promise.js';
+<pre><code class="language-js">import {pmap} from 'ksjs/promise.js';
 
 const fruits = ['apple', 'banana', 'pear'];
 
@@ -3010,7 +3004,7 @@ const indexedFruits = pmap(fruits, (fruit, i) =&gt; {
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<pre><code class="language-js">import {pmap} from '@bamf-health/bamfjs/promise.js';
+<pre><code class="language-js">import {pmap} from 'ksjs/promise.js';
 
 const fruits = ['apple', 'banana', 'pear'];
 
@@ -3045,12 +3039,12 @@ const indexedFruits = pmap(fruits, (fruit, i) =&gt; {
 <p><a name="module_selection"></a></p>
 <h2>selection</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {getSelection} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {getSelection} from 'ksjs';
 
 // or:
-import {getSelection} from '@bamf-health/bamfjs/selection.mjs';
+import {getSelection} from 'ksjs/selection.mjs';
 // or:
-import {getSelection} from '@bamf-health/bamfjs/selection.js';
+import {getSelection} from 'ksjs/selection.js';
 </code></pre>
 <ul>
 <li><a href="#module_selection">selection</a>
@@ -3172,12 +3166,12 @@ only the first text node within the element will be used for selection</p>
 <p><a name="module_storage"></a></p>
 <h2>storage</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {Storage} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {Storage} from 'ksjs';
 
 // or:
-import {Storage} from '@bamf-health/bamfjs/storage.mjs';
+import {Storage} from 'ksjs/storage.mjs';
 // or:
-import {Storage} from '@bamf-health/bamfjs/storage.js';
+import {Storage} from 'ksjs/storage.js';
 </code></pre>
 <ul>
 <li><a href="#module_storage">storage</a>
@@ -3317,17 +3311,17 @@ import {Storage} from '@bamf-health/bamfjs/storage.js';
 <p><a name="module_string"></a></p>
 <h2>string</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {slugify} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {slugify} from 'ksjs';
 
 // or:
-import {slugify} from '@bamf-health/bamfjs/string.mjs';
+import {slugify} from 'ksjs/string.mjs';
 // or:
-import {slugify} from '@bamf-health/bamfjs/string.js';
+import {slugify} from 'ksjs/string.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">import {slugify} from '@bamf-health/bamfjs/string.cjs';
+<pre><code class="language-js">const {slugify} require('ksjs/string.cjs');
 // or:
-const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
+const {slugify} = require('ksjs/cjs/string.js');
 </code></pre>
 <ul>
 <li><a href="#module_string">string</a>
@@ -3726,17 +3720,17 @@ console.log(stripTags('&lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;World&lt;/p&gt;'));
 <p><a name="module_timer"></a></p>
 <h2>timer</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {debounce} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {debounce} from 'ksjs';
 
 // or:
-import {debounce} from '@bamf-health/bamfjs/timer.mjs';
+import {debounce} from 'ksjs/timer.mjs';
 // or:
-import {debounce} from '@bamf-health/bamfjs/timer.js';
+import {debounce} from 'ksjs/timer.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">import {debounce} from '@bamf-health/bamfjs/timer.cjs';
+<pre><code class="language-js">import {debounce} from 'ksjs/timer.cjs';
 // or:
-const {debounce} = require('@bamf-health/bamfjs/cjs/timer.js');
+const {debounce} = require('ksjs/cjs/timer.js');
 </code></pre>
 <ul>
 <li><a href="#module_timer">timer</a>
@@ -3982,17 +3976,17 @@ Falls back to using <code>requestAnimationFrame (or an rAF polyfill) if </code>r
 <p><a name="module_url"></a></p>
 <h2>url</h2>
 <p>ESM Import Example:</p>
-<pre><code class="language-js">import {serialize} from '@bamf-health/bamfjs';
+<pre><code class="language-js">import {serialize} from 'ksjs';
 
 // or:
-import {serialize} from '@bamf-health/bamfjs/url.mjs';
+import {serialize} from 'ksjs/url.mjs';
 // or:
-import {serialize} from '@bamf-health/bamfjs/url.js';
+import {serialize} from 'ksjs/url.js';
 </code></pre>
 <p>CommonJS Require Example:</p>
-<pre><code class="language-js">import {serialize} from '@bamf-health/bamfjs/url.cjs';
+<pre><code class="language-js">import {serialize} from 'ksjs/url.cjs';
 // or:
-const {serialize} = require('@bamf-health/bamfjs/cjs/url.js');
+const {serialize} = require('ksjs/cjs/url.js');
 </code></pre>
 <ul>
 <li><a href="#module_url">url</a>

@@ -2,19 +2,19 @@
  * @module string
  * @summary ESM Import Example:
  * ```js
- * import {slugify} from '@bamf-health/bamfjs';
+ * import {slugify} from 'ksjs';
  *
  * // or:
- * import {slugify} from '@bamf-health/bamfjs/string.mjs';
+ * import {slugify} from 'ksjs/string.mjs';
  * // or:
- * import {slugify} from '@bamf-health/bamfjs/string.js';
+ * import {slugify} from 'ksjs/string.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * import {slugify} from '@bamf-health/bamfjs/string.cjs';
+ * const {slugify} require('ksjs/string.cjs');
  * // or:
- * const {slugify} = require('@bamf-health/bamfjs/cjs/string.js');
+ * const {slugify} = require('ksjs/cjs/string.js');
  * ```
  *
  */

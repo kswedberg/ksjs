@@ -2,19 +2,19 @@
  * @module object
  * @summary ESM Import Example:
  * ```js
- * import {deepCopy} from '@bamf-health/bamfjs';
+ * import {deepCopy} from 'ksjs';
  *
  * // or:
- * import {deepCopy} from '@bamf-health/bamfjs/object.mjs';
+ * import {deepCopy} from 'ksjs/object.mjs';
  * // or:
- * import {deepCopy} from '@bamf-health/bamfjs/object.js';
+ * import {deepCopy} from 'ksjs/object.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * import {deepCopy} from '@bamf-health/bamfjs/object.cjs';
+ * import {deepCopy} from 'ksjs/object.cjs';
  * // or:
- * const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
+ * const {deepCopy} = require('ksjs/cjs/object.js');
  * ```
  *
  */

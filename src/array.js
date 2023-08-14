@@ -2,19 +2,19 @@
  * @module array
  * @summary ESM Import Example:
  * ```js
- * import {isArray} from '@bamf-health/bamfjs';
+ * import {isArray} from 'ksjs';
  *
  * // or:
- * import {isArray} from '@bamf-health/bamfjs/array.mjs';
+ * import {isArray} from 'ksjs/array.mjs';
  * // or:
- * import {isArray} from '@bamf-health/bamfjs/array.js';
+ * import {isArray} from 'ksjs/array.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {isArray} = require('@bamf-health/bamfjs/array.cjs');
+ * const {isArray} = require('ksjs/array.cjs');
  * // or:
- * const {isArray} = require('@bamf-health/bamfjs/cjs/array.js');
+ * const {isArray} = require('ksjs/cjs/array.js');
  * ```
  *
  */
@@ -25,7 +25,7 @@
  * @param  {array} arr item to determine whether it's an array
  * @returns {boolean}     `true` if arr is array, `false` if not
  * @example
- * import {isArray} from '@bamf-health/bamfjs/array.js';
+ * import {isArray} from 'ksjs/array.js';
  *
  * if (isArray(window.foo)) {
  *   window.foo.push('bar');
@@ -70,7 +70,7 @@ export const inArray = function(el, arr) {
  * @param  {object} obj The object to convert
  * @returns {array}     An array of objects with name and value properties
  * @example
- * import {objectToArray} from '@bamf-health/bamfjs/array.js';
+ * import {objectToArray} from 'ksjs/array.js';
  *
  * const obj = {
  *   foo: 'bar',
@@ -115,7 +115,7 @@ export const objectToArray = function(obj) {
  * @param {Boolean} [wrapObject] Whether to simply wrap an object in an array (true) or  convert to array of objects with name/value properties
  * @returns {array}      The value converted to an array
  * @example
- *  import {makeArray} from '@bamf-health/bamfjs/array.js';
+ *  import {makeArray} from 'ksjs/array.js';
  * const foo = makeArray('one two three');
  * // foo is now ['one', 'two', 'three']
  *
@@ -171,7 +171,7 @@ export const randomItem = function randomItem(arr) {
  * @param  {array} arr  Array from which to pluck
  * @param  {string} prop Property to pluck
  * @returns {array} Array of values of the property (if the value is `undefined`, returns `null` instead)
-* @example import {pluck} from '@bamf-health/bamfjs/array.js';
+* @example import {pluck} from 'ksjs/array.js';
 *
 * let family = [
 *   {

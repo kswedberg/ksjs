@@ -3,12 +3,12 @@
  * @summary
  * ESM Import Example:
  * ```js
- * import {getJSON} from '@bamf-health/bamfjs';
+ * import {getJSON} from 'ksjs';
  *
 * // or:
- * import {getJSON} from '@bamf-health/bamfjs/ajax.js';
+ * import {getJSON} from 'ksjs/ajax.js';
  * // or:
- * import {getJSON} from '@bamf-health/bamfjs/ajax.mjs';
+ * import {getJSON} from 'ksjs/ajax.mjs';
  * ```
  *
  */
