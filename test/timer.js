@@ -61,6 +61,7 @@ describe('Timer', () => {
               assert.strictEqual(logs[i], item);
             });
             assert.strictEqual(logs.length, 3);
+            console.log('LOGS & TIMES');
             console.log(logs);
             console.log(times);
             done();
