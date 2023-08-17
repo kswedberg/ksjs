@@ -57,8 +57,8 @@ export const debounce = function debounce(fn, timerDelay, ctx) {
   return function(...args) {
     ctx = ctx || this;
 
-    window.clearTimeout(timeout);
-    timeout = window.setTimeout(() => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
       fn.apply(ctx, args);
       timeout = ctx = args = null;
     }, delay);
@@ -87,8 +87,8 @@ export const unbounce = function unbounce(fn, timerDelay, ctx) {
       fn.apply(ctx || this, args);
     }
 
-    window.clearTimeout(timeout);
-    timeout = window.setTimeout(() => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
       timeout = null;
     }, delay);
   };
@@ -148,7 +148,7 @@ const setupRaf = function() {
     window.requestAnimationFrame = function(callback, element) {
       const currTime = new Date().getTime();
       const timeToCall = Math.max(0, 16 - (currTime - lastTime));
-      const id = window.setTimeout(() => {
+      const id = setTimeout(() => {
         callback(currTime + timeToCall);
       }, timeToCall);
 
