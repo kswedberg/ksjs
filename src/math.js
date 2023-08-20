@@ -1,16 +1,20 @@
 /**
  * @module math
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
- * import {median} from 'fmjs';
+ * import {median} from 'ksjs';
  *
  * // or:
- * import {median} from 'fmjs/math.js';
+ * import {median} from 'ksjs/math.mjs';
+ * // or:
+ * import {median} from 'ksjs/math.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {median} = require('fmjs/cjs/math.js');
+ * const {median} = require('ksjs/math.cjs');
+ * // or:
+ * const {median} = require('ksjs/cjs/math.js');
  * ```
  *
  */

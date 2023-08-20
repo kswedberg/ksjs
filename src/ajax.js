@@ -1,12 +1,14 @@
 /**
  * @module ajax
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
- * import {getJSON} from 'fmjs';
+ * import {getJSON} from 'ksjs';
  *
+* // or:
+ * import {getJSON} from 'ksjs/ajax.js';
  * // or:
- * import {getJSON} from 'fmjs/ajax.js';
+ * import {getJSON} from 'ksjs/ajax.mjs';
  * ```
  *
  */

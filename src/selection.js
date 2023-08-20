@@ -1,12 +1,14 @@
 /**
  * @module selection
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
- * import {getSelection} from 'fmjs';
+ * import {getSelection} from 'ksjs';
  *
  * // or:
- * import {getSelection} from 'fmjs/selection.js';
+ * import {getSelection} from 'ksjs/selection.mjs';
+ * // or:
+ * import {getSelection} from 'ksjs/selection.js';
  * ```
  *
  */

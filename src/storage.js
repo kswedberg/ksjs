@@ -4,12 +4,14 @@ import {extend} from './object.js';
 /**
  * @module storage
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
- * import {Storage} from 'fmjs';
+ * import {Storage} from 'ksjs';
  *
  * // or:
- * import {Storage} from 'fmjs/storage.js';
+ * import {Storage} from 'ksjs/storage.mjs';
+ * // or:
+ * import {Storage} from 'ksjs/storage.js';
  * ```
  *
  */

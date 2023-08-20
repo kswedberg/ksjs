@@ -5,45 +5,6 @@ const assert = require('assert');
 describe('Promise', () => {
 
   describe('peach', () => {
-    // it('iterates through array', function(done) {
-    //   const fns = [
-    //     Promise.resolve('one'),
-    //     'two',
-    //     new Promise((resolve) => {
-    //       setTimeout(resolve, 50, 'three');
-    //     }),
-    //   ];
-
-    //   const msgs = [];
-
-    //   peach(fns, (item) => {
-    //     return msgs.push(item);
-    //   })
-    //   .then(() => {
-    //     assert.equal(msgs.length, 3, 'All three items in array were pushed');
-    //     done();
-    //   });
-    // });
-
-    // it('gets last promised element correctly', function(done) {
-    //   const msgs = [];
-
-    //   peach(fns, (item) => {
-    //     return msgs.push(item);
-    //   })
-    //   .then(() => {
-    //     msgs[2]
-    //     .then((value) => {
-    //       assert.equal(msgs[2], 'three', 'Last promised element return value is correct');
-    //       done();
-    //     });
-
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     done(err);
-    //   });
-    // });
 
     it('returns an array', (done) => {
       const msgs = [];
@@ -106,9 +67,11 @@ describe('Promise', () => {
       const indexedFruits = await pmap(fruits, (fruit, i) => {
         const output = `${fruit}-${i}`;
 
-        return i % 2 === 1 ? output : new Promise((resolve) => {
-          setTimeout(() => resolve(output), 10);
-        });
+        return i % 2 === 1 ?
+          output :
+          new Promise((resolve) => {
+            setTimeout(() => resolve(output), 10);
+          });
       });
 
       assert.equal(indexedFruits.length, 3, 'array length matches');
@@ -117,41 +80,42 @@ describe('Promise', () => {
 
     });
   });
-});
-describe('pfilter', () => {
-  it('filters array in parallel with function returning promise', (done) => {
-    const fruits = ['apple', 'banana', 'pear'];
 
-    pfilter(fruits, (fruit, i) => {
-      const keep = i % 2 === 0;
+  describe('pfilter', () => {
+    it('filters array in parallel with function returning promise', (done) => {
+      const fruits = ['apple', 'banana', 'pear'];
 
-      return new Promise((resolve) => {
-        setTimeout(() => resolve(keep), 10);
-      });
-    }, 'parallel')
-    .then((filteredFruits) => {
-      assert.equal(filteredFruits.length, 2, 'array length matches');
-      assert.equal(filteredFruits[1], 'pear', 'last item value matches');
-      done();
-    })
-    .catch(done);
-  });
+      pfilter(fruits, (fruit, i) => {
+        const keep = i % 2 === 0;
 
-  it('filters array sequentially with function returning promise', (done) => {
-    const fruits = ['apple', 'banana', 'pear'];
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(keep), 10);
+        });
+      }, 'parallel')
+      .then((filteredFruits) => {
+        assert.equal(filteredFruits.length, 2, 'array length matches');
+        assert.equal(filteredFruits[1], 'pear', 'last item value matches');
+        done();
+      })
+      .catch(done);
+    });
 
-    pfilter(fruits, (fruit, i) => {
-      const keep = i % 2 === 0;
+    it('filters array sequentially with function returning promise', (done) => {
+      const fruits = ['apple', 'banana', 'pear'];
 
-      return new Promise((resolve) => {
-        setTimeout(() => resolve(keep), 10);
-      });
-    })
-    .then((filteredFruits) => {
-      assert.equal(filteredFruits.length, 2, 'array length matches');
-      assert.equal(filteredFruits[1], 'pear', 'last item value matches');
-      done();
-    })
-    .catch(done);
+      pfilter(fruits, (fruit, i) => {
+        const keep = i % 2 === 0;
+
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(keep), 10);
+        });
+      })
+      .then((filteredFruits) => {
+        assert.equal(filteredFruits.length, 2, 'array length matches');
+        assert.equal(filteredFruits[1], 'pear', 'last item value matches');
+        done();
+      })
+      .catch(done);
+    });
   });
 });

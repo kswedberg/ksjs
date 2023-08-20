@@ -1,17 +1,21 @@
 /**
 * @module color
 * @summary
-* ES6 Import Example
+* ESM Import Example
 * ```js
-* import {rgb2Hex} from 'fmjs'
+* import {rgb2Hex} from 'ksjs'
 *
 * // or:
-* import {rgb2Hex} from 'fmjs/color.js'
+* import {rgb2Hex} from 'ksjs/color.mjs'
+* // or:
+* import {rgb2Hex} from 'ksjs/color.js'
 * ```
 *
 * CJS Require Example
 * ```js
-* const {rgb2Hex} = require('fmjs/cjs/color.js');
+* const {rgb2Hex} = require('ksjs/color.cjs');
+* // or:
+* const {rgb2Hex} = require('ksjs/cjs/color.js');
 * ```
 */
 

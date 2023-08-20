@@ -1,16 +1,20 @@
 /**
  * @module timer
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
- * import {debounce} from 'fmjs';
+ * import {debounce} from 'ksjs';
  *
  * // or:
- * import {debounce} from 'fmjs/timer.js';
+ * import {debounce} from 'ksjs/timer.mjs';
+ * // or:
+ * import {debounce} from 'ksjs/timer.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {debounce} = require('fmjs/cjs/timer.js');
+ * import {debounce} from 'ksjs/timer.cjs';
+ * // or:
+ * const {debounce} = require('ksjs/cjs/timer.js');
  * ```
  *
  */
@@ -53,8 +57,8 @@ export const debounce = function debounce(fn, timerDelay, ctx) {
   return function(...args) {
     ctx = ctx || this;
 
-    window.clearTimeout(timeout);
-    timeout = window.setTimeout(() => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
       fn.apply(ctx, args);
       timeout = ctx = args = null;
     }, delay);
@@ -83,8 +87,8 @@ export const unbounce = function unbounce(fn, timerDelay, ctx) {
       fn.apply(ctx || this, args);
     }
 
-    window.clearTimeout(timeout);
-    timeout = window.setTimeout(() => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
       timeout = null;
     }, delay);
   };
@@ -175,7 +179,7 @@ export const raf = function(fn, context) {
     const ctx = context || this;
 
     if (typeof window === 'undefined') {
-      throw new TypeError('window is not defined: fmjs/timer.js ln 178');
+      throw new TypeError('window is not defined: ksjs/timer.js ln 178');
     }
 
     if (!window.requestAnimationFrame) {
@@ -190,4 +194,63 @@ export const raf = function(fn, context) {
       fn.apply(ctx, args);
     });
   };
+};
+
+/**
+* Set up a function to be called when the UI thread is idle by using `requestIdleCallback()`.
+* Falls back to using `requestAnimationFrame (or an rAF polyfill) if `requestIdleCallback()` is not supported.
+* @function idle
+* @param {function} fn The function to call
+* @param {Element} [context = this] The context in which to call `fn`
+*/
+export const idle = function(fn, context) {
+  let queued = false;
+
+  if (typeof window !== 'undefined' && !window.requestIdleCallback) {
+    return raf(fn, context);
+  }
+
+  return function(...args) {
+    const ctx = context || this;
+
+    if (!queued) {
+      queued = true;
+      // eslint-disable-next-line prefer-arrow-callback
+      requestIdleCallback(() => {
+        fn.apply(ctx, args);
+        queued = false;
+      });
+    }
+  };
+};
+
+/**
+ * @function deadline
+ * @param {Promise} promise A promise to be resolved
+ * @param {number} ms The number of milliseconds to wait for the promise to be resolved before rejecting
+ * @param {any} exception An optional exception to be thrown if the promise is rejected
+ * @returns {any} The result of the promise if it is resolved or the exception if it is rejected
+ */
+export const deadline = (promise, ms, exception) => {
+  let timer;
+
+  return Promise
+  .race([
+    promise,
+    new Promise((_r, reject) => {
+      timer = setTimeout(reject, ms, exception || new Error('timeout'));
+    }),
+  ])
+  .finally(() => clearTimeout(timer));
+};
+
+/**
+* Like setTimeout, but with a promise that resolves when the timeout has expired.
+* @function delay
+* @param {number} timeout The number of ms to wait before resolving the promise
+*/
+export const delay = (timeout) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
 };

@@ -1,16 +1,20 @@
 /**
  * @module url
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
- * import {serialize} from 'fmjs';
+ * import {serialize} from 'ksjs';
  *
  * // or:
- * import {serialize} from 'fmjs/url.js';
+ * import {serialize} from 'ksjs/url.mjs';
+ * // or:
+ * import {serialize} from 'ksjs/url.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {serialize} = require('fmjs/cjs/url.js');
+ * import {serialize} from 'ksjs/url.cjs';
+ * // or:
+ * const {serialize} = require('ksjs/cjs/url.js');
  * ```
  *
  */

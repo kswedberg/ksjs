@@ -1,50 +1,40 @@
-# bamfjs
+# ksjs
 
-<!-- [![view on npm](http://img.shields.io/npm/v/bamfjs.svg)](https://www.npmjs.org/package/bamfjs) -->
-
-This repo contains a bunch of plain JavaScript functions that could come in handy while working on BAMF projects. They are mostly provided as ES6 modules, but a subset of them are also offered as CommonJS modules so they can easily be used in a node.js environment.
+This repo contains a bunch of plain JavaScript functions that come in handy while working on various projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.
 
 ## Install
 
-If you want to install bamfjs via npm or yarn, go ahead:
+From the command line, run:
 
 ```bash
-npm install bamfjs
+npm install ksjs
 ```
+
+or
 
 ```bash
-yarn add bamfjs
+yarn add ksjs
 ```
 
-## ES6 Modules
+## ES Modules
 
-If your bundler supports ES6 module tree shaking, you can import any function like this:
-
-```js
-import {$, debounce, deepCopy} from 'bamfjs';
-```
-
-**Note**: For Webpack, you probably need to configure it to treat bamfjs as ES6.
-
-Otherwise, for any of the [modules](#modules), you can do this:
+**Preferred**: For any of the [modules](#modules), you can import functions like so:
 
 ```js
-import {example1, example2} from '@bamf-health/bamfjs/example.js'
+import {example1, example2} from 'ksjs/example.mjs'
+// Depending on your project, ES modules are available in
+// files with the .js extension, too. For example:
+// import {example1, example2} from 'ksjs/example.js'
 
 example1('foo');
 example2('bar');
 ```
 
-or this (not recommended):
+**Not recommended**: If your bundler supports ES module tree shaking, you might be able to import functions from various files like so (for Webpack, you might need to configure it to treat bamfjs as ES6+):
 
 ```js
-import * as examples from '@bamf-health/bamfjs/example'
-
-examples.example1('foo');
-examples.example2('bar');
+import {$, debounce, deepCopy} from 'bamfjs';
 ```
-
-
 
 ## CommonJS Modules
 
@@ -59,10 +49,10 @@ The following [modules](#modules) &amp; their corresponding functions can be use
 * timer
 * url
 
-You can require them from their respective files in the `cjs` directory, like so:
+**Preferred**: You can require them from their respective files with the `.cjs` extension, like so:
 
 ```js
-const {example1} = require('@bamf-health/bamfjs/cjs/example');
+const {example1} = require('ksjs/example.cjs');
 
 example1('foo');
 ```
@@ -70,7 +60,23 @@ example1('foo');
 or like so:
 
 ```js
-const examples = require('@bamf-health/bamfjs/cjs/example');
+const examples = require('ksjs/example.cjs');
+
+examples.example1('foo');
+```
+
+**Otherwise**: You could require them from the `cjs` directory, like so (Note the ".js" extension here):
+
+```js
+const {example1} = require('ksjs/cjs/example.js');
+
+example1('foo');
+```
+
+or like so:
+
+```js
+const examples = require('ksjs/cjs/example.js');
 
 examples.example1('foo');
 ```
@@ -100,12 +106,14 @@ examples.example1('foo');
 <a name="module_ajax"></a>
 
 ## ajax
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {getJSON} from 'fmjs';
+import {getJSON} from 'ksjs';
 
 // or:
-import {getJSON} from 'fmjs/ajax.js';
+import {getJSON} from 'ksjs/ajax.js';
+// or:
+import {getJSON} from 'ksjs/ajax.mjs';
 ```
 
 
@@ -184,33 +192,41 @@ Send a POST request with `FormData` derived from form element provided by `optio
 <a name="module_array"></a>
 
 ## array
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {isArray} from 'fmjs';
+import {isArray} from 'ksjs';
 
 // or:
-import {isArray} from 'fmjs/array.js';
+import {isArray} from 'ksjs/array.mjs';
+// or:
+import {isArray} from 'ksjs/array.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {isArray} = require('fmjs/cjs/array.js');
+const {isArray} = require('ksjs/array.cjs');
+// or:
+const {isArray} = require('ksjs/cjs/array.js');
 ```
 
 
 * [array](#module_array)
   * [isArray(arr)](#module_array..isArray) ⇒ <code>boolean</code>
   * [inArray(el, arr)](#module_array..inArray) ⇒ <code>boolean</code>
+  * [objectToArray(obj)](#module_array..objectToArray) ⇒ <code>array</code>
+  * [makeArray(value, [delimiter], [wrapObject])](#module_array..makeArray) ⇒ <code>array</code>
   * [randomItem(arr)](#module_array..randomItem) ⇒ <code>any</code>
   * [pluck(arr, prop)](#module_array..pluck) ⇒ <code>array</code>
   * [shuffle(els)](#module_array..shuffle) ⇒ <code>array</code>
-  * [collapse(...arrays)](#module_array..collapse) ⇒ <code>array</code>
-  * [merge(array1, array2)](#module_array..merge) ⇒ <code>array</code>
+  * [merge(...arrays)](#module_array..merge) ⇒ <code>array</code>
+  * ~~[collapse()](#module_array..collapse)~~
   * [intersect(array1, array2, [prop])](#module_array..intersect) ⇒ <code>array</code>
   * [unique(arr, [prop])](#module_array..unique) ⇒ <code>array</code>
   * [diff(array1, array2, [prop])](#module_array..diff) ⇒ <code>array</code>
   * [chunk(arr, n)](#module_array..chunk) ⇒ <code>array</code>
+  * [range(a, [b])](#module_array..range) ⇒ <code>array</code>
   * [pad(arr, size, value)](#module_array..pad) ⇒ <code>array</code>
+  * [sort(arr, [prop], [options])](#module_array..sort) ⇒ <code>array</code>
 
 <a name="module_array..isArray"></a>
 
@@ -227,7 +243,7 @@ Determine whether "arr" is a true array
 
 **Example**  
 ```js
-import {isArray} from 'fmjs/array.js';
+import {isArray} from 'ksjs/array.js';
 
 if (isArray(window.foo)) {
   window.foo.push('bar');
@@ -247,6 +263,73 @@ Determine whether item "el" is in array "arr"
 | el | <code>any</code> | An item to test against the array |
 | arr | <code>array</code> | The array to test against |
 
+<a name="module_array..objectToArray"></a>
+
+### objectToArray(obj) ⇒ <code>array</code>
+
+Convert an object to an array of objects with name and value properties
+
+**Returns**: <code>array</code> - An array of objects with name and value properties<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>object</code> | The object to convert |
+
+**Example**  
+```js
+import {objectToArray} from 'ksjs/array.js';
+
+const obj = {
+  foo: 'bar',
+  baz: 'qux'
+};
+
+const arr = objectToArray(obj);
+ // arr = [
+//   {name: 'foo', value: 'bar'},
+//   {name: 'baz', value: 'qux'}
+// ];
+```
+<a name="module_array..makeArray"></a>
+
+### makeArray(value, [delimiter], [wrapObject]) ⇒ <code>array</code>
+
+Return an array based on the given value:
+a) Strings are split by a delimiter (defaults to /\s+/).
+b) Plain objects are converted to an array of objects with name and value properties.
+b2) …unless wrapObject is true in which case they are just wrapped in an array
+c) Undefined and null are returned as an empty array.
+d) Arrays are returned as is.
+e) Anything else is wrapped in an array.
+
+**Returns**: <code>array</code> - The value converted to an array<br />
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | <code>any</code> |  | The value to convert to an array |
+| [delimiter] | <code>string</code> \| <code>RegExp</code> | <code>&quot;&#x3D; /\\s+/&quot;</code> | A string or regular expression to use for splitting a string into an array (defaults to /\s+/) |
+| [wrapObject] | <code>Boolean</code> |  | Whether to simply wrap an object in an array (true) or  convert to array of objects with name/value properties |
+
+**Example**  
+```js
+import {makeArray} from 'ksjs/array.js';
+const foo = makeArray('one two three');
+// foo is now ['one', 'two', 'three']
+
+const bar = makeArray('one,two,three', ',');
+// bar is now ['one', 'two', 'three']
+
+const baz = makeArray(['one', 'two', 'three']);
+// baz is still ['one', 'two', 'three']
+
+const quz = makeArray({foo: 'bar'});
+// quz is now [{name: 'foo': value: 'bar'}]
+
+const quuz = makeArray(null);
+// quuz is now []
+```
 <a name="module_array..randomItem"></a>
 
 ### randomItem(arr) ⇒ <code>any</code>
@@ -276,7 +359,7 @@ Take an array of objects and a property and return an array of values of that pr
 
 **Example**  
 ```js
-import {pluck} from 'fmjs/array.js';
+import {pluck} from 'ksjs/array.js';
 
 let family = [
   {
@@ -326,39 +409,26 @@ Fisher-Yates (aka Knuth) shuffle. Takes an array of elements and returns the sam
 | --- | --- | --- |
 | els | <code>array</code> | Array to be shuffled |
 
-<a name="module_array..collapse"></a>
+<a name="module_array..merge"></a>
 
-### collapse(...arrays) ⇒ <code>array</code>
+### merge(...arrays) ⇒ <code>array</code>
 
-Collapse two or more arrays into a single, new array. Same as `merge()`, but not limited to two arrays.
+Merge two or more arrays into a single, new array.
 
-**Returns**: <code>array</code> - A new collapsed array<br />
+**Returns**: <code>array</code> - A new merged array<br />
 
-* **Warning**: untested
-
-**See**: [merge](#module_array..merge)
 
 | Param | Type | Description |
 | --- | --- | --- |
 | ...arrays | <code>array</code> | 2 or more arrays to collapse |
 
-<a name="module_array..merge"></a>
+<a name="module_array..collapse"></a>
 
-### merge(array1, array2) ⇒ <code>array</code>
+### ~~collapse()~~
+***Deprecated***
 
-Merge two arrays into a single, new array. Same as `collapse()` but only works with two array arguments.
 
-**Returns**: <code>array</code> - A new merged array<br />
-
-* **Warning**: untested
-
-**See**: [collapse](#module_array..collapse)
-
-| Param | Type | Description |
-| --- | --- | --- |
-| array1 | <code>array</code> | First array |
-| array2 | <code>array</code> | Second array |
-
+**See**: [merge](#module_array..merge) instead
 <a name="module_array..intersect"></a>
 
 ### intersect(array1, array2, [prop]) ⇒ <code>array</code>
@@ -449,6 +519,20 @@ From an array passed into the first argument, create an array of arrays, each on
 | arr | <code>array</code> | Array to be chunked. This array itself will not be modified. |
 | n | <code>number</code> | Number of elements per chunk |
 
+<a name="module_array..range"></a>
+
+### range(a, [b]) ⇒ <code>array</code>
+
+Create an array of numbers from 0 to `a` - 1 (if `b` not provided) or from `a` to `b` (if `b` is provided).
+
+**Returns**: <code>array</code> - A new array of numbers<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| a | <code>number</code> | The length of the 0-based array to be returned if `b` is NOT provided; the first number in the array if `b` IS provided. |
+| [b] | <code>number</code> | The (optional) last number of the array. |
+
 <a name="module_array..pad"></a>
 
 ### pad(arr, size, value) ⇒ <code>array</code>
@@ -464,20 +548,42 @@ Pad an array with `value` until its length equals `size`
 | size | <code>number</code> | Total length of the array after padding it |
 | value | <code>any</code> | Value to use for each "padded" element of the array |
 
+<a name="module_array..sort"></a>
+
+### sort(arr, [prop], [options]) ⇒ <code>array</code>
+
+Sort an array with sensible defaults: numbers (or numeric strings) before letters and case and diacritics ignored
+
+**Returns**: <code>array</code> - The sorted array<br />
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| arr | <code>array</code> |  | Array to sort |
+| [prop] | <code>string</code> |  | If dealing with an array of objects, the property by which to sort |
+| [options] | <code>object</code> |  | Object indicating options to override defaults (see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator#options) |
+| [options.sensitivity] | <code>string</code> | <code>&quot;base&quot;</code> | One of 'base', 'accent', 'case', 'variant'. Default is 'base' |
+| [options.numeric] | <code>boolean</code> | <code>true</code> | Whether to treat numeric strings as numbers. Default is true |
+| [options[...rest]] | <code>any</code> |  | Other options (besides sensitivity:'base' and numeric: true) per the spec for `Intl.Collator.prototype.compare` |
+
 <a name="module_color"></a>
 
 ## color
-ES6 Import Example
+ESM Import Example
 ```js
-import {rgb2Hex} from 'fmjs'
+import {rgb2Hex} from 'ksjs'
 
 // or:
-import {rgb2Hex} from 'fmjs/color.js'
+import {rgb2Hex} from 'ksjs/color.mjs'
+// or:
+import {rgb2Hex} from 'ksjs/color.js'
 ```
 
 CJS Require Example
 ```js
-const {rgb2Hex} = require('fmjs/cjs/color.js');
+const {rgb2Hex} = require('ksjs/color.cjs');
+// or:
+const {rgb2Hex} = require('ksjs/cjs/color.js');
 ```
 
 
@@ -589,12 +695,14 @@ Return darkColor if bgColor is light and lightColor if bgColor is dark. "Light" 
 <a name="module_cookie"></a>
 
 ## cookie
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {getCookie} from 'fmjs';
+import {getCookie} from 'ksjs';
 
 // or:
-import {getCookie} from 'fmjs/cookie.js';
+import {getCookie} from 'ksjs/cookie.mjs';
+// or:
+import {getCookie} from 'ksjs/cookie.js';
 ```
 
 
@@ -653,12 +761,14 @@ Remove a cookie
 <a name="module_dom"></a>
 
 ## dom
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {addClass} from 'fmjs';
+import {addClass} from 'ksjs';
 
 // or:
-import {addClass} from 'fmjs/dom.js';
+import {addClass} from 'ksjs/dom.mjs';
+// or:
+import {addClass} from 'ksjs/dom.js';
 ```
 
 
@@ -681,6 +791,7 @@ import {addClass} from 'fmjs/dom.js';
   * [before(el, toInsert)](#module_dom..before) ⇒ <code>Element</code>
   * [after(el, toInsert)](#module_dom..after) ⇒ <code>Element</code>
   * [createTree(options)](#module_dom..createTree) ⇒ <code>Element(s)</code>
+  * [createHTML(options)](#module_dom..createHTML) ⇒ <code>Element(s)</code>
   * [remove(el)](#module_dom..remove) ⇒ <code>Element</code>
   * [empty(el)](#module_dom..empty) ⇒ <code>Element</code>
   * [replace(oldEl, replacement)](#module_dom..replace)
@@ -943,6 +1054,23 @@ Provide an object, along with possible child objects, to create a node tree read
 | [options.children] | <code>Array.&lt;Object&gt;</code> | Optional array of objects, with each object representing a child node |
 | [...options[attr]] | <code>string</code> | One or more optional attributes to set on the element |
 
+<a name="module_dom..createHTML"></a>
+
+### createHTML(options) ⇒ <code>Element(s)</code>
+
+Provide an object, along with possible child objects, to create an HTML string that can be inserted into the DOM.
+
+**Returns**: <code>Element(s)</code> - The created Element node tree<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>object</code> |  |
+| [options.tag] | <code>string</code> | Optional tag name for the element. If none provided, a document fragment is created instead |
+| [options.text] | <code>string</code> | Optional inner text of the element. |
+| [options.children] | <code>Array.&lt;Object&gt;</code> | Optional array of objects, with each object representing a child node |
+| [...options[attr]] | <code>string</code> | One or more optional attributes to set on the element |
+
 <a name="module_dom..remove"></a>
 
 ### remove(el) ⇒ <code>Element</code>
@@ -1005,12 +1133,14 @@ Insert a script into the DOM with reasonable default properties, returning a pro
 <a name="module_event"></a>
 
 ## event
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {addEvent} from 'fmjs';
+import {addEvent} from 'ksjs';
 
 // or:
-import {addEvent} from 'fmjs/event.js';
+import {addEvent} from 'ksjs/event.mjs';
+// or:
+import {addEvent} from 'ksjs/event.js';
 ```
 
 
@@ -1084,13 +1214,20 @@ triggerEvent(document.body, 'myCustomEvent', {weather: 'sunshine'});
 <a name="module_form"></a>
 
 ## form
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {getFormData} from 'fmjs';
+import {getFormData} from 'ksjs';
 
 // or:
-import {getFormData} from 'fmjs/form.js';
+import {getFormData} from 'ksjs/form.mjs';
+// or:
+import {getFormData} from 'ksjs/form.js';
 ```
+
+
+* [form](#module_form)
+  * [getFormData](#module_form..getFormData) ⇒ <code>any</code>
+  * [valuesToFormData(values)](#module_form..valuesToFormData) ⇒ <code>FormData</code>
 
 <a name="module_form..getFormData"></a>
 
@@ -1160,15 +1297,30 @@ console.log(getFormData.array(myform));
 //    }
 // ]
 ```
+<a name="module_form..valuesToFormData"></a>
+
+### valuesToFormData(values) ⇒ <code>FormData</code>
+
+Note: if the value of a key is an object with a `files` property, each file in the files array will be appended to the FormData object.
+
+**Returns**: <code>FormData</code> - The form data object<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| values | <code>Object</code> \| <code>Array</code> | The object or array of objects to convert |
+
 <a name="module_jsonp"></a>
 
 ## jsonp
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {getJSONP} from 'fmjs';
+import {getJSONP} from 'ksjs';
 
 // or:
-import {getJSONP} from 'fmjs/jsonp.js';
+import {getJSONP} from 'ksjs/jsonp.mjs';
+// or:
+import {getJSONP} from 'ksjs/jsonp.js';
 ```
 
 <a name="module_jsonp..getJSONP"></a>
@@ -1198,17 +1350,21 @@ getJSONP({url: 'https://example.com/api/'})
 <a name="module_math"></a>
 
 ## math
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {median} from 'fmjs';
+import {median} from 'ksjs';
 
 // or:
-import {median} from 'fmjs/math.js';
+import {median} from 'ksjs/math.mjs';
+// or:
+import {median} from 'ksjs/math.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {median} = require('fmjs/cjs/math.js');
+const {median} = require('ksjs/math.cjs');
+// or:
+const {median} = require('ksjs/cjs/math.js');
 ```
 
 
@@ -1344,31 +1500,38 @@ Return the number with the highest value from an array of numbers
 <a name="module_object"></a>
 
 ## object
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {deepCopy} from 'fmjs';
+import {deepCopy} from 'ksjs';
 
 // or:
-import {deepCopy} from 'fmjs/object.js';
+import {deepCopy} from 'ksjs/object.mjs';
+// or:
+import {deepCopy} from 'ksjs/object.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {deepCopy} = require('fmjs/cjs/object.js');
+import {deepCopy} from 'ksjs/object.cjs';
+// or:
+const {deepCopy} = require('ksjs/cjs/object.js');
 ```
 
 
 * [object](#module_object)
   * [isObject(obj)](#module_object..isObject)
   * [isPlainObject(obj)](#module_object..isPlainObject)
-  * [deepCopy(obj, [cache])](#module_object..deepCopy) ⇒ <code>Object</code>
+  * [clone(obj)](#module_object..clone) ⇒ <code>Object</code>
+  * [deepCopy(obj, [forceFallback], [cache])](#module_object..deepCopy) ⇒ <code>Object</code>
   * [extend(target, ...objects)](#module_object..extend) ⇒ <code>Object</code>
-  * [getProperty(root, properties, fallbackVaue)](#module_object..getProperty) ⇒ <code>\*</code>
+  * [getProperty(root, properties, fallbackValue)](#module_object..getProperty) ⇒ <code>\*</code>
+  * [getLastDefined(root, properties)](#module_object..getLastDefined) ⇒ <code>\*</code>
   * [isEmptyObject(obj)](#module_object..isEmptyObject) ⇒ <code>boolean</code>
-  * [setProperty(root, properties)](#module_object..setProperty) ⇒ <code>Object</code>
+  * [setProperty(root, properties, value)](#module_object..setProperty) ⇒ <code>Object</code>
   * [forEachValue(obj, fn)](#module_object..forEachValue) ⇒ <code>void</code>
-  * [pick(obj, props)](#module_object..pick) ⇒ <code>Object</code>
-  * [omit(obj, props)](#module_object..omit) ⇒ <code>Object</code>
+  * [getObject(obj, options)](#module_object..getObject)
+  * [pick(obj, props, [options])](#module_object..pick) ⇒ <code>Object</code>
+  * [omit(obj, props, [options])](#module_object..omit) ⇒ <code>Object</code>
 
 <a name="module_object..isObject"></a>
 
@@ -1395,9 +1558,23 @@ Derived from lodash _.isPlainObject
 | --- | --- | --- |
 | obj | <code>Object</code> | The argument that will be checked to see if it is a plain object |
 
+<a name="module_object..clone"></a>
+
+### clone(obj) ⇒ <code>Object</code>
+
+Deep copy an object (alternative to deepCopy), using graph theory and new Map(). Avoids circular refs and infinite loops.
+
+**Returns**: <code>Object</code> - A copy of the object<br />
+
+**See**: [Cloning JavaScript objects with Graph Theory](https://andreasimonecosta.dev/posts/cloning-javascript-objects-with-graph-theory/)
+
+| Param | Type |
+| --- | --- |
+| obj | <code>Object</code> | 
+
 <a name="module_object..deepCopy"></a>
 
-### deepCopy(obj, [cache]) ⇒ <code>Object</code>
+### deepCopy(obj, [forceFallback], [cache]) ⇒ <code>Object</code>
 
 Deep copy an object, avoiding circular references and the infinite loops they might cause.
 
@@ -1407,6 +1584,7 @@ Deep copy an object, avoiding circular references and the infinite loops they mi
 | Param | Type | Description |
 | --- | --- | --- |
 | obj | <code>Object</code> | The object to copy |
+| [forceFallback] | <code>Boolean</code> | If set to `true`, doesn't try to use native `structuredClone` function first. |
 | [cache] | <code>Array.&lt;Object&gt;</code> | Used internally to avoid circular references |
 
 <a name="module_object..extend"></a>
@@ -1459,7 +1637,7 @@ const merged = extend(foo, bar);
 ```
 <a name="module_object..getProperty"></a>
 
-### getProperty(root, properties, fallbackVaue) ⇒ <code>\*</code>
+### getProperty(root, properties, fallbackValue) ⇒ <code>\*</code>
 
 Get a nested property of an object in a safe way
 
@@ -1470,7 +1648,7 @@ Get a nested property of an object in a safe way
 | --- | --- | --- |
 | root | <code>Object</code> | The root object |
 | properties | <code>Array.&lt;String&gt;</code> \| <code>String</code> | Either an array of properties or a dot-delimited string of properties |
-| fallbackVaue | <code>any</code> | A value to assign if it's otherwise undefined |
+| fallbackValue | <code>any</code> | A value to assign if it's otherwise undefined |
 
 **Example**  
 ```js
@@ -1491,6 +1669,37 @@ console.log(getProperty(foo, ['broken', 'not', 'happening']))
 // Logs: undefined
 };
 ```
+<a name="module_object..getLastDefined"></a>
+
+### getLastDefined(root, properties) ⇒ <code>\*</code>
+
+Get a nested property of an object in a safe way
+
+**Returns**: <code>\*</code> - The value of the last nested property referenced in `properties` arg that has a defined value<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| root | <code>Object</code> | The root object |
+| properties | <code>Array.&lt;String&gt;</code> \| <code>String</code> | Either an array of properties or a dot-delimited string of properties |
+
+**Example**  
+```js
+const foo = {
+  could: {
+   keep: {
+    going: 'but will stop'
+  },
+  shortStop: 'ride ends here'
+};
+
+console.log(getLastDefined(foo, 'could.keep.going'))
+// Logs: 'but will stop'
+
+console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
+// Logs: 'ride ends here'
+};
+```
 <a name="module_object..isEmptyObject"></a>
 
 ### isEmptyObject(obj) ⇒ <code>boolean</code>
@@ -1506,7 +1715,7 @@ Determine whether an object (or array) is "empty"
 
 <a name="module_object..setProperty"></a>
 
-### setProperty(root, properties) ⇒ <code>Object</code>
+### setProperty(root, properties, value) ⇒ <code>Object</code>
 
 Set a nested property of an object in a safe way
 
@@ -1517,6 +1726,7 @@ Set a nested property of an object in a safe way
 | --- | --- | --- |
 | root | <code>Object</code> | The root object |
 | properties | <code>Array.&lt;String&gt;</code> \| <code>String</code> | Either an array of properties or a dot-delimited string of properties |
+| value | <code>any</code> | The value to set for the nested property |
 
 <a name="module_object..forEachValue"></a>
 
@@ -1531,48 +1741,70 @@ Loop through an object, calling a function for each element (like forEach, but f
 | obj | <code>Object</code> | The object to iterate over |
 | fn | <code>function</code> | A function to be called for each member of the object. The function takes two parameters: the member's value and the member's key, respectively |
 
+<a name="module_object..getObject"></a>
+
+### getObject(obj, options)
+
+INTERNAL: Return either the same object passed in first parameter or a deep copy of the object, depending on the deep option.
+
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>Object</code> | The object to return |
+| options | <code>Object</code> | Options object |
+| options.deep | <code>boolean</code> | Whether to deep-clone the object or not before returning it |
+
 <a name="module_object..pick"></a>
 
-### pick(obj, props) ⇒ <code>Object</code>
+### pick(obj, props, [options]) ⇒ <code>Object</code>
 
 Return a new object containing only the properties included in the props array.
 
 **Returns**: <code>Object</code> - A copy of the object, containing only the `props` properties<br />
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| obj | <code>Object</code> | The object from which to get properties |
-| props | <code>array</code> | Propertes to get from the object |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| obj | <code>Object</code> |  | The object from which to get properties |
+| props | <code>array.&lt;string&gt;</code> |  | Properties to get from the object |
+| [options] | <code>Object</code> |  | Options object |
+| [options.deep] | <code>boolean</code> | <code>true</code> | Whether to deep-clone the object before assigning its properties to the new object |
 
 <a name="module_object..omit"></a>
 
-### omit(obj, props) ⇒ <code>Object</code>
+### omit(obj, props, [options]) ⇒ <code>Object</code>
 
 Return a new object, excluding the properties in the props array.
 
 **Returns**: <code>Object</code> - A modified copy of the object<br />
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| obj | <code>Object</code> | The object from which to get properties |
-| props | <code>array</code> | Propertes to exclude from the object |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| obj | <code>Object</code> |  | The object from which to get properties |
+| props | <code>array</code> |  | Properties to exclude from the object |
+| [options] | <code>Object</code> |  | Options object |
+| [options.deep] | <code>boolean</code> | <code>true</code> | Whether to deep-clone the object before assigning its properties to the new object |
 
 <a name="module_promise"></a>
 
 ## promise
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {peach} from 'fmjs';
+import {peach} from 'ksjs';
 
 // or:
-import {peach} from 'fmjs/promise.js';
+import {peach} from 'ksjs/promise.mjs';
+// or:
+import {peach} from 'ksjs/promise.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {peach} = require('fmjs/cjs/promise.js');
+import {peach} from 'ksjs/promise.cjs';
+// or:
+const {peach} = require('ksjs/cjs/promise.js');
 ```
 
 
@@ -1613,7 +1845,7 @@ const {peach} = require('fmjs/cjs/promise.js');
 
 **Example**  
 ```js
-import {pmap} from 'fmjs/promise.js';
+import {pmap} from 'ksjs/promise.js';
 
 const fruits = ['apple', 'banana', 'pear'];
 
@@ -1638,7 +1870,7 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 
 **Example**  
 ```js
-import {pmap} from 'fmjs/promise.js';
+import {pmap} from 'ksjs/promise.js';
 
 const fruits = ['apple', 'banana', 'pear'];
 
@@ -1660,12 +1892,14 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 <a name="module_selection"></a>
 
 ## selection
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {getSelection} from 'fmjs';
+import {getSelection} from 'ksjs';
 
 // or:
-import {getSelection} from 'fmjs/selection.js';
+import {getSelection} from 'ksjs/selection.mjs';
+// or:
+import {getSelection} from 'ksjs/selection.js';
 ```
 
 
@@ -1738,12 +1972,14 @@ Return an object with the following properties related to the selected text with
 <a name="module_storage"></a>
 
 ## storage
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {Storage} from 'fmjs';
+import {Storage} from 'ksjs';
 
 // or:
-import {Storage} from 'fmjs/storage.js';
+import {Storage} from 'ksjs/storage.mjs';
+// or:
+import {Storage} from 'ksjs/storage.js';
 ```
 
 
@@ -1851,44 +2087,39 @@ Constructor for storage functions.
 <a name="module_string"></a>
 
 ## string
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {slugify} from 'fmjs';
+import {slugify} from 'ksjs';
 
 // or:
-import {slugify} from 'fmjs/string.js';
+import {slugify} from 'ksjs/string.mjs';
+// or:
+import {slugify} from 'ksjs/string.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {slugify} = require('fmjs/cjs/string.js');
+const {slugify} require('ksjs/string.cjs');
+// or:
+const {slugify} = require('ksjs/cjs/string.js');
 ```
 
 
 * [string](#module_string)
-  * [stringTo(value, [type], [options])](#module_string.stringTo) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
-  * [pluralize(str, num, [ending])](#module_string.pluralize) ⇒ <code>string</code>
-  * [changeCase(str, type)](#module_string.changeCase) ⇒ <code>string</code>
-  * [slugify(str)](#module_string.slugify) ⇒ <code>string</code>
-  * [rot13(string)](#module_string.rot13) ⇒ <code>string</code>
-  * [hashCode(str, [prefix])](#module_string.hashCode) ⇒ <code>number</code> \| <code>string</code>
-  * [base64Encode(str)](#module_string.base64Encode) ⇒ <code>string</code>
-  * [base64Decode(str)](#module_string.base64Decode) ⇒ <code>string</code>
-  * [randomString([sep])](#module_string.randomString) ⇒ <code>string</code>
-
-<a name="module_string.stringTo"></a>
-
-### stringTo(value, [type], [options]) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
-
-Casts a value to the specified `type` or to best guess at a type if none given
-
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| value | <code>string</code> | Value to cast |
-| [type] | <code>function</code> | (Boolean|Number|Array) |
-| [options] | <code>object</code> |  |
+  * _static_
+    * [pluralize(str, num, [ending])](#module_string.pluralize) ⇒ <code>string</code>
+    * [changeCase(str, type, [options])](#module_string.changeCase) ⇒ <code>string</code>
+    * [slugify(str)](#module_string.slugify) ⇒ <code>string</code>
+    * [truncate(string, options)](#module_string.truncate) ⇒ <code>string</code>
+    * [rot13(string)](#module_string.rot13) ⇒ <code>string</code>
+    * [hashCode(str, [prefix])](#module_string.hashCode) ⇒ <code>number</code> \| <code>string</code>
+    * [base64Encode(str)](#module_string.base64Encode) ⇒ <code>string</code>
+    * [base64Decode(str)](#module_string.base64Decode) ⇒ <code>string</code>
+    * [randomString([sep], [prefix])](#module_string.randomString) ⇒ <code>string</code>
+  * _inner_
+    * [parseStringTemplate(str, obj)](#module_string..parseStringTemplate) ⇒ <code>string</code>
+    * [stringTo(value, [type], [options])](#module_string..stringTo) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
+    * [stripTags(str)](#module_string..stripTags) ⇒ <code>string</code>
 
 <a name="module_string.pluralize"></a>
 
@@ -1907,7 +2138,7 @@ Converts a singular word to a plural
 
 <a name="module_string.changeCase"></a>
 
-### changeCase(str, type) ⇒ <code>string</code>
+### changeCase(str, type, [options]) ⇒ <code>string</code>
 
 Changes the case of the provided words according to the `type`.
 
@@ -1918,6 +2149,7 @@ Changes the case of the provided words according to the `type`.
 | --- | --- | --- |
 | str | <code>string</code> | String that will be cased as determined by `type` |
 | type | <code>string</code> | One of 'title|sentence|caps|camel|pascal|slug|snake' |
+| [options] | <code>object</code> | Optional options object. Its use depends on the type of case change |
 
 **Example**  
 ```js
@@ -1927,6 +2159,9 @@ console.log(changeCase(oldMan, 'title'));
 // Logs: 'The Old Man and the Sea'
 
 console.log(changeCase(oldMan, 'sentence'));
+// Logs: 'The old man and the sea'
+
+console.log(changeCase('the-old-man-and-the-sea', 'sentence', {unslugify: true}));
 // Logs: 'The old man and the sea'
 
 console.log(changeCase(oldMan, 'camel'));
@@ -1952,6 +2187,39 @@ console.log(slugify('Hello there, how are you?'));
 
 console.log(slugify('  You? & Me<3* '));
 // Logs: 'you-me-3'
+```
+<a name="module_string.truncate"></a>
+
+### truncate(string, options) ⇒ <code>string</code>
+**Returns**: <code>string</code> - The truncated string, or the full string if it's shorter than the total amount to truncate<br />
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| string | <code>str</code> |  | The string to be truncated |
+| options | <code>object</code> |  | Options object. |
+| [options.start] | <code>int</code> |  | The number of characters to keep at the start of the string. If falsy, no truncation will occur at the start. |
+| [options.end] | <code>int</code> |  | The number of characters to keep at the end of the string. If falsy, no truncation will occur at the end. |
+| [options.separator] | <code>string</code> | <code>&quot;&#x27;...&#x27;&quot;</code> | The separator to use when truncating the string. Defaults to '...' |
+
+**Example**  
+```js
+const str = 'Collaboratively administrate empowered markets';
+
+console.log(truncate(str, {start: 10}));
+// Logs: 'Collaborat...'
+
+console.log(truncate(str, {start: 10, separator: ''}));
+// Logs: 'Collaborat'
+
+console.log(truncate(str, {end: 10}));
+// Logs: '...ed markets'
+
+console.log(truncate(str, {start: 10, end: 10}));
+// Logs: 'Collaborat...ed markets'
+
+console.log(truncate(str, {start: 50, end: 50}));
+// Logs: 'Collaboratively administrate empowered markets'
 ```
 <a name="module_string.rot13"></a>
 
@@ -2011,32 +2279,85 @@ If the browser does not support this type of encoding, returns the string unchan
 
 <a name="module_string.randomString"></a>
 
-### randomString([sep]) ⇒ <code>string</code>
+### randomString([sep], [prefix]) ⇒ <code>string</code>
 
 Return a pseudo-random string consisting of two base-36 strings, separated by the optional provided `sep` argument.
-The first number is derived from the current date, including milliseconds
-The second number is derived from a random 11-digit number
+The first number is derived from a random 11-digit number
+The second number is derived from the current date, including milliseconds
+The string can begin with an optional `prefix`
 
 
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [sep] | <code>string</code> | <code>&quot;.&quot;</code> | Optional separator for the two base-36 strings |
+| [sep] | <code>string</code> | <code>&quot;.&quot;</code> | Optional separator for the two base-36 strings, Default is "." |
+| [prefix] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | Optional prefix for the string |
 
+<a name="module_string..parseStringTemplate"></a>
+
+### parseStringTemplate(str, obj) ⇒ <code>string</code>
+**Returns**: <code>string</code> - String with tokens replaced with values<br />
+
+**See**: https://stackoverflow.com/a/59084440
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | String with tokens ( `${example}` ) to parse |
+| obj | <code>object</code> | Object of properties with values to be used when replacing tokens |
+
+<a name="module_string..stringTo"></a>
+
+### stringTo(value, [type], [options]) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
+
+Casts a value to the specified `type` or to best guess at a type if none given
+
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>string</code> | Value to cast |
+| [type] | <code>function</code> | (Boolean|Number|Array) |
+| [options] | <code>object</code> |  |
+
+<a name="module_string..stripTags"></a>
+
+### stripTags(str) ⇒ <code>string</code>
+
+Strip tags from a string
+
+**Returns**: <code>string</code> - Stripped string<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | String to be stripped of tags |
+
+**Example**  
+```js
+console.log(stripTags('<p>Hello</p>'));
+// Logs: 'Hello'
+
+console.log(stripTags('<p>Hello</p><p>World</p>'));
+// Logs: 'HelloWorld'
+```
 <a name="module_timer"></a>
 
 ## timer
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {debounce} from 'fmjs';
+import {debounce} from 'ksjs';
 
 // or:
-import {debounce} from 'fmjs/timer.js';
+import {debounce} from 'ksjs/timer.mjs';
+// or:
+import {debounce} from 'ksjs/timer.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {debounce} = require('fmjs/cjs/timer.js');
+import {debounce} from 'ksjs/timer.cjs';
+// or:
+const {debounce} = require('ksjs/cjs/timer.js');
 ```
 
 
@@ -2048,6 +2369,9 @@ const {debounce} = require('fmjs/cjs/timer.js');
   * [unbounce(fn, [timerDelay], [ctx])](#module_timer..unbounce)
   * [throttle(fn, [timerDelay], [context])](#module_timer..throttle)
   * [raf(fn, [context])](#module_timer..raf)
+  * [idle(fn, [context])](#module_timer..idle)
+  * [deadline(promise, ms, exception)](#module_timer..deadline) ⇒ <code>any</code>
+  * [delay(timeout)](#module_timer..delay)
 
 <a name="module_timer..HOUR"></a>
 
@@ -2141,20 +2465,62 @@ Set up a function to be called immediately before the next repaint using `reques
 | fn | <code>function</code> |  | The function to call |
 | [context] | <code>Element</code> | <code>this</code> | The context in which to call `fn` |
 
+<a name="module_timer..idle"></a>
+
+### idle(fn, [context])
+
+Set up a function to be called when the UI thread is idle by using `requestIdleCallback()`.
+Falls back to using `requestAnimationFrame (or an rAF polyfill) if `requestIdleCallback()` is not supported.
+
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| fn | <code>function</code> |  | The function to call |
+| [context] | <code>Element</code> | <code>this</code> | The context in which to call `fn` |
+
+<a name="module_timer..deadline"></a>
+
+### deadline(promise, ms, exception) ⇒ <code>any</code>
+**Returns**: <code>any</code> - The result of the promise if it is resolved or the exception if it is rejected<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| promise | <code>Promise</code> | A promise to be resolved |
+| ms | <code>number</code> | The number of milliseconds to wait for the promise to be resolved before rejecting |
+| exception | <code>any</code> | An optional exception to be thrown if the promise is rejected |
+
+<a name="module_timer..delay"></a>
+
+### delay(timeout)
+
+Like setTimeout, but with a promise that resolves when the timeout has expired.
+
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| timeout | <code>number</code> | The number of ms to wait before resolving the promise |
+
 <a name="module_url"></a>
 
 ## url
-ES6 Import Example:
+ESM Import Example:
 ```js
-import {serialize} from 'fmjs';
+import {serialize} from 'ksjs';
 
 // or:
-import {serialize} from 'fmjs/url.js';
+import {serialize} from 'ksjs/url.mjs';
+// or:
+import {serialize} from 'ksjs/url.js';
 ```
 
 CommonJS Require Example:
 ```js
-const {serialize} = require('fmjs/cjs/url.js');
+import {serialize} from 'ksjs/url.cjs';
+// or:
+const {serialize} = require('ksjs/cjs/url.js');
 ```
 
 

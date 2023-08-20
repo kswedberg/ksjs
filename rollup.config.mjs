@@ -1,18 +1,17 @@
-import {readdirSync} from 'fs-extra';
+import {readdirSync} from 'fs';
 import minimist from 'minimist';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import strip from '@rollup/plugin-strip';
-import buble from '@rollup/plugin-buble';
-import {terser} from 'rollup-plugin-terser';
-import {eslint} from 'rollup-plugin-eslint';
-import banner from 'rollup-plugin-banner';
+// import {terser} from 'rollup-plugin-terser';
+import eslint from '@rollup/plugin-eslint';
+// import banner from 'rollup-plugin-banner';
 
 const argv = minimist(process.argv.slice(2));
 const addSrc = (f) => `src/${f}`;
 const esFiles = readdirSync('./src/').map(addSrc);
 
-const cjsFiles = [
+const cjsFileNames = [
   'array.js',
   'color.js',
   'index.js',
@@ -22,15 +21,19 @@ const cjsFiles = [
   'string.js',
   'timer.js',
   'url.js',
-].map(addSrc);
+];
+const cjsFiles = cjsFileNames.map(addSrc);
 
 const nodeEnv = process.env.NODE_ENV;
 const testEnv = process.env.TEST_ENV;
 const plugins = {
   main: [
     replace({
-      'process.env.NODE_ENV': JSON.stringify(nodeEnv),
-      'process.env.TEST_ENV': JSON.stringify(testEnv),
+      values: {
+        'process.env.NODE_ENV': JSON.stringify(nodeEnv),
+        'process.env.TEST_ENV': JSON.stringify(testEnv),
+      },
+      preventAssignment: true,
     }),
     // Strip debugger, console.*, assert.* statements
     strip(),
@@ -39,8 +42,11 @@ const plugins = {
   ],
   qunit: [
     replace({
-      'process.env.NODE_ENV': JSON.stringify(nodeEnv),
-      'process.env.TEST_ENV': JSON.stringify(testEnv),
+      values: {
+        'process.env.NODE_ENV': JSON.stringify(nodeEnv),
+        'process.env.TEST_ENV': JSON.stringify(testEnv),
+      },
+      preventAssignment: true,
     }),
   ],
   mocha: [],
@@ -53,12 +59,12 @@ const buildFormats = [];
 
 if (!argv.format || argv.format === 'es') {
   const esConfig = {
-    preserveModules: true,
     input: esFiles,
     output: {
       dir: './',
       format: 'esm',
       exports: 'named',
+      preserveModules: true,
     },
     plugins: [
       eslint({
@@ -68,18 +74,19 @@ if (!argv.format || argv.format === 'es') {
     ],
   };
 
+  console.log('esm');
   buildFormats.push(esConfig);
 }
 
 if (!argv.format || argv.format === 'cjs') {
   const cjsConfig = {
-    preserveModules: true,
     input: cjsFiles,
     output: {
       esModule: false,
       dir: 'cjs',
       format: 'cjs',
       exports: 'named',
+      preserveModules: true,
     },
     plugins: [
       ...plugins.main,
@@ -102,9 +109,11 @@ if (!argv.format || argv.format === 'cjs') {
       plugins: plugins[test],
     };
 
+    console.log('building', test);
     buildFormats.push(testConfig);
   }
 });
 
+export {cjsFileNames};
 // Export config
 export default buildFormats;

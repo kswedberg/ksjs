@@ -2,5 +2,7 @@
 *.mjs
 !src/*.js
 !test/*.js
-!rollup.config.js
+!rollup.config.mjs
 !.*.js
+!scripts/*.js
+!scripts/*.mjs
