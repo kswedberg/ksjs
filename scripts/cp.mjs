@@ -14,8 +14,8 @@ const copyFiles = (files, {dir = '.', ext}) => {
     const inputFile = path.resolve(dir, f);
     const content = await readFile(inputFile, 'utf8');
     const transformed = content
-    // .replace(/(import.+)(\.js)/g, '$1.mjs')
-    // .replace(/(import.+)(\.js)/g, '$1.cjs')
+    .replace(/(import.+)(\.js)/g, '$1.mjs')
+    .replace(/(require\(.+)(\.js)/g, '$1.cjs')
     .replace(/@bamf-health\/bamfjs/g, 'ksjs');
 
     await outputFile(`${base}.${ext}`, transformed);
