@@ -295,14 +295,20 @@ describe('URL', () => {
     });
 
     it('serialized array', () => {
-      assert.equal(urls.serialize(obj2), 'foo[]=yes&foo[]=again');
+      assert.equal(urls.serialize(obj2), 'foo=yes&foo=again');
+    });
+    it('serialized array', () => {
+      assert.equal(urls.serialize(obj2, {arrayBrackets: true}), 'foo[]=yes&foo[]=again');
     });
     it('serialized array, to string', () => {
       assert.equal(urls.serialize(obj2, {arrayToString: true, raw: true}), 'foo=yes,again');
     });
 
-    it('serialized object with nested array', () => {
-      assert.equal(urls.serialize(obj3), 'foo[bar][]=one&foo[bar][]=two');
+    it('serialized object for nested array', () => {
+      assert.equal(urls.serialize(obj3), 'foo[bar]=one&foo[bar]=two');
+    });
+    it('serialized object with brackets for nested array', () => {
+      assert.equal(urls.serialize(obj3, {arrayBrackets: true}), 'foo[bar][]=one&foo[bar][]=two');
     });
 
     it('serialized object', () => {
