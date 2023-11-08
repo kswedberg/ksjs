@@ -275,3 +275,36 @@ export const postFormData = (url, options = {form: null, cache: true, memcache: 
 
   return ajax(url, opts);
 };
+
+/**
+ * Fetch an HTML document and return the html string (or a subset of it) from the resolved Promise
+ * @function fetchHTML
+ * @param {string} url  The URL of the resource to fetch
+ * @param {string} selector A selector specifying the html content in the resource to return
+ * @returns {Promise} A resolved or rejected Promise, resolving to an HTML string
+ */
+export const fetchHTML = (url, selector) => {
+
+  // For old browsers that do not support fetch,
+  // just set the href to the url instead (using server navigation)
+  if (typeof fetch !== 'function') {
+    location.href = url;
+
+    return Promise.reject(new Error('Fetch API not supported. Loading new page from browser.'));
+  }
+
+  return fetch(url)
+  .then((response) => response.text())
+  .then((html) => {
+
+    if (!selector) {
+      return html;
+    }
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const primaryContent = doc.querySelector(selector);
+
+    return primaryContent ? primaryContent.innerHTML : '';
+  });
+};
