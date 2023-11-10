@@ -290,13 +290,13 @@ export const intersect = function(array1, array2, prop) {
 
     // If a prop argument is provided, we only need to match on that property of the object
     if (prop) {
-      return !!array2.find((array2Item) => array2Item[prop] === item[prop]);
+      return array2.some((array2Item) => array2Item[prop] === item[prop]);
     }
 
     // If NO prop provided, match against the entire (stringified) object
     const strung = JSON.stringify(item);
 
-    return !!array2.find((array2Item) => strung === JSON.stringify(array2Item));
+    return array2.some((array2Item) => strung === JSON.stringify(array2Item));
   });
 };
 
