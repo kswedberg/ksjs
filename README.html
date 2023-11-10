@@ -107,6 +107,7 @@ import {getJSON} from 'ksjs/ajax.mjs';
 <li><a href="#module_ajax..getJSON">getJSON([url], [options])</a> ⇒ <code>Promise</code></li>
 <li><a href="#module_ajax..postJSON">postJSON([url], [options])</a> ⇒ <code>Promise</code></li>
 <li><a href="#module_ajax..postFormData">postFormData([url], [options])</a> ⇒ <code>Promise</code></li>
+<li><a href="#module_ajax..fetchHTML">fetchHTML(url, selector)</a> ⇒ <code>Promise</code></li>
 </ul>
 </li>
 </ul>
@@ -264,6 +265,31 @@ import {getJSON} from 'ksjs/ajax.mjs';
 <td><code>Object</code></td>
 <td><code>{}</code></td>
 <td>See <a href="#module_ajax..ajax">ajax</a> for details</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_ajax..fetchHTML"></a></p>
+<h3>fetchHTML(url, selector) ⇒ <code>Promise</code></h3>
+<p>Fetch an HTML document and return the html string (or a subset of it) from the resolved Promise</p>
+<p><strong>Returns</strong>: <code>Promise</code> - A resolved or rejected Promise, resolving to an HTML string<br /></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url</td>
+<td><code>string</code></td>
+<td>The URL of the resource to fetch</td>
+</tr>
+<tr>
+<td>selector</td>
+<td><code>string</code></td>
+<td>A selector specifying the html content in the resource to return</td>
 </tr>
 </tbody>
 </table>
@@ -4132,9 +4158,14 @@ const {serialize} = require('ksjs/cjs/url.js');
 <td>If <code>true</code>, calls .toString() on arrays. So <code>{foo: ['won', 'too']}</code> becomes <code>foo=won%2Ctoo</code>. Used in conjunction with <code>{raw: true}</code>, the same object becomes <code>foo=won,too</code></td>
 </tr>
 <tr>
+<td>[options.arrayBrackets]</td>
+<td><code>boolean</code></td>
+<td>If <code>true</code> (and <code>options.arrayToString</code> is NOT <code>true</code>), arrays take the form of <code>foo[]=won&amp;foo[]=too</code>; otherwise, <code>foo=won&amp;foo=too</code></td>
+</tr>
+<tr>
 <td>[options.indexed]</td>
 <td><code>boolean</code></td>
-<td>If <code>true</code> (and <code>options.arrayToString</code> is NOT <code>true</code>), arrays take the form of <code>foo[0]=won&amp;foo[1]=too</code>; otherwise, <code>foo[]=won&amp;foo[]=too</code></td>
+<td>If <code>true</code> (and <code>options.arrayToString</code> is NOT <code>true</code>), arrays take the form of <code>foo[0]=won&amp;foo[1]=too</code></td>
 </tr>
 </tbody>
 </table>
@@ -4143,9 +4174,11 @@ const {serialize} = require('ksjs/cjs/url.js');
 // Logs: 'foo=yes&amp;bar=again'
 </code></pre>
 <p><strong>Example</strong></p>
-<pre><code class="language-js">console.log(serialize({foo: ['yes', 'again']}, {arrayToString: true}));
+<pre><code class="language-js">console.log(serialize({foo: ['yes', 'again']}));
+// Logs: 'foo=yes&amp;foo=again'
+console.log(serialize({foo: ['yes', 'again']}, {arrayToString: true}));
 // Logs: 'foo=yes,again'
-console.log(serialize({foo: ['yes', 'again']}));
+console.log(serialize({foo: ['yes', 'again']}, {arrayBrackets: true}));
 // Logs: 'foo[]=yes&amp;foo[]=again'
 
 console.log(serialize({foo: ['yes', 'again']}, {indexed: true}));
