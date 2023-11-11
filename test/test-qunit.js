@@ -142,6 +142,35 @@ QUnit.test('set/get/toggle attributes', (assert) => {
 
 });
 
+QUnit.test('create HTML strings', (assert) => {
+  const tree = {tag: 'p', text: 'my name is Barney Rubble. ', attrs: {id: 'barney', class: 'rubble'}};
+  const html = doms.createHTML(tree);
+  const expected = '<p id="barney" class="rubble">my name is Barney Rubble. </p>';
+
+  assert.equal(html, expected, 'correctly created shallow html');
+
+  const deepTree = Object.assign({
+    children: [
+      {tag: 'strong', text: 'Bam Bam'},
+      {
+        text: ' is my son! ',
+      },
+      {
+        tag: 'a',
+        attrs: {
+          href: 'https://example.com',
+          rel: 'noopener',
+          target: '_blank',
+        },
+        text: 'Meet the Flintstones',
+      },
+    ],
+  }, tree);
+  const deepExpected = '<p id="barney" class="rubble">my name is Barney Rubble. <strong>Bam Bam</strong> is my son! <a href="https://example.com" rel="noopener" target="_blank">Meet the Flintstones</a></p>';
+
+  assert.equal(doms.createHTML(deepTree), deepExpected, 'correctly created deep html');
+});
+
 QUnit.test('insert and remove elements', (assert) => {
   const children = [
     {tag: 'div', children: [{tag: 'span', text: 'hi mom!'}]},
@@ -548,6 +577,32 @@ QUnit.module('form', {
     this.checkbox.click();
     this.form = this.domForm = this.checkbox = null;
   },
+});
+
+QUnit.test('valuesToFormData', (assert) => {
+  const values = {
+    name: 'Karl',
+    email: 'karl@example.com',
+    list: ['1', '2'],
+  };
+  const expectedKeys = Object.keys(values);
+  const formDataKeys = [];
+  const formData = forms.valuesToFormData(values);
+
+  for (let keyVal of formData.entries()) {
+    let key = keyVal[0];
+    const val = keyVal[1];
+    let expectedVal = values[key];
+
+    formDataKeys.push(key);
+
+    assert.ok(expectedKeys.includes(key), `formData key ${key} is in expected keys`);
+    assert.equal(val, expectedVal, `value ${val} for key ${key} is correct`);
+  }
+
+  expectedKeys.forEach((key) => {
+    assert.ok(formDataKeys.includes(key), `expected key ${key} is in formData keys`);
+  });
 });
 
 QUnit.test('getFormData - formData', function(assert) {

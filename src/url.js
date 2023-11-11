@@ -1,16 +1,20 @@
 /**
  * @module url
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
- * import {serialize} from 'fmjs';
+ * import {serialize} from 'ksjs';
  *
  * // or:
- * import {serialize} from 'fmjs/url.js';
+ * import {serialize} from 'ksjs/url.mjs';
+ * // or:
+ * import {serialize} from 'ksjs/url.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {serialize} = require('fmjs/cjs/url.js');
+ * import {serialize} from 'ksjs/url.cjs';
+ * // or:
+ * const {serialize} = require('ksjs/cjs/url.js');
  * ```
  *
  */
@@ -38,12 +42,19 @@ const buildParams = function buildParams(prefix, obj, options, add) {
     if (options.arrayToString) {
       add(prefix, obj.toString());
 
-    } else {
+    } else if (options.arrayBrackets || options.indexed) {
       for (let i = 0; i < l; i++) {
         // Serialize array item.
         val = obj[i];
         valType = getObjectType(val);
         buildParams(`${prefix}[${valType || options.indexed ? i : ''}]`, val, options, add);
+      }
+    } else {
+      for (let i = 0; i < l; i++) {
+        // Serialize array item.
+        val = obj[i];
+        valType = getObjectType(val);
+        buildParams(`${prefix}`, val, options, add);
       }
     }
 
@@ -219,15 +230,18 @@ export const hashSanitize = function hashSanitize(hash) {
  * @param {boolean} [options.raw] If `true`, property values are NOT url-decoded
  * @param {string} [options.prefix] If set, and `data` is an array, sets as if prefix were the name of the array
  * @param {boolean} [options.arrayToString] If `true`, calls .toString() on arrays. So `{foo: ['won', 'too']}` becomes `foo=won%2Ctoo`. Used in conjunction with `{raw: true}`, the same object becomes `foo=won,too`
- * @param {boolean} [options.indexed] If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[0]=won&foo[1]=too`; otherwise, `foo[]=won&foo[]=too`
+ * @param {boolean} [options.arrayBrackets] If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[]=won&foo[]=too`; otherwise, `foo=won&foo=too`
+ * @param {boolean} [options.indexed] If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[0]=won&foo[1]=too`
  * @returns {string} A query string
  * @example
  * console.log(serialize({foo: 'yes', bar: 'again}));
  * // Logs: 'foo=yes&bar=again'
  * @example
+ * console.log(serialize({foo: ['yes', 'again']}));
+ * // Logs: 'foo=yes&foo=again'
  * console.log(serialize({foo: ['yes', 'again']}, {arrayToString: true}));
  * // Logs: 'foo=yes,again'
- * console.log(serialize({foo: ['yes', 'again']}));
+ * console.log(serialize({foo: ['yes', 'again']}, {arrayBrackets: true}));
  * // Logs: 'foo[]=yes&foo[]=again'
  *
  * console.log(serialize({foo: ['yes', 'again']}, {indexed: true}));

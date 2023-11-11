@@ -1,12 +1,14 @@
 /**
  * @module cookie
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
- * import {getCookie} from 'fmjs';
+ * import {getCookie} from 'ksjs';
  *
  * // or:
- * import {getCookie} from 'fmjs/cookie.js';
+ * import {getCookie} from 'ksjs/cookie.mjs';
+ * // or:
+ * import {getCookie} from 'ksjs/cookie.js';
  * ```
  *
  */

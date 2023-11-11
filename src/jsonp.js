@@ -2,12 +2,14 @@
 /**
  * @module jsonp
  * @summary
- * ES6 Import Example:
+ * ESM Import Example:
  * ```js
- * import {getJSONP} from 'fmjs';
+ * import {getJSONP} from 'ksjs';
  *
  * // or:
- * import {getJSONP} from 'fmjs/jsonp.js';
+ * import {getJSONP} from 'ksjs/jsonp.mjs';
+ * // or:
+ * import {getJSONP} from 'ksjs/jsonp.js';
  * ```
  *
  */

@@ -1,17 +1,19 @@
 import * as urls from '../src/url.js';
 
 const assert = require('assert');
-const safeLocation = location.href !== 'about:blank' ? location : {
-  hash: '',
-  host: 'localhost:8001',
-  hostname: 'localhost',
-  href: 'http://localhost:8001/test/index.html',
-  origin: 'http://localhost:8001',
-  pathname: '/test/index.html',
-  port: '8001',
-  protocol: 'http:',
-  search: '',
-};
+const safeLocation = location.href !== 'about:blank' ?
+  location :
+  {
+    hash: '',
+    host: 'localhost:8001',
+    hostname: 'localhost',
+    href: 'http://localhost:8001/test/index.html',
+    origin: 'http://localhost:8001',
+    pathname: '/test/index.html',
+    port: '8001',
+    protocol: 'http:',
+    search: '',
+  };
 
 describe('URL', () => {
   describe('location', () => {
@@ -293,14 +295,20 @@ describe('URL', () => {
     });
 
     it('serialized array', () => {
-      assert.equal(urls.serialize(obj2), 'foo[]=yes&foo[]=again');
+      assert.equal(urls.serialize(obj2), 'foo=yes&foo=again');
+    });
+    it('serialized array', () => {
+      assert.equal(urls.serialize(obj2, {arrayBrackets: true}), 'foo[]=yes&foo[]=again');
     });
     it('serialized array, to string', () => {
       assert.equal(urls.serialize(obj2, {arrayToString: true, raw: true}), 'foo=yes,again');
     });
 
-    it('serialized object with nested array', () => {
-      assert.equal(urls.serialize(obj3), 'foo[bar][]=one&foo[bar][]=two');
+    it('serialized object for nested array', () => {
+      assert.equal(urls.serialize(obj3), 'foo[bar]=one&foo[bar]=two');
+    });
+    it('serialized object with brackets for nested array', () => {
+      assert.equal(urls.serialize(obj3, {arrayBrackets: true}), 'foo[bar][]=one&foo[bar][]=two');
     });
 
     it('serialized object', () => {

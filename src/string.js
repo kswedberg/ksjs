@@ -1,16 +1,20 @@
 /**
  * @module string
- * @summary ES6 Import Example:
+ * @summary ESM Import Example:
  * ```js
- * import {slugify} from 'fmjs';
+ * import {slugify} from 'ksjs';
  *
  * // or:
- * import {slugify} from 'fmjs/string.js';
+ * import {slugify} from 'ksjs/string.mjs';
+ * // or:
+ * import {slugify} from 'ksjs/string.js';
  * ```
  *
  * CommonJS Require Example:
  * ```js
- * const {slugify} = require('fmjs/cjs/string.js');
+ * const {slugify} require('ksjs/string.cjs');
+ * // or:
+ * const {slugify} = require('ksjs/cjs/string.js');
  * ```
  *
  */
@@ -29,7 +33,7 @@ const charMaps = {
     ά: 'a', έ: 'e', ή: 'h', ί: 'i', ΰ: 'y', α: 'a', β: 'b', γ: 'g', δ: 'd', ε: 'e', ζ: 'z', η: 'h', θ: '8', ι: 'i', κ: 'k', λ: 'l', μ: 'm', ν: 'n', ξ: '3', ο: 'o', π: 'p', ρ: 'r', ς: 's', σ: 's', τ: 't', υ: 'y', φ: 'f', χ: 'x', ψ: 'ps', ω: 'w', ϊ: 'i', ϋ: 'y', ό: 'o', ύ: 'y', ώ: 'w', Ё: 'Yo', Ђ: 'DJ', Є: 'Ye', І: 'I', Ї: 'Yi', Ј: 'J', Љ: 'LJ', Њ: 'NJ', Ћ: 'C', Џ: 'DZ',
     А: 'A', Б: 'B', В: 'V', Г: 'G', Д: 'D', Е: 'E', Ж: 'Zh', З: 'Z', И: 'I', Й: 'J', К: 'K', Л: 'L', М: 'M', Н: 'N', О: 'O', П: 'P', Р: 'R', С: 'S', Т: 'T', У: 'U', Ф: 'F', Х: 'H', Ц: 'C', Ч: 'Ch', Ш: 'Sh', Щ: 'Sh', Ъ: 'U', Ы: 'Y', Ь: '', Э: 'E', Ю: 'Yu', Я: 'Ya',
     а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ж: 'zh', з: 'z', и: 'i', й: 'j', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h', ц: 'c', ч: 'ch', ш: 'sh', щ: 'sh', ъ: 'u', ы: 'y', ь: '', э: 'e', ю: 'yu', я: 'ya', ё: 'yo', ђ: 'dj', є: 'ye', і: 'i', ї: 'yi', ј: 'j', љ: 'lj', њ: 'nj', ћ: 'c', ѝ: 'u', џ: 'dz', Ґ: 'G', ґ: 'g', Ғ: 'GH', ғ: 'gh', Қ: 'KH', қ: 'kh', Ң: 'NG', ң: 'ng', Ү: 'UE', ү: 'ue', Ұ: 'U', ұ: 'u', Һ: 'H', һ: 'h',
-    Ә: 'AE', ә: 'ae', Ө: 'OE', ө: 'oe', '฿': 'baht', ა: 'a', ბ: 'b', გ: 'g', დ: 'd', ე: 'e', ვ: 'v', ზ: 'z', თ: 't', ი: 'i', კ: 'k', ლ: 'l', მ: 'm', ნ: 'n', ო: 'o', პ: 'p', ჟ: 'zh', რ: 'r', ს: 's', ტ: 't', უ: 'u', ფ: 'f', ქ: 'k', ღ: 'gh', ყ: 'q', შ: 'sh', ჩ: 'ch', ც: 'ts', ძ: 'dz', წ: 'ts', ჭ: 'ch', ხ: 'kh', ჯ: 'j', ჰ: 'h', Ẁ: 'W', ẁ: 'w', Ẃ: 'W', ẃ: 'w', Ẅ: 'W', ẅ: 'w', ẞ: 'SS',
+    Ә: 'AE', ә: 'ae', Ө: 'OE', ө: 'oe', '฿': 'baht', ა: 'a', ბ: 'b', გ: 'g', დ: 'd', ე: 'e', ვ: 'v', ზ: 'z', თ: 't', ი: 'i', კ: 'k', ლ: 'l', მ: 'm', ნ: 'n', ო: 'o', პ: 'p', ჟ: 'zh', რ: 'r', ს: 's', ტ: 't', უ: 'u', ფ: 'f', ქ: 'k', ღ: 'gh', ყ: 'q', შ: 'sh', ჩ: 'ch', ც: 'ts', ძ: 'dz', წ: 'ts', ჭ: 'ch', ხ: 'kh', ჯ: 'j', ჰ: 'h', Ẁ: 'W', ẁ: 'w', Ẃ: 'W', ẃ: 'w', Ẅ: 'W', ẅ: 'w', // ẞ: 'SS',
     Ạ: 'A', ạ: 'a', Ả: 'A', ả: 'a', Ấ: 'A', ấ: 'a', Ầ: 'A', ầ: 'a', Ẩ: 'A', ẩ: 'a', Ẫ: 'A', ẫ: 'a', Ậ: 'A', ậ: 'a', Ắ: 'A', ắ: 'a', Ằ: 'A', ằ: 'a', Ẳ: 'A', ẳ: 'a', Ẵ: 'A', ẵ: 'a', Ặ: 'A', ặ: 'a', Ẹ: 'E', ẹ: 'e', Ẻ: 'E', ẻ: 'e', Ẽ: 'E', ẽ: 'e', Ế: 'E', ế: 'e', Ề: 'E', ề: 'e', Ể: 'E', ể: 'e', Ễ: 'E', ễ: 'e', Ệ: 'E', ệ: 'e', Ỉ: 'I', ỉ: 'i', Ị: 'I', ị: 'i', Ọ: 'O', ọ: 'o', Ỏ: 'O', ỏ: 'o', Ố: 'O', ố: 'o', Ồ: 'O', ồ: 'o', Ổ: 'O', ổ: 'o', Ỗ: 'O', ỗ: 'o', Ộ: 'O', ộ: 'o', Ớ: 'O', ớ: 'o', Ờ: 'O', ờ: 'o', Ở: 'O', ở: 'o', Ỡ: 'O', ỡ: 'o', Ợ: 'O', ợ: 'o', Ụ: 'U', ụ: 'u', Ủ: 'U', ủ: 'u', Ứ: 'U', ứ: 'u', Ừ: 'U', ừ: 'u', Ử: 'U', ử: 'u', Ữ: 'U', ữ: 'u', Ự: 'U', ự: 'u', Ỳ: 'Y', ỳ: 'y', Ỵ: 'Y', ỵ: 'y', Ỷ: 'Y', ỷ: 'y', Ỹ: 'Y', ỹ: 'y',
   },
   // currencies
@@ -92,9 +96,28 @@ const stringToImplicit = function(value, options) {
   return value;
 };
 
+
+/**
+ * @function parseStringTemplate
+ * @param {string} str String with tokens ( `${example}` ) to parse
+ * @param {object} obj Object of properties with values to be used when replacing tokens
+ * @returns {string} String with tokens replaced with values
+ * @see https://stackoverflow.com/a/59084440
+ */
+export const parseStringTemplate = (str, obj) => {
+  const rText = /\$\{(?!\d)[\w\p{L}]*\}/u;
+  const rVars = /[^}{]+(?=})/g;
+
+  const textParts = str.split(rText);
+  const args = str.match(rVars) || [];
+  const params = args.map((item) => obj[item] || (obj[item] === undefined ? '' : obj[item]));
+
+  return String.raw({raw: textParts}, ...params);
+};
+
 /**
  * Casts a value to the specified `type` or to best guess at a type if none given
- * @function
+ * @function stringTo
  * @param {string} value Value to cast
  * @param {function} [type] (Boolean|Number|Array)
  * @param {object} [options]
@@ -249,6 +272,13 @@ const caseChanges = {
     // remove leading and trailing underscores
     .replace(/^_|_$/g, '') || str;
   },
+  camelToSnake: (str) => {
+    return str
+    .trim()
+    .split(/(?=[A-Z])/)
+    .join('_')
+    .toLowerCase();
+  },
 };
 
 /**
@@ -295,6 +325,51 @@ export const changeCase = (str, type, options) => {
  */
 export const slugify = function slugify(str) {
   return caseChanges.slug(str);
+};
+
+/**
+ * @function
+ * @param {str} string The string to be truncated
+ * @param {object} options Options object.
+ * @param {int} [options.start] The number of characters to keep at the start of the string. If falsy, no truncation will occur at the start.
+ * @param {int} [options.end] The number of characters to keep at the end of the string. If falsy, no truncation will occur at the end.
+ * @param {string} [options.separator = '...'] The separator to use when truncating the string. Defaults to '...'
+ * @returns {string} The truncated string, or the full string if it's shorter than the total amount to truncate
+ * @example
+ * const str = 'Collaboratively administrate empowered markets';
+ *
+ * console.log(truncate(str, {start: 10}));
+ * // Logs: 'Collaborat...'
+ *
+* console.log(truncate(str, {start: 10, separator: ''}));
+ * // Logs: 'Collaborat'
+ *
+ * console.log(truncate(str, {end: 10}));
+ * // Logs: '...ed markets'
+ *
+ * console.log(truncate(str, {start: 10, end: 10}));
+ * // Logs: 'Collaborat...ed markets'
+ *
+ * console.log(truncate(str, {start: 50, end: 50}));
+ * // Logs: 'Collaboratively administrate empowered markets'
+ */
+export const truncate = function truncate(str, options = {}) {
+  const {start, end, separator = '...'} = options;
+
+  if (typeof str !== 'string' || (!start && !end)) {
+    return str;
+  }
+  const len = str.length;
+
+  if (!end) {
+    return len <= start ? str : str.slice(0, start) + separator;
+  }
+  if (!start) {
+    return len <= end ? str : separator + str.slice(-end);
+  }
+
+  // both start and end
+  return len <= start + end ? str : str.slice(0, start) + separator + str.slice(-end);
 };
 
 /**
@@ -377,18 +452,42 @@ export const base64Decode = function base64Decode(str) {
 
 /**
  * Return a pseudo-random string consisting of two base-36 strings, separated by the optional provided `sep` argument.
- * The first number is derived from the current date, including milliseconds
- * The second number is derived from a random 11-digit number
+* The first number is derived from a random 11-digit number
+* The second number is derived from the current date, including milliseconds
+* The string can begin with an optional `prefix`
  * @function
- * @param {string} [sep = .] Optional separator for the two base-36 strings
+ * @param {string} [sep = .] Optional separator for the two base-36 strings, Default is "."
+ * @param {string} [prefix = ''] Optional prefix for the string
  * @returns {string}
  */
-
-export const randomString = function(sep) {
+export const randomString = function(sep, prefix) {
   const pow = 10 ** 10;
   const separator = sep == null ? '.' : sep;
   const randoNum = Math.round(Math.random() * pow);
   const date36 = (+new Date()).toString(36);
 
-  return [randoNum.toString(36), date36].join(separator);
+  const parts = [randoNum.toString(36), date36];
+
+  if (prefix) {
+    parts.unshift(prefix);
+  }
+
+  return parts.join(separator);
+};
+
+/**
+ * Strip tags from a string
+ * @function stripTags
+ * @param {string} str String to be stripped of tags
+ * @returns {string} Stripped string
+ * @example
+ * console.log(stripTags('<p>Hello</p>'));
+ * // Logs: 'Hello'
+ *
+ * console.log(stripTags('<p>Hello</p><p>World</p>'));
+ * // Logs: 'HelloWorld'
+ *
+ */
+export const stripTags = function stripTags(str) {
+  return str.replace(/<\/?[a-z0-9]+\b[^>]*>/g, '');
 };
