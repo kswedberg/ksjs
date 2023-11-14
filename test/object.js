@@ -85,6 +85,23 @@ describe('Object', () => {
         return 'hello';
       },
     };
+    const sameExceptOrder = {
+      foo: {
+        bar: {
+          baz: 'Hello',
+          fn() {
+            return 'who are you?';
+          },
+        },
+        flotsam: ['Meet George Jetsam', 'Jude, his wife'],
+      },
+      firstName: 'Jane',
+      lastName: 'Doe',
+      bar: 'hello',
+      cb: function() {
+        return 'hello';
+      },
+    };
 
     const originalArray = [
       'hello!',
@@ -117,6 +134,12 @@ describe('Object', () => {
 
     it('compares deeply nested objects that are the same', () => {
       assert.strictEqual(isDeepEqual(original, copy1), true);
+    });
+    it('compares deeply nested objects that are the same in every way except the order of one of the properties', () => {
+      assert.strictEqual(isDeepEqual(original, sameExceptOrder), true);
+    });
+    it('compares stringified objects that are the same in every way except the order of one of the properties', () => {
+      assert.strictEqual(JSON.stringify(original) === JSON.stringify(sameExceptOrder), false);
     });
     it('compares deeply nested object with another that has been modified', () => {
       assert.strictEqual(isDeepEqual(original, copy2), false);
