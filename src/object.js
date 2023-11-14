@@ -165,6 +165,43 @@ export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
   return copy;
 };
 
+/**
+ * Compare two items for equality, recursing through nested objects or arrays
+ * @function isDeepEqual
+ * @param {*} objectA The first item to compare
+ * @param {*} objectB The second item to compare
+ * @returns {Boolean} True if the items are deeply equal, false otherwise
+ */
+export const isDeepEqual = function isDeepEqual(objectA, objectB) {
+  // If it's the same object, or the two items are primitives, then they are equal
+  if (objectA === objectB) {
+    return true;
+  }
+
+  if (!(objectA instanceof Object)) {
+    return objectA === objectB;
+  }
+  const objectAKeys = Object.keys(objectA);
+
+  // If different number of props, then NOT equal
+  if (objectAKeys.length !== Object.keys(objectB).length) {
+    return false;
+  }
+
+  for (const key of objectAKeys) {
+    // second object does not have the same key as first object, NOT equal
+    if (objectB[key] === undefined) {
+      return false;
+    }
+
+    // Recursively call isDeepEqual on the property's values
+    if (!isDeepEqual(objectA[key], objectB[key])) {
+      return false;
+    }
+  }
+
+  return true;
+};
 
 /**
  * Deep merge two or more objects in turn, with right overriding left

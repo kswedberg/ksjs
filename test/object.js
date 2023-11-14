@@ -1,4 +1,4 @@
-import {deepCopy, clone, extend, setProperty, getProperty, getLastDefined, pick, omit, isPlainObject} from '../src/object.js';
+import {deepCopy, isDeepEqual, clone, extend, setProperty, getProperty, getLastDefined, pick, omit, isPlainObject} from '../src/object.js';
 
 const assert = require('assert');
 
@@ -64,6 +64,69 @@ describe('Object', () => {
       assert.strictEqual(schemaCopy[0].title, 'Foo Bar');
       assert.strictEqual(schema.length, 3);
       assert.strictEqual(schemaCopy.length, 2);
+    });
+  });
+
+  describe('isDeepEqual', () => {
+    const original = {
+      foo: {
+        bar: {
+          baz: 'Hello',
+          fn() {
+            return 'who are you?';
+          },
+        },
+        flotsam: ['Meet George Jetsam', 'Jude, his wife'],
+      },
+      bar: 'hello',
+      firstName: 'Jane',
+      lastName: 'Doe',
+      cb: function() {
+        return 'hello';
+      },
+    };
+
+    const originalArray = [
+      'hello!',
+      {
+        foo: {
+          bar: {
+            baz: 'Hello',
+            fn() {
+              return 'who are you?';
+            },
+          },
+          flotsam: ['Meet George Jetsam', 'Jude, his wife'],
+        },
+      },
+      {bar: 'hello'},
+      {
+        name: [
+          {firstName: 'Jane'},
+          {lastName: 'Doe'},
+        ],
+      },
+    ];
+    const copy1 = deepCopy(original);
+    const copy2 = deepCopy(original);
+    const arrayCopy1 = deepCopy(originalArray);
+    const arrayCopy2 = deepCopy(originalArray);
+
+    copy2.foo.bar.baz = 'Bye';
+    arrayCopy2[3].name.push({suffix: 'Jr.'});
+
+    it('compares deeply nested objects that are the same', () => {
+      assert.strictEqual(isDeepEqual(original, copy1), true);
+    });
+    it('compares deeply nested object with another that has been modified', () => {
+      assert.strictEqual(isDeepEqual(original, copy2), false);
+    });
+
+    it('compares deeply nested arrays that are the same', () => {
+      assert.strictEqual(isDeepEqual(originalArray, arrayCopy1), true);
+    });
+    it('compares deeply nested arrays that are different', () => {
+      assert.strictEqual(isDeepEqual(originalArray, arrayCopy2), false);
     });
   });
 
