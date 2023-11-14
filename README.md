@@ -106,7 +106,9 @@ examples.example1('foo');
 <a name="module_ajax"></a>
 
 ## ajax
+
 ESM Import Example:
+
 ```js
 import {getJSON} from 'ksjs';
 
@@ -207,7 +209,9 @@ Fetch an HTML document and return the html string (or a subset of it) from the r
 <a name="module_array"></a>
 
 ## array
+
 ESM Import Example:
+
 ```js
 import {isArray} from 'ksjs';
 
@@ -218,6 +222,7 @@ import {isArray} from 'ksjs/array.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 const {isArray} = require('ksjs/array.cjs');
 // or:
@@ -256,7 +261,8 @@ Determine whether "arr" is a true array
 | --- | --- | --- |
 | arr | <code>array</code> | item to determine whether it's an array |
 
-**Example**  
+**Example**
+
 ```js
 import {isArray} from 'ksjs/array.js';
 
@@ -264,6 +270,7 @@ if (isArray(window.foo)) {
   window.foo.push('bar');
 }
 ```
+
 <a name="module_array..inArray"></a>
 
 ### inArray(el, arr) ⇒ <code>boolean</code>
@@ -291,7 +298,8 @@ Convert an object to an array of objects with name and value properties
 | --- | --- | --- |
 | obj | <code>object</code> | The object to convert |
 
-**Example**  
+**Example**
+
 ```js
 import {objectToArray} from 'ksjs/array.js';
 
@@ -306,6 +314,7 @@ const arr = objectToArray(obj);
 //   {name: 'baz', value: 'qux'}
 // ];
 ```
+
 <a name="module_array..makeArray"></a>
 
 ### makeArray(value, [delimiter], [wrapObject]) ⇒ <code>array</code>
@@ -327,7 +336,8 @@ e) Anything else is wrapped in an array.
 | [delimiter] | <code>string</code> \| <code>RegExp</code> | <code>&quot;&#x3D; /\\s+/&quot;</code> | A string or regular expression to use for splitting a string into an array (defaults to /\s+/) |
 | [wrapObject] | <code>Boolean</code> |  | Whether to simply wrap an object in an array (true) or  convert to array of objects with name/value properties |
 
-**Example**  
+**Example**
+
 ```js
 import {makeArray} from 'ksjs/array.js';
 const foo = makeArray('one two three');
@@ -345,6 +355,7 @@ const quz = makeArray({foo: 'bar'});
 const quuz = makeArray(null);
 // quuz is now []
 ```
+
 <a name="module_array..randomItem"></a>
 
 ### randomItem(arr) ⇒ <code>any</code>
@@ -372,7 +383,8 @@ Take an array of objects and a property and return an array of values of that pr
 | arr | <code>array</code> | Array from which to pluck |
 | prop | <code>string</code> | Property to pluck |
 
-**Example**  
+**Example**
+
 ```js
 import {pluck} from 'ksjs/array.js';
 
@@ -410,6 +422,7 @@ console.log(ids);
 console.log(colors);
 // Logs: [null, 'blue', 'green', null]
 ```
+
 <a name="module_array..shuffle"></a>
 
 ### shuffle(els) ⇒ <code>array</code>
@@ -440,6 +453,7 @@ Merge two or more arrays into a single, new array.
 <a name="module_array..collapse"></a>
 
 ### ~~collapse()~~
+
 ***Deprecated***
 
 
@@ -449,6 +463,7 @@ Merge two or more arrays into a single, new array.
 ### intersect(array1, array2, [prop]) ⇒ <code>array</code>
 
 Return a subset of `array1`, only including elements from `array2` that are also in `array1`.
+
 * If `prop` is provided, only that property of an element needs to match for the two arrays to be considered intersecting at that element
 
 **Returns**: <code>array</code> - A new filtered array<br />
@@ -460,7 +475,8 @@ Return a subset of `array1`, only including elements from `array2` that are also
 | array2 | <code>array</code> | Second array |
 | [prop] | <code>any</code> | Optional property to compare in each element of the array |
 
-**Example**  
+**Example**
+
 ```js
 const array1 = [{name: 'Foo', id: 'a'}, {name: 'Bar', id: 'b'}];
 const array2 = [{name: 'Foo', id: 'z'}, {name: 'Zippy', id: 'b'}];
@@ -471,12 +487,14 @@ console.log(intersect(array1, array2, 'name'));
 console.log(intersect(array1, array2, 'id'));
 // Logs [{name: 'Bar', id: 'b'}]
 ```
+
 <a name="module_array..unique"></a>
 
 ### unique(arr, [prop]) ⇒ <code>array</code>
 
 Take an array of elements and return an array containing unique elements.
 If an element is an object or array:
+
 * when `prop` is *undefined*, uses `JSON.stringify()` when checking the elements
 * when `prop` is *provided*, only that property needs to match for the element to be considered a duplicate and thus excluded from the returned array
 
@@ -488,19 +506,22 @@ If an element is an object or array:
 | arr | <code>array</code> | Array to be filtered by uniqueness of elements (or property of elements) |
 | [prop] | <code>any</code> | Optional property to be tested if an element in `arr` is an object or array |
 
-**Example**  
+**Example**
+
 ```js
 const array1 = [1, 2, 3, 2, 5, 1];
 const uniq = unique(array1);
 console.log(uniq);
 // Logs: [1, 2, 3, 5]
 ```
+
 <a name="module_array..diff"></a>
 
 ### diff(array1, array2, [prop]) ⇒ <code>array</code>
 
 Return a subset of `array1`, only including elements that are NOT also in `array2`. The returned array won't include any elements from `array2`.
 If an element is an object or array:
+
 * when `prop` is *undefined*, uses `JSON.stringify()` when performing the comparison on an object or array
 * when `prop` is *provided*, only that property needs to match for the item to be excluded fom the returned array
 
@@ -513,13 +534,15 @@ If an element is an object or array:
 | array2 | <code>array</code> | Array to use as a comparison |
 | [prop] | <code>string</code> | Optional property to be tested if an element in `array1` is an object or array |
 
-**Example**  
+**Example**
+
 ```js
 const array1 = [1, 2, 3, 4];
 const array2 = [2, 3, 5, 6, -1];
 console.log(diff(array1, array2));
 // Logs: [1, 4]
 ```
+
 <a name="module_array..chunk"></a>
 
 ### chunk(arr, n) ⇒ <code>array</code>
@@ -584,7 +607,9 @@ Sort an array with sensible defaults: numbers (or numeric strings) before letter
 <a name="module_color"></a>
 
 ## color
+
 ESM Import Example
+
 ```js
 import {rgb2Hex} from 'ksjs'
 
@@ -595,6 +620,7 @@ import {rgb2Hex} from 'ksjs/color.js'
 ```
 
 CJS Require Example
+
 ```js
 const {rgb2Hex} = require('ksjs/color.cjs');
 // or:
@@ -603,9 +629,9 @@ const {rgb2Hex} = require('ksjs/cjs/color.js');
 
 
 * [color](#module_color)
-  * _static_
+  * *static*
     * [hex2Rgb](#module_color.hex2Rgb)
-  * _inner_
+  * *inner*
     * [rgb2Hex(rgb)](#module_color..rgb2Hex) ⇒ <code>string</code>
     * [rgba2Hex(rgba)](#module_color..rgba2Hex) ⇒ <code>string</code>
     * [rgb2Luminance(rgb)](#module_color..rgb2Luminance) ⇒ <code>number</code>
@@ -637,7 +663,8 @@ Convert an rgb value to a 6-digit hex value. If an *rgba* value is passed, the o
 | --- | --- | --- |
 | rgb | <code>string</code> \| <code>array</code> | either an rgb string such as `'rgb(255, 120, 10)'` or an rgb array such as `[255, 120, 10]` |
 
-**Example**  
+**Example**
+
 ```js
 rgb2Hex('rgb(255, 136, 0)')
 // => '#ff8800'
@@ -648,6 +675,7 @@ rgb2Hex([255, 136, 0])
 rgb2Hex('rgba(255, 136, 0, .8)')
 // => '#ff8800'
 ```
+
 <a name="module_color..rgba2Hex"></a>
 
 ### rgba2Hex(rgba) ⇒ <code>string</code>
@@ -661,7 +689,8 @@ Convert an rgba value to an 8-digit hex value, or an rgb value to a 6-digit hex 
 | --- | --- | --- |
 | rgba | <code>string</code> \| <code>array</code> | either an rgba string such as `'rgba(255, 120, 10, .5)'` or an rgba array such as `[255, 120, 10, .5]` |
 
-**Example**  
+**Example**
+
 ```js
 rgba2Hex('rgba(255, 136, 0, .8)')
 // => '#ff8800cc'
@@ -672,6 +701,7 @@ rgba2Hex([255, 136, 0, .8])
 rgba2Hex('rgb(255, 136, 0)')
 // => '#ff8800'
 ```
+
 <a name="module_color..rgb2Luminance"></a>
 
 ### rgb2Luminance(rgb) ⇒ <code>number</code>
@@ -682,8 +712,8 @@ Convert an RGB color to a luminance value. You probably don't want to use this o
 
 **See**
 
-- [getContrastColor()](#module_color..getContrastColor)
-- [StackOverflow](https://stackoverflow.com/questions/9733288/how-to-programmatically-calculate-the-contrast-ratio-between-two-colors) for more information
+* [getContrastColor()](#module_color..getContrastColor)
+* [StackOverflow](https://stackoverflow.com/questions/9733288/how-to-programmatically-calculate-the-contrast-ratio-between-two-colors) for more information
 
 
 | Param | Type | Description |
@@ -710,7 +740,9 @@ Return darkColor if bgColor is light and lightColor if bgColor is dark. "Light" 
 <a name="module_cookie"></a>
 
 ## cookie
+
 ESM Import Example:
+
 ```js
 import {getCookie} from 'ksjs';
 
@@ -776,7 +808,9 @@ Remove a cookie
 <a name="module_dom"></a>
 
 ## dom
+
 ESM Import Example:
+
 ```js
 import {addClass} from 'ksjs';
 
@@ -1148,7 +1182,9 @@ Insert a script into the DOM with reasonable default properties, returning a pro
 <a name="module_event"></a>
 
 ## event
+
 ESM Import Example:
+
 ```js
 import {addEvent} from 'ksjs';
 
@@ -1215,7 +1251,8 @@ Derived from emitEvent(): (c) 2019 Chris Ferdinandi, MIT License, https://gomake
 | type | <code>string</code> | Name representing the custom event type |
 | detail | <code>Object</code> | Object to make available as the `detail` property of the event handler's `event` argument |
 
-**Example**  
+**Example**
+
 ```js
 // Using this module's addEvent() function
 // Add a custom event handler
@@ -1226,10 +1263,13 @@ addEvent(document.body, 'myCustomEvent', (event) => console.log(event.detail.wea
 triggerEvent(document.body, 'myCustomEvent', {weather: 'sunshine'});
 // Logs: 'sunshine'
 ```
+
 <a name="module_form"></a>
 
 ## form
+
 ESM Import Example:
+
 ```js
 import {getFormData} from 'ksjs';
 
@@ -1267,7 +1307,8 @@ Return the set of successful form controls of the provided `form` element in one
 | .formData(form) | <code>function</code> | Return a `FormData` instance |
 | .array(form) | <code>function</code> | Return form data as an array of objects with `name` and `value` properties |
 
-**Example**  
+**Example**
+
 ```js
 const myform = document.getElementById('myform');
 
@@ -1279,7 +1320,9 @@ console.log(getFormData.object(myform));
 //    meals: ['breakfast', 'dinner']
 // }
 ```
-**Example**  
+
+**Example**
+
 ```js
 const myform = document.getElementById('myform');
 
@@ -1287,7 +1330,9 @@ console.log(getFormData.string(myform));
 // Logs:
 // email=name%40example.com&gender=female&meals[]=breakfast&meals[]=dinner
 ```
-**Example**  
+
+**Example**
+
 ```js
 const myform = document.getElementById('myform');
 
@@ -1312,6 +1357,7 @@ console.log(getFormData.array(myform));
 //    }
 // ]
 ```
+
 <a name="module_form..valuesToFormData"></a>
 
 ### valuesToFormData(values) ⇒ <code>FormData</code>
@@ -1328,7 +1374,9 @@ Note: if the value of a key is an object with a `files` property, each file in t
 <a name="module_jsonp"></a>
 
 ## jsonp
+
 ESM Import Example:
+
 ```js
 import {getJSONP} from 'ksjs';
 
@@ -1358,14 +1406,18 @@ Function for those times when you just need to make a "jsonp" request (and you c
 | [options.data.callback] | <code>string</code> | <code>&quot;jsonp.[timestamp]&quot;</code> | Optional value of the callback query-string parameter to append to the script's `src` |
 | callback(json) | <code>function</code> |  | Function to be called when request is complete. A json object is passed to it. |
 
-**Example**  
+**Example**
+
 ```js
 getJSONP({url: 'https://example.com/api/'})
 ```
+
 <a name="module_math"></a>
 
 ## math
+
 ESM Import Example:
+
 ```js
 import {median} from 'ksjs';
 
@@ -1376,6 +1428,7 @@ import {median} from 'ksjs/math.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 const {median} = require('ksjs/math.cjs');
 // or:
@@ -1515,7 +1568,9 @@ Return the number with the highest value from an array of numbers
 <a name="module_object"></a>
 
 ## object
+
 ESM Import Example:
+
 ```js
 import {deepCopy} from 'ksjs';
 
@@ -1526,6 +1581,7 @@ import {deepCopy} from 'ksjs/object.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 import {deepCopy} from 'ksjs/object.cjs';
 // or:
@@ -1586,7 +1642,7 @@ Deep copy an object (alternative to deepCopy), using graph theory and new Map().
 
 | Param | Type |
 | --- | --- |
-| obj | <code>Object</code> | 
+| obj | <code>Object</code> |
 
 <a name="module_object..deepCopy"></a>
 
@@ -1633,7 +1689,8 @@ Heavily influenced by/mostly ripped off from jQuery.extend
 | target | <code>Object</code> | The target object that will be mutated. Use `{}` to create new object |
 | ...objects | <code>Object</code> | One or more objects to merge into the first |
 
-**Example**  
+**Example**
+
 ```js
 const foo = {
   one: 'singular',
@@ -1665,6 +1722,7 @@ const merged = extend(foo, bar);
 //  saloon: 'wild west',
 // }
 ```
+
 <a name="module_object..getProperty"></a>
 
 ### getProperty(root, properties, fallbackValue) ⇒ <code>\*</code>
@@ -1680,7 +1738,8 @@ Get a nested property of an object in a safe way
 | properties | <code>Array.&lt;String&gt;</code> \| <code>String</code> | Either an array of properties or a dot-delimited string of properties |
 | fallbackValue | <code>any</code> | A value to assign if it's otherwise undefined |
 
-**Example**  
+**Example**
+
 ```js
 const foo = {
   could: {
@@ -1699,6 +1758,7 @@ console.log(getProperty(foo, ['broken', 'not', 'happening']))
 // Logs: undefined
 };
 ```
+
 <a name="module_object..getLastDefined"></a>
 
 ### getLastDefined(root, properties) ⇒ <code>\*</code>
@@ -1713,7 +1773,8 @@ Get a nested property of an object in a safe way
 | root | <code>Object</code> | The root object |
 | properties | <code>Array.&lt;String&gt;</code> \| <code>String</code> | Either an array of properties or a dot-delimited string of properties |
 
-**Example**  
+**Example**
+
 ```js
 const foo = {
   could: {
@@ -1730,6 +1791,7 @@ console.log(getLastDefined(foo, ['shortStop', 'stops', 'short']))
 // Logs: 'ride ends here'
 };
 ```
+
 <a name="module_object..isEmptyObject"></a>
 
 ### isEmptyObject(obj) ⇒ <code>boolean</code>
@@ -1820,7 +1882,9 @@ Return a new object, excluding the properties in the props array.
 <a name="module_promise"></a>
 
 ## promise
+
 ESM Import Example:
+
 ```js
 import {peach} from 'ksjs';
 
@@ -1831,6 +1895,7 @@ import {peach} from 'ksjs/promise.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 import {peach} from 'ksjs/promise.cjs';
 // or:
@@ -1873,7 +1938,8 @@ const {peach} = require('ksjs/cjs/promise.js');
 | fn | <code>ArrayCallback</code> |  | Function that is called for each element in the array, each returning a modified result |
 | [order] | <code>string</code> | <code>&quot;sequence&quot;</code> | Whether to call the callback for each item sequentially (`'sequence'`, default) or at the same time (`'parallel'`). |
 
-**Example**  
+**Example**
+
 ```js
 import {pmap} from 'ksjs/promise.js';
 
@@ -1883,6 +1949,7 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 
 });
 ```
+
 <a name="module_promise..pfilter"></a>
 
 ### pfilter(arr, fn(item,index,array), [order]) ⇒ <code>Promise</code>
@@ -1898,7 +1965,8 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 | fn(item,index,array) | <code>ArrayCallback</code> |  | Function that is called for each element in the array, each returning a modified result |
 | [order] | <code>string</code> | <code>&quot;sequence&quot;</code> | Whether to call the callback for each item sequentially (`'sequence'`, default) or at the same time (`'parallel'`). |
 
-**Example**  
+**Example**
+
 ```js
 import {pmap} from 'ksjs/promise.js';
 
@@ -1908,6 +1976,7 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 
 });
 ```
+
 <a name="module_promise..ArrayCallback"></a>
 
 ### ArrayCallback ⇒ <code>Promise</code>
@@ -1915,14 +1984,16 @@ const indexedFruits = pmap(fruits, (fruit, i) => {
 
 | Param | Type |
 | --- | --- |
-| item | <code>any</code> | 
-| [index] | <code>number</code> | 
-| [array] | <code>array</code> | 
+| item | <code>any</code> |
+| [index] | <code>number</code> |
+| [array] | <code>array</code> |
 
 <a name="module_selection"></a>
 
 ## selection
+
 ESM Import Example:
+
 ```js
 import {getSelection} from 'ksjs';
 
@@ -1988,6 +2059,7 @@ Sets the selection of **all** of the element's contents (including all of its ch
 ### getSelection(el)
 
 Return an object with the following properties related to the selected text within the element:
+
 * `start`: 0-based index of the start of the selection
 * `end`: 0-based index of the end of the selection
 * `length`: the length of the selection
@@ -2002,7 +2074,9 @@ Return an object with the following properties related to the selected text with
 <a name="module_storage"></a>
 
 ## storage
+
 ESM Import Example:
+
 ```js
 import {Storage} from 'ksjs';
 
@@ -2014,7 +2088,7 @@ import {Storage} from 'ksjs/storage.js';
 
 
 * [storage](#module_storage)
-  * _instance_
+  * *instance*
     * [getLength()](#module_storage+getLength) ⇒ <code>number</code>
     * [get(key)](#module_storage+get) ⇒ <code>any</code>
     * [set(key, value)](#module_storage+set) ⇒ <code>string</code>
@@ -2022,7 +2096,7 @@ import {Storage} from 'ksjs/storage.js';
     * [clear()](#module_storage+clear)
     * [getAll()](#module_storage+getAll) ⇒ <code>Object</code>
     * [keys()](#module_storage+keys) ⇒ <code>array</code>
-  * _inner_
+  * *inner*
     * [Storage](#module_storage..Storage)
       * [new Storage([type], [ns])](#new_module_storage..Storage_new)
 
@@ -2117,7 +2191,9 @@ Constructor for storage functions.
 <a name="module_string"></a>
 
 ## string
+
 ESM Import Example:
+
 ```js
 import {slugify} from 'ksjs';
 
@@ -2128,6 +2204,7 @@ import {slugify} from 'ksjs/string.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 const {slugify} require('ksjs/string.cjs');
 // or:
@@ -2136,7 +2213,7 @@ const {slugify} = require('ksjs/cjs/string.js');
 
 
 * [string](#module_string)
-  * _static_
+  * *static*
     * [pluralize(str, num, [ending])](#module_string.pluralize) ⇒ <code>string</code>
     * [changeCase(str, type, [options])](#module_string.changeCase) ⇒ <code>string</code>
     * [slugify(str)](#module_string.slugify) ⇒ <code>string</code>
@@ -2146,7 +2223,7 @@ const {slugify} = require('ksjs/cjs/string.js');
     * [base64Encode(str)](#module_string.base64Encode) ⇒ <code>string</code>
     * [base64Decode(str)](#module_string.base64Decode) ⇒ <code>string</code>
     * [randomString([sep], [prefix])](#module_string.randomString) ⇒ <code>string</code>
-  * _inner_
+  * *inner*
     * [parseStringTemplate(str, obj)](#module_string..parseStringTemplate) ⇒ <code>string</code>
     * [stringTo(value, [type], [options])](#module_string..stringTo) ⇒ <code>Boolean</code> \| <code>Number</code> \| <code>Array</code>
     * [stripTags(str)](#module_string..stripTags) ⇒ <code>string</code>
@@ -2181,7 +2258,8 @@ Changes the case of the provided words according to the `type`.
 | type | <code>string</code> | One of 'title|sentence|caps|camel|pascal|slug|snake' |
 | [options] | <code>object</code> | Optional options object. Its use depends on the type of case change |
 
-**Example**  
+**Example**
+
 ```js
 const oldMan = 'the old man and the sea';
 
@@ -2197,6 +2275,7 @@ console.log(changeCase('the-old-man-and-the-sea', 'sentence', {unslugify: true})
 console.log(changeCase(oldMan, 'camel'));
 // Logs: 'theOldManAndTheSea'
 ```
+
 <a name="module_string.slugify"></a>
 
 ### slugify(str) ⇒ <code>string</code>
@@ -2210,7 +2289,8 @@ Slugify a string by lowercasing it and replacing white spaces and non-alphanumer
 | --- | --- | --- |
 | str | <code>string</code> | String to be converted to a slug |
 
-**Example**  
+**Example**
+
 ```js
 console.log(slugify('Hello there, how are you?'));
 // Logs: 'hello-there-how-are-you'
@@ -2218,9 +2298,11 @@ console.log(slugify('Hello there, how are you?'));
 console.log(slugify('  You? & Me<3* '));
 // Logs: 'you-me-3'
 ```
+
 <a name="module_string.truncate"></a>
 
 ### truncate(string, options) ⇒ <code>string</code>
+
 **Returns**: <code>string</code> - The truncated string, or the full string if it's shorter than the total amount to truncate<br />
 
 
@@ -2232,7 +2314,8 @@ console.log(slugify('  You? & Me<3* '));
 | [options.end] | <code>int</code> |  | The number of characters to keep at the end of the string. If falsy, no truncation will occur at the end. |
 | [options.separator] | <code>string</code> | <code>&quot;&#x27;...&#x27;&quot;</code> | The separator to use when truncating the string. Defaults to '...' |
 
-**Example**  
+**Example**
+
 ```js
 const str = 'Collaboratively administrate empowered markets';
 
@@ -2251,6 +2334,7 @@ console.log(truncate(str, {start: 10, end: 10}));
 console.log(truncate(str, {start: 50, end: 50}));
 // Logs: 'Collaboratively administrate empowered markets'
 ```
+
 <a name="module_string.rot13"></a>
 
 ### rot13(string) ⇒ <code>string</code>
@@ -2326,6 +2410,7 @@ The string can begin with an optional `prefix`
 <a name="module_string..parseStringTemplate"></a>
 
 ### parseStringTemplate(str, obj) ⇒ <code>string</code>
+
 **Returns**: <code>string</code> - String with tokens replaced with values<br />
 
 **See**: https://stackoverflow.com/a/59084440
@@ -2362,7 +2447,8 @@ Strip tags from a string
 | --- | --- | --- |
 | str | <code>string</code> | String to be stripped of tags |
 
-**Example**  
+**Example**
+
 ```js
 console.log(stripTags('<p>Hello</p>'));
 // Logs: 'Hello'
@@ -2370,10 +2456,13 @@ console.log(stripTags('<p>Hello</p>'));
 console.log(stripTags('<p>Hello</p><p>World</p>'));
 // Logs: 'HelloWorld'
 ```
+
 <a name="module_timer"></a>
 
 ## timer
+
 ESM Import Example:
+
 ```js
 import {debounce} from 'ksjs';
 
@@ -2384,6 +2473,7 @@ import {debounce} from 'ksjs/timer.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 import {debounce} from 'ksjs/timer.cjs';
 // or:
@@ -2438,7 +2528,8 @@ Set up a function to be called once at the end of repeated potential calls withi
 | [timerDelay] | <code>number</code> | <code>200</code> | Number of milliseconds to delay before firing once at the end |
 | [ctx] | <code>Element</code> | <code>this</code> | The context in which to call `fn` |
 
-**Example**  
+**Example**
+
 ```js
 const scrollLog = function(event) {
 console.log('Started resizing the window!');
@@ -2446,6 +2537,7 @@ console.log('Started resizing the window!');
 
 window.addEventListener('resize', debounce(scrollLog));
 ```
+
 <a name="module_timer..unbounce"></a>
 
 ### unbounce(fn, [timerDelay], [ctx])
@@ -2460,7 +2552,8 @@ Set up a function to be called once at the end of repeated potential calls withi
 | [timerDelay] | <code>number</code> | <code>200</code> | Number of milliseconds within which to avoid calling the same function |
 | [ctx] | <code>Element</code> | <code>this</code> | The context in which to call `fn` |
 
-**Example**  
+**Example**
+
 ```js
 const scrollLog = function(event) {
 console.log('Started resizing the window!');
@@ -2468,6 +2561,7 @@ console.log('Started resizing the window!');
 
 window.addEventListener('resize', debounce(scrollLog));
 ```
+
 <a name="module_timer..throttle"></a>
 
 ### throttle(fn, [timerDelay], [context])
@@ -2500,7 +2594,7 @@ Set up a function to be called immediately before the next repaint using `reques
 ### idle(fn, [context])
 
 Set up a function to be called when the UI thread is idle by using `requestIdleCallback()`.
-Falls back to using `requestAnimationFrame (or an rAF polyfill) if `requestIdleCallback()` is not supported.
+Falls back to using `requestAnimationFrame (or an rAF polyfill) if`requestIdleCallback()` is not supported.
 
 
 
@@ -2512,6 +2606,7 @@ Falls back to using `requestAnimationFrame (or an rAF polyfill) if `requestIdleC
 <a name="module_timer..deadline"></a>
 
 ### deadline(promise, ms, exception) ⇒ <code>any</code>
+
 **Returns**: <code>any</code> - The result of the promise if it is resolved or the exception if it is rejected<br />
 
 
@@ -2536,7 +2631,9 @@ Like setTimeout, but with a promise that resolves when the timeout has expired.
 <a name="module_url"></a>
 
 ## url
+
 ESM Import Example:
+
 ```js
 import {serialize} from 'ksjs';
 
@@ -2547,6 +2644,7 @@ import {serialize} from 'ksjs/url.js';
 ```
 
 CommonJS Require Example:
+
 ```js
 import {serialize} from 'ksjs/url.cjs';
 // or:
@@ -2635,12 +2733,13 @@ Convert an object to a serialized string
 | [options.arrayBrackets] | <code>boolean</code> | If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[]=won&foo[]=too`; otherwise, `foo=won&foo=too` |
 | [options.indexed] | <code>boolean</code> | If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[0]=won&foo[1]=too` |
 
-**Example**  
 ```js
 console.log(serialize({foo: 'yes', bar: 'again}));
 // Logs: 'foo=yes&bar=again'
 ```
-**Example**  
+
+**Example**
+
 ```js
 console.log(serialize({foo: ['yes', 'again']}));
 // Logs: 'foo=yes&foo=again'
@@ -2658,6 +2757,7 @@ console.log(serialize(['yes', 'again'], {prefix: 'foo'}));
 console.log(serialize(['yes', 'again'], {prefix: 'foo', indexed: false}));
 // Logs: 'foo[]=yes&foo[]=again'
 ```
+
 <a name="module_url..unserialize"></a>
 
 ### unserialize([string], [options]) ⇒ <code>Object</code>
@@ -2675,4 +2775,3 @@ Convert a serialized string to an object
 | [options.empty] | <code>any</code> | <code>true</code> | The returned value of a param with no value (e.g. `?foo&bar&baz`). Typically, this would be either `true` or `''` |
 | [options.splitValues] | <code>Boolean</code> \| <code>RegExp</code> \| <code>String</code> | <code>false</code> | If NOT `false`, splits converts to an array all values with one or more matches of the `splitValues` option. If `true`, splits on commas (`/,/`). So, `?foo=bar,baz` becomes `{foo: ['bar', 'baz']}` |
 | [options.shallow] | <code>boolean</code> | <code>false</code> | If `true`, does NOT attempt to build nested object |
-
