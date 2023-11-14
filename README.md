@@ -132,6 +132,7 @@ import {getJSON} from '@bamf-health/bamfjs/ajax.mjs';
   * [getJSON([url], [options])](#module_ajax..getJSON) ⇒ <code>Promise</code>
   * [postJSON([url], [options])](#module_ajax..postJSON) ⇒ <code>Promise</code>
   * [postFormData([url], [options])](#module_ajax..postFormData) ⇒ <code>Promise</code>
+  * [fetchHTML(url, selector)](#module_ajax..fetchHTML) ⇒ <code>Promise</code>
 
 <a name="module_ajax..ajax"></a>
 
@@ -198,6 +199,20 @@ Send a POST request with `FormData` derived from form element provided by `optio
 | --- | --- | --- | --- |
 | [url] | <code>string</code> | <code>location.href</code> | The URL of the resource |
 | [options] | <code>Object</code> | <code>{}</code> | See [ajax](#module_ajax..ajax) for details |
+
+<a name="module_ajax..fetchHTML"></a>
+
+### fetchHTML(url, selector) ⇒ <code>Promise</code>
+
+Fetch an HTML document and return the html string (or a subset of it) from the resolved Promise
+
+**Returns**: <code>Promise</code> - A resolved or rejected Promise, resolving to an HTML string<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| url | <code>string</code> | The URL of the resource to fetch |
+| selector | <code>string</code> | A selector specifying the html content in the resource to return |
 
 <a name="module_array"></a>
 
@@ -1533,6 +1548,7 @@ const {deepCopy} = require('@bamf-health/bamfjs/cjs/object.js');
   * [isPlainObject(obj)](#module_object..isPlainObject)
   * [clone(obj)](#module_object..clone) ⇒ <code>Object</code>
   * [deepCopy(obj, [forceFallback], [cache])](#module_object..deepCopy) ⇒ <code>Object</code>
+  * [isDeepEqual(objectA, objectB)](#module_object..isDeepEqual) ⇒ <code>Boolean</code>
   * [extend(target, ...objects)](#module_object..extend) ⇒ <code>Object</code>
   * [getProperty(root, properties, fallbackValue)](#module_object..getProperty) ⇒ <code>\*</code>
   * [getLastDefined(root, properties)](#module_object..getLastDefined) ⇒ <code>\*</code>
@@ -1596,6 +1612,20 @@ Deep copy an object, avoiding circular references and the infinite loops they mi
 | obj | <code>Object</code> | The object to copy |
 | [forceFallback] | <code>Boolean</code> | If set to `true`, doesn't try to use native `structuredClone` function first. |
 | [cache] | <code>Array.&lt;Object&gt;</code> | Used internally to avoid circular references |
+
+<a name="module_object..isDeepEqual"></a>
+
+### isDeepEqual(objectA, objectB) ⇒ <code>Boolean</code>
+
+Compare two items for equality, recursing through nested objects or arrays
+
+**Returns**: <code>Boolean</code> - True if the items are deeply equal, false otherwise<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| objectA | <code>\*</code> | The first item to compare |
+| objectB | <code>\*</code> | The second item to compare |
 
 <a name="module_object..extend"></a>
 
@@ -2612,7 +2642,8 @@ Convert an object to a serialized string
 | [options.raw] | <code>boolean</code> | If `true`, property values are NOT url-decoded |
 | [options.prefix] | <code>string</code> | If set, and `data` is an array, sets as if prefix were the name of the array |
 | [options.arrayToString] | <code>boolean</code> | If `true`, calls .toString() on arrays. So `{foo: ['won', 'too']}` becomes `foo=won%2Ctoo`. Used in conjunction with `{raw: true}`, the same object becomes `foo=won,too` |
-| [options.indexed] | <code>boolean</code> | If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[0]=won&foo[1]=too`; otherwise, `foo[]=won&foo[]=too` |
+| [options.arrayBrackets] | <code>boolean</code> | If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[]=won&foo[]=too`; otherwise, `foo=won&foo=too` |
+| [options.indexed] | <code>boolean</code> | If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[0]=won&foo[1]=too` |
 
 **Example**  
 ```js
@@ -2621,9 +2652,11 @@ console.log(serialize({foo: 'yes', bar: 'again}));
 ```
 **Example**  
 ```js
+console.log(serialize({foo: ['yes', 'again']}));
+// Logs: 'foo=yes&foo=again'
 console.log(serialize({foo: ['yes', 'again']}, {arrayToString: true}));
 // Logs: 'foo=yes,again'
-console.log(serialize({foo: ['yes', 'again']}));
+console.log(serialize({foo: ['yes', 'again']}, {arrayBrackets: true}));
 // Logs: 'foo[]=yes&foo[]=again'
 
 console.log(serialize({foo: ['yes', 'again']}, {indexed: true}));
