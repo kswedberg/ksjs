@@ -120,8 +120,8 @@ export const clone = function(obj) {
 */
 export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
 
-  // just return if obj is immutable or primitive value
-  if (obj === null || typeof obj !== 'object') {
+  // just return if obj is immutable or primitive value or a Date object
+  if (obj === null || typeof obj !== 'object' || obj instanceof Date) {
     return obj;
   }
 
@@ -165,6 +165,12 @@ export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
   return copy;
 };
 
+const isDateOrFunction = (obj) => {
+  const type = ObjectProto.toString.call(obj);
+
+  return type === '[object Date]' || type === '[object Function]';
+};
+
 /**
  * Compare two items for equality, recursing through nested objects or arrays
  * @function isDeepEqual
@@ -173,12 +179,16 @@ export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
  * @returns {Boolean} True if the items are deeply equal, false otherwise
  */
 export const isDeepEqual = function isDeepEqual(objectA, objectB) {
-  // If it's the same object, or the two items are primitives, then they are equal
+  // If it's the same object, or the two items are equal primitives, then they are equal
   if (objectA === objectB) {
     return true;
   }
 
-  if (!(objectA instanceof Object)) {
+  if (isDateOrFunction(objectA) && isDateOrFunction(objectB)) {
+    return objectA.toString() === objectB.toString();
+  }
+
+  if (!isObject(objectA) || !isObject(objectB)) {
     return objectA === objectB;
   }
   const objectAKeys = Object.keys(objectA);

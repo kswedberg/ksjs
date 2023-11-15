@@ -69,6 +69,7 @@ describe('Object', () => {
 
   describe('isDeepEqual', () => {
     const original = {
+      date: new Date(2000, 12, 28),
       foo: {
         bar: {
           baz: 'Hello',
@@ -85,7 +86,9 @@ describe('Object', () => {
         return 'hello';
       },
     };
+
     const sameExceptOrder = {
+      date: new Date(2000, 12, 28),
       foo: {
         bar: {
           baz: 'Hello',
