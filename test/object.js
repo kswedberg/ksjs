@@ -127,10 +127,46 @@ describe('Object', () => {
         ],
       },
     ];
+
+    const complex = {
+      schedulable: 'yes',
+      role_id: 'rol_qlbm8puQnIfitwvs',
+      name: 'Another Role',
+      auth0_role_name: 'Another Role_9c2542fa-93dc-43f0-ac17-05c732e5284f',
+      description: 'Another Role Description',
+      location: {
+        id: '9c2542fa-93dc-43f0-ac17-05c732e5284f',
+        name: 'Grand Rapids',
+        created_at: '2023-09-07T12:12:50.176Z',
+        updated_at: '2023-09-07T12:12:50.176Z',
+      },
+      moduleAccess: [
+        {
+          scheduling: [
+            'NONE_SCHEDULING',
+          ],
+          users: [
+            'NONE_USER',
+          ],
+          roles: [
+            'ROLES_READ',
+          ],
+          clinics: [
+            'CLINIC_READ',
+            'CLINIC_WRITE',
+            'CLINIC_DELETE',
+          ],
+        },
+      ],
+      signAccess: [
+        {},
+      ],
+    };
     const copy1 = deepCopy(original);
     const copy2 = deepCopy(original);
     const arrayCopy1 = deepCopy(originalArray);
     const arrayCopy2 = deepCopy(originalArray);
+    const complex2 = deepCopy(complex);
 
     copy2.foo.bar.baz = 'Bye';
     arrayCopy2[3].name.push({suffix: 'Jr.'});
@@ -147,7 +183,9 @@ describe('Object', () => {
     it('compares deeply nested object with another that has been modified', () => {
       assert.strictEqual(isDeepEqual(original, copy2), false);
     });
-
+    it('compares complex objects that are the same', () => {
+      assert.strictEqual(isDeepEqual(complex, complex2), true);
+    });
     it('compares deeply nested arrays that are the same', () => {
       assert.strictEqual(isDeepEqual(originalArray, arrayCopy1), true);
     });
