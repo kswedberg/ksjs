@@ -171,6 +171,9 @@ describe('Object', () => {
     copy2.foo.bar.baz = 'Bye';
     arrayCopy2[3].name.push({suffix: 'Jr.'});
 
+    it('compares falsey values', () => {
+      assert.strictEqual(isDeepEqual({test: undefined}, {test: undefined}), true);
+    });
     it('compares deeply nested objects that are the same', () => {
       assert.strictEqual(isDeepEqual(original, copy1), true);
     });

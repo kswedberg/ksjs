@@ -199,11 +199,6 @@ export const isDeepEqual = function isDeepEqual(objectA, objectB) {
   }
 
   for (const key of objectAKeys) {
-    // second object does not have the same key as first object, NOT equal
-    if (objectB[key] === undefined) {
-      return false;
-    }
-
     // Recursively call isDeepEqual on the property's values
     if (!isDeepEqual(objectA[key], objectB[key])) {
       return false;
