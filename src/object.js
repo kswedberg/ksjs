@@ -171,6 +171,11 @@ const isDateOrFunction = (obj) => {
   return type === '[object Date]' || type === '[object Function]';
 };
 
+const isRegExEqual = (regA, regB) => {
+  return regA.source === regB.source &&
+    regA.flags.split('').sort().join('') === regB.flags.split('').sort().join('');
+};
+
 /**
  * Compare two items for equality, recursing through nested objects or arrays
  * @function isDeepEqual
@@ -188,9 +193,14 @@ export const isDeepEqual = function isDeepEqual(objectA, objectB) {
     return objectA.toString() === objectB.toString();
   }
 
+  if (objectA instanceof RegExp && objectB instanceof RegExp) {
+    return isRegExEqual(objectA, objectB);
+  }
+
   if (!isObject(objectA) || !isObject(objectB)) {
     return objectA === objectB;
   }
+
   const objectAKeys = Object.keys(objectA);
 
   // If different number of props, then NOT equal
