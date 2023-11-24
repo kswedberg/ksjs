@@ -2466,6 +2466,7 @@ const {deepCopy} = require('ksjs/cjs/object.js');
 <li><a href="#module_object..isPlainObject">isPlainObject(obj)</a></li>
 <li><a href="#module_object..clone">clone(obj)</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..deepCopy">deepCopy(obj, [forceFallback], [cache])</a> ⇒ <code>Object</code></li>
+<li><a href="#module_object..isDeepEqual">isDeepEqual(objectA, objectB)</a> ⇒ <code>Boolean</code></li>
 <li><a href="#module_object..extend">extend(target, …objects)</a> ⇒ <code>Object</code></li>
 <li><a href="#module_object..getProperty">getProperty(root, properties, fallbackValue)</a> ⇒ <code>*</code></li>
 <li><a href="#module_object..getLastDefined">getLastDefined(root, properties)</a> ⇒ <code>*</code></li>
@@ -2563,6 +2564,31 @@ Derived from lodash _.isPlainObject</p>
 <td>[cache]</td>
 <td><code>Array.&lt;Object&gt;</code></td>
 <td>Used internally to avoid circular references</td>
+</tr>
+</tbody>
+</table>
+<p><a name="module_object..isDeepEqual"></a></p>
+<h3>isDeepEqual(objectA, objectB) ⇒ <code>Boolean</code></h3>
+<p>Compare two items for equality, recursing through nested objects or arrays</p>
+<p><strong>Returns</strong>: <code>Boolean</code> - True if the items are deeply equal, false otherwise<br /></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>objectA</td>
+<td><code>*</code></td>
+<td>The first item to compare</td>
+</tr>
+<tr>
+<td>objectB</td>
+<td><code>*</code></td>
+<td>The second item to compare</td>
 </tr>
 </tbody>
 </table>

@@ -120,8 +120,8 @@ export const clone = function(obj) {
 */
 export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
 
-  // just return if obj is immutable or primitive value
-  if (obj === null || typeof obj !== 'object') {
+  // just return if obj is immutable or primitive value or a Date object
+  if (obj === null || typeof obj !== 'object' || obj instanceof Date) {
     return obj;
   }
 
@@ -165,6 +165,58 @@ export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
   return copy;
 };
 
+const isDateOrFunction = (obj) => {
+  const type = ObjectProto.toString.call(obj);
+
+  return type === '[object Date]' || type === '[object Function]';
+};
+
+const isRegExEqual = (regA, regB) => {
+  return regA.source === regB.source &&
+    regA.flags.split('').sort().join('') === regB.flags.split('').sort().join('');
+};
+
+/**
+ * Compare two items for equality, recursing through nested objects or arrays
+ * @function isDeepEqual
+ * @param {*} objectA The first item to compare
+ * @param {*} objectB The second item to compare
+ * @returns {Boolean} True if the items are deeply equal, false otherwise
+ */
+export const isDeepEqual = function isDeepEqual(objectA, objectB) {
+  // If it's the same object, or the two items are equal primitives, then they are equal
+  if (objectA === objectB) {
+    return true;
+  }
+
+  if (isDateOrFunction(objectA) && isDateOrFunction(objectB)) {
+    return objectA.toString() === objectB.toString();
+  }
+
+  if (objectA instanceof RegExp && objectB instanceof RegExp) {
+    return isRegExEqual(objectA, objectB);
+  }
+
+  if (!isObject(objectA) || !isObject(objectB)) {
+    return objectA === objectB;
+  }
+
+  const objectAKeys = Object.keys(objectA);
+
+  // If different number of props, then NOT equal
+  if (objectAKeys.length !== Object.keys(objectB).length) {
+    return false;
+  }
+
+  for (const key of objectAKeys) {
+    // Recursively call isDeepEqual on the property's values
+    if (!isDeepEqual(objectA[key], objectB[key])) {
+      return false;
+    }
+  }
+
+  return true;
+};
 
 /**
  * Deep merge two or more objects in turn, with right overriding left

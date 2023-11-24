@@ -1538,6 +1538,7 @@ const {deepCopy} = require('ksjs/cjs/object.js');
   * [isPlainObject(obj)](#module_object..isPlainObject)
   * [clone(obj)](#module_object..clone) ⇒ <code>Object</code>
   * [deepCopy(obj, [forceFallback], [cache])](#module_object..deepCopy) ⇒ <code>Object</code>
+  * [isDeepEqual(objectA, objectB)](#module_object..isDeepEqual) ⇒ <code>Boolean</code>
   * [extend(target, ...objects)](#module_object..extend) ⇒ <code>Object</code>
   * [getProperty(root, properties, fallbackValue)](#module_object..getProperty) ⇒ <code>\*</code>
   * [getLastDefined(root, properties)](#module_object..getLastDefined) ⇒ <code>\*</code>
@@ -1601,6 +1602,20 @@ Deep copy an object, avoiding circular references and the infinite loops they mi
 | obj | <code>Object</code> | The object to copy |
 | [forceFallback] | <code>Boolean</code> | If set to `true`, doesn't try to use native `structuredClone` function first. |
 | [cache] | <code>Array.&lt;Object&gt;</code> | Used internally to avoid circular references |
+
+<a name="module_object..isDeepEqual"></a>
+
+### isDeepEqual(objectA, objectB) ⇒ <code>Boolean</code>
+
+Compare two items for equality, recursing through nested objects or arrays
+
+**Returns**: <code>Boolean</code> - True if the items are deeply equal, false otherwise<br />
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| objectA | <code>\*</code> | The first item to compare |
+| objectB | <code>\*</code> | The second item to compare |
 
 <a name="module_object..extend"></a>
 

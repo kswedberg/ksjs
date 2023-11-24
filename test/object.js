@@ -1,4 +1,4 @@
-import {deepCopy, clone, extend, setProperty, getProperty, getLastDefined, pick, omit, isPlainObject} from '../src/object.js';
+import {deepCopy, isDeepEqual, clone, extend, setProperty, getProperty, getLastDefined, pick, omit, isPlainObject} from '../src/object.js';
 
 const assert = require('assert');
 
@@ -64,6 +64,136 @@ describe('Object', () => {
       assert.strictEqual(schemaCopy[0].title, 'Foo Bar');
       assert.strictEqual(schema.length, 3);
       assert.strictEqual(schemaCopy.length, 2);
+    });
+  });
+
+  describe('isDeepEqual', () => {
+    const original = {
+      date: new Date(2000, 12, 28),
+      foo: {
+        bar: {
+          baz: 'Hello',
+          fn() {
+            return 'who are you?';
+          },
+        },
+        flotsam: ['Meet George Jetsam', 'Jude, his wife'],
+      },
+      bar: 'hello',
+      firstName: 'Jane',
+      lastName: 'Doe',
+      cb: function() {
+        return 'hello';
+      },
+    };
+
+    const sameExceptOrder = {
+      date: new Date(2000, 12, 28),
+      foo: {
+        bar: {
+          baz: 'Hello',
+          fn() {
+            return 'who are you?';
+          },
+        },
+        flotsam: ['Meet George Jetsam', 'Jude, his wife'],
+      },
+      firstName: 'Jane',
+      lastName: 'Doe',
+      bar: 'hello',
+      cb: function() {
+        return 'hello';
+      },
+    };
+
+    const originalArray = [
+      'hello!',
+      {
+        foo: {
+          bar: {
+            baz: 'Hello',
+            fn() {
+              return 'who are you?';
+            },
+          },
+          flotsam: ['Meet George Jetsam', 'Jude, his wife'],
+        },
+      },
+      {bar: 'hello'},
+      {
+        name: [
+          {firstName: 'Jane'},
+          {lastName: 'Doe'},
+        ],
+      },
+    ];
+
+    const complex = {
+      schedulable: 'yes',
+      role_id: 'rol_qlbm8puQnIfitwvs',
+      name: 'Another Role',
+      auth0_role_name: 'Another Role_9c2542fa-93dc-43f0-ac17-05c732e5284f',
+      description: 'Another Role Description',
+      location: {
+        id: '9c2542fa-93dc-43f0-ac17-05c732e5284f',
+        name: 'Grand Rapids',
+        created_at: '2023-09-07T12:12:50.176Z',
+        updated_at: '2023-09-07T12:12:50.176Z',
+      },
+      moduleAccess: [
+        {
+          scheduling: [
+            'NONE_SCHEDULING',
+          ],
+          users: [
+            'NONE_USER',
+          ],
+          roles: [
+            'ROLES_READ',
+          ],
+          clinics: [
+            'CLINIC_READ',
+            'CLINIC_WRITE',
+            'CLINIC_DELETE',
+          ],
+        },
+      ],
+      signAccess: [
+        {},
+      ],
+    };
+    const copy1 = deepCopy(original);
+    const copy2 = deepCopy(original);
+    const arrayCopy1 = deepCopy(originalArray);
+    const arrayCopy2 = deepCopy(originalArray);
+    const complex2 = deepCopy(complex);
+
+    copy2.foo.bar.baz = 'Bye';
+    arrayCopy2[3].name.push({suffix: 'Jr.'});
+
+    it('compares falsey values', () => {
+      assert.strictEqual(isDeepEqual({test: undefined}, {test: undefined}), true);
+    });
+    it('compares deeply nested objects that are the same', () => {
+      assert.strictEqual(isDeepEqual(original, copy1), true);
+    });
+    it('compares deeply nested objects that are the same in every way except the order of one of the properties', () => {
+      assert.strictEqual(isDeepEqual(original, sameExceptOrder), true);
+    });
+    it('compares stringified objects that are the same in every way except the order of one of the properties', () => {
+      assert.strictEqual(JSON.stringify(original) === JSON.stringify(sameExceptOrder), false);
+    });
+    it('compares deeply nested object with another that has been modified', () => {
+      assert.strictEqual(isDeepEqual(original, copy2), false);
+    });
+    it('compares complex objects that are the same', () => {
+      assert.strictEqual(isDeepEqual(complex, complex2), true);
+    });
+    it('compares deeply nested arrays that are the same', () => {
+      assert.strictEqual(isDeepEqual(originalArray, arrayCopy1), true);
+    });
+    it('compares deeply nested arrays that are different', () => {
+      assert.strictEqual(isDeepEqual(originalArray, arrayCopy2), false);
     });
   });
 
