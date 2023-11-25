@@ -29,7 +29,7 @@ const buildMarkdown = async(files) => {
     console.log(err);
   }
 
-  return content;
+  return `<!-- markdownlint-disable MD036 -->\n${content}`;
 };
 
 const md2html = (content) => {

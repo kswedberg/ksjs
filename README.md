@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD036 -->
 # ksjs
 
 This repo contains a bunch of plain JavaScript functions that come in handy while working on various projects. They are mostly provided as ES modules, but a subset of them are also offered as CommonJS modules so they can easily be used in an older node.js environment.
@@ -2732,6 +2733,8 @@ Convert an object to a serialized string
 | [options.arrayToString] | <code>boolean</code> | If `true`, calls .toString() on arrays. So `{foo: ['won', 'too']}` becomes `foo=won%2Ctoo`. Used in conjunction with `{raw: true}`, the same object becomes `foo=won,too` |
 | [options.arrayBrackets] | <code>boolean</code> | If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[]=won&foo[]=too`; otherwise, `foo=won&foo=too` |
 | [options.indexed] | <code>boolean</code> | If `true` (and `options.arrayToString` is NOT `true`), arrays take the form of `foo[0]=won&foo[1]=too` |
+
+**Example**
 
 ```js
 console.log(serialize({foo: 'yes', bar: 'again}));
