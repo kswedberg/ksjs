@@ -120,8 +120,8 @@ export const clone = function(obj) {
 */
 export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
 
-  // just return if obj is immutable or primitive value or a Date object
-  if (obj === null || typeof obj !== 'object' || obj instanceof Date) {
+  // just return if obj is immutable or primitive value or a regular expression
+  if (obj === null || typeof obj !== 'object' || obj instanceof RegExp) {
     return obj;
   }
 
@@ -134,10 +134,9 @@ export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
     } catch (err) {
       // silently fall back on error
     }
-
   }
 
-  // if obj is hit, it is in circular structure
+  // if obj is hit, it is in circular structure, so return the copy
   const hit = cache.find((c) => c.original === obj);
 
   if (hit) {
@@ -153,6 +152,21 @@ export const deepCopy = function deepCopy(obj, forceFallback, cache = []) {
     copy,
   });
 
+  // Handle Date objects
+  if (obj instanceof Date) {
+    return new Date(+obj);
+  }
+
+  // Handle Set objects
+  if (obj instanceof Set) {
+    return new Set(deepCopy([...obj]));
+  }
+  // Handle Map objects
+  if (obj instanceof Map) {
+    return new Map(deepCopy([...obj]));
+  }
+
+  // Handle POJOs and arrays
   Object.keys(obj).forEach((key) => {
     if ((key === 'constructor' && typeof obj[key] === 'function') || key === '__proto__') {
       return;
