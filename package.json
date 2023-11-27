@@ -2,7 +2,7 @@
   "name": "ksjs",
   "title": "ksjs",
   "description": "A bunch of random JavaScript functions",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "author": "Karl Swedberg",
   "license": "MIT",
   "scripts": {
