@@ -7,6 +7,7 @@ describe('Object', () => {
   describe('deepCopy', () => {
     let original = {
       foo: {
+        date: new Date(2000, 11, 28),
         bar: {
           baz: 'Hello',
           fn() {
@@ -18,6 +19,10 @@ describe('Object', () => {
       bar: 'hello',
       firstName: 'Jane',
       lastName: 'Doe',
+      regex: /hello/,
+      regexToChange: /hello/gi,
+      set: new Set([{one: 'two'}]),
+      map: new Map([['first', {one: 'two'}], ['second', 'four']]),
       cb: function() {
         return 'hello';
       },
@@ -30,6 +35,7 @@ describe('Object', () => {
 
     it('copies deeply nested object', () => {
       assert.strictEqual(original.foo.bar.baz, copy.foo.bar.baz);
+      assert.strictEqual(original.regex.toString(), copy.regex.toString());
     });
 
     it('preserves original when copy is mutated & vice versa', () => {
@@ -37,6 +43,146 @@ describe('Object', () => {
       assert.notStrictEqual(original.firstName, copy.firstName);
     });
 
+    it('handles dates and regular expressions', () => {
+      original.foo.date.setFullYear(2002);
+      original.regexToChange = /goodbye/;
+
+      assert.notStrictEqual(original.foo.date.getFullYear(), copy.foo.date.getFullYear());
+      assert.strictEqual(copy.foo.date.getFullYear(), 2000);
+      assert.strictEqual(copy.regexToChange.source, 'hello');
+      assert.strictEqual(copy.regexToChange.flags.length, 2);
+    });
+
+    it('handles Set objects', () => {
+      original.set.add('bar');
+      original.set.forEach((item) => {
+        if (typeof item === 'object') {
+          item.two = 'four';
+        }
+      });
+
+      assert.notStrictEqual(original.set.size, copy.set.size);
+      assert.strictEqual(copy.set.size, 1);
+
+      original.set.forEach((item) => {
+        if (typeof item === 'object') {
+          assert.strictEqual(item.one, 'two');
+          assert.strictEqual(item.two, 'four');
+        }
+      });
+      copy.set.forEach((item) => {
+        assert.strictEqual(item.one, 'two');
+        assert.strictEqual(item.two, undefined);
+      });
+    });
+
+    it('handles Map objects', () => {
+      original.map.set('second', 'five');
+      original.map.set('third', 'Charles');
+      original.map.set('first', {one: 'changed'});
+      copy.map.delete('second');
+
+      assert.strictEqual(original.map.get('second'), 'five');
+      assert.strictEqual(copy.map.get('second'), undefined);
+      assert.strictEqual(copy.map.get('first').one, 'two');
+      assert.notStrictEqual(original.map.get('first'), copy.map.get('first'));
+    });
+
+    const originalFirst = {foo: 'foo', bar: 'bar'};
+    const originalSet = new Set([originalFirst, 'two', 'three']);
+    const copySet = deepCopy(originalSet, true);
+
+    it('deep copies a Set', () => {
+      // Modify members of original and copy
+      originalSet.add('original');
+      copySet.add('copy');
+      [...originalSet][0].foo = 'original';
+
+      copySet.forEach((item) => {
+        if (typeof item === 'object') {
+          item.bar = 'copy';
+        }
+      });
+
+      assert.strictEqual(originalSet.has('original'), true);
+      assert.strictEqual(copySet.has('original'), false);
+      assert.strictEqual(originalSet.has('copy'), false);
+      assert.strictEqual(copySet.has('copy'), true);
+      assert.strictEqual(originalSet.has(originalFirst), true);
+      assert.strictEqual(copySet.has(originalFirst), false);
+
+      assert.strictEqual(copySet.size, 4);
+      originalSet.forEach((item) => {
+        if (typeof item === 'object') {
+          assert.strictEqual(item.foo, 'original');
+          assert.strictEqual(item.bar, 'bar');
+        }
+      });
+    });
+
+    // If the environment has structuredClone, all the tests have been using it
+    // So we should also run tests with the forced fallback
+    if (typeof structuredClone !== 'undefined') {
+      const forcedFallbackCopy = deepCopy(original, true);
+
+      forcedFallbackCopy.bar = 'goodbye';
+      original.firstName = 'T.G.I.F.';
+
+      it('copies deeply nested object', () => {
+        assert.strictEqual(original.foo.bar.baz, forcedFallbackCopy.foo.bar.baz);
+        assert.strictEqual(original.regex.toString(), forcedFallbackCopy.regex.toString());
+      });
+
+      it('preserves forcedFallbackCopy when original is mutated & vice versa', () => {
+        assert.notStrictEqual(original.bar, forcedFallbackCopy.bar);
+        assert.notStrictEqual(original.firstName, forcedFallbackCopy.firstName);
+      });
+
+      it('handles dates and regular expressions', () => {
+        original.foo.date.setFullYear(2002);
+        original.regexToChange = /goodbye/;
+
+        assert.notStrictEqual(original.foo.date.getFullYear(), forcedFallbackCopy.foo.date.getFullYear());
+        assert.strictEqual(forcedFallbackCopy.foo.date.getFullYear(), 2000);
+        assert.strictEqual(forcedFallbackCopy.regexToChange.source, 'hello');
+        assert.strictEqual(forcedFallbackCopy.regexToChange.flags.length, 2);
+      });
+
+      it('handles Set and Map objects', () => {
+        original.set.add('bar');
+        original.set.forEach((item) => {
+          if (typeof item === 'object') {
+            item.two = 'four';
+          }
+        });
+
+        original.map.set('second', 'five');
+        original.map.set('third', 'Charles');
+        original.map.set('first', {one: 'changed'});
+        forcedFallbackCopy.map.delete('second');
+
+        assert.notStrictEqual(original.set.size, forcedFallbackCopy.set.size);
+        assert.strictEqual(forcedFallbackCopy.set.size, 1);
+
+        original.set.forEach((item) => {
+          if (typeof item === 'object') {
+            assert.strictEqual(item.one, 'two');
+            assert.strictEqual(item.two, 'four');
+          }
+        });
+        forcedFallbackCopy.set.forEach((item) => {
+          assert.strictEqual(item.one, 'two');
+          assert.strictEqual(item.two, undefined);
+        });
+
+        assert.strictEqual(original.map.get('second'), 'five');
+        assert.strictEqual(forcedFallbackCopy.map.get('second'), undefined);
+        assert.strictEqual(forcedFallbackCopy.map.get('first').one, 'two');
+        assert.notStrictEqual(original.map.get('first'), forcedFallbackCopy.map.get('first'));
+      });
+    }
+
+    // Make sure deepCopy works with an array of objects as well
     const schema = [
       {
         id: 'foo',
@@ -50,7 +196,7 @@ describe('Object', () => {
       },
     ];
 
-    const schemaCopy = deepCopy(schema);
+    const schemaCopy = deepCopy(schema, true);
 
     schemaCopy[0].title = 'Foo Bar';
     schema.push({id: 'baz', title: 'Baz', type: 'string'});
@@ -64,6 +210,16 @@ describe('Object', () => {
       assert.strictEqual(schemaCopy[0].title, 'Foo Bar');
       assert.strictEqual(schema.length, 3);
       assert.strictEqual(schemaCopy.length, 2);
+    });
+
+    const lucia = new Date(2002, 11, 13);
+    const luciaCopy = deepCopy(lucia);
+
+    it('Breaks the reference when copying top-level Date object', () => {
+      assert.notStrictEqual(lucia, luciaCopy);
+
+      lucia.setFullYear(2004);
+      assert.strictEqual(luciaCopy.getFullYear(), 2002);
     });
   });
 
